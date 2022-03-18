@@ -1,32 +1,108 @@
-import React, { useState } from 'react';
-import '../FormStyles.css';
+import React, { useState } from "react";
+import "../FormStyles.css";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+
+const acceptedImageFormats = ["jpg", "png"];
 
 const ActivitiesForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        description: ''
-    });
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    description: "",
+    image: "",
+  });
+  const [image, setImage] = useState("");
 
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'description'){
-            setInitialValues({...initialValues, description: e.target.value})
+  const handleChange = (e) => {
+    if (e.target.name === "name") {
+      setInitialValues({ ...initialValues, name: e.target.value });
+    }
+    if (e.target.name === "description") {
+      setInitialValues({ ...initialValues, description: e.target.value });
+    }
+    if (e.target.name === "image") {
+      setInitialValues({ ...initialValues, image: e.target.value });
+      let reader = new FileReader();
+      let file = e.target.files[0];
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+      reader.addEventListener(
+        "load",
+        () => {
+          setImage(reader.result);
+        },
+        false
+      );
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log("sub");
+  };
+
+  return (
+    <Formik
+      enableReinitialize
+      validateOnChange
+      initialValues={initialValues}
+      validate={(values) => {
+        const errors = {};
+        if (!values.name) {
+          errors.name = "Campo requerido";
         }
-    }
+        if (!values.description) {
+          errors.description = "Campo requerido";
+        }
+        if (
+          !acceptedImageFormats.includes(initialValues.image.split(".").pop())
+        ) {
+          errors.image = "Formato no aceptado";
+        }
+        return errors;
+      }}
+      onSubmit={handleSubmit}
+    >
+      {(props) => (
+        <Form className="form-container">
+          <Field
+            className="input-field"
+            type="text"
+            name="name"
+            placeholder="Activity Title"
+            onChange={handleChange}
+            required
+          />
+          <ErrorMessage name="name" />
+          <Field
+            className="input-field"
+            type="text"
+            name="description"
+            placeholder="Write some activity description"
+            onChange={handleChange}
+          />
+          <ErrorMessage name="description" />
+          <Field
+            className="input-field"
+            type="file"
+            accept=".jpg,.png"
+            name="image"
+            value={undefined}
+            onChange={handleChange}
+            required
+          />
+          <ErrorMessage name="image" />
+          {image && !props.errors.image && <img src={image} />}
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={Object.keys(props.errors).length !== 0}
+          >
+            Submit
+          </button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
-    
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Activity Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some activity description"></input>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
-    );
-}
- 
 export default ActivitiesForm;
