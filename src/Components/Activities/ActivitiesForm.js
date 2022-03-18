@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["jpg", "png"];
 
@@ -13,13 +14,13 @@ const ActivitiesForm = () => {
   const [image, setImage] = useState("");
 
   const handleChange = (e) => {
-    if (e.target.name === "name") {
+    if (e?.target?.name === "name") {
       setInitialValues({ ...initialValues, name: e.target.value });
     }
-    if (e.target.name === "description") {
-      setInitialValues({ ...initialValues, description: e.target.value });
+    if (e?.editor?.name === "description") {
+      setInitialValues({ ...initialValues, description: e.editor.getData() });
     }
-    if (e.target.name === "image") {
+    if (e?.target?.name === "image") {
       setInitialValues({ ...initialValues, image: e.target.value });
       let reader = new FileReader();
       let file = e.target.files[0];
@@ -74,10 +75,12 @@ const ActivitiesForm = () => {
           />
           <ErrorMessage name="name" />
           <Field
+            component={DescriptionField}
             className="input-field"
             type="text"
             name="description"
             placeholder="Write some activity description"
+            // setFieldValue={props.setFieldValue}  Esto era para el metodo que no funciona
             onChange={handleChange}
           />
           <ErrorMessage name="description" />
