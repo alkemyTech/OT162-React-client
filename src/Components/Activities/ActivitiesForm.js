@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import DescriptionField from "./DescriptionField";
+import axios from "axios";
 
-const acceptedImageFormats = ["jpg", "png"];
+const acceptedImageFormats = ["image/jpeg", "image/png"];
 
 const ActivitiesForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -21,7 +22,6 @@ const ActivitiesForm = () => {
       setInitialValues({ ...initialValues, description: e.editor.getData() });
     }
     if (e?.target?.name === "image") {
-      setInitialValues({ ...initialValues, image: e.target.value });
       let reader = new FileReader();
       let file = e.target.files[0];
       if (file) {
@@ -30,6 +30,7 @@ const ActivitiesForm = () => {
       reader.addEventListener(
         "load",
         () => {
+          setInitialValues({ ...initialValues, image: reader.result });
           setImage(reader.result);
         },
         false
@@ -38,7 +39,13 @@ const ActivitiesForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log("sub");
+    axios
+      .post(
+        `${process.env.REACT_APP_BASE_API}${process.env.REACT_APP_CREATE_ACTIVITY}`,
+        initialValues
+      )
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -55,7 +62,8 @@ const ActivitiesForm = () => {
           errors.description = "Campo requerido";
         }
         if (
-          !acceptedImageFormats.includes(initialValues.image.split(".").pop())
+          !initialValues.image.includes(acceptedImageFormats[0]) &&
+          !initialValues.image.includes(acceptedImageFormats[1])
         ) {
           errors.image = "Formato no aceptado";
         }
@@ -80,7 +88,6 @@ const ActivitiesForm = () => {
             type="text"
             name="description"
             placeholder="Write some activity description"
-            // setFieldValue={props.setFieldValue}  Esto era para el metodo que no funciona
             onChange={handleChange}
           />
           <ErrorMessage name="description" />
