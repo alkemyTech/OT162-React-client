@@ -3,7 +3,8 @@ import "../FormStyles.css";
 import { Field, Form, Formik } from "formik";
 import axios from "axios";
 import { Button, Container, FormHelperText, TextField } from "@mui/material";
-import { PhotoCameraIcon, EditIcon } from "@mui/icons-material";
+import EditIcon from "@mui/icons-material/Edit";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
 import DescriptionField from "./DescriptionField";
 
