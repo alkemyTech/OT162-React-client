@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../FormStyles.css";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import DescriptionField from "./DescriptionField";
+import { Field, Form, Formik } from "formik";
 import axios from "axios";
+import { Button, Container, FormHelperText, TextField } from "@mui/material";
+import { PhotoCameraIcon, EditIcon } from "@mui/icons-material";
+import swal from "sweetalert";
+import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 const url_api_base = "https://ongapi.alkemy.org/api";
@@ -10,6 +13,7 @@ const activity_endpoint = "/activities";
 
 const ActivitiesForm = ({ activity }) => {
   const [initialValues, setInitialValues] = useState({
+    id: activity ? activity.id : "",
     name: activity ? activity.name : "",
     description: activity ? activity.description : "",
     image: activity ? activity.image : "",
@@ -43,84 +47,130 @@ const ActivitiesForm = ({ activity }) => {
   const handleSubmit = () => {
     if (activity) {
       axios
-        .patch(
-          `${url_api_base}${activity_endpoint}/${activity.id}`,
+        .put(
+          `${url_api_base}${activity_endpoint}/${initialValues.id}`,
           initialValues
         )
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+        .then(() =>
+          swal({
+            title: "Actividad actualizada",
+            icon: "success",
+          })
+        )
+        .catch((error) => {
+          swal({
+            title: "Error",
+            title: "Hubo un problema al actualizar la actividad",
+            icon: "error",
+          });
+          console.log(error);
+        });
     } else {
+      // Si bien el ticket dice hacer el post al endpoint activities/create
+      // lo hago a activities directamente ya que en los doc de la api dice eso
       axios
         .post(`${url_api_base}${activity_endpoint}`, initialValues)
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+        .then(() =>
+          swal({
+            title: "Actividad creada",
+            icon: "success",
+          })
+        )
+        .catch((error) => {
+          swal({
+            title: "Error",
+            text: "Hubo un problema al crear la actividad",
+            icon: "error",
+          });
+          console.log(error);
+        });
     }
   };
 
   return (
     <Formik
       enableReinitialize
-      validateOnChange
+      validateOnChange={true}
       initialValues={initialValues}
       validate={(values) => {
         const errors = {};
         if (!values.name) {
           errors.name = "Campo requerido";
         }
-        if (!values.description) {
-          errors.description = "Campo requerido";
-        }
         if (!initialValues.image) {
-          errors.image = "Campo Requerido";
-        }
-        if (
-          !initialValues.image.includes(acceptedImageFormats[0]) &&
-          !initialValues.image.includes(acceptedImageFormats[1])
-        ) {
-          errors.image = "Formato no aceptado";
+          errors.image = "Imagen Requerida";
+        } else {
+          if (
+            !initialValues.image.includes(acceptedImageFormats[0]) &&
+            !initialValues.image.includes(acceptedImageFormats[1]) &&
+            initialValues.image !== ""
+          ) {
+            errors.image = "Formato no aceptado";
+          }
         }
         return errors;
       }}
       onSubmit={handleSubmit}
     >
       {(props) => (
-        <Form className="form-container">
-          <Field
-            className="input-field"
-            type="text"
-            name="name"
-            placeholder="Activity Title"
-            onChange={handleChange}
-            required
-          />
-          <ErrorMessage name="name" />
-          <Field
-            component={DescriptionField}
-            className="input-field"
-            type="text"
-            name="description"
-            placeholder="Write some activity description"
-            onChange={handleChange}
-          />
-          <ErrorMessage name="description" />
-          <Field
-            className="input-field"
-            type="file"
-            accept=".jpg,.png"
-            name="image"
-            value={undefined}
-            onChange={handleChange}
-          />
-          <ErrorMessage name="image" />
-          {image && !props.errors.image && <img src={image} />}
-          <button
-            type="submit"
-            className="submit-btn"
-            disabled={Object.keys(props.errors).length !== 0}
-          >
-            Submit
-          </button>
-        </Form>
+        <Container maxWidth="lg" component="main">
+          <h1>{activity ? "Edit your activity!" : "Create a new activity!"}</h1>
+          <Form className="form-container">
+            <div className="image-controls">
+              {!image && (
+                <span className="image-msg">Nothing Uploaded Yet!</span>
+              )}
+              <Button
+                variant="contained"
+                id="image"
+                component="label"
+                className="image-edit-btn"
+                startIcon={image ? <EditIcon /> : <PhotoCameraIcon />}
+              >
+                {image ? "Edit Image" : "Upload Image*"}
+                <input
+                  type="file"
+                  accept=".jpg,.png"
+                  name="image"
+                  value={undefined}
+                  onChange={handleChange}
+                  hidden
+                />
+              </Button>
+              {image && !props.errors.image && <img src={image} alt="" />}
+            </div>
+            <FormHelperText error children={props.errors.image} />
+            <TextField
+              id="outlined-helperText"
+              label="Activity Title"
+              type="text"
+              name="name"
+              placeholder="Activity Title"
+              value={props.values.name}
+              onChange={handleChange}
+              onBlur={props.handleBlur}
+              helperText={props.errors.name}
+              error={!!props.errors.name}
+              required
+            />
+            <Field
+              component={DescriptionField}
+              className="input-field"
+              type="text"
+              name="description"
+              placeholder="Write some activity description"
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={Object.keys(props.errors).length !== 0}
+              onClick={props.handleBlur}
+            >
+              Submit
+            </Button>
+          </Form>
+        </Container>
       )}
     </Formik>
   );
