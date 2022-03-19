@@ -5,14 +5,16 @@ import DescriptionField from "./DescriptionField";
 import axios from "axios";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
+const url_api_base = "https://ongapi.alkemy.org/api";
+const activity_endpoint = "/activities";
 
-const ActivitiesForm = () => {
+const ActivitiesForm = ({ activity }) => {
   const [initialValues, setInitialValues] = useState({
-    name: "",
-    description: "",
-    image: "",
+    name: activity ? activity.name : "",
+    description: activity ? activity.description : "",
+    image: activity ? activity.image : "",
   });
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(activity ? activity.image : "");
 
   const handleChange = (e) => {
     if (e?.target?.name === "name") {
@@ -39,13 +41,20 @@ const ActivitiesForm = () => {
   };
 
   const handleSubmit = () => {
-    axios
-      .post(
-        `${process.env.REACT_APP_BASE_API}${process.env.REACT_APP_CREATE_ACTIVITY}`,
-        initialValues
-      )
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    if (activity) {
+      axios
+        .patch(
+          `${url_api_base}${activity_endpoint}/${activity.id}`,
+          initialValues
+        )
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+    } else {
+      axios
+        .post(`${url_api_base}${activity_endpoint}`, initialValues)
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+    }
   };
 
   return (
@@ -60,6 +69,9 @@ const ActivitiesForm = () => {
         }
         if (!values.description) {
           errors.description = "Campo requerido";
+        }
+        if (!initialValues.image) {
+          errors.image = "Campo Requerido";
         }
         if (
           !initialValues.image.includes(acceptedImageFormats[0]) &&
@@ -98,7 +110,6 @@ const ActivitiesForm = () => {
             name="image"
             value={undefined}
             onChange={handleChange}
-            required
           />
           <ErrorMessage name="image" />
           {image && !props.errors.image && <img src={image} />}
