@@ -61,7 +61,7 @@ const ActivitiesForm = ({ activity }) => {
         .catch((error) => {
           swal({
             title: "Error",
-            title: "Hubo un problema al actualizar la actividad",
+            text: "Hubo un problema al actualizar la actividad",
             icon: "error",
           });
           console.log(error);
