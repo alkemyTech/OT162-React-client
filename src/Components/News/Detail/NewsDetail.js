@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router'
 import axios from 'axios';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import HeroSection from '../../HeroSection/HeroSection'
+import Alert from '@mui/material/Alert';
 
-const NewsDetail = (props) => {
+const NewsDetail = () => {
     let { id } = useParams();
-    const [details, setDetails] = useState({message: "Cargando..."});
+    const [details, setDetails] = useState({message: "Cargando...", severity: "info"});
 
     useEffect(() => {
         axios.get("https://ongapi.alkemy.org/api/news/" + id)
@@ -16,31 +14,20 @@ const NewsDetail = (props) => {
             setDetails(res.data);
         })
         .catch((err) => {
-            setDetails({message: err.toString()});
+            setDetails({message: err.toString(), severity: "error"});
         })
     }, [id]);
 
     return (
-        <Card sx={{ maxWidth: 400 }}>
+        <div>
             {details.data ?
             <div>
-                <CardMedia
-                    component="img"
-                    alt="image"
-                    height="140"
-                    image={details.data.image}
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {props.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {details.data.content}
-                    </Typography>
-                </CardContent>
+                <HeroSection title={details.data.name} text={details.data.content} img={details.data.image}/>
             </div> : 
-            <div>{details.message}</div>}
-        </Card>
+            <Alert severity={details.severity}>
+                {details.message}
+            </Alert>}
+        </div>
     )
 }
 
