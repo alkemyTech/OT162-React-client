@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import CKEditor from 'ckeditor4-react';
+import Input from '@mui/material/Input';
 import '../FormStyles.css';
 
 const SlidesForm = () => {
     const [initialValues, setInitialValues] = useState({
         name: '',
-        description: ''
+        description: '',
+        order:'',
+        image: ''
     });
 
     const handleChange = (e) => {
         if(e.target.name === 'name'){
             setInitialValues({...initialValues, name: e.target.value})
-        } 
+        }
+        if(e.target.name === 'image'){
+            setInitialValues({...initialValues, image: e.target.value})
+        }
     }
 
-    const handleEditor = (e) => {
+    const handleEditorChange = (e) => {
         setInitialValues({...initialValues, description: e.editor.getData()})
     }
 
@@ -29,10 +35,9 @@ const SlidesForm = () => {
             <CKEditor 
                 name="description" 
                 value={initialValues.description} 
-                data="Write the description"
-                onChange={handleEditor}
-                />  
-            <input className="input-filed" type="file" name="image"/>
+                onChange={handleEditorChange}
+                /> 
+            <Input name='image' type="file" accept="image/*" onChange={handleChange}/>
             <button className="submit-btn" type="submit">Send</button>
         </form>
     );
