@@ -184,7 +184,7 @@ const ProjectsForm = ({ project }) => {
 
             <LocalizationProvider dateAdapter={DateAdapter}>
               <DatePicker
-                label="Basic example"
+                label="DD/MM/YYYY"
                 value={props.values.due_date}
                 onChange={(newDate) => {
                   setInitialValues({
