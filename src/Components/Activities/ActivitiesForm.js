@@ -2,7 +2,14 @@ import { useState } from "react";
 import "../FormStyles.css";
 import { Field, Form, Formik } from "formik";
 import axios from "axios";
-import { Button, Container, FormHelperText, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  FormHelperText,
+  TextField,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
@@ -20,6 +27,7 @@ const ActivitiesForm = ({ activity }) => {
     image: activity ? activity.image : "",
   });
   const [image, setImage] = useState(activity ? activity.image : "");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     if (e?.target?.name === "name") {
@@ -46,6 +54,7 @@ const ActivitiesForm = ({ activity }) => {
   };
 
   const handleSubmit = () => {
+    setLoading(true);
     if (activity) {
       axios
         .put(
@@ -65,7 +74,8 @@ const ActivitiesForm = ({ activity }) => {
             icon: "error",
           });
           console.log(error);
-        });
+        })
+        .finally(() => setLoading(false));
     } else {
       // Si bien el ticket dice hacer el post al endpoint activities/create
       // lo hago a activities directamente ya que en los doc de la api dice eso
@@ -84,7 +94,8 @@ const ActivitiesForm = ({ activity }) => {
             icon: "error",
           });
           console.log(error);
-        });
+        })
+        .finally(() => setLoading(false));
     }
   };
 
@@ -98,13 +109,13 @@ const ActivitiesForm = ({ activity }) => {
         if (!values.name) {
           errors.name = "Campo requerido";
         }
-        if (!initialValues.image) {
+        if (!values.image) {
           errors.image = "Imagen Requerida";
         } else {
           if (
-            !initialValues.image.includes(acceptedImageFormats[0]) &&
-            !initialValues.image.includes(acceptedImageFormats[1]) &&
-            initialValues.image !== ""
+            !values.image.includes(acceptedImageFormats[0]) &&
+            !values.image.includes(acceptedImageFormats[1]) &&
+            values.image !== ""
           ) {
             errors.image = "Formato no aceptado";
           }
@@ -162,14 +173,35 @@ const ActivitiesForm = ({ activity }) => {
               placeholder="Write some activity description"
               onChange={handleChange}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={Object.keys(props.errors).length !== 0}
-              onClick={props.handleBlur}
-            >
-              Submit
-            </Button>
+            <Box sx={{ m: 1, position: "relative" }}>
+              <Button
+                sx={{
+                  display: "block",
+                  margin: "0 auto",
+                  width: "clamp(85px, 100%, 300px)",
+                }}
+                type="submit"
+                variant="contained"
+                disabled={
+                  loading ? loading : Object.keys(props.errors).length !== 0
+                }
+                onClick={props.handleBlur}
+              >
+                Submit
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    marginTop: "-12px",
+                    marginLeft: "-12px",
+                  }}
+                />
+              )}
+            </Box>
           </Form>
         </Container>
       )}
