@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CKEditor from 'ckeditor4-react';
-import Input from '@mui/material/Input';
+import Input from '@mui/material/Input'
+import { imageFormats } from '../../features/SlidesForm/imageFormats';
 import '../FormStyles.css';
 
 const SlidesForm = () => {
@@ -37,7 +38,11 @@ const SlidesForm = () => {
                 value={initialValues.description} 
                 onChange={handleEditorChange}
                 /> 
-            <Input name='image' type="file" accept="image/*" onChange={handleChange}/>
+            <Input 
+                name='image' 
+                type="file" 
+                inputProps={imageFormats}
+                onChange={handleChange}/>
             <button className="submit-btn" type="submit">Send</button>
         </form>
     );
