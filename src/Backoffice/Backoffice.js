@@ -13,97 +13,121 @@ const Backoffice = () => {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 12, sm: 12, md: 12 }} sx={{justifyContent: "center"}}>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Novedades</span>
+                            </Typography>
+                            <img src='images/novedades-icon.png' alt='logo' className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Actividades</span>
+                            </Typography>
+                            <img src='images/actividades-icon.png' alt='logo' className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Categorias</span>
+                            </Typography>
+                            <img src='images/categorias-icon.png' alt="logo" className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Testimonios</span>
+                            </Typography>
+                            <img src='images/testimonios-icon.png' alt="logo" className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Organización</span>
+                            </Typography>
+                            <img src='images/organizacion-icon.jpg' alt="logo" className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Slides</span>
+                            </Typography>
+                            <img src='images/slides-icon.png' alt="logo" className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Usuarios</span>
+                            </Typography>
+                            <img src='images/usuarios-icon.jpg' alt="logo" className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item sx={{ minWidth: 250 }}>
                     <Card sx={{ minWidth: 250, boxShadow: 3, borderRadius: '6px' }} variant="outlined">
-                        <CardContent>
+                        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
                             <Typography align="center" variation="primary" sx={{color: '#76b5fa', fontWeight: 'bold'}}>
-                                Novedades
+                                <span>Miembros</span>
+                            </Typography>
+                            <img src='images/miembros-icon.png' alt="logo" className='round-image center mt mb'/>
+                            <Box textAlign='center'>
                                 <Button variant="contained" sx={{backgroundColor: '#319795'}}>
                                     Ir
                                 </Button>
-                            </Typography>
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
