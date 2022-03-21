@@ -3,6 +3,7 @@ import CKEditor from 'ckeditor4-react';
 import Input from '@mui/material/Input'
 import { imageFormats } from '../../features/SlidesForm/imageFormats';
 import '../FormStyles.css';
+import PostSlide from '../../features/SlidesForm/slidePost';
 
 function getBase64(file){
     return new Promise((resolve, reject) =>{
@@ -15,10 +16,15 @@ function getBase64(file){
 
 const SlidesForm = () => {
     const [initialValues, setInitialValues] = useState({
+        id: 0,
         name: '',
         description: '',
+        image: '',
         order:'',
-        image: ''
+        user_id: 0,
+        created_at: '',
+        updated_at: '',
+        deleted_at: '',
     });
 
     const handleChange = (e) => {
@@ -39,7 +45,7 @@ const SlidesForm = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(initialValues);
+        PostSlide(initialValues)
     }
 
     return (
