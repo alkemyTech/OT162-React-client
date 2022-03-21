@@ -4,6 +4,15 @@ import Input from '@mui/material/Input'
 import { imageFormats } from '../../features/SlidesForm/imageFormats';
 import '../FormStyles.css';
 
+function getBase64(file){
+    return new Promise((resolve, reject) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    })
+}
+
 const SlidesForm = () => {
     const [initialValues, setInitialValues] = useState({
         name: '',
@@ -17,7 +26,10 @@ const SlidesForm = () => {
             setInitialValues({...initialValues, name: e.target.value})
         }
         if(e.target.name === 'image'){
-            setInitialValues({...initialValues, image: e.target.value})
+            let imageFile = e.target.files[0];
+            getBase64(imageFile).then(
+                data => setInitialValues({...initialValues, image: data})
+            )
         }
     }
 
