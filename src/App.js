@@ -13,8 +13,8 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
-import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
 import Login from './Components/Auth/Login/Login';
+import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
 
 function App() {
   return (
