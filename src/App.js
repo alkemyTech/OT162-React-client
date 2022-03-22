@@ -13,6 +13,7 @@ import SchoolCampaign from './Campaigns/School/SchoolCampaign';
 import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
+import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
 import Backoffice from './Backoffice/Backoffice';
 
 function App() {
@@ -27,10 +28,11 @@ function App() {
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
-          <Route path="/create-member" component={MembersForm} />
+          <Route path="/backoffice/members/edit/:id" component={MembersForm} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="/actividades/:id" component={ActivityDetail} />
           <Route path="/backoffice" component={Backoffice} />
         </Switch>
       </BrowserRouter>
