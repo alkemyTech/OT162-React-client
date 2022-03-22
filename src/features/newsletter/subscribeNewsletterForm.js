@@ -8,11 +8,12 @@ const NewsletterForm = () => {
     
     if(user){
         userRegistred = true;
-        console.log(userRegistred);
     }
     
     return(
         <div>
+            {userRegistred ? 
+            <p>You are already registred for our Newsletter, thank you for your support</p> :
             <Formik
             initialValues={{email:''}}
             onSubmit={(values) => SubscribeEmail(values)}>
@@ -21,7 +22,7 @@ const NewsletterForm = () => {
                     <br/>
                     <Button type="submit" variant="contained">Subscribe</Button>
                 </Form>
-            </Formik>
+            </Formik>}
         </div>
     )
 }
