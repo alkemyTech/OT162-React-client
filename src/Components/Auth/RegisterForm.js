@@ -11,20 +11,24 @@ const RegisterForm = () => {
   });
 
   const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setInitialValues({ ...initialValues, name: e.target.value });
-    }
-    if (e.target.name === "lastName") {
-      setInitialValues({ ...initialValues, lastName: e.target.value });
-    }
-    if (e.target.name === "email") {
-      setInitialValues({ ...initialValues, email: e.target.value });
-    }
-    if (e.target.name === "password") {
-      setInitialValues({ ...initialValues, password: e.target.value });
-    }
-    if (e.target.name === "confirmPassword") {
-      setInitialValues({ ...initialValues, confirmPassword: e.target.value });
+    switch (e.target.name) {
+      case "name":
+        setInitialValues({ ...initialValues, name: e.target.value });
+        break;
+      case "lastName":
+        setInitialValues({ ...initialValues, lastName: e.target.value });
+        break;
+      case "email":
+        setInitialValues({ ...initialValues, email: e.target.value });
+        break;
+      case "password":
+        setInitialValues({ ...initialValues, password: e.target.value });
+        break;
+      case "confirmPassword":
+        setInitialValues({ ...initialValues, confirmPassword: e.target.value });
+        break;
+      default:
+        break;
     }
   };
 
@@ -38,24 +42,22 @@ const RegisterForm = () => {
 
       if (password !== confirmPassword) {
         errors.password = "las contraseñas deben ser iguales";
-      }
-
-      if (
+      } else if (
         !password.length >= 6 ||
         !specialCaracRegex.test(password) ||
         !numbersRegex.test(password)
       ) {
         errors.password =
           "las contraseñas deben ser de al menos 6 caracteres y contener al menos 1 simbolo, 1 letra y 1 numero";
+      } else {
+        Object.values(initialValues).map((value) => {
+          if (value === "" || undefined || null) {
+            return (errors.form = "todos los campos son obligatorios");
+          } else {
+            return errors;
+          }
+        });
       }
-
-      Object.values(initialValues).map((value) => {
-        if (value === "" || undefined || null) {
-          return (errors.form = "todos los campos son obligatorios");
-        } else {
-          return errors;
-        }
-      });
     }
 
     localStorage.setItem("token", "tokenValueExample");
