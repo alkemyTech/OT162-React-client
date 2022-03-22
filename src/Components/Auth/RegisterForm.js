@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
+import swal from "sweetalert";
 
 const RegisterForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -40,23 +41,33 @@ const RegisterForm = () => {
       const numbersRegex = /[0-9]/;
       const errors = {};
 
-      if (password !== confirmPassword) {
-        errors.password = "las contraseñas deben ser iguales";
-      } else if (
-        !password.length >= 6 ||
-        !specialCaracRegex.test(password) ||
-        !numbersRegex.test(password)
-      ) {
-        errors.password =
-          "las contraseñas deben ser de al menos 6 caracteres y contener al menos 1 simbolo, 1 letra y 1 numero";
-      } else {
-        Object.values(initialValues).map((value) => {
-          if (value === "" || undefined || null) {
-            return (errors.form = "todos los campos son obligatorios");
-          } else {
-            return errors;
-          }
-        });
+      Object.values(initialValues).map((value) => {
+        if (value === "" || undefined || null) {
+          errors.form = "todos los campos son obligatorios";
+          swal(errors.form, {
+            button: "Cerrar",
+          });
+        }
+        return errors;
+      });
+
+      if (!errors.form) {
+        if (password !== confirmPassword) {
+          errors.password = "las contraseñas deben ser iguales";
+          swal(errors.password, {
+            button: "Cerrar",
+          });
+        } else if (
+          !password.length >= 6 ||
+          !specialCaracRegex.test(password) ||
+          !numbersRegex.test(password)
+        ) {
+          errors.password =
+            "Las contraseñas deben ser de al menos 6 caracteres y contener al menos 1 simbolo, 1 letra y 1 numero";
+          swal(errors.password, {
+            button: "Cerrar",
+          });
+        }
       }
     }
 
@@ -72,7 +83,6 @@ const RegisterForm = () => {
         value={initialValues.name}
         onChange={handleChange}
         placeholder="Enter name"
-        required
       ></input>
       <input
         className="input-field"
@@ -81,7 +91,6 @@ const RegisterForm = () => {
         value={initialValues.lastName}
         onChange={handleChange}
         placeholder="Enter last name"
-        required
       ></input>
       <input
         className="input-field"
@@ -90,7 +99,6 @@ const RegisterForm = () => {
         value={initialValues.email}
         onChange={handleChange}
         placeholder="Enter email"
-        required
       ></input>
       <input
         className="input-field"
@@ -99,7 +107,6 @@ const RegisterForm = () => {
         value={initialValues.password}
         onChange={handleChange}
         placeholder="Enter password"
-        required
       ></input>
       <input
         className="input-field"
@@ -108,7 +115,6 @@ const RegisterForm = () => {
         value={initialValues.confirmPassword}
         onChange={handleChange}
         placeholder="Repeat password"
-        required
       ></input>
       <button className="submit-btn" type="submit">
         Register
