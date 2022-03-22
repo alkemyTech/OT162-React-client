@@ -6,16 +6,16 @@ import { useState, useEffect } from "react";
 
 const Login = () => {
   const [login, setLogin] = useState(false);
-  const [invalidPass, setInvalidPass] = useState(false)
-  const [mensajeError, setMensajeError] = useState("")
-  const [name, setName] = useState("")
+  const [invalidPass, setInvalidPass] = useState(false);
+  const [mensajeError, setMensajeError] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
-    if(invalidPass){
-      setMensajeError("Email o Password inválidos") 
-    }      
-  }, [invalidPass])
-  
+    if (invalidPass) {
+      setMensajeError("Email o Password inválidos");
+    }
+  }, [invalidPass]);
+
   return (
     <>
       <Formik
@@ -27,12 +27,26 @@ const Login = () => {
           let errores = {};
           if (!inputs.email) {
             errores.email = "Por favor, ingrese un email";
+          } else {
+            if (
+              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(inputs.email)
+            ) {
+              errores.email = "Formato de mail inválido";
+            }
           }
           if (!inputs.password) {
             errores.password = "Por favor, ingrese una password";
-          }else{
-            if(invalidPass){
-              errores.password = mensajeError
+          } else {
+            if (invalidPass) {
+              errores.password = mensajeError;
+            }
+            if (inputs.password.length < 6) {
+              errores.password = "La password debe tener al menos 6 caracteres";
+            }
+            if (
+              !/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/.test(inputs.password)
+            ) {
+              errores.password = "La contraseña debe tener al menos un número, una letra, un símbolo";
             }
           }
           return errores;
@@ -41,7 +55,7 @@ const Login = () => {
           let userInfo = {
             email: inputs.email,
             password: inputs.password,
-          };          
+          };
           try {
             fetch("http://localhost:3003/api/user/login", {
               method: "POST",
@@ -53,21 +67,21 @@ const Login = () => {
                 "Content-Type": "application/json",
                 "Acces-Control-Allow-Origin": "*",
               },
-              body: JSON.stringify(userInfo), 
+              body: JSON.stringify(userInfo),
             })
-              .then((response) => response.json()) 
+              .then((response) => response.json())
               .then((res) => {
-                if(res.success){
-                  console.log('Bienvenido', userInfo.email)
-                  setInvalidPass(false)
-                  setLogin(true)
-                  setName(userInfo.name)
+                if (res.success) {
+                  console.log("Bienvenido", userInfo.email);
+                  setInvalidPass(false);
+                  setLogin(true);
+                  setName(userInfo.name);
                 }
-                if(res.error){
-                  console.log('Contraseña invalida')
-                  setInvalidPass(true)                  
+                if (res.error) {
+                  console.log("Contraseña invalida");
+                  setInvalidPass(true);
                 }
-              }) 
+              })
               .catch((error) => {
                 console.log(error);
                 console.log("Usuario inexistente");
