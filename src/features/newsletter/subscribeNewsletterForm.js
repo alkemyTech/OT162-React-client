@@ -3,6 +3,14 @@ import Button from '@mui/material/Button';
 import SubscribeEmail from "./subscribeEmail";
 
 const NewsletterForm = () => {
+    let user = localStorage.getItem("userEmail");
+    let userRegistred = false;
+    
+    if(user){
+        userRegistred = true;
+        console.log(userRegistred);
+    }
+    
     return(
         <div>
             <Formik
