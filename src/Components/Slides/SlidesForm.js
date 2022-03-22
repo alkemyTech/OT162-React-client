@@ -50,12 +50,16 @@ const SlidesForm = () => {
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
+            <h3>Slide Title</h3>
             <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Slide Title"></input>
+            <h3>Descripción</h3>
             <CKEditor 
                 name="description" 
                 value={initialValues.description} 
                 onChange={handleEditorChange}
                 /> 
+            <h3>Add image</h3>
+            <p>(Only *.JPEG, *.JGP and *.PNG formats acceptted)</p>
             <Input 
                 name='image' 
                 type="file" 
