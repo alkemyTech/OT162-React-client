@@ -65,3 +65,9 @@
   cursor: pointer;
   background-color: #3498db;
 }
+
+.invalid-feedback {
+  font-size: "10px";
+  font-family: "Work Sans";
+  color: "red";
+}
