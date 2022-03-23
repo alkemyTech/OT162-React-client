@@ -48,7 +48,7 @@ const HomeForm = () => {
         }}
         onSubmit={(values, {resetForm}) => {
             resetForm();
-            console.log("Formulario enviado");
+            // Here goes the submit action
             setSubmittedForm(true);
             setTimeout(() => setSubmittedForm(false), 5000);
          }}>
