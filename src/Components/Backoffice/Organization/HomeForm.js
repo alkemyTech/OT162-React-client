@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Formik } from 'formik';
+import './HomeForm.css';
 
 const HomeForm = () => {
     const [submittedForm, setSubmittedForm] = useState(false);
@@ -53,8 +54,8 @@ const HomeForm = () => {
             setTimeout(() => setSubmittedForm(false), 5000);
          }}>
             {( {values, errors, touched, handleSubmit, handleChange, handleBlur}) => (
-                <form onSubmit={handleSubmit}>
-                    <div>
+                <form onSubmit={handleSubmit} className="form-container">
+                    <div className="section-box form-container">
                         <label htmlFor="welcome">Texto de bienvenida</label>
                         <input 
                             type="text" 
@@ -63,83 +64,81 @@ const HomeForm = () => {
                             placeholder="Texto de bienvenida" 
                             value={values.welcome}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                        {touched.welcome && errors.welcome && <div>{errors.welcome}</div>}
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.welcome && errors.welcome && <div className="error-feedback">{errors.welcome}</div>}</div>
                     </div>
-                    <div>
-                        <label htmlFor="photo1">First photo</label>
+                    <div className="section-box form-container">
+                        <label htmlFor="photo1">Foto 1</label>
                         <input 
                             type="text" 
                             id="photo1" 
-                            name="photo1" 
-                            placeholder="Photo" 
+                            name="photo1"
+                            placeholder="Url de la foto (https://image.url)"
                             value={values.photo}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                        {touched.photo1 && errors.photo1 && <div>{errors.photo1}</div>}
-                    </div>
-                    <div>
-                        <label htmlFor="photoName1">First photo name</label>
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.photo1 && errors.photo1 && <div className="error-feedback">{errors.photo1}</div>}</div>
                         <input 
                             type="text" 
                             id="photoName1" 
                             name="photoName1" 
-                            placeholder="Photo name" 
+                            placeholder="Nombre de la foto" 
                             value={values.photo}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                            {touched.photoName1 && errors.photoName1 && <div>{errors.photoName1}</div>}
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.photoName1 && errors.photoName1 && <div className="error-feedback">{errors.photoName1}</div>}</div>
                     </div>
-                    <div>
-                        <label htmlFor="photo2">Second photo</label>
+                    <div className="section-box form-container">
+                        <label htmlFor="photo2">Foto 2</label>
                         <input 
                             type="text" 
                             id="photo2" 
                             name="photo2" 
-                            placeholder="Photo" 
+                            placeholder="Url de la foto (https://image.url)" 
                             value={values.photo}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                            {touched.photo2 && errors.photo2 && <div>{errors.photo2}</div>}
-                    </div>
-                    <div>
-                        <label htmlFor="photoName2">Second photo name</label>
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.photo2 && errors.photo2 && <div className="error-feedback">{errors.photo2}</div>}</div>
                         <input 
                             type="text" 
                             id="photoName2" 
                             name="photoName2" 
-                            placeholder="Photo name" 
+                            placeholder="Nombre de la foto" 
                             value={values.photo}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                            {touched.photoName2 && errors.photoName2 && <div>{errors.photoName2}</div>}
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.photoName2 && errors.photoName2 && <div className="error-feedback">{errors.photoName2}</div>}</div>
                     </div>
-                    <div>
-                        <label htmlFor="photo3">Third photo</label>
+                    <div className="section-box form-container">
+                        <label htmlFor="photo3">Foto 3</label>
                         <input 
                             type="text" 
                             id="photo3" 
                             name="photo3" 
-                            placeholder="Photo" 
+                            placeholder="Url de la foto (https://image.url)" 
                             value={values.photo}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                            {touched.photo3 && errors.photo3 && <div>{errors.photo3}</div>}
-                    </div>
-                    <div>
-                        <label htmlFor="photoName3">Third photo name</label>
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.photo3 && errors.photo3 && <div className="error-feedback">{errors.photo3}</div>}</div>
                         <input 
                             type="text" 
                             id="photoName3" 
                             name="photoName3" 
-                            placeholder="Photo name" 
+                            placeholder="Nombre de la foto" 
                             value={values.photo}
                             onChange={handleChange}
-                            onBlur={handleBlur}/>
-                            {touched.photoName3 && errors.photoName3 && <div>{errors.photoName3}</div>}
+                            onBlur={handleBlur}
+                            className="input-field"/>
+                        <div>{touched.photoName3 && errors.photoName3 && <div className="error-feedback">{errors.photoName3}</div>}</div>
                     </div>
-                    <button type="submit">Enviar</button>
-                    {submittedForm && <p>Formulario enviado con exito</p>}
+                    <button type="submit" className="submit-btn">Enviar</button>
+                    {submittedForm && <p className="success-feedback">Formulario enviado con exito</p>}
                 </form>
             )}
         </Formik>
