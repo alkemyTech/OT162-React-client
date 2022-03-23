@@ -1,8 +1,8 @@
 import React from 'react'
-import './HeroSection.css'
+import './title.css'
 
 
-const HeroSection = ({title, text, img}) => {
+const Title = ({title, text, img}) => {
   
   return (
     <div className="hero">
@@ -28,4 +28,4 @@ const HeroSection = ({title, text, img}) => {
   )
 }
 
-export default HeroSection
+export default Title
