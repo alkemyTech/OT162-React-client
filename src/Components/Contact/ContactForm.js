@@ -12,6 +12,19 @@ const ContactForm = () => {
   });
   //I did it with useState because in the future we will need setInitialValues for submitting//
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInitialValues({
+      ...initialValues,
+      name: e.currentTarget.name.value,
+      email: e.currentTarget.email.value,
+      phone: e.currentTarget.phone.value,
+      message: e.currentTarget.message.value,
+    });
+  };
+
+  console.log(initialValues);
+
   return (
     <Formik
       initialValues={initialValues}
@@ -39,15 +52,7 @@ const ContactForm = () => {
         return errors;
       }}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleBlur,
-        handleSubmit,
-        handleChange,
-        isSubmitting,
-      }) => (
+      {({ errors, touched, handleChange, isSubmitting }) => (
         <div>
           <form className="form-container" onSubmit={handleSubmit}>
             <h2>Formulario de contacto</h2>
