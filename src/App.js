@@ -15,6 +15,7 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
+import SlidesList from './Components/Slides/SlidesList';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/create-category" component={CategoriesForm} />
           <Route path="/backoffice/news/create" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/backoffice/slides" component={SlidesList} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/backoffice/members/edit/:id" component={MembersForm} />
