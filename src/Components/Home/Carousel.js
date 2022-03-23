@@ -11,6 +11,7 @@ import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import { Grid } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import "../Carousel.css";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -20,7 +21,7 @@ const Carousel = (props) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = 15;
+  const maxSteps = 10;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -40,11 +41,16 @@ const Carousel = (props) => {
         container
         direction="row"
         justifyContent="center"
-        alignItems="flex-start"
+        alignItems="center"
       >
         {slides.length > 0 && (
           <Grid item xs={12} md={10} lg={8}>
-            <Paper square elevation={2} sx={{ marginTop: "10px" }}>
+            <Paper
+              square
+              elevation={10}
+              sx={{ marginTop: "10px" }}
+              style={{ background: "#90a4ae" }}
+            >
               <Grid
                 container
                 direction="column"
@@ -61,8 +67,14 @@ const Carousel = (props) => {
                       height: 50,
                       bgcolor: "background.default",
                     }}
+                    style={{
+                      background: "#90a4ae",
+                      color: "#ffffff",
+                      textShadow: "1px 1px 2px black",
+                    }}
                   >
                     <Typography
+                      variant="h5"
                       style={{ marginLeft: "auto", marginRight: "auto" }}
                     >
                       {slides[activeStep].name}
@@ -75,22 +87,23 @@ const Carousel = (props) => {
                     index={activeStep}
                     onChangeIndex={handleStepChange}
                     enableMouseEvents
+                    interval={5000}
                   >
                     {slides.slice(0, maxSteps).map((step, index) => (
-                      <div key={step.name}>
+                      <div key={step.name} style={{ placeItems: "center" }}>
                         <Box
                           component="img"
                           sx={{
-                            height: "100%",
-                            alignItems:"center",
-                            justifyContent:"center",
-                            maxHeight: matches ? "500px" : "200px",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            display: "flex",
-                            overflow: "hidden",
-                            width: "auto",
+                            height: matches ? "500px" : "250px",
+                            width: "800px",
                             maxWidth: "100%",
+                            margin: "auto",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            flexDirection: "column",
+                            display: "flex",
+                            textAlign: "center",
+                            objectFit: "cover",
                           }}
                           src={step.image}
                           alt={step.name}
@@ -104,6 +117,7 @@ const Carousel = (props) => {
                     steps={matches ? maxSteps : 0}
                     position="static"
                     activeStep={activeStep}
+                    style={{ background: "#90a4ae" }}
                     nextButton={
                       <Button
                         size="small"
