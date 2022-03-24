@@ -4,7 +4,7 @@ import Title from "../Title/Title";
 const newsSection = () => {
   return (
     <div>
-      <Title title="Novedades" img={""} />
+      <Title title="Novedades" />
       <div>Here goes the Card Component (OT162-60)</div>
     </div>
   );
