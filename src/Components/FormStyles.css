@@ -35,3 +35,9 @@
   flex-direction: column;
   gap: 15px;
 }
+
+.invalid-feedback {
+  font-size: "10px";
+  font-family: "Work Sans";
+  color: red;
+}
