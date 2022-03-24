@@ -9,7 +9,7 @@ const Nosotros = () => {
     
     useEffect(() => {
     axios
-      .get(`${rutas.GET_MEMBERS_URL}/1`)
+      .get(`${rutas.GET_SPECIFIC_ORGANIZATION_URL}`)
       .then((result) => {
         setTitle(result.data.data.name);
         setText(result.data.data.long_description);
