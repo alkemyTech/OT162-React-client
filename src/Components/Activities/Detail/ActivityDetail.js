@@ -1,16 +1,13 @@
-import React from 'react'
-import HeroSection from '../../HeroSection/HeroSection'
+import React from "react";
+import Title from "../../Title/Title";
 
 const ActivityDetail = () => {
   return (
     <>
-        <HeroSection title='Activity title'/>
-        <div className="content">
-            TODO
-        </div>
-
+      <Title title="Activity title" />
+      <div className="content">TODO</div>
     </>
-  )
-}
+  );
+};
 
-export default ActivityDetail
+export default ActivityDetail;
