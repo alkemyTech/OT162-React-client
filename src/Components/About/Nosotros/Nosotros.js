@@ -21,7 +21,7 @@ const Nosotros = () => {
       })
       .catch((e) => {
         console.log("ERROR", e.message);
-      });
+      }); 
   }, []);
 
   return (
