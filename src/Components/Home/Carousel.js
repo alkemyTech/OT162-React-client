@@ -17,7 +17,6 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Carousel = (props) => {
   const { slides } = props;
-  console.log(slides);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const [activeStep, setActiveStep] = React.useState(0);
