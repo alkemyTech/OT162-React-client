@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert'
 
 const config = {
     headers: {
@@ -11,19 +12,34 @@ const Get = async (endpoint, id) => {
     try{
         if(id){
           const resp= await axios.get(`${baseUrl}/${endpoint}/${id}`,config)
-          return resp.data
+          const {success,message, data} = resp.data
+          if(success){
+              swal('Success', message, 'success')
+              return data
+          } else {
+              swal('Error', message, 'error')
+          }
           
     
         } else{
             const resp= await  axios.get(`${baseUrl}/${endpoint}`, config)
+            const {success,message, data} = resp.data
+            if(success){
+                swal('Success', message, 'success')
+                return data
+            } else {
+                swal('Error', message, 'error')
+            }
             
-           return resp.data
+           
           
         }
 
     }
     catch(error){
             console.log(error)
+            swal('Error', 'Oops! Something went wrong', 'error')
+
 
     }
 }
