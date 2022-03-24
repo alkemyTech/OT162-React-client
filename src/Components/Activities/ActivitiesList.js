@@ -1,6 +1,5 @@
-import React from "react";
 import "../CardListStyles.css";
-import HeroSection from "../HeroSection/HeroSection";
+import Title from "../Title/Title";
 const ActivitiesList = () => {
   const activitiesMock = [
     { id: 2, name: "Titulo de prueba", description: "Descripcion de prueba" },
@@ -10,7 +9,7 @@ const ActivitiesList = () => {
 
   return (
     <div>
-      <HeroSection title="Actividades" img="/images/banner-img.jpg" />
+      <Title title="Actividades" img="/images/banner-img.jpg" />
       <ul className="list-container">
         {activitiesMock.length > 0 ? (
           activitiesMock.map((activity) => {
