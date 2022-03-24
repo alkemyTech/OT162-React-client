@@ -15,6 +15,7 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
 import Login from './Components/Auth/Login/Login';
+import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
           <Route path="/backoffice/members/edit/:id" component={MembersForm} />
+          <Route path="/backoffice/organization/edit" component={SiteDataForm} />
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
