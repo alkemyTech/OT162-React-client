@@ -1,10 +1,10 @@
 import React from "react";
-import NewsTitle from "./NewsTitle";
+import Title from "../Title/Title";
 
-const newsSection = (props) => {
+const newsSection = () => {
   return (
     <div>
-      <NewsTitle />
+      <Title title="Novedades" img={""} />
       <div>Here goes the Card Component (OT162-60)</div>
     </div>
   );
