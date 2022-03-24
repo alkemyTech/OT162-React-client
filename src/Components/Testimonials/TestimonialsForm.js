@@ -10,11 +10,11 @@ import '../FormStyles.css';
 
 const TestimonialForm = ({testimonial}) => {
    
-    const [initialValues, setInitialValues] = useState(testimonial ? {name: testimonial.name, description: testimonial.description, img: testimonial.img,
+    const [initialValues, setInitialValues] = useState(testimonial ? {name: testimonial.name, description: testimonial.description, image: testimonial.image,
     id: testimonial.id} : {
         name: '',
         description: '',
-        img: ''
+        image: ''
     });
     const [loading, setLoading] = useState(false)
 
@@ -24,13 +24,13 @@ const TestimonialForm = ({testimonial}) => {
         } if(e.target.name === 'description'){
             setInitialValues({...initialValues, description: e.target.value})
         }
-        if (e.target.name === "img") {
+        if (e.target.name === "image") {
             let reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
             reader.addEventListener(
               "load",
               () => {
-                setInitialValues({ ...initialValues, img: reader.result });
+                setInitialValues({ ...initialValues, image: reader.result });
               },
               false
             );
@@ -41,9 +41,9 @@ const TestimonialForm = ({testimonial}) => {
 
     const handleUpdate = () => {
         let data = {};
-        if (testimonial.img === initialValues.img) {
+        if (testimonial.image === initialValues.image) {
           Object.keys(initialValues).forEach((value) => {
-            if (value !== "img") {
+            if (value !== "image") {
               data[value] = initialValues[value];
             }
           });
@@ -85,7 +85,7 @@ const TestimonialForm = ({testimonial}) => {
        setInitialValues({
          name: "",
          description: "",
-         img: "",
+         image: "",
          id: "",
        });
     };
@@ -104,8 +104,8 @@ const TestimonialForm = ({testimonial}) => {
             errors.description = "This field is required";
           }
 
-          if (!initialValues.img) {
-            errors.img = "This field is required";
+          if (!initialValues.image) {
+            errors.image = "This field is required";
           }
 
           return errors;
@@ -161,7 +161,7 @@ const TestimonialForm = ({testimonial}) => {
                   disabled
                   id="outlined-disabled"
                   label="Image"
-                  value={initialValues.img}
+                  value={initialValues.image}
                   
                 />
               </Grid>
@@ -171,7 +171,7 @@ const TestimonialForm = ({testimonial}) => {
                   style={{ display: "none" }}
                   id="contained-button-file"
                   type="file"
-                  name="img"
+                  name="image"
                   onChange={handleChange}
                 />
                 <label htmlFor="contained-button-file">
@@ -191,7 +191,7 @@ const TestimonialForm = ({testimonial}) => {
               </Grid>
             </Grid>
             <ErrorMessage
-              name="img"
+              name="image"
               component="div"
               className="error"
              
