@@ -6,6 +6,7 @@ import rutas from '../../../config/rutas'
 const Nosotros = () => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
+    const [img, setImg] = useState('')
     
     useEffect(() => {
     axios
@@ -13,6 +14,7 @@ const Nosotros = () => {
       .then((result) => {
         setTitle(result.data.data.name);
         setText(result.data.data.long_description);
+        setImg(result.data.data.logo);
       })
       .then((result) => {
           console.log(result)
@@ -24,7 +26,7 @@ const Nosotros = () => {
 
   return (
     <div>
-        <HeroSection title={title} text={text}/>
+        <HeroSection title={title} text={text} img={img}/>
     </div>
   )
 }
