@@ -5,7 +5,7 @@ const newsSection = (props) => {
   return (
     <div>
       <NewsTitle />
-      <div>Here goes the Card Component</div>
+      <div>Here goes the Card Component (OT162-60)</div>
     </div>
   );
 };
