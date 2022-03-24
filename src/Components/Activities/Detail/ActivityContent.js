@@ -1,7 +1,7 @@
-// String should be 'description field' from ID, accordding API specs
+//  Description recieved accordding API specs
 
-const ActivityContent = (string) => {
-    let HTMLString = string
+const ActivityContent = (description) => {
+    let HTMLString = description
 
     if(HTMLString.value !== undefined){
         function createMarkup(){
