@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
+import React from "react";
 import NewsTitle from "./NewsTitle";
 
 const newsSection = (props) => {
   return (
-    <Fragment>
+    <div>
       <NewsTitle />
       <div>Here goes the Card Component</div>
-    </Fragment>
+    </div>
   );
 };
 
