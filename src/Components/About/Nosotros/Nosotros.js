@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {React,useEffect,useState} from 'react'
-import HeroSection from '../../HeroSection/HeroSection'
 import rutas from '../../../config/rutas'
+import Title from '../../Title/Title'
 
 const Nosotros = () => {
     const [title, setTitle] = useState('')
@@ -26,7 +26,7 @@ const Nosotros = () => {
 
   return (
     <div>
-        <HeroSection title={title} text={text} img={img}/>
+        <Title title={title} text={text} img={img}/>
     </div>
   )
 }
