@@ -89,7 +89,7 @@ const SlidesList = () => {
               <TableCell align="center">Name</TableCell>
               <TableCell align="center">Description</TableCell>
               <TableCell align="center">Image</TableCell>
-              <TableCell align="center">Acciones</TableCell>
+              <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
