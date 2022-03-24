@@ -1,10 +1,11 @@
-const TestType = "<h1>String de prueba</h1><br/><p>Parrafo de prueba</p>"
+// String should be 'description field' from ID, accordding API specs
 
-const ActivityContent = () => {
-    console.log(TestType)
-    if(TestType !== {}){
+const ActivityContent = (string) => {
+    let HTMLString = string
+
+    if(HTMLString.value !== undefined){
         function createMarkup(){
-            return{__html: (TestType)}
+            return{__html: (HTMLString)}
         }
         return(
             <div dangerouslySetInnerHTML={createMarkup()}/>
