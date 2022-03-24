@@ -13,12 +13,12 @@ const Get = () => {
     .catch((err) => console.log(err));
 };
 
-export const Put = (route, identifier, data) => {
+export const Put = (route, id, data) => {
   axios
-    .put(route, data, {
+    .put(`${route}/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "JWT goes here",
+        Authorization: "TOKEN goes here",
       },
     })
     .then((res) => console.log(res))
@@ -26,7 +26,3 @@ export const Put = (route, identifier, data) => {
 };
 
 export default Get;
-
-// Criterios de aceptación: El método deberá recibir una ruta destino, un identificador y
-// un objeto con la estructura de datos para enviar en el BODY. Deberá invocar el método para agregar
-// el encabezado Authorization en base al token del usuario y realizar una petición PUT. Agregarlo en privateApiService.js.
