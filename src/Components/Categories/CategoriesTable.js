@@ -1,4 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
+import axios from "axios";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,57 +10,93 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import Button from "@mui/material/Button";
 
-function createData(name, createdAt) {
-  return { name, createdAt };
+import Link from "@mui/material/Link";
+import swal from "sweetalert";
+import { useHistory } from "react-router-dom";
+
+const url = "https://ongapi.alkemy.org/api/categories";
+
+function createData(id, name, createdAt) {
+  return { id, name, createdAt };
 }
-
-const rows = [
-  createData("Category 1", "10 Marzo 2021"),
-  createData("Category 2", "10 Abril 2021"),
+const DUMMY_CATEGORIES = [
+  createData("1", "Category 1", "10 Marzo 2021"),
+  createData("2", "Category 2", "10 Abril 2021"),
+  createData("3", "Category 3", "08 Abril 2021"),
 ];
 
-const categoryTable = (
-  <TableContainer component={Paper}>
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-      <TableHead>
-        <TableRow>
-          <TableCell>Nombre</TableCell>
-          <TableCell align="center">Fecha de creación</TableCell>
-          <TableCell align="center">Eliminar</TableCell>
-          <TableCell align="center">Editar</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow
-            key={row.name}
-            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-          >
-            <TableCell component="th" scope="row">
-              {row.name}
-            </TableCell>
-            <TableCell align="center">{row.createdAt}</TableCell>
-            <TableCell align="center">
-              <DeleteIcon />
-            </TableCell>
-            <TableCell align="center">
-              <EditIcon />
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainer>
-);
-
 const CategoriesTable = () => {
-  return categoryTable;
+  const history = useHistory();
+  const deleteHandler = (id) => {
+    axios
+      .delete(`${url}/${id}`)
+      .then(() => {
+        swal({ title: "Category deleted", icon: "success" });
+      })
+      .catch((error) => {
+        swal({
+          title: "You cannot delete it!",
+          text: error.response.data.message,
+          icon: "warning",
+        });
+      });
+  };
+  const editHandler = (id) => {
+    history.push("/create-category");
+    //Go to the Category Form, it is in /create-category. By now the only way to edit a category
+  };
+
+  return (
+    <Fragment>
+      <Button
+        variant="contained"
+        sx={{ margin: 2 }}
+        href="/backoffice/Categorias/create"
+      >
+        Go to Backoffice
+      </Button>
+      <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000 }}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align="center">Created at</TableCell>
+              <TableCell align="center">Delete</TableCell>
+              <TableCell align="center">Edit</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {DUMMY_CATEGORIES.map((category) => (
+              <TableRow key={category.name}>
+                <TableCell component="th" scope="row">
+                  {category.name}
+                </TableCell>
+                <TableCell align="center">{category.createdAt}</TableCell>
+                <TableCell align="center">
+                  <Link
+                    component="button"
+                    onClick={() => deleteHandler(category.id)}
+                  >
+                    <DeleteIcon />
+                  </Link>
+                </TableCell>
+                <TableCell align="center">
+                  <Link
+                    component="button"
+                    onClick={() => editHandler(category.id)}
+                  >
+                    <EditIcon />
+                  </Link>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Fragment>
+  );
 };
 
 export default CategoriesTable;
-
-// Al ingresar a la ruta /backoffice/categories, mostrará el listado de Categorías para el usuario administrador
-// en una tabla. El mismo tendrá datos mockeados para representar los datos, que posteriormente se obtendrán
-// desde el endpoint de listado de Categorías. La tabla mostrará los campos name y createdAt, y las acciones para eliminar y editar.
-// En la sección superior, mostrará un componente <Link> que redirigirá a la ruta /backoffice/Categorías/create.
