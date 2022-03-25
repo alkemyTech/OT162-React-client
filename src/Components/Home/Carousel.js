@@ -16,7 +16,7 @@ import "../Carousel.css";
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const Carousel = (props) => {
-  const { slides } = props;
+  const { slides, background } = props;
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const [activeStep, setActiveStep] = React.useState(0);
@@ -48,7 +48,7 @@ const Carousel = (props) => {
               square
               elevation={10}
               sx={{ marginTop: "10px" }}
-              style={{ background: "#90a4ae" }}
+              style={{ background: background }}
             >
               <Grid
                 container
@@ -67,7 +67,7 @@ const Carousel = (props) => {
                       bgcolor: "background.default",
                     }}
                     style={{
-                      background: "#90a4ae",
+                      background: background,
                       color: "#ffffff",
                       textShadow: "1px 1px 2px black",
                     }}
@@ -116,7 +116,7 @@ const Carousel = (props) => {
                     steps={matches ? maxSteps : 0}
                     position="static"
                     activeStep={activeStep}
-                    style={{ background: "#90a4ae" }}
+                    style={{ background: background }}
                     nextButton={
                       <Button
                         size="small"

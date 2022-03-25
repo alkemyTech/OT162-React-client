@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <div>
-      <Carousel slides={slides} />
+      <Carousel slides={slides} background={"#90a4ae"} />{/* background is Carousel's backgroundColor  */}
     </div>
   );
 };
