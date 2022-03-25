@@ -1,32 +1,132 @@
-import React, { useState } from 'react';
-import '../FormStyles.css';
+import React, { useState } from "react";
+import CKEditor from "ckeditor4-react";
+import { Formik } from "formik";
+import axios from "axios";
 
-const CategoriesForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        description: ''
-    })
+import "../FormStyles.css";
 
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'description'){
-            setInitialValues({...initialValues, description: e.target.value})
+const categoriesLink = "https://ongapi.alkemy.org/api/categories";
+
+const CategoriesForm = ({ category }) => {
+  const [initialValues, setInitialValues] = useState({
+    name: category ? category.name : "",
+    description: category ? category.description : "",
+    image: category ? category.image : "",
+    id: category ? category.id : "",
+  });
+
+  const handleChange = (e) => {
+    if (e?.target?.name === "name") {
+      setInitialValues({ ...initialValues, name: e.target.value });
+    }
+    if (e?.target?.name === "image") {
+      let reader = new FileReader();
+      let file = e.target.files[0];
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+      reader.addEventListener(
+        "load",
+        () => {
+          setInitialValues({ ...initialValues, image: reader.result });
+        },
+        false
+      );
+    }
+    if (e?.editor?.name === "description") {
+      setInitialValues({ ...initialValues, description: e.editor.getData() });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    if (category) {
+      axios
+        .put(`${categoriesLink}/${initialValues.id}`, initialValues)
+        .then(() => {
+          console.log("PUT");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else
+      axios
+        .post(categoriesLink, initialValues)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+
+  console.log(initialValues);
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      enableReinitialize
+      validate={(values) => {
+        const errors = {};
+        if (!values.name) {
+          errors.name = "Nombre es requerido";
+        } else if (values.name.length < 4) {
+          errors.name = "El nombre debe tener al menos 4 caracteres";
         }
-    }
+        if (!values.description) {
+          errors.description = "Descripción requerida";
+        }
+        if (!values.image) {
+          errors.image = "Imagen requerida";
+        }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
-
-    return (
+        return errors;
+      }}
+      onSubmit={handleSubmit}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
         <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Write some description"></input>
-            <button className="submit-btn" type="submit">Send</button>
+          <input
+            className="input-field"
+            type="text"
+            name="name"
+            onChange={handleChange}
+            value={initialValues.name}
+            placeholder="Name"
+          />
+          {errors.name && touched.name && errors.name}
+
+          <CKEditor
+            initData={initialValues.description}
+            id="description"
+            name="description"
+            onChange={handleChange}
+          />
+          {errors.description && touched.description && errors.description}
+
+          <input
+            className="input-field"
+            type="file"
+            id="image"
+            accept=".jpg, .png"
+            name="image"
+            onChange={handleChange}
+          ></input>
+          {errors.image && touched.image && errors.image}
+
+          <button className="submit-btn" type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
         </form>
-    );
-}
- 
+      )}
+    </Formik>
+  );
+};
+
 export default CategoriesForm;

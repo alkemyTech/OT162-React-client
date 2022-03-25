@@ -21,4 +21,9 @@ const Patch = (ruta, obj, id) => {
   });
 };
 
-export { Get, Patch };
+const GetAuth = () => {
+    let token = localStorage.getItem('token');
+    return token !== null ? `Bearer ${token}` : null;
+}
+
+export {Get, GetAuth, Patch};
