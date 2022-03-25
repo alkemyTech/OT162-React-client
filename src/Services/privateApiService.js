@@ -13,16 +13,21 @@ const Get = () => {
     .catch((err) => console.log(err));
 };
 
-export const Put = (route, id, data) => {
+const Put = (route, id, data) => {
   axios
     .put(`${route}/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: "TOKEN goes here",
+        Authorization: GetAuth(),
       },
     })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
 
-export default Get;
+const GetAuth = () => {
+  let token = localStorage.getItem("token");
+  return token !== null ? `Bearer ${token}` : null;
+};
+
+export { Get, GetAuth, Put };
