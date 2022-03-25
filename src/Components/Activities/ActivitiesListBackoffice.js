@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,17 +11,18 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Skeleton from "@mui/lab/Skeleton";
 import activitiesTableStyle from "../../assets/styles/activitiesTableStyle";
-import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Icon from "@mui/material/Icon";
-import Modal from "@mui/material/Modal";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import WarningIcon from "@mui/icons-material/Warning";
+import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
 import rutas from "../../config/rutas";
+import PopUpWarning from "../Popups/PopUpWarning";
+import PopUpOpDone from "../Popups/PopUpOpDone";
+import Loading from "../Utilities/Loading";
+import { Backdrop } from "@mui/material";
 
 const useStyles = makeStyles(activitiesTableStyle);
 
@@ -32,6 +32,8 @@ const ActivitiesListBackoffice = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [modalConfirmation, setModalConfirmation] = useState(false);
+  const [modalOperation, setModalOperation] = useState([false, ""]);
+  const [isLoading, setIsLoading] = useState(false);
   const [activity, setActivity] = useState(false);
 
   const rows = [
@@ -67,6 +69,12 @@ const ActivitiesListBackoffice = () => {
     },
     {
       id: 6,
+      name: "Titulo de prueba",
+      image: "http://ongapi.alkemy.org/storage/Fxrssbkor4.jpeg",
+      createdAt: "2022-03-04T16:47:37.000000Z",
+    },
+    {
+      id: 7,
       name: "Titulo de prueba",
       image: "http://ongapi.alkemy.org/storage/Fxrssbkor4.jpeg",
       createdAt: "2022-03-04T16:47:37.000000Z",
@@ -109,17 +117,35 @@ const ActivitiesListBackoffice = () => {
   };
 
   const handleDelete = () => {
+    setModalConfirmation(false);
+    setIsLoading(true);
     axios
       .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
-      .then((response) => console.log(response))
-      .catch((e) => console.log(e));
-    setModalConfirmation(false);
+      .then(() => {
+        setModalOperation([true, "succes"]);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setModalOperation([true, "succes"]);
+        setIsLoading(false);
+      });
   };
 
   return (
     <div className={classes.root}>
       <Grid container spacing={3} justifyContent="center" alignItems="flex-end">
-        <Grid item xs={12} md={11.5} lg={10}>
+        <Grid item xs={12} md={11.5} lg={11}>
+          <Button
+            variant="outlined"
+            to="/backoffice/activities/create"
+            component={RouterLink}
+            className={classes.buttonAdd}
+            startIcon={<AddIcon />}
+          >
+            Crear Nueva Actividad
+          </Button>
+        </Grid>
+        <Grid item xs={12} md={11.5} lg={11}>
           <Paper style={{ zIndex: "1", position: "relative" }}>
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
@@ -171,6 +197,8 @@ const ActivitiesListBackoffice = () => {
                                       }}
                                       src={value}
                                     />
+                                  ) : column.id === "createdAt" ? (
+                                    value.slice(0, -17)
                                   ) : (
                                     value
                                   )}
@@ -189,6 +217,7 @@ const ActivitiesListBackoffice = () => {
                                   variant="contained"
                                   to={`/backoffice/activities/edit/${row.id}`}
                                   component={RouterLink}
+                                  className={classes.button}
                                   startIcon={<EditIcon />}
                                 >
                                   Editar
@@ -197,10 +226,11 @@ const ActivitiesListBackoffice = () => {
                                   id={row.id}
                                   variant="contained"
                                   onClick={() => handleConfirmDelete(row.id)}
+                                  className={classes.button}
                                   startIcon={<DeleteIcon />}
                                   color={"error"}
                                 >
-                                  {"Eliminar"}
+                                  "Eliminar"
                                 </Button>
                               </Grid>
                             </TableCell>
@@ -230,89 +260,31 @@ const ActivitiesListBackoffice = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
+            <Backdrop className={classes.backdrop} open={isLoading}>
+              <Loading />
+            </Backdrop>
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Modal
+          <PopUpWarning
             open={modalConfirmation}
-            onClose={() => {
-              setModalConfirmation(false);
-            }}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            style={{
-              padding: "20px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "absolute",
-            }}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Paper
-              variant="outlined"
-              style={{
-                position: "absolute",
-                maxWidth: 400,
-                padding: "20px",
-                backgroundColor: "#e0e0e0",
-              }}
-            >
-              <Grid
-                container
-                spacing={2}
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item xs={4}>
-                  <Icon
-                    component={WarningIcon}
-                    style={{ fontSize: 100 }}
-                    color="warning"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography gutterBottom align="center" variant="h4">
-                    Confirmar eliminar Actividad.
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography gutterBottom align="center" variant="body1">
-                    ¿Estas seguro de querer eliminar esta actividad de la ONG?
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <Button
-                    fullWidth={true}
-                    size="medium"
-                    variant="contained"
-                    color="error"
-                    onClick={() => {
-                      setModalConfirmation(false);
-                    }}
-                  >
-                    Cancelar
-                  </Button>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <Button
-                    fullWidth={true}
-                    size="medium"
-                    variant="contained"
-                    color="success"
-                    onClick={handleDelete}
-                  >
-                    Confirmar
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Modal>
+            setOpen={setModalConfirmation}
+            title="Confirmar eliminar Actividad"
+            text="¿Estas seguro de querer eliminar esta actividad de la ONG?"
+            handleConfirm={handleDelete}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <PopUpOpDone
+            open={modalOperation[0]}
+            result={modalOperation[1]}
+            setOpen={setModalOperation}
+            text={
+              modalOperation[1] === "succes"
+                ? "La Actividad fue eliminada con exito"
+                : "La Actividad no pudo ser eliminada."
+            }
+          />
         </Grid>
       </Grid>
     </div>
