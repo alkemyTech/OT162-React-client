@@ -16,6 +16,7 @@ import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ActivitiesList from './Components/Activities/ActivitiesList';
+import ActivitiesListBackoffice from './Components/Activities/ActivitiesListBackoffice';
 
 function App() {
   return (
@@ -34,8 +35,9 @@ function App() {
           <Route path="/school-campaign" element={<SchoolCampaign />} />
           <Route path="/toys-campaign" element={<ToysCampaign />} />
           <Route path="/actividades/:id" element={<ActivityDetail />} />
-          <Route path="/actividades" component={<ActivitiesList />} />
+          <Route path="/actividades" element={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/activities" element={<ActivitiesListBackoffice />} />
         </Routes>
       </BrowserRouter>
     <div className="App">
