@@ -126,7 +126,7 @@ const ActivitiesListBackoffice = () => {
         setIsLoading(false);
       })
       .catch((e) => {
-        setModalOperation([true, "succes"]);
+        setModalOperation([true, "error"]);
         setIsLoading(false);
       });
   };
@@ -146,7 +146,7 @@ const ActivitiesListBackoffice = () => {
           </Button>
         </Grid>
         <Grid item xs={12} md={11.5} lg={11}>
-          <Paper style={{ zIndex: "1", position: "relative" }}>
+          <Paper spacing={3} style={{ zIndex: "1", position: "relative" }}>
             <TableContainer className={classes.container}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -280,7 +280,7 @@ const ActivitiesListBackoffice = () => {
             result={modalOperation[1]}
             setOpen={setModalOperation}
             text={
-              modalOperation[1] === "succes"
+              modalOperation[1] === "error"
                 ? "La Actividad fue eliminada con exito"
                 : "La Actividad no pudo ser eliminada."
             }
