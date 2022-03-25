@@ -36,12 +36,6 @@
   gap: 15px;
 }
 
-<<<<<<< HEAD
-.invalid-feedback {
-  font-size: "10px";
-  font-family: "Work Sans";
-  color: red;
-=======
 .form-container {
   width: 60%;
   margin: 15px auto;
@@ -76,5 +70,4 @@
   font-size: "10px";
   font-family: "Work Sans";
   color: "red";
->>>>>>> 721386b02766b745695a018469c857613fc63878
 }
