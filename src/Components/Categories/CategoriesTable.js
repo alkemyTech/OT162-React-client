@@ -14,7 +14,7 @@ import Button from "@mui/material/Button";
 
 import Link from "@mui/material/Link";
 import swal from "sweetalert";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const url = "https://ongapi.alkemy.org/api/categories";
 
@@ -28,7 +28,7 @@ const DUMMY_CATEGORIES = [
 ];
 
 const CategoriesTable = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const deleteHandler = (id) => {
     axios
       .delete(`${url}/${id}`)
@@ -44,7 +44,7 @@ const CategoriesTable = () => {
       });
   };
   const editHandler = (id) => {
-    history.push("/create-category");
+    navigate("/create-category");
     //Go to the Category Form, it is in /create-category. By now the only way to edit a category
   };
 
