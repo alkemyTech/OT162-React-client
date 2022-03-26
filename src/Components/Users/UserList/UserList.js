@@ -5,7 +5,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { CreateButton, DeleteButton, EditButton } from './Buttons';
+import Button from '@mui/material/Button';
+import { EditUser, DeleteUser, RedirectToCreate } from './ButtonActions';
 import { columns } from './Columns';
 import { UserInfoRow } from './Row';
 
@@ -13,7 +14,7 @@ const UserList = () => {
     return(
         <div>
             <h1>UserList</h1>
-            <CreateButton/>
+            <Button variant="contained" onClick={() => RedirectToCreate()}>Create new user</Button>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
@@ -28,8 +29,10 @@ const UserList = () => {
                             <TableRow key={user.id}>
                                 <TableCell>{user.name}</TableCell>
                                 <TableCell>{user.email}</TableCell>
-                                <EditButton/>
-                                <DeleteButton/>
+                                <TableCell>
+                                    <Button variant="contained" onClick={() => EditUser(user)}>Edit</Button>
+                                    <Button variant="contained" onClick={() => DeleteUser(user)}>Delete</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
