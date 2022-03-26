@@ -42,6 +42,7 @@ function App() {
       </BrowserRouter>
       <div className="App">
         <Card
+          image="https://st.depositphotos.com/2069323/2156/i/600/depositphotos_21568765-stock-photo-casual-businessman-pointing.jpg"
           title="FLASH"
           description="lorem daskndajondajd as dha dhashkdasjldasjk´djkñasdjklasdjklasdajksl´dadjkla as dha dhashkdasjldasjk´djkñasdjklasdjklasdajksl´dadjkla"
           placeholder="no img"
