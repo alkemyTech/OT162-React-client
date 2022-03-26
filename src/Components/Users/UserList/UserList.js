@@ -1,18 +1,19 @@
 import Table from '@mui/material/Table';
-import { styled } from '@mui/material/styles';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { DeleteButton, EditButton } from './Buttons';
+import { CreateButton, DeleteButton, EditButton } from './Buttons';
 import { columns } from './Columns';
+import { UserInfoRow } from './Row';
 
 const UserList = () => {
     return(
         <div>
             <h1>UserList</h1>
+            <CreateButton/>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
@@ -23,14 +24,14 @@ const UserList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell>User Example</TableCell>
-                            <TableCell>User@example.com</TableCell>
-                            <TableCell>
+                        {UserInfoRow.map((user) =>(
+                            <TableRow key={user.id}>
+                                <TableCell>{user.name}</TableCell>
+                                <TableCell>{user.email}</TableCell>
                                 <EditButton/>
                                 <DeleteButton/>
-                            </TableCell>
-                        </TableRow>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>

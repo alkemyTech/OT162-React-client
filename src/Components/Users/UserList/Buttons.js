@@ -6,7 +6,7 @@ export const EditButton = (props) => {
     }
 
     return(
-        <Button variant="contained" onClick={() => EditUser()}>Edit</Button>
+        <Button variant="contained" onClick={() => EditUser(props)}>Edit</Button>
     )
 }
 
@@ -16,6 +16,12 @@ export const DeleteButton = (props) => {
     }
 
     return(
-        <Button variant="contained" onClick={() => DeleteUser()}>Delete</Button>
+        <Button variant="contained" onClick={() => DeleteUser(props)}>Delete</Button>
+    )
+}
+
+export const CreateButton = () => {
+    return(
+        <Button variant="contained" onClick={() => console.log('Crete Button press')}>Create new User</Button>
     )
 }
