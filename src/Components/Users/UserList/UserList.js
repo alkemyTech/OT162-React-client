@@ -6,15 +6,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import { EditUser, DeleteUser, RedirectToCreate } from './ButtonActions';
+import { EditUser, DeleteUser } from './ButtonActions';
 import { columns } from './Columns';
 import { UserInfoRow } from './Row';
+import { Link } from 'react-router-dom';
+import '../../../styles/usersTable.css';
 
 const UserList = () => {
+  
     return(
         <div>
-            <h1>UserList</h1>
-            <Button variant="contained" onClick={() => RedirectToCreate()}>Create new user</Button>
+            <h3>User's List</h3>
+            <Button variant="contained">
+                <Link to="/backoffice/users/create">Create</Link>
+            </Button>
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>

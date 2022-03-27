@@ -1,11 +1,9 @@
+// Dummy function for later development
+
 export function EditUser(user){
-    console.log(user, 'Edit button press')
+    console.log(user.id, 'Edit button press')
 }
 
 export function DeleteUser(user){
-    console.log(user, 'Delete button press')
-}
-
-export function RedirectToCreate(){
-    console.log('Create new user button press')
+    console.log(user.id, 'Delete button press')
 }
