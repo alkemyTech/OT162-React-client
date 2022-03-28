@@ -18,7 +18,7 @@ const GetAuth = () => {
 }
 
 const Delete = (path, id) => {
-    https://ongapi.alkemy.org/api/contacts/13
+    // URL Example https://ongapi.alkemy.org/api/contacts/13
     let baseURL = 'https://ongapi.alkemy.org/api/';
     let path = 'contacts';
     let id = 1;
