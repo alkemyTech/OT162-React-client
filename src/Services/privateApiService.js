@@ -18,14 +18,16 @@ const GetAuth = () => {
 }
 
 const Delete = (path, id) => {
-    // URL Example https://ongapi.alkemy.org/api/contacts/13
+    let token = localStorage.getItem('token');
     let baseURL = 'https://ongapi.alkemy.org/api/';
-    let path = 'contacts';
-    let id = 1;
+    let pathSection = path;
+    let idContent = id;
 
-    axios.delete(baseURL + '/' + path + '/' + id)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+    if(token !== null || token !== undefined){
+        axios.delete(baseURL + pathSection + '/' + idContent)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
 }
 
 export {Get, GetAuth, Delete};
