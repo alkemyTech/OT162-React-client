@@ -14,7 +14,6 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
-import { Get } from "./Services/privateApiService";
 
 function App() {
   return (
@@ -41,11 +40,6 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
-        <button
-          onClick={() => Get("https://jsonplaceholder.typicode.com/users", "1")}
-        >
-          BOTON
-        </button>
       </div>
     </>
   );
