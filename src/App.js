@@ -16,6 +16,7 @@ import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ActivitiesList from './Components/Activities/ActivitiesList';
+import News from './Components/News/News';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/actividades/:id" element={<ActivityDetail />} />
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/news" element={<News />} />
         </Routes>
       </BrowserRouter>
     <div className="App">
