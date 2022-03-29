@@ -14,7 +14,6 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
-import Card from "./Components/Cards/Card";
 
 function App() {
   return (
@@ -41,12 +40,6 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
-        <Card
-          image="https://st.depositphotos.com/2069323/2156/i/600/depositphotos_21568765-stock-photo-casual-businessman-pointing.jpg"
-          title="FLASH"
-          description="lorem daskndajondajd as dha dhashkdasjldasjk´djkñasdjklasdjklasdajksl´dadjkla as dha dhashkdasjldasjk´djkñasdjklasdjklasdajksl´dadjkla"
-          placeholder="no img"
-        />
       </div>
     </>
   );
