@@ -23,9 +23,17 @@ const Get = (url, id) => {
     .catch((err) => console.log(err));
 };
 
+const Post = (URL,Body,) => {
+    return axios.post(URL,Body,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: GetAuth(),
+        }})
+}
+
 const GetAuth = () => {
   let token = localStorage.getItem("token");
   return token !== null ? `Bearer ${token}` : null;
 };
 
-export { Get, GetAuth };
+export {Get, GetAuth,Post};
