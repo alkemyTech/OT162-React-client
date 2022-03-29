@@ -4,7 +4,7 @@ import { Delete, Get, Post, Put } from "./privateApiService";
 
 const getMembers = ()=> Get(rutas.MEMBERS_URL);
 
-const getMemberById = ()=> Get(rutas.MEMBERS_URL, id);
+const getMemberById = (id)=> Get(rutas.MEMBERS_URL, id);
 
 const addNewMember = (member)=> Post(rutas.MEMBERS_URL, member)
 
