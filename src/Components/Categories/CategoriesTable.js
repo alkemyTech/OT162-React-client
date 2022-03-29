@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import axios from "axios";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,16 +10,14 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
-
 import Link from "@mui/material/Link";
+
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import {
   deleteCategory,
   getCategories,
 } from "../../Services/categoriesApiService";
-
-const url = "https://ongapi.alkemy.org/api/categories";
 
 function createData(id, name, createdAt) {
   return { id, name, createdAt };
@@ -34,18 +31,7 @@ const DUMMY_CATEGORIES = [
 const CategoriesTable = () => {
   const navigate = useNavigate();
   const deleteHandler = (id) => {
-    axios
-      .delete(`${url}/${id}`)
-      .then(() => {
-        swal({ title: "Category deleted", icon: "success" });
-      })
-      .catch((error) => {
-        swal({
-          title: "You cannot delete it!",
-          text: error.response.data.message,
-          icon: "warning",
-        });
-      });
+    deleteCategory(id);
   };
   const editHandler = (id) => {
     navigate("/create-category");
