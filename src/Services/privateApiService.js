@@ -58,4 +58,17 @@ const GetAuth = () => {
   return token !== null ? `Bearer ${token}` : null;
 };
 
-export {Get, GetAuth,Post, Put, Patch};
+const Delete = (path, id) => {
+    let token = localStorage.getItem('token');
+    let baseURL = 'https://ongapi.alkemy.org/api/';
+    let pathSection = path;
+    let idContent = id;
+
+    if(token !== null || token !== undefined){
+        axios.delete(baseURL + pathSection + '/' + idContent)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
+}
+
+export {Get, GetAuth,Post, Put, Patch, Delete};
