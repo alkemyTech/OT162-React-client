@@ -6,12 +6,19 @@ const config = {
   },
 };
 
-const Get = () => {
+const Put = (route, id, data) => {
   axios
-    .get("https://jsonplaceholder.typicode.com/users", config)
+    .put(`${route}/${id}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: GetAuth(),
+      },
+    })
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
+
+
 const Patch = (ruta, obj, id) => {
   return axios.patch(`${ruta}/${id}`, obj, {
     headers: {
@@ -20,10 +27,35 @@ const Patch = (ruta, obj, id) => {
     },
   });
 };
+// "https://jsonplaceholder.typicode.com/users"
+const Get = (url, id) => {
+  const auth = GetAuth();
+  config.headers.authorization = auth;
+  let httpURL;
 
-const GetAuth = () => {
-    let token = localStorage.getItem('token');
-    return token !== null ? `Bearer ${token}` : null;
+  if (id) {
+    httpURL = url + "/" + id;
+  } else {
+    httpURL = url;
+  }
+  console.log(httpURL);
+  axios
+    .get(httpURL, config)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
+const Post = (URL,Body,) => {
+    return axios.post(URL,Body,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: GetAuth(),
+        }})
 }
 
-export {Get, GetAuth, Patch};
+const GetAuth = () => {
+  let token = localStorage.getItem("token");
+  return token !== null ? `Bearer ${token}` : null;
+};
+
+export {Get, GetAuth,Post, Put, Patch};
