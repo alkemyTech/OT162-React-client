@@ -71,25 +71,4 @@ const Delete = (path, id) => {
   }
 };
 
-// Novedades service
-
-const News = (method, id, body) => {
-  switch (method) {
-    case "get":
-      Get("https://ongapi.alkemy.org/docs/news", id);
-      break;
-    case "post":
-      Post("https://ongapi.alkemy.org/docs/news", body);
-      break;
-    case "put":
-      Put("https://ongapi.alkemy.org/docs/news", id, body);
-      break;
-    case "delete":
-      Delete("https://ongapi.alkemy.org/docs/news", id);
-      break;
-    default:
-      break;
-  }
-};
-
-export { Get, GetAuth, Post, Put, Patch, Delete, News };
+export { Get, GetAuth, Post, Put, Patch, Delete };
