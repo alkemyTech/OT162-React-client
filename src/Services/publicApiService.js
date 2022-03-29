@@ -14,20 +14,14 @@ const Get = () => {
     .catch((err) => console.log(err));
 };
 
-const News = (url, id) => {
+const News = (id) => {
   const auth = GetAuth();
   config.headers.authorization = auth;
   let httpURL = "https://ongapi.alkemy.org/api/users";
-
   if (id) {
-    httpURL = url + "/" + id;
-  } else {
-    httpURL = url;
+    httpURL = httpURL + "/" + id;
   }
-  axios
-    .get(httpURL, config)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  return axios.get(httpURL, config);
 };
 
 export default (Get, News);

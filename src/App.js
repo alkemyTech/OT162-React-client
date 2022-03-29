@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import ActivitiesForm from "./Components/Activities/ActivitiesForm";
 import CategoriesForm from "./Components/Categories/CategoriesForm";
@@ -15,9 +15,15 @@ import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
-import { News } from "./Services/privateApiService";
+import News from "./Services/publicApiService";
 
 function App() {
+  const [first, setfirst] = useState({});
+
+  useEffect(() => {
+    News().then((res) => setfirst(res));
+  }, []);
+
   return (
     <>
       <BrowserRouter>
@@ -43,7 +49,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
-        <button onClick={() => console.log(News("get", "1"))}>BOTON</button>
+        <button onClick={() => console.log(first)}>BOTON</button>
       </div>
     </>
   );
