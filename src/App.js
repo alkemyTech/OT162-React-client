@@ -14,6 +14,7 @@ import ProjectsForm from "./Components/Projects/ProjectsForm";
 import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
+import CategoriesTable from "./Components/Categories/CategoriesTable";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/create-category" element={<CategoriesForm />} />
           <Route path="/backoffice/news/create" element={<NewsForm />} />
           <Route path="/backoffice/create-slide" element={<SlidesForm />} />
+          <Route path="/backoffice/categories" element={<CategoriesTable />} />
           <Route path="/create-testimonials" element={<TestimonialForm />} />
           <Route path="/create-user" element={<UserForm />} />
           <Route
