@@ -17,6 +17,16 @@ const Put = (route, id, data) => {
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
+
+
+const Patch = (ruta, obj, id) => {
+  return axios.patch(`${ruta}/${id}`, obj, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: GetAuth(),
+    },
+  });
+};
 // "https://jsonplaceholder.typicode.com/users"
 const Get = (url, id) => {
   const auth = GetAuth();
@@ -48,4 +58,4 @@ const GetAuth = () => {
   return token !== null ? `Bearer ${token}` : null;
 };
 
-export {Get, GetAuth,Post, Put};
+export {Get, GetAuth,Post, Put, Patch};
