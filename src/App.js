@@ -15,13 +15,14 @@ import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
+import Home from './Components/Home/index'
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={} />           Esta ruta debe ser para el Home */}
+          <Route path="/" exact element={<Home />} />
           <Route path="/create-activity" element={<ActivitiesForm />} />
           <Route path="/create-category" element={<CategoriesForm />} />
           <Route path="/backoffice/news/create" element={<NewsForm />} />
