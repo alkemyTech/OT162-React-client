@@ -280,7 +280,7 @@ const ActivitiesListBackoffice = () => {
             result={modalOperation[1]}
             setOpen={setModalOperation}
             text={
-              modalOperation[1] === "error"
+              modalOperation[1] === "success"
                 ? "La Actividad fue eliminada con exito"
                 : "La Actividad no pudo ser eliminada."
             }
