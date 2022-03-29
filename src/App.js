@@ -15,6 +15,7 @@ import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
+import { News } from "./Services/privateApiService";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
+        <button onClick={() => console.log(News("get", "1"))}>BOTON</button>
       </div>
     </>
   );

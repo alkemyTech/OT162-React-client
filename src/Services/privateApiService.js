@@ -18,7 +18,6 @@ const Put = (route, id, data) => {
     .catch((err) => console.log(err));
 };
 
-
 const Patch = (ruta, obj, id) => {
   return axios.patch(`${ruta}/${id}`, obj, {
     headers: {
@@ -38,20 +37,20 @@ const Get = (url, id) => {
   } else {
     httpURL = url;
   }
-  console.log(httpURL);
   axios
     .get(httpURL, config)
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
 
-const Post = (URL,Body,) => {
-    return axios.post(URL,Body,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: GetAuth(),
-        }})
-}
+const Post = (URL, Body) => {
+  return axios.post(URL, Body, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: GetAuth(),
+    },
+  });
+};
 
 const GetAuth = () => {
   let token = localStorage.getItem("token");
@@ -59,16 +58,38 @@ const GetAuth = () => {
 };
 
 const Delete = (path, id) => {
-    let token = localStorage.getItem('token');
-    let baseURL = 'https://ongapi.alkemy.org/api/';
-    let pathSection = path;
-    let idContent = id;
+  let token = localStorage.getItem("token");
+  let baseURL = "https://ongapi.alkemy.org/api/";
+  let pathSection = path;
+  let idContent = id;
 
-    if(token !== null || token !== undefined){
-        axios.delete(baseURL + pathSection + '/' + idContent)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    }
-}
+  if (token !== null || token !== undefined) {
+    axios
+      .delete(baseURL + pathSection + "/" + idContent)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
+};
 
-export {Get, GetAuth,Post, Put, Patch, Delete};
+// Novedades service
+
+const News = (method, id, body) => {
+  switch (method) {
+    case "get":
+      Get("https://ongapi.alkemy.org/docs/news", id);
+      break;
+    case "post":
+      Post("https://ongapi.alkemy.org/docs/news", body);
+      break;
+    case "put":
+      Put("https://ongapi.alkemy.org/docs/news", id, body);
+      break;
+    case "delete":
+      Delete("https://ongapi.alkemy.org/docs/news", id);
+      break;
+    default:
+      break;
+  }
+};
+
+export { Get, GetAuth, Post, Put, Patch, Delete, News };
