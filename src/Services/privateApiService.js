@@ -6,13 +6,6 @@ const config = {
   },
 };
 
-const Get = () => {
-  axios
-    .get("https://jsonplaceholder.typicode.com/users", config)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-};
-
 const Put = (route, id, data) => {
   axios
     .put(`${route}/${id}`, data, {
@@ -24,10 +17,35 @@ const Put = (route, id, data) => {
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
+// "https://jsonplaceholder.typicode.com/users"
+const Get = (url, id) => {
+  const auth = GetAuth();
+  config.headers.authorization = auth;
+  let httpURL;
+
+  if (id) {
+    httpURL = url + "/" + id;
+  } else {
+    httpURL = url;
+  }
+  console.log(httpURL);
+  axios
+    .get(httpURL, config)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
+const Post = (URL,Body,) => {
+    return axios.post(URL,Body,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: GetAuth(),
+        }})
+}
 
 const GetAuth = () => {
   let token = localStorage.getItem("token");
   return token !== null ? `Bearer ${token}` : null;
 };
 
-export { Get, GetAuth, Put };
+export {Get, GetAuth,Post, Put};
