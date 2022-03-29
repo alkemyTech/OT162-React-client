@@ -1,25 +1,15 @@
-import axios from "axios";
-import { GetAuth } from "./privateApiService";
+import { Delete, Get, Post, Put } from "./privateApiService";
+import rutas from "../config/rutas";
 
-const baseContactURL = "https://ongapi.alkemy.org/api/contacts";
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: GetAuth(),
-  },
-};
+const getContacts = () => Get(rutas.CONTACTS_URL);
 
-const getContacts = () => axios.get(`${baseContactURL}`, config);
+const getContactById = (id) => Get(rutas.CONTACTS_URL, id);
 
-const getContactById = (id) => axios.get(`${baseContactURL}/${id}`, config);
+const addNewContact = (contact) => Post(rutas.CONTACTS_URL, contact);
 
-const addNewContact = (contact) =>
-  axios.post(`${baseContactURL}`, contact, config);
+const updateContact = (id, newData) => Put(rutas.CONTACTS_URL, id, newData);
 
-const updateContact = (id, newData) =>
-  axios.put(`${baseContactURL}/${id}`, newData, config);
-
-const deleteContact = (id) => axios.delete(`${baseContactURL}/${id}`, config);
+const deleteContact = (id) => Delete(rutas.CONTACTS_URL, id);
 
 export {
   getContacts,
