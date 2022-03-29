@@ -5,6 +5,18 @@ const config = {
     Group: 162, //Aqui va el ID del equipo!!
   },
 };
+
+const Put = (route, id, data) => {
+  axios
+    .put(`${route}/${id}`, data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: GetAuth(),
+      },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
 // "https://jsonplaceholder.typicode.com/users"
 const Get = (url, id) => {
   const auth = GetAuth();
@@ -36,4 +48,4 @@ const GetAuth = () => {
   return token !== null ? `Bearer ${token}` : null;
 };
 
-export {Get, GetAuth,Post};
+export {Get, GetAuth,Post, Put};
