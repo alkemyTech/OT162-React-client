@@ -20,17 +20,18 @@ export default function BasicTable() {
     return {id,  name, image, createdAt, carbs, protein };
   } 
   
-  const eliminar = (row) => {
-    setRows(rows.filter(x => x.id !== row.id));
-  }
+  // const eliminar = (row) => {
+  //   setRows(rows.filter(x => x.id !== row.id));
+  // }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell align="right">Image</TableCell>
-            <TableCell align="right">Created at</TableCell>            
+            <TableCell align="center">Image</TableCell>
+            <TableCell align="center">Created at</TableCell>            
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,10 +43,10 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.image}</TableCell>
-              <TableCell align="right">{row.createdAt}</TableCell>
-              <TableCell align="right"><button onClick={() => eliminar()}>Editar</button></TableCell>
-              <TableCell align="right"><button onClick={() => eliminar(row)}>Eliminar</button></TableCell>
+              <TableCell align="center">{row.image}</TableCell>
+              <TableCell align="center">{row.createdAt}</TableCell>
+              {/* <TableCell align="right"><button onClick={() => eliminar()}>Editar</button></TableCell>
+              <TableCell align="right"><button onClick={() => eliminar(row)}>Eliminar</button></TableCell> */}
             </TableRow>
           ))}
         </TableBody>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
-import DataGrid from '../DataGrid/DataGrid'
+import Table from '../Table/Table'
 
 const News = () => {
   return (
@@ -8,7 +8,7 @@ const News = () => {
         <Link to="/backoffice/news/create">
             <button>Agregar Novedades</button>
         </Link>
-        <DataGrid/>
+        <Table/>
       </>      
   )
 }
