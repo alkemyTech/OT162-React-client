@@ -15,7 +15,7 @@ const getSlide = (id) => {
 }
 
 const postSlide = (slide) => {
-    axios.post(routes.createSlide, slide)
+    axios.post(routes.baseURL, slide)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }
