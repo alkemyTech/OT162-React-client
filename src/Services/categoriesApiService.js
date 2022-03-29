@@ -9,12 +9,15 @@ const getCategoriesById = (id) => {
   Get(rutas.GET_CATEGORIES_URL, id);
 };
 
-const postCategory = (body) => {
-  Post(rutas.GET_CATEGORIES_URL, body);
+const postCategory = (data) => {
+  Post(rutas.GET_CATEGORIES_URL, data);
 };
 
-const putCategory = (id, body) => {
-  Put(rutas.GET_CATEGORIES_URL, id, body);
+const putCategory = (id, data) => {
+  Put(rutas.GET_CATEGORIES_URL, id, data);
+};
+const patchCategory = (id, data) => {
+  Patch(rutas.GET_CATEGORIES_URL, id, data);
 };
 
 const deleteCategory = (id) => {
@@ -27,4 +30,5 @@ export {
   postCategory,
   putCategory,
   deleteCategory,
+  patchCategory,
 };

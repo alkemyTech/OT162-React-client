@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CKEditor from "ckeditor4-react";
 import { Formik } from "formik";
 import axios from "axios";
+import { putCategory, postCategory } from "../../Services/categoriesApiService";
 
 import "../FormStyles.css";
 
@@ -40,23 +41,24 @@ const CategoriesForm = ({ category }) => {
 
   const handleSubmit = (e) => {
     if (category) {
-      axios
-        .put(`${categoriesLink}/${initialValues.id}`, initialValues)
-        .then(() => {
-          console.log("PUT");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else
-      axios
-        .post(categoriesLink, initialValues)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      putCategory(initialValues.id, initialValues);
+      // axios
+      //   .put(`${categoriesLink}/${initialValues.id}`, initialValues)
+      //   .then(() => {
+      //     console.log("PUT");
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+    } else postCategory(initialValues);
+    // axios
+    //   .post(categoriesLink, initialValues)
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   console.log(initialValues);
@@ -83,14 +85,7 @@ const CategoriesForm = ({ category }) => {
       }}
       onSubmit={handleSubmit}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
+      {({ values, errors, touched, handleBlur, isSubmitting }) => (
         <form className="form-container" onSubmit={handleSubmit}>
           <input
             className="input-field"
