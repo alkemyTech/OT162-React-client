@@ -4,6 +4,7 @@ import Input from '@mui/material/Input'
 import { imageFormats } from '../../features/SlidesForm/imageFormats';
 import '../FormStyles.css';
 import PostSlide from '../../features/SlidesForm/slidePost';
+import { getSlideList } from '../../Services/slideService';
 
 function getBase64(file){
     return new Promise((resolve, reject) =>{
