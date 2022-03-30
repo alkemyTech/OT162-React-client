@@ -18,7 +18,6 @@ const Put = (route, id, data) => {
     .catch((err) => console.log(err));
 };
 
-
 const Patch = (ruta, obj, id) => {
   return axios.patch(`${ruta}/${id}`, obj, {
     headers: {
@@ -45,13 +44,17 @@ const Get = (url, id) => {
     .catch((err) => console.log(err));
 };
 
-const Post = (URL,Body,) => {
-    return axios.post(URL,Body,{
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: GetAuth(),
-        }})
-}
+const Post = (URL, Body) => {
+  axios
+    .post(URL, Body, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: GetAuth(),
+      },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
 
 const GetAuth = () => {
   let token = localStorage.getItem("token");
@@ -59,16 +62,17 @@ const GetAuth = () => {
 };
 
 const Delete = (path, id) => {
-    let token = localStorage.getItem('token');
-    let baseURL = 'https://ongapi.alkemy.org/api/';
-    let pathSection = path;
-    let idContent = id;
+  let token = localStorage.getItem("token");
+  let baseURL = "https://ongapi.alkemy.org/api/";
+  let pathSection = path;
+  let idContent = id;
 
-    if(token !== null || token !== undefined){
-        axios.delete(baseURL + pathSection + '/' + idContent)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    }
-}
+  if (token !== null || token !== undefined) {
+    axios
+      .delete(baseURL + pathSection + "/" + idContent)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  }
+};
 
-export {Get, GetAuth,Post, Put, Patch, Delete};
+export { Get, GetAuth, Post, Put, Patch, Delete };

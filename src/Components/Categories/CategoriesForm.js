@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import CKEditor from "ckeditor4-react";
 import { Formik } from "formik";
-import axios from "axios";
+import { putCategory, postCategory } from "../../Services/categoriesApiService";
 
 import "../FormStyles.css";
-
-const categoriesLink = "https://ongapi.alkemy.org/api/categories";
 
 const CategoriesForm = ({ category }) => {
   const [initialValues, setInitialValues] = useState({
@@ -40,23 +38,10 @@ const CategoriesForm = ({ category }) => {
 
   const handleSubmit = (e) => {
     if (category) {
-      axios
-        .put(`${categoriesLink}/${initialValues.id}`, initialValues)
-        .then(() => {
-          console.log("PUT");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else
-      axios
-        .post(categoriesLink, initialValues)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      putCategory(initialValues.id, initialValues);
+    } else {
+      postCategory(initialValues);
+    }
   };
 
   console.log(initialValues);
