@@ -17,6 +17,7 @@ import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
 import Home from './Components/Home/index';
 import HomeForm from './Components/Backoffice/Organization/HomeForm';
+import Backoffice from './Backoffice/Backoffice';
 
 function App() {
   return (
@@ -42,9 +43,11 @@ function App() {
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
+          <Route path="/backoffice" element={<Backoffice />} />
         </Routes>
       </BrowserRouter>
       <div className="App">
+        <UserForm />
       </div>
     </>
   );
