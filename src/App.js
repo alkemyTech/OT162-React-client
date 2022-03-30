@@ -16,6 +16,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
 import Home from './Components/Home/index'
+import Backoffice from './Backoffice/Backoffice';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/actividades/:id" element={<ActivityDetail />} />
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice" element={<Backoffice />} />
         </Routes>
       </BrowserRouter>
       <div className="App">
