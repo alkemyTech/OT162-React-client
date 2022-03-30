@@ -15,7 +15,8 @@ import ActivityDetail from "./Components/Activities/Detail/ActivityDetail";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
-import Home from './Components/Home/index'
+import Home from './Components/Home/index';
+import HomeForm from './Components/Backoffice/Organization/HomeForm';
 import Backoffice from './Backoffice/Backoffice';
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/actividades/:id" element={<ActivityDetail />} />
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
         </Routes>
       </BrowserRouter>
