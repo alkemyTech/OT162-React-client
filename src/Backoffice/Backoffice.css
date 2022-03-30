@@ -1,0 +1,22 @@
+body {
+    background-color: #edf2f7;
+}
+
+.round-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 150px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mt {
+    margin-top: 10px;
+}
+
+.mb {
+    margin-bottom: 24px;
+}
