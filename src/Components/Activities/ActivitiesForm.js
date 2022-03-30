@@ -14,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
 import DescriptionField from "./DescriptionField";
+import { updateActivity } from "../../Services/ActivitiesApiService";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 const url_api_base = "https://ongapi.alkemy.org/api";
@@ -56,11 +57,12 @@ const ActivitiesForm = ({ activity }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (activity) {
-      axios
-        .put(
-          `${url_api_base}${activity_endpoint}/${initialValues.id}`,
-          initialValues
-        )
+      // axios
+      //   .put(
+      //     `${url_api_base}${activity_endpoint}/${initialValues.id}`,
+      //     initialValues
+      //   )
+      updateActivity()
         .then(() =>
           swal({
             title: "Actividad actualizada",

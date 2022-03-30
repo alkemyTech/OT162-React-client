@@ -7,7 +7,7 @@ const config = {
 };
 
 const Put = (route, id, data) => {
-  axios
+  return axios
     .put(`${route}/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
