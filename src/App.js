@@ -20,6 +20,7 @@ import CategoriesTable from "./Components/Categories/CategoriesTable";
 import Home from './Components/Home/index';
 import HomeForm from './Components/Backoffice/Organization/HomeForm';
 import Backoffice from './Backoffice/Backoffice';
+import Nosotros from './Components/About/Nosotros/Nosotros';
 
 function App() {
   return (
