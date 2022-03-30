@@ -43,6 +43,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
+        <UserForm />
       </div>
     </>
   );
