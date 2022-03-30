@@ -17,6 +17,7 @@ import SlidesList from './Components/Slides/SlidesList';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
+import ActivitiesListBackoffice from "./Components/Activities/ActivitiesListBackoffice";
 import Home from './Components/Home/index';
 import HomeForm from './Components/Backoffice/Organization/HomeForm';
 import Backoffice from './Backoffice/Backoffice';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/school-campaign" element={<SchoolCampaign />} />
           <Route path="/toys-campaign" element={<ToysCampaign />} />
           <Route path="/actividades/:id" element={<ActivityDetail />} />
+          <Route path="/backoffice/activities" element={<ActivitiesListBackoffice />} />
           <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
           <Route path="/gracias" element={<Thanks />} />
           <Route path="/actividades" component={<ActivitiesList />} />
