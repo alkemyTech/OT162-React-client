@@ -26,6 +26,7 @@ import Donation from './Donations/Donation';
 import Thanks from './Donations/Thanks';
 import Contact from './Components/Contact/Contact';
 import MembersList from './Components/Members/MembersList';
+import UserList from './Components/Users/UserList/UserList';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="/gracias" element={<Thanks />} />
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/users" component={UserList}/>
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact/>} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
