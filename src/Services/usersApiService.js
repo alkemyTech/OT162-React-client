@@ -5,20 +5,20 @@ const getUsers = () =>{
     Get(rutas.GET_USERS_URL)
 }
 
-const getUserByID = (ID) => {
-    Get(rutas.GET_USERS_URL,ID)
+const getUserByID = (id) => {
+    Get(rutas.GET_USERS_URL,id)
 }
 
-const putUsers = (ID,BODY) => {
-    Put(rutas.GET_USERS_URL,ID,BODY)
+const putUsers = (id,body) => {
+    Put(rutas.GET_USERS_URL,id,body)
 }
 
-const postUsers = (BODY) => {
-    Post(rutas.GET_USERS_URL,BODY)
+const postUsers = (body) => {
+    Post(rutas.GET_USERS_URL,body)
 }
 
-const deleteUsers = (ID) => {
-    Delete(rutas.GET_USERS_URL,ID)
+const deleteUsers = (id) => {
+    Delete(rutas.GET_USERS_URL,id)
 }
 
 export {getUsers,getUserByID,putUsers,postUsers,deleteUsers}
