@@ -60,7 +60,7 @@ const mockMembers = [
     
 ]
 
-const MembersList = () => {
+const BackofficeMembersList = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const editMember = (id) => {
@@ -160,4 +160,4 @@ const MembersList = () => {
 };
 
 
-export default MembersList
+export default BackofficeMembersList
