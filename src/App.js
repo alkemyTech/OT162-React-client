@@ -21,6 +21,8 @@ import Home from './Components/Home/index';
 import HomeForm from './Components/Backoffice/Organization/HomeForm';
 import Backoffice from './Backoffice/Backoffice';
 import Nosotros from './Components/About/Nosotros/Nosotros';
+import Donation from './Donations/Donation';
+import Thanks from './Donations/Thanks';
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
           <Route path="/school-campaign" element={<SchoolCampaign />} />
           <Route path="/toys-campaign" element={<ToysCampaign />} />
           <Route path="/actividades/:id" element={<ActivityDetail />} />
+          <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
+          <Route path="/gracias" element={<Thanks />} />
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
