@@ -12,12 +12,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 
-import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import {
-  deleteCategory,
-  getCategories,
-} from "../../Services/categoriesApiService";
+import { deleteCategory } from "../../Services/categoriesApiService";
 
 function createData(id, name, createdAt) {
   return { id, name, createdAt };
