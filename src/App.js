@@ -13,6 +13,9 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
+<<<<<<< HEAD
+import Login from './Components/Auth/Login/Login';
+=======
 import SlidesList from './Components/Slides/SlidesList';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
@@ -27,11 +30,29 @@ import Thanks from './Donations/Thanks';
 import Contact from './Components/Contact/Contact';
 import MembersList from './Components/Members/MembersList';
 import UserList from './Components/Users/UserList/UserList';
+>>>>>>> f102a00023101b4f36d0cc765b98e3e8c1f943ed
 
 function App() {
   return (
     <>
       <BrowserRouter>
+<<<<<<< HEAD
+        <Switch>
+          {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+          <Route path="/create-activity" component={ActivitiesForm} />
+          <Route path="/create-category" component={CategoriesForm} />
+          <Route path="/backoffice/news/create" component={NewsForm} />
+          <Route path="/backoffice/create-slide" component={SlidesForm} />
+          <Route path="/create-testimonials" component={TestimonialForm} />
+          <Route path="/create-user" component={UserForm} />
+          <Route path="/backoffice/members/edit/:id" component={MembersForm} />
+          <Route path="/create-project" component={ProjectsForm} />
+          <Route path="/school-campaign" component={SchoolCampaign} />
+          <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="/actividades/:id" component={ActivityDetail} />
+          <Route path="/login" component={Login} />         
+        </Switch>
+=======
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/create-activity" element={<ActivitiesForm />} />
@@ -61,6 +82,7 @@ function App() {
           <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
         </Routes>
+>>>>>>> f102a00023101b4f36d0cc765b98e3e8c1f943ed
       </BrowserRouter>
       <div className="App">
         <UserForm />
