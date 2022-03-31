@@ -27,6 +27,7 @@
   text-align: center;
   border-bottom: 5px solid #41aabe;
   padding-bottom: 15px;
+  margin: 15px;
 }
 .card-img-div {
   max-height: 200px;
