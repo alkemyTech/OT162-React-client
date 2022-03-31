@@ -18,6 +18,7 @@ import SlidesList from './Components/Slides/SlidesList';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
+import Home from "./Components/Home/index";
 import ActivitiesListBackoffice from "./Components/Activities/ActivitiesListBackoffice";
 import Home from './Components/Home/index';
 import HomeForm from './Components/Backoffice/Organization/HomeForm';
