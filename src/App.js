@@ -13,6 +13,7 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
+import Login from './Components/Auth/Login/Login';
 import SlidesList from './Components/Slides/SlidesList';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
@@ -62,6 +63,7 @@ function App() {
           <Route path="/contacto" element={<Contact/>} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
+          <Route path="/login" component={Login} /> 
         </Routes>
       </BrowserRouter>
       <div className="App">
