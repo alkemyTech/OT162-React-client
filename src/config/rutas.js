@@ -4,6 +4,7 @@ const rutas = {
   GET_CATEGORIES_URL: `${url}/categories`,
   NEWS_URL: `${url}/news`,
   GET_MEMBERS_URL: `${url}/members`,
+  MEMBERS_URL: `${url}/members`,
   GET_USERS_URL: `${url}/users`,
   CONTACTS_URL: `${url}/contacts`,
   GET_ACTIVITY_URL: `${url}/activities`,

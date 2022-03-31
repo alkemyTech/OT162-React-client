@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import rutas from "../../config/rutas";
 import { useParams } from "react-router-dom";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
@@ -9,6 +7,8 @@ import { Fab, Grid, Icon, TextField } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import {  getMemberById, updateMember } from "../../Services/membersApiService";
+
 
 const MembersForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -46,23 +46,28 @@ const MembersForm = () => {
 
   const handleEdit = () => {
     console.log(initialValues);
+    updateMember(id, initialValues)
+  
   };
 
   useEffect(() => {
-    axios
-      .get(`${rutas.GET_MEMBERS_URL}/${id}`)
-      .then((result) => {
-        setInitialValues({
-          name: result.data.data.name,
-          image: result.data.data.image,
-          description: result.data.data.description,
-          facebookUrl: result.data.data.facebookUrl,
-          linkedinUrl: result.data.data.linkedinUrl,
-        });
+  getMemberById(id)
+ 
+ 
+     .then((result) => {
+          setInitialValues({
+            name: result.data.name,
+            image: result.data.image,
+           description: result.data.description,
+           facebookUrl: result.data.facebookUrl,
+            linkedinUrl: result.data.linkedinUrl,
+          });
+        console.log(result)
       })
       .catch((e) => {
         console.log("ERROR", e.message);
       });
+      
   }, [id]);
 
   return (
