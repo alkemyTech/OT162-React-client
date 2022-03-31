@@ -21,6 +21,11 @@ const Put = (route, id, data) => {
 const Patch = (ruta, obj, id) => {
   return axios.patch(`${ruta}/${id}`, obj, {
     headers: {
+<<<<<<< HEAD
+        Group: 1                //Aqui va el ID del equipo!!
+    }
+}
+=======
       "Content-Type": "application/json",
       Authorization: GetAuth(),
     },
@@ -31,6 +36,7 @@ const Get = (url, id) => {
   const auth = GetAuth();
   config.headers.authorization = auth;
   let httpURL;
+>>>>>>> f102a00023101b4f36d0cc765b98e3e8c1f943ed
 
   if (id) {
     httpURL = url + "/" + id;

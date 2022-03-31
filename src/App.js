@@ -13,6 +13,7 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import ActivityDetail from './Components/Activities/Detail/ActivityDetail';
+import Login from './Components/Auth/Login/Login';
 import SlidesList from './Components/Slides/SlidesList';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
@@ -28,6 +29,7 @@ import Contact from './Components/Contact/Contact';
 import MembersList from './Components/Members/MembersList';
 import UserList from './Components/Users/UserList/UserList';
 import NewsSection from "./Components/News/NewsSection";
+import BackofficeMembersList from './Components/Members/BackofficeMembersList';
 
 function App() {
   return (
@@ -55,6 +57,7 @@ function App() {
           <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
           <Route path="/gracias" element={<Thanks />} />
           <Route path="/actividades" component={<ActivitiesList />} />
+          <Route path="/backoffice/members" element={<BackofficeMembersList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
           <Route path="/Novedades" element={<NewsSection />} />
           <Route path="/backoffice/users" component={UserList}/>
@@ -62,6 +65,7 @@ function App() {
           <Route path="/contacto" element={<Contact/>} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
+          <Route path="/login" component={Login} /> 
         </Routes>
       </BrowserRouter>
       <div className="App">
