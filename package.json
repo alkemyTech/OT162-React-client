@@ -19,6 +19,7 @@
     "formik": "^2.2.6",
     "framer-motion": "^4.1.11",
     "gsap": "^3.6.1",
+    "isarray": "^2.0.5",
     "moment": "^2.29.1",
     "node-sass": "^7.0.1",
     "react": "^16.13.1",

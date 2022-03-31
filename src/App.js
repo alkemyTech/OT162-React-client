@@ -28,6 +28,7 @@ import Thanks from './Donations/Thanks';
 import Contact from './Components/Contact/Contact';
 import MembersList from './Components/Members/MembersList';
 import UserList from './Components/Users/UserList/UserList';
+import NewsSection from "./Components/News/NewsSection";
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           <Route path="/actividades" component={<ActivitiesList />} />
           <Route path="/backoffice/members" element={<BackofficeMembersList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/Novedades" element={<NewsSection />} />
           <Route path="/backoffice/users" component={UserList}/>
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact/>} />
