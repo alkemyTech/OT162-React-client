@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../Title/Title";
 import "./NewsSection.css";
 import Card from "../Cards/Card";
 import { Grid } from "@mui/material";
+import axios from "axios";
+import { errorAlert } from "../../features/alerts/alerts";
 
 const CARD_DUMMY_DATA = [
   {
@@ -35,7 +37,25 @@ const CARD_DUMMY_DATA = [
   },
 ];
 
-const newsSection = () => {
+const NewsSection = () => {
+  const [news, setNews] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get("https://ongapi.alkemy.org/api/news")
+      .then((res) => {
+        setNews(res.data.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setNews({ message: err.toString(), severity: "error" });
+        errorAlert(err, "Invalid request", "Exit");
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <div>
       <Title
@@ -53,12 +73,13 @@ const newsSection = () => {
         alignItems="center"
         sx={{ margin: 3 }}
       >
-        {CARD_DUMMY_DATA.map((card) => (
+        {news.map((item) => (
           <Card
-            image={card.image}
-            title={card.title}
-            description={card.description}
-            placeholder={card.placeholder}
+            key={item.id}
+            image={item.image}
+            title={item.name}
+            description={item.content}
+            placeholder={item.placeholder}
           />
         ))}
       </Grid>
@@ -66,4 +87,4 @@ const newsSection = () => {
   );
 };
 
-export default newsSection;
+export default NewsSection;
