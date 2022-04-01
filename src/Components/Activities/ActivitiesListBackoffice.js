@@ -22,7 +22,6 @@ import rutas from "../../config/rutas";
 import PopUpWarning from "../Popups/PopUpWarning";
 import PopUpOpDone from "../Popups/PopUpOpDone";
 import Loading from "../Utilities/Loading";
-import { Backdrop } from "@mui/material";
 
 const useStyles = makeStyles(activitiesTableStyle);
 
@@ -260,9 +259,7 @@ const ActivitiesListBackoffice = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
-            <Backdrop className={classes.backdrop} open={isLoading}>
-              <Loading />
-            </Backdrop>
+            <Loading open={isLoading} />
           </Paper>
         </Grid>
         <Grid item xs={12}>
