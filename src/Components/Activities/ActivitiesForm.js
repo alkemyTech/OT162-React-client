@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../FormStyles.css";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import axios from "axios";
 import {
   Box,
@@ -13,7 +13,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
-import DescriptionField from "./DescriptionField";
+// import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 const url_api_base = "https://ongapi.alkemy.org/api";
@@ -165,14 +165,14 @@ const ActivitiesForm = ({ activity }) => {
               error={!!props.errors.name}
               required
             />
-            <Field
+            {/* <Field
               component={DescriptionField}
               className="input-field"
               type="text"
               name="description"
               placeholder="Write some activity description"
               onChange={handleChange}
-            />
+            /> */}
             <Box sx={{ m: 1, position: "relative" }}>
               <Button
                 sx={{
