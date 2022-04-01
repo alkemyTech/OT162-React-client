@@ -1,21 +1,15 @@
-import rutas from "../config/rutas";
 import { Delete, Get, Post, Put } from "./privateApiService";
 
+const memebersRoute = `${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_MEMBERS}`;
 
-const getMembers = ()=> Get(rutas.MEMBERS_URL);
+const getMembers = () => Get(memebersRoute);
 
-const getMemberById = (id)=> Get(rutas.MEMBERS_URL, id);
+const getMemberById = (id) => Get(memebersRoute, id);
 
-const addNewMember = (member)=> Post(rutas.MEMBERS_URL, member)
+const addNewMember = (member) => Post(memebersRoute, member);
 
-const updateMember = (id, newData)=> Put(rutas.MEMBERS_URL, id, newData)
+const updateMember = (id, newData) => Put(memebersRoute, id, newData);
 
-const deleteMember = (id)=> Delete(rutas.MEMBERS_URL,id)
+const deleteMember = (id) => Delete(memebersRoute, id);
 
-export {
-    getMembers,
-    getMemberById,
-    addNewMember,
-    updateMember,
-    deleteMember,
-}
+export { getMembers, getMemberById, addNewMember, updateMember, deleteMember };
