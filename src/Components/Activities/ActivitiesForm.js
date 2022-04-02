@@ -14,11 +14,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
 import DescriptionField from "./DescriptionField";
-import { updateActivity } from "../../Services/ActivitiesApiService";
+import { updateActivity, createActivity } from "../../Services/ActivitiesApiService";
+import { RequestAsJSON } from "request";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
-const url_api_base = "https://ongapi.alkemy.org/api";
-const activity_endpoint = "/activities";
+// const url_api_base = "https://ongapi.alkemy.org/api";
+// const activity_endpoint = "/activities";
 
 const ActivitiesForm = ({ activity }) => {
   const [initialValues, setInitialValues] = useState({
@@ -62,7 +63,7 @@ const ActivitiesForm = ({ activity }) => {
       //     `${url_api_base}${activity_endpoint}/${initialValues.id}`,
       //     initialValues
       //   )
-      updateActivity()
+      updateActivity(rutas.GET_ACTIVITY_URL, initialValues)
         .then(() =>
           swal({
             title: "Actividad actualizada",
@@ -81,8 +82,9 @@ const ActivitiesForm = ({ activity }) => {
     } else {
       // Si bien el ticket dice hacer el post al endpoint activities/create
       // lo hago a activities directamente ya que en los doc de la api dice eso
-      axios
-        .post(`${url_api_base}${activity_endpoint}`, initialValues)
+      // axios
+      //   .post(`${url_api_base}${activity_endpoint}`, initialValues)
+      createActivity(rutas.GET_ACTIVITY_URL, initialValues)
         .then(() =>
           swal({
             title: "Actividad creada",

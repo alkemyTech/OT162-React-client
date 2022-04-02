@@ -1,10 +1,17 @@
-import {Put,Post,Patch,Delete} from './privateApiService';
+import {Put, Post, Patch, Delete} from './privateApiService';
 
 
-const updateActivity = (url_api_base, activity_endpoint, initialValues) => {
-    let route = url_api_base + activity_endpoint 
+const updateActivity = (url, initialValues) => {    
     let id = initialValues.id;
-    return Put(route, id, initialValues)
+    return Put(url, id, initialValues)
 }
 
-export {updateActivity};
+const createActivity = (url, initialValues) => {   
+    return Post(url, initialValues)
+}
+
+const deleteActivity = (url, activity) => {
+    return Delete(url, activity)
+}
+
+export {updateActivity, createActivity, deleteActivity};
