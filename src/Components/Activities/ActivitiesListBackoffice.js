@@ -23,6 +23,7 @@ import PopUpWarning from "../Popups/PopUpWarning";
 import PopUpOpDone from "../Popups/PopUpOpDone";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
+import { deleteActivity } from "../../Services/ActivitiesApiService";
 
 const useStyles = makeStyles(activitiesTableStyle);
 
@@ -119,8 +120,9 @@ const ActivitiesListBackoffice = () => {
   const handleDelete = () => {
     setModalConfirmation(false);
     setIsLoading(true);
-    axios
-      .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
+    // axios
+    //   .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
+    deleteActivity("/activities", activity)
       .then(() => {
         setModalOperation([true, "succes"]);
         setIsLoading(false);

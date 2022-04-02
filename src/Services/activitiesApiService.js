@@ -10,8 +10,8 @@ const createActivity = (url, initialValues) => {
     return Post(url, initialValues)
 }
 
-const deleteActivity = (url, activity) => {
-    return Delete(url, activity)
+const deleteActivity = (path, activity) => {
+    return Delete(path, activity)
 }
 
 export {updateActivity, createActivity, deleteActivity};
