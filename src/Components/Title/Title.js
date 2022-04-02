@@ -14,7 +14,7 @@ const Title = ({ title, text, img }) => {
           backgroundSize: "cover",
           backgroundPosition: "center",
           position: "relative",
-          height: "50%",
+          height: "100%",
         }}
       >
         <div className="container__text">
