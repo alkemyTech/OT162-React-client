@@ -19,9 +19,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ActivitiesList from "./Components/Activities/ActivitiesList";
 import CategoriesTable from "./Components/Categories/CategoriesTable";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import News from './Components/News/News';
 import Home from './Components/Home/index'
 =======
+=======
+>>>>>>> 46ed5ec03bbc300f38788f73b18f5cae9c96996e
 import Home from "./Components/Home/index";
 import ActivitiesListBackoffice from "./Components/Activities/ActivitiesListBackoffice";
 import HomeForm from './Components/Backoffice/Organization/HomeForm';
@@ -34,7 +37,12 @@ import MembersList from './Components/Members/MembersList';
 import UserList from './Components/Users/UserList/UserList';
 import NewsSection from "./Components/News/NewsSection";
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
+<<<<<<< HEAD
 >>>>>>> c64de70491dabb2001ab6b7538135d63397e083a
+=======
+import News from './Components/News/News';
+
+>>>>>>> 46ed5ec03bbc300f38788f73b18f5cae9c96996e
 
 function App() {
   return (
@@ -65,8 +73,12 @@ function App() {
           <Route path="/backoffice/members" element={<BackofficeMembersList />} />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Route path="/backoffice/news" element={<News />} />
 =======
+=======
+          <Route path="/backoffice/news" element={<News />} />
+>>>>>>> 46ed5ec03bbc300f38788f73b18f5cae9c96996e
           <Route path="/Novedades" element={<NewsSection />} />
           <Route path="/backoffice/users" component={UserList}/>
           <Route path="/miembros" element={<MembersList />} />
@@ -74,7 +86,11 @@ function App() {
           <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
           <Route path="/login" component={Login} /> 
+<<<<<<< HEAD
 >>>>>>> c64de70491dabb2001ab6b7538135d63397e083a
+=======
+
+>>>>>>> 46ed5ec03bbc300f38788f73b18f5cae9c96996e
         </Routes>
       </BrowserRouter>
       <div className="App">
