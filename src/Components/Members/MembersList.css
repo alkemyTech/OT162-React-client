@@ -1,0 +1,15 @@
+.rounded-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:300px;
+    height:300px;
+    border-radius:150px;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+.rounded-image {
+    width: 100%;
+    height: auto;
+}

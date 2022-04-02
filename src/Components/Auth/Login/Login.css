@@ -1,0 +1,94 @@
+.Login , .login__success{
+    /* background-image: url("C:/Users/carab/Desktop/Stuff/NoCountryForJRDevs/nc/src/assets/FotoLogin.png"); */
+    background-size: cover;
+    height: 924px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+  .Login__inputs {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 20px;
+    font-family: "ubuntu";
+    height: 64vh;
+    width: 40%;
+  }
+  .Login__inputs h2 {
+    font-weight: 400;
+    margin: 3% auto 1%;
+    color: #003b32;
+    justify-self: center;
+    font-size: 2.2rem;
+  }
+  .Login__inputs span {
+    color: #003b32;
+    font-family: "lato", sans-serif;
+  }
+  .Login__inputs span:nth-child(7) {
+    align-self: flex-end;
+    margin: 1% 20% 0 0;
+    font-size: 0.9rem;
+    color: #003b3299;
+  }
+  .Login__inputs span:last-of-type {
+    margin-top: 5%;
+  }
+  .Login__inputs label:first-of-type {
+    align-self: flex-start;
+    margin-left: 20%;
+    margin-top: 10%;
+  }
+  .Login__inputs label {
+    align-self: flex-start;
+    margin-left: 20%;
+    margin-top: 3%;
+    color: #003b32;
+  }
+  .Login__inputs input {
+    width: 60%;
+    align-self: center;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #d1d3d5;
+  }
+  .Login__inputs button {
+    background: #40817a;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: "ubuntu";
+    cursor: pointer;
+    width: 35%;
+    align-self: end;  
+    margin-top: 5%;
+  }
+  .Login__form--bottom a {
+    text-decoration: none;
+    color: #40817a;
+    margin-right: 5%;
+  }
+  .successfulSend {
+    color: #fff;
+    background: #2ba68f;
+    border-radius: 1rem;
+    padding: 2.5% 5%;
+    margin: 2% auto;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-family: "ubuntu";
+  }
+  .login__success--inner {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 50%;
+  }
+  .ingresar {
+    padding: 10px;
+  }
