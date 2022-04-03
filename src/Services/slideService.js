@@ -1,27 +1,27 @@
 import axios from "axios";
-import { routes } from "../features/routes/constants";
 
+const slidesUrl = `${REACT_APP_SLIDES_ROUTE}`
 
 const getSlideList = () => {
-    axios.get(routes.baseURL)
+    axios.get(slidesUrl)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }
 
 const getSlide = (id) => {
-    axios.get(routes.baseURL + id)
+    axios.get(slidesUrl + id)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }
 
 const postSlide = (slide) => {
-    axios.post(routes.baseURL, slide)
+    axios.post(slidesUrl, slide)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }
 
 const deleteSlide = (id) => {
-    axios.get(routes.baseURL + id)
+    axios.get(slidesUrl + id)
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }
