@@ -16,6 +16,7 @@ import { updateActivity, createActivity } from "../../Services/activitiesApiServ
 import { RequestAsJSON } from "request";
 import rutas from '../../config/rutas'
 // import DescriptionField from "./DescriptionField";
+import axios from "axios";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 // const url_api_base = "https://ongapi.alkemy.org/api";
@@ -83,7 +84,7 @@ const ActivitiesForm = ({ activity }) => {
       // Si bien el ticket dice hacer el post al endpoint activities/create
       // lo hago a activities directamente ya que en los doc de la api dice eso
       // axios
-      //   .post(`${url_api_base}${activity_endpoint}`, initialValues)
+      //   .post(rutas.GET_ACTIVITY_URL, initialValues)
       createActivity(rutas.GET_ACTIVITY_URL, initialValues)
         .then(() =>
           swal({

@@ -45,7 +45,7 @@ const Get = (url, id) => {
 };
 
 const Post = (URL, Body) => {
-  axios
+ return axios
     .post(URL, Body, {
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const Delete = (path, id) => {
   let idContent = id;
 
   if (token !== null || token !== undefined) {
-    axios
+    return axios
       .delete(baseURL + pathSection + "/" + idContent)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

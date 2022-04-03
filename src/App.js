@@ -37,7 +37,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/create-activity" element={<ActivitiesForm />} />
+          <Route path="/create-activity" element={<ActivitiesForm activity={{
+id:0,
+name:"PruebaUpdate",
+description:"PruebaUpdate",
+image:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABSzSURBVHhe7Z0LlCRVeccXoySSxwmal4kYT3KikCiBo4khJiKRZd3uGTxGN77z4KWQgCaCGsBsiCDsTg8LipoYEhIVEzaaaIh5iUnUBaZneQVRRM0hgmDYneUhugvLTHW+X+/94FL79Uz3THdP1+z/d87/dNet6urqru+797v3u1W1SgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQogVzTrTnaant5eEEI+Cc7SSrqFACP..."
+
+ }}/>} />
           <Route path="/create-category" element={<CategoriesForm />} />
           <Route path="/backoffice/news/create" element={<NewsForm />} />
           <Route path="/backoffice/create-slide" element={<SlidesForm />} />
