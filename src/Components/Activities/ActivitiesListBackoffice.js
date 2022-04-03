@@ -17,13 +17,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
-import axios from "axios";
-import rutas from "../../config/rutas";
 import PopUpWarning from "../Popups/PopUpWarning";
 import PopUpOpDone from "../Popups/PopUpOpDone";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
-import { deleteActivity } from "../../Services/ActivitiesApiService";
+import { deleteActivity } from "../../Services/activitiesApiService";
 
 const useStyles = makeStyles(activitiesTableStyle);
 

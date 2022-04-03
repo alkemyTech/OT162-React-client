@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../FormStyles.css";
 import { Form, Formik } from "formik";
-import axios from "axios";
 import {
   Box,
   Button,
@@ -13,9 +12,9 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
-import { updateActivity, createActivity } from "../../Services/ActivitiesApiService";
+import { updateActivity, createActivity } from "../../Services/activitiesApiService";
 import { RequestAsJSON } from "request";
-import {rutas} from '../../rutas'
+import rutas from '../../config/rutas'
 // import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
