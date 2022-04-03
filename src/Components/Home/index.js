@@ -5,7 +5,7 @@ import Loading from "../Utilities/Loading";
 import Carousel from "./Carousel";
 import HomeTitle from "./HomeTitle";
 import NewsList from "./NewsList";
-import { errorAlert } from "../../../features/alerts/alerts";
+import { errorAlert } from "../../features/alerts/alerts";
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
