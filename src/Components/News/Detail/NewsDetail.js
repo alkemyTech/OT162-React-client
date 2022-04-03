@@ -2,29 +2,36 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Title from "../../Title/Title";
-import Alert from "@mui/material/Alert";
+import Loading from "../../Utilities/Loading";
+import { errorAlert } from "../../../features/alerts/alerts";
 
 const NewsDetail = () => {
   let { id } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
   const [details, setDetails] = useState({
     message: "Cargando...",
     severity: "info",
   });
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get("https://ongapi.alkemy.org/api/news/" + id)
       .then((res) => {
         setDetails(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         setDetails({ message: err.toString(), severity: "error" });
+        errorAlert(err, "ID invalido", "Exit");
+        setIsLoading(false);
       });
   }, [id]);
 
   return (
     <div>
-      {details.data ? (
+      {isLoading && <Loading />}
+      {details.data && (
         <div>
           <Title
             title={details.data.name}
@@ -32,8 +39,6 @@ const NewsDetail = () => {
             img={details.data.image}
           />
         </div>
-      ) : (
-        <Alert severity={details.severity}>{details.message}</Alert>
       )}
     </div>
   );
