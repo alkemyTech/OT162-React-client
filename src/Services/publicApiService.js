@@ -1,27 +1,50 @@
 import axios from "axios";
-import { GetAuth } from "./privateApiService";
+import swal from "sweetalert";
 
 const config = {
   headers: {
     Group: 162, //Aqui va el ID del equipo!!
   },
 };
+const baseUrl = "https://ongapi.alkemy.org/api";
 
-const Get = () => {
-  axios
-    .get("https://jsonplaceholder.typicode.com/users", config)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
-};
-
-const News = (id) => {
-  const auth = GetAuth();
-  config.headers.authorization = auth;
-  let httpURL = "https://ongapi.alkemy.org/api/users";
-  if (id) {
-    httpURL = httpURL + "/" + id;
+const Get = async (endpoint, id) => {
+  try {
+    if (id) {
+      const resp = await axios.get(`${baseUrl}/${endpoint}/${id}`, config);
+      const { success, message, data } = resp.data;
+      if (success) {
+        swal("Success", message, "success");
+        return data;
+      } else {
+        swal("Error", message, "error");
+      }
+    } else {
+      const resp = await axios.get(`${baseUrl}/${endpoint}`, config);
+      const { success, message, data } = resp.data;
+      if (success) {
+        swal("Success", message, "success");
+        return data;
+      } else {
+        swal("Error", message, "error");
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    swal("Error", "Oops! Something went wrong", "error");
   }
-  return axios.get(httpURL, config);
 };
 
-export default (Get, News);
+const Post = (endpoint, body) => {
+  axios
+    .post("https://ongapi.alkemy.org/api/" + endpoint, body)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return <></>;
+};
+
+export { Get, Post };

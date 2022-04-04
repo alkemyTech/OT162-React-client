@@ -28,6 +28,7 @@ const Patch = (ruta, obj, id) => {
 };
 // "https://jsonplaceholder.typicode.com/users"
 const Get = (url, id) => {
+  console.log(url);
   const auth = GetAuth();
   config.headers.authorization = auth;
   let httpURL;
@@ -37,19 +38,22 @@ const Get = (url, id) => {
   } else {
     httpURL = url;
   }
-  axios
+  return axios
     .get(httpURL, config)
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
 
 const Post = (URL, Body) => {
-  return axios.post(URL, Body, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: GetAuth(),
-    },
-  });
+  axios
+    .post(URL, Body, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: GetAuth(),
+      },
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 };
 
 const GetAuth = () => {
