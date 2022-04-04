@@ -30,6 +30,7 @@ import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
 import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
 import SiteDataForm from "./Components/SiteDataForm/SiteDataForm";
+import ContactForm from "./Components/Contact/ContactForm";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
+          <Route path="/backoffice/contact/create" element={<ContactForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
           <Route path="/login" component={Login} />
         </Routes>

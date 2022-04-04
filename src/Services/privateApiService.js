@@ -45,15 +45,12 @@ const Get = (url, id) => {
 };
 
 const Post = (URL, Body) => {
-  axios
-    .post(URL, Body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: GetAuth(),
-      },
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  return axios.post(URL, Body, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: GetAuth(),
+    },
+  });
 };
 
 const GetAuth = () => {
