@@ -37,8 +37,7 @@ const Get = (url, id) => {
   } else {
     httpURL = url;
   }
-  console.log(httpURL);
-  axios
+  return axios
     .get(httpURL, config)
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
