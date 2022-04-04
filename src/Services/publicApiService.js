@@ -14,7 +14,6 @@ const Get = async (endpoint, id) => {
           const resp= await axios.get(`${baseUrl}/${endpoint}/${id}`,config)
           const {success,message, data} = resp.data
           if(success){
-              swal('Success', message, 'success')
               return data
           } else {
               swal('Error', message, 'error')
@@ -25,7 +24,6 @@ const Get = async (endpoint, id) => {
             const resp= await  axios.get(`${baseUrl}/${endpoint}`, config)
             const {success,message, data} = resp.data
             if(success){
-                swal('Success', message, 'success')
                 return data
             } else {
                 swal('Error', message, 'error')
