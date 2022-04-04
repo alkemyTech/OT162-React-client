@@ -28,7 +28,6 @@ const Patch = (ruta, obj, id) => {
 };
 // "https://jsonplaceholder.typicode.com/users"
 const Get = (url, id) => {
-  console.log(url);
   const auth = GetAuth();
   config.headers.authorization = auth;
   let httpURL;

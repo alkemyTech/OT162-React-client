@@ -42,7 +42,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  max-height: 272px;
+  max-height: 200px;
   border: 3px solid #41aabe;
   overflow: hidden;
 }
