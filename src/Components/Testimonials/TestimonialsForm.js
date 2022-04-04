@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../FormStyles.css';
+import { Post } from '../../Services/privateApiService';
+
+const TestimonialURL = `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_TESTIMONIAL_ROUTE}`;
 
 const TestimonialForm = () => {
     const [initialValues, setInitialValues] = useState({
@@ -17,7 +20,7 @@ const TestimonialForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(initialValues);
+        Post(TestimonialURL, initialValues);
     }
 
     return (

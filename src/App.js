@@ -29,6 +29,7 @@ import MembersList from "./Components/Members/MembersList";
 import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
 import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
+import SiteDataForm from "./Components/SiteDataForm/SiteDataForm";
 
 function App() {
   return (
