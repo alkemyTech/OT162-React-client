@@ -1,4 +1,4 @@
-import {Get, Post} from './publicApiService';
+import {Post} from './publicApiService';
 import axios from 'axios';
 
 const PostSliders = async (values) => {
