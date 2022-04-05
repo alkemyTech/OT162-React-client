@@ -37,5 +37,8 @@ const GetSlides = () => {
     return Get("slides");
 }
 
+const GetNews = () => {
+    return Get("news");
+}
 
-export {PostSliders, GetTitle, GetSlides};
+export {PostSliders, GetTitle, GetSlides, GetNews};
