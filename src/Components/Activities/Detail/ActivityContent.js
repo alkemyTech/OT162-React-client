@@ -1,4 +1,4 @@
-//  Description recieved accordding API specs
+import { errorAlert } from '../../../features/alerts/alerts';
 
 const ActivityContent = (description) => {
     let HTMLString = description
@@ -11,6 +11,7 @@ const ActivityContent = (description) => {
             <div dangerouslySetInnerHTML={createMarkup()}/>
         )
     }else{
+        errorAlert('Ha ocurrido un error', 'No hay actividades que mostrar', 'Continuar...')
         return(
             <h3>Here well be display a selected activity</h3>
         )
