@@ -17,11 +17,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
+import axios from "axios";
+import rutas from "../../config/rutas";
 import PopUpWarning from "../Popups/PopUpWarning";
 import PopUpOpDone from "../Popups/PopUpOpDone";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
-import { deleteActivity } from "../../Services/activitiesApiService";
 
 const useStyles = makeStyles(activitiesTableStyle);
 
@@ -118,9 +119,8 @@ const ActivitiesListBackoffice = () => {
   const handleDelete = () => {
     setModalConfirmation(false);
     setIsLoading(true);
-    // axios
-    //   .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
-    deleteActivity("/activities", activity)
+    axios
+      .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
       .then(() => {
         setModalOperation([true, "succes"]);
         setIsLoading(false);
