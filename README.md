@@ -1,3 +1,4 @@
+<no pushear directo a main>
 # Ong Client
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
@@ -28,3 +29,15 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## `User Alerts`
+
+Implemented in 'src/features/alerts/alerts.js', these alerts give three standarized types of alert (success, erorr and info).
+For the correct use of them, they need to recieve three string parameters: 
+- Notification title.
+- Notification message.
+- Notification button text.
+
+Those three parameters are mandatory.
+
+The alerts were develop with sweetAlert (https://sweetalert.js.org/docs/ for more information).

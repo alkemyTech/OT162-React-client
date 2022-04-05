@@ -7,6 +7,9 @@ import React, { useState } from 'react';
 import swal from 'sweetalert';
 import { baseUrl } from '../../config/config';
 import '../FormStyles.css';
+import { Post } from '../../Services/privateApiService';
+
+const TestimonialURL = `${process.env.REACT_APP_BASE_URL}${process.env.REACT_APP_TESTIMONIAL_ROUTE}`;
 
 const TestimonialForm = ({testimonial}) => {
    
@@ -37,6 +40,10 @@ const TestimonialForm = ({testimonial}) => {
           }
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        Post(TestimonialURL, initialValues);
+    }
 
 
     const handleUpdate = () => {
@@ -127,7 +134,7 @@ const TestimonialForm = ({testimonial}) => {
             <ErrorMessage
               name="name"
               component="div"
-              className="error"
+              className="invalid-feedback"
              
             />
             <label htmlFor="text">Description</label>
@@ -145,7 +152,7 @@ const TestimonialForm = ({testimonial}) => {
             <ErrorMessage
               name="description"
               component="div"
-              className="error"
+              className="invalid-feedback"
              
             />
           
@@ -193,7 +200,7 @@ const TestimonialForm = ({testimonial}) => {
             <ErrorMessage
               name="image"
               component="div"
-              className="error"
+              className="invalid-feedback"
              
             />
             <button className="submit-btn" type="submit">Send</button>

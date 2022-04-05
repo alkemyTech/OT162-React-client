@@ -1,17 +1,60 @@
-.list-container{
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600&display=swap");
+.list-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
 }
 
-.card-info{
-    list-style: none;
-    padding: 10px 30px;
-    background-color: #A1D4F6;
-    border-radius: 5px;
+.card-info {
+  list-style: none;
+  padding: 10px 30px;
+  background-color: #a1d4f6;
+  border-radius: 5px;
 }
 
-.card-info:hover{
-    cursor: pointer;
-    background-color: #61BBF8;
+.card-info:hover {
+  cursor: pointer;
+  background-color: #61bbf8;
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  min-height: 450px;
+  max-width: 280px;
+  text-align: center;
+  border-bottom: 5px solid #41aabe;
+  padding-bottom: 15px;
+  margin: 15px;
+}
+.card-img-div {
+  max-height: 200px;
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+.card-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  max-height: 200px;
+  border: 3px solid #41aabe;
+  overflow: hidden;
+}
+.card-title {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  color: #41aabe;
+  font-size: 30px;
+}
+
+.card-description {
+  font-size: 20px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
 }
