@@ -1,5 +1,6 @@
-import {Post} from './publicApiService';
+import {Get, Post} from './publicApiService';
 import axios from 'axios';
+
 
 const PostSliders = async (values) => {
     await axios.get(values.photo1, {responseType: 'arraybuffer'})
@@ -28,4 +29,9 @@ const PostSliders = async (values) => {
     });
 }
 
-export {PostSliders};
+const GetTitle = () => {
+    return Get("organization");
+}
+
+
+export {PostSliders, GetTitle};
