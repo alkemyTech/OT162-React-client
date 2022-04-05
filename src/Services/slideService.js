@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const slidesUrl = `${REACT_APP_SLIDES_ROUTE}`
+const slidesUrl = process.env.REACT_APP_SLIDES_ROUTE
 
 const getSlideList = () => {
     axios.get(slidesUrl)

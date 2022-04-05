@@ -20,6 +20,7 @@ import { PhotoCamera } from "@mui/icons-material";
 
 const NewsForm = (props) => {
   const { news } = props;
+  const baseRoute = process.env.REACT_APP_NEWS_ROUTE
 
   const [initialValues, setInitialValues] = useState(
     news
@@ -70,7 +71,7 @@ const NewsForm = (props) => {
       });
     }
     axios
-      .put(`${rutas.NEWS_URL}/${news.id}`, dataNew, {
+      .put(`${baseRoute}/${news.id}`, dataNew, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
@@ -86,7 +87,7 @@ const NewsForm = (props) => {
 
   const handleCreateNew = () => {
     axios
-      .post(rutas.NEWS_URL, initialValues, {
+      .post(baseRoute, initialValues, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
