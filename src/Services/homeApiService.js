@@ -33,5 +33,9 @@ const GetTitle = () => {
     return Get("organization");
 }
 
+const GetSlides = () => {
+    return Get("slides");
+}
 
-export {PostSliders, GetTitle};
+
+export {PostSliders, GetTitle, GetSlides};
