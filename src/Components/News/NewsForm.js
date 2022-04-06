@@ -71,7 +71,7 @@ const NewsForm = (props) => {
       });
     }
     axios
-      .put(`${baseRoute}/${news.id}`, dataNew, {
+      .put(`https://ongapi.alkemy.org/api/news/${news.id}`, dataNew, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
