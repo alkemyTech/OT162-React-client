@@ -28,6 +28,9 @@ import Contact from "./Components/Contact/Contact";
 import MembersList from "./Components/Members/MembersList";
 import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
+import BackofficeMembersList from './Components/Members/BackofficeMembersList';
+import News from './Components/News/News';
+import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
 import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
 import {
   GetNews,
@@ -71,6 +74,7 @@ function App() {
             element={<BackofficeMembersList />}
           />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/news" element={<News />} />
           <Route path="/Novedades" element={<NewsSection />} />
           <Route path="/backoffice/users" component={UserList} />
           <Route path="/miembros" element={<MembersList />} />
