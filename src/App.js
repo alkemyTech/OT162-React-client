@@ -28,10 +28,10 @@ import Contact from "./Components/Contact/Contact";
 import MembersList from "./Components/Members/MembersList";
 import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
-import BackofficeMembersList from './Components/Members/BackofficeMembersList';
-import News from './Components/News/News';
-import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
 import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
+import News from "./Components/News/News";
+import SiteDataForm from "./Components/SiteDataForm/SiteDataForm";
+
 import {
   GetNews,
   GetSingleNews,
