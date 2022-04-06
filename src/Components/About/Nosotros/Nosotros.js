@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {React,useEffect,useState} from 'react'
-import rutas from '../../../config/rutas'
 import Title from '../../Title/Title'
 
 const Nosotros = () => {
@@ -10,7 +9,7 @@ const Nosotros = () => {
     
     useEffect(() => {
     axios
-      .get(`${rutas.GET_SPECIFIC_ORGANIZATION_URL}`)
+      .get(`${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_ORGANIZATION}`)
       .then((result) => {
         setTitle(result.data.data.name);
         setText(result.data.data.long_description);
