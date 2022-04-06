@@ -28,11 +28,9 @@ import Contact from "./Components/Contact/Contact";
 import MembersList from "./Components/Members/MembersList";
 import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
-<<<<<<< HEAD
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
+import News from './Components/News/News';
 import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
-=======
-import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
 import {
   GetNews,
   GetSingleNews,
@@ -40,7 +38,6 @@ import {
   PutNews,
   DeleteNews,
 } from "./Services/newsApiService";
->>>>>>> a6a124cc5a9cc5e14916891d16f730f6a9d7963c
 
 function App() {
   return (
@@ -76,6 +73,7 @@ function App() {
             element={<BackofficeMembersList />}
           />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/news" element={<News />} />
           <Route path="/Novedades" element={<NewsSection />} />
           <Route path="/backoffice/users" component={UserList} />
           <Route path="/miembros" element={<MembersList />} />
