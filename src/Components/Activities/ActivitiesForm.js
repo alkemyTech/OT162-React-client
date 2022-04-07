@@ -14,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
 // import DescriptionField from "./DescriptionField";
+import {errorAlert} from '../../features/alerts/alerts';
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 const url_api_base = "https://ongapi.alkemy.org/api";
@@ -68,11 +69,7 @@ const ActivitiesForm = ({ activity }) => {
           })
         )
         .catch((error) => {
-          swal({
-            title: "Error",
-            text: "Hubo un problema al actualizar la actividad",
-            icon: "error",
-          });
+          errorAlert("Error","Hubo un problema al actualizar la actividad","error")
           console.log(error);
         })
         .finally(() => setLoading(false));
@@ -87,12 +84,8 @@ const ActivitiesForm = ({ activity }) => {
             icon: "success",
           })
         )
-        .catch((error) => {
-          swal({
-            title: "Error",
-            text: "Hubo un problema al crear la actividad",
-            icon: "error",
-          });
+        .catch((error) => {          
+          errorAlert("Error","Hubo un problema al crear la actividad","error")
           console.log(error);
         })
         .finally(() => setLoading(false));
