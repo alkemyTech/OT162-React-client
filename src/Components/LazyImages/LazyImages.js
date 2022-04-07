@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const LazyImages = ({link, desc}) => {
+const LazyImages = ({src, alt}) => {
   return (
       <>
-    <img src={link} alt={desc} />
+    <img src={src} alt={alt} />
       </>
   )
 }
