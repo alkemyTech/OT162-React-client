@@ -30,6 +30,7 @@ import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
 import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
 =======
@@ -41,6 +42,11 @@ import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
 import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
 import SiteDataForm from "./Components/SiteDataForm/SiteDataForm";
 import ContactForm from "./Components/Contact/ContactForm";
+=======
+import BackofficeMembersList from './Components/Members/BackofficeMembersList';
+import News from './Components/News/News';
+import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
+>>>>>>> 1d86fb696db97b94185f304c0c2d38973533a045
 import {
   GetNews,
   GetSingleNews,
@@ -48,7 +54,6 @@ import {
   PutNews,
   DeleteNews,
 } from "./Services/newsApiService";
->>>>>>> a6a124cc5a9cc5e14916891d16f730f6a9d7963c
 
 function App() {
   return (
