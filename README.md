@@ -46,3 +46,13 @@ For the correct use of them, they need to recieve three string parameters:
 Those three parameters are mandatory.
 
 The alerts were develop with sweetAlert (https://sweetalert.js.org/docs/ for more information).
+
+## `Progress View`
+
+This component is implemented in 'src/Components/Utilities/Loading.js', its objective is to show feedback to the user when it is loading a resource.
+For the correct use of its, it need to receive a bool parameter:
+- Open
+
+This parameter is mandatory.
+
+The progress views were develop with MaterialUI (https://mui.com/components/progress/ for more information).
