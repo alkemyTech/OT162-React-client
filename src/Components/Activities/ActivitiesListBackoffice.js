@@ -260,9 +260,7 @@ const ActivitiesListBackoffice = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
-            <Backdrop className={classes.backdrop} open={isLoading}>
-              <Loading />
-            </Backdrop>
+            <Loading open={isLoading} />
           </Paper>
         </Grid>
         <Grid item xs={12}>
