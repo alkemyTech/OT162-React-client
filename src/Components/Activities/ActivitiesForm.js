@@ -13,10 +13,11 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import swal from "sweetalert";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 // import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
-const url_api_base = "https://ongapi.alkemy.org/api";
+const url_api_base = process.env.REACT_APP_URL_BASE;
 const activity_endpoint = "/activities";
 
 const ActivitiesForm = ({ activity }) => {
@@ -61,18 +62,13 @@ const ActivitiesForm = ({ activity }) => {
           `${url_api_base}${activity_endpoint}/${initialValues.id}`,
           initialValues
         )
-        .then(() =>
-          swal({
-            title: "Actividad actualizada",
-            icon: "success",
-          })
-        )
+        .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
         .catch((error) => {
-          swal({
-            title: "Error",
-            text: "Hubo un problema al actualizar la actividad",
-            icon: "error",
-          });
+          errorAlert(
+            "Error",
+            "Hubo un problema al actualizar la actividad",
+            "Exit"
+          );
           console.log(error);
         })
         .finally(() => setLoading(false));
@@ -81,18 +77,9 @@ const ActivitiesForm = ({ activity }) => {
       // lo hago a activities directamente ya que en los doc de la api dice eso
       axios
         .post(`${url_api_base}${activity_endpoint}`, initialValues)
-        .then(() =>
-          swal({
-            title: "Actividad creada",
-            icon: "success",
-          })
-        )
+        .then(() => confirmAlert("Excelente", "Actividad creada", "Exit"))
         .catch((error) => {
-          swal({
-            title: "Error",
-            text: "Hubo un problema al crear la actividad",
-            icon: "error",
-          });
+          errorAlert("Error", "Hubo un problema al crear la actividad", "Exit");
           console.log(error);
         })
         .finally(() => setLoading(false));
