@@ -7,7 +7,7 @@ const config = {
 };
 
 const Put = (route, id, data) => {
-  axios
+  return axios
     .put(`${route}/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
@@ -37,15 +37,14 @@ const Get = (url, id) => {
   } else {
     httpURL = url;
   }
-  console.log(httpURL);
-  axios
+  return axios
     .get(httpURL, config)
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
 
 const Post = (URL, Body) => {
-  axios
+  return axios
     .post(URL, Body, {
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +67,7 @@ const Delete = (path, id) => {
   let idContent = id;
 
   if (token !== null || token !== undefined) {
-    axios
+    return axios
       .delete(baseURL + pathSection + "/" + idContent)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
