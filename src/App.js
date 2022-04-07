@@ -29,8 +29,16 @@ import MembersList from "./Components/Members/MembersList";
 import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
+import News from './Components/News/News';
 import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
 import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
+import {
+  GetNews,
+  GetSingleNews,
+  PostNews,
+  PutNews,
+  DeleteNews,
+} from "./Services/newsApiService";
 
 function App() {
   return (
@@ -66,6 +74,7 @@ function App() {
             element={<BackofficeMembersList />}
           />
           <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/backoffice/news" element={<News />} />
           <Route path="/Novedades" element={<NewsSection />} />
           <Route path="/backoffice/users" component={UserList} />
           <Route path="/miembros" element={<MembersList />} />
@@ -77,6 +86,23 @@ function App() {
       </BrowserRouter>
       <div className="App">
         <UserForm />
+        <button
+          onClick={() =>
+            PutNews(1, {
+              id: 0,
+              name: "angelasldlad",
+              slug: "string",
+              content: "string",
+              user_id: 0,
+              category_id: 0,
+              created_at: "2022-04-04T18:46:43.451Z",
+              updated_at: "2022-04-04T18:46:43.451Z",
+              deleted_at: "2022-04-04T18:46:43.451Z",
+            })
+          }
+        >
+          asdasd
+        </button>
       </div>
     </>
   );
