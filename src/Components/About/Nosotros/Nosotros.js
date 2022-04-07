@@ -21,7 +21,18 @@ const Nosotros = () => {
     <div>
         <Title title={data.name} text={data.welcome_text} img={data.logo}/>
     </div>
-  )
-}
+  );
+};
 
-export default Nosotros
+export default Nosotros;
+
+
+{/* {loading ? <Loading /> : <Title title={title} text={text} img={img} />}
+
+errorAlert(
+          "Error",
+          "An error has occurred while getting data from server.",
+          "Ok"
+        ); */}
+
+//loading y error
