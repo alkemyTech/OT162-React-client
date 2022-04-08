@@ -17,13 +17,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
-import axios from "axios";
-import rutas from "../../config/rutas";
 import PopUpWarning from "../Popups/PopUpWarning";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
-
+import { deleteActivity } from "../../Services/ActivitiesApiService";
 const useStyles = makeStyles(activitiesTableStyle);
 
 const ActivitiesListBackoffice = () => {
@@ -119,8 +117,7 @@ const ActivitiesListBackoffice = () => {
   const handleDelete = () => {
     setModalConfirmation(false);
     setIsLoading(true);
-    axios
-      .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
+    deleteActivity(`${process.env.REACT_APP_ACTIVITY_ROUTE}/${activity}`)
       .then(() => {
         setIsLoading(false);
         confirmAlert("Listo", "Actividad eliminada", "Exit");
