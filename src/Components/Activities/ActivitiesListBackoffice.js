@@ -17,13 +17,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import { Link as RouterLink } from "react-router-dom";
-import axios from "axios";
-import rutas from "../../config/rutas";
 import PopUpWarning from "../Popups/PopUpWarning";
-import PopUpOpDone from "../Popups/PopUpOpDone";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
-
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import { deleteActivity } from "../../Services/ActivitiesApiService";
 const useStyles = makeStyles(activitiesTableStyle);
 
 const ActivitiesListBackoffice = () => {
@@ -119,15 +117,14 @@ const ActivitiesListBackoffice = () => {
   const handleDelete = () => {
     setModalConfirmation(false);
     setIsLoading(true);
-    axios
-      .delete(`${rutas.GET_ACTIVITY_URL}/${activity}`)
+    deleteActivity(`${process.env.REACT_APP_ACTIVITY_ROUTE}/${activity}`)
       .then(() => {
-        setModalOperation([true, "succes"]);
         setIsLoading(false);
+        confirmAlert("Listo", "Actividad eliminada", "Exit");
       })
       .catch((e) => {
-        setModalOperation([true, "error"]);
         setIsLoading(false);
+        errorAlert("Error :(", "No se pudo eliminar actividad", "Exit");
       });
   };
 
@@ -260,9 +257,7 @@ const ActivitiesListBackoffice = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
-            <Backdrop className={classes.backdrop} open={isLoading}>
-              <Loading />
-            </Backdrop>
+            <Loading open={isLoading} />
           </Paper>
         </Grid>
         <Grid item xs={12}>
@@ -272,18 +267,6 @@ const ActivitiesListBackoffice = () => {
             title="Confirmar eliminar Actividad"
             text="¿Estas seguro de querer eliminar esta actividad de la ONG?"
             handleConfirm={handleDelete}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <PopUpOpDone
-            open={modalOperation[0]}
-            result={modalOperation[1]}
-            setOpen={setModalOperation}
-            text={
-              modalOperation[1] === "success"
-                ? "La Actividad fue eliminada con exito"
-                : "La Actividad no pudo ser eliminada."
-            }
           />
         </Grid>
       </Grid>

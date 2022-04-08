@@ -1,15 +1,16 @@
 import { Delete, Get, Post, Put } from "./privateApiService";
-import rutas from "../config/rutas";
 
-const getContacts = () => Get(rutas.CONTACTS_URL);
+const contactURL = `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_CONTACTS_ROUTE}`;
 
-const getContactById = (id) => Get(rutas.CONTACTS_URL, id);
+const getContacts = () => Get(contactURL);
 
-const addNewContact = (contact) => Post(rutas.CONTACTS_URL, contact);
+const getContactById = (id) => Get(contactURL, id);
 
-const updateContact = (id, newData) => Put(rutas.CONTACTS_URL, id, newData);
+const addNewContact = (contact) => Post(contactURL, contact);
 
-const deleteContact = (id) => Delete(rutas.CONTACTS_URL, id);
+const updateContact = (id, newData) => Put(contactURL, id, newData);
+
+const deleteContact = (id) => Delete(contactURL, id);
 
 export {
   getContacts,

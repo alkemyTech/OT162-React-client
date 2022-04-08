@@ -40,7 +40,7 @@ const CategoriesForm = ({ category }) => {
     if (category) {
       putCategory(initialValues.id, initialValues);
     } else {
-      postCategory(initialValues);
+      postCategory(initialValues).then((res) => console.log(res));
     }
   };
 

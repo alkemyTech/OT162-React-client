@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 
 import "../FormStyles.css";
+import { Post } from "../../Services/privateApiService";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import { addNewContact } from "../../Services/contactApiServices";
 
 const ContactForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -21,6 +24,17 @@ const ContactForm = () => {
       phone: e.currentTarget.phone.value,
       message: e.currentTarget.message.value,
     });
+    addNewContact({
+      ...initialValues,
+      name: e.currentTarget.name.value,
+      email: e.currentTarget.email.value,
+      phone: e.currentTarget.phone.value,
+      message: e.currentTarget.message.value,
+    })
+      .then(() => confirmAlert("Contact created", "", "Ok"))
+      .catch(() =>
+        errorAlert("Error", "An error occurred while creating the contact.")
+      );
   };
 
   console.log(initialValues);

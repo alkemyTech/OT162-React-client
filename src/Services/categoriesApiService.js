@@ -1,27 +1,28 @@
 import { Get, Post, Put, Patch, Delete } from "./privateApiService";
-import rutas from "../config/rutas";
+
+const categoriesRoute = `${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_CATEGORIES_ROUTE}`;
 
 const getCategories = () => {
-  Get(rutas.GET_CATEGORIES_URL);
+  return Get(categoriesRoute);
 };
 
 const getCategoriesById = (id) => {
-  Get(rutas.GET_CATEGORIES_URL, id);
+  return Get(categoriesRoute, id);
 };
 
 const postCategory = (data) => {
-  Post(rutas.GET_CATEGORIES_URL, data);
+  return Post(categoriesRoute, data);
 };
 
 const putCategory = (id, data) => {
-  Put(rutas.GET_CATEGORIES_URL, id, data);
+  return Put(categoriesRoute, id, data);
 };
 const patchCategory = (id, data) => {
-  Patch(rutas.GET_CATEGORIES_URL, id, data);
+  return Patch(categoriesRoute, id, data);
 };
 
 const deleteCategory = (id) => {
-  Delete(rutas.GET_CATEGORIES_URL, id);
+  return Delete(categoriesRoute, id);
 };
 
 export {
