@@ -7,10 +7,7 @@ const slidesUrl = `${process.env.REACT_APP_SLIDES_ROUTE}`;
 >>>>>>> a6a124cc5a9cc5e14916891d16f730f6a9d7963c
 
 const getSlideList = () => {
-  axios
-    .get(slidesUrl)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+  return axios.get(slidesUrl);
 };
 
 const getSlide = (id) => {

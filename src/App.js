@@ -28,25 +28,10 @@ import Contact from "./Components/Contact/Contact";
 import MembersList from "./Components/Members/MembersList";
 import UserList from "./Components/Users/UserList/UserList";
 import NewsSection from "./Components/News/NewsSection";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-import BackofficeMembersList from './Components/Members/BackofficeMembersList';
-import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
-=======
-=======
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
 import News from './Components/News/News';
-import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
->>>>>>> 2060295bd14a0a6afb56fb63fbdf31c52f7a8779
-import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
 import SiteDataForm from "./Components/SiteDataForm/SiteDataForm";
 import ContactForm from "./Components/Contact/ContactForm";
-=======
-import BackofficeMembersList from './Components/Members/BackofficeMembersList';
-import News from './Components/News/News';
-import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
->>>>>>> 1d86fb696db97b94185f304c0c2d38973533a045
 import {
   GetNews,
   GetSingleNews,
@@ -83,7 +68,7 @@ function App() {
           />
           <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
           <Route path="/gracias" element={<Thanks />} />
-          <Route path="/actividades" component={<ActivitiesList />} />
+          <Route path="/actividades" element={<ActivitiesList />} />
           <Route
             path="/backoffice/members"
             element={<BackofficeMembersList />}
@@ -91,13 +76,13 @@ function App() {
           <Route path="/Novedades/:id" element={<NewsDetail />} />
           <Route path="/backoffice/news" element={<News />} />
           <Route path="/Novedades" element={<NewsSection />} />
-          <Route path="/backoffice/users" component={UserList} />
+          <Route path="/backoffice/users" element={UserList} />
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice/contact/create" element={<ContactForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
       <div className="App">
