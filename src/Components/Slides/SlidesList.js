@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import { errorAlert } from "../../features/alerts/alerts";
 
 const slideURL = "https://ongapi.alkemy.org/api/slide";
 
@@ -59,12 +60,8 @@ const SlidesList = () => {
         axios
           .delete(`${slideURL}/${id}`)
           .then(() => swal({ title: "Slide deleted", icon: "success" }))
-          .catch((err) => {
-            swal({
-              title: "Error",
-              text: "An error has ocurred while trying to delete teh slide",
-              icon: "error",
-            });
+          .catch((err) => {            
+            errorAlert("Error", "An error has ocurred while trying to delete teh slide");
             console.log(err);
           });
       }

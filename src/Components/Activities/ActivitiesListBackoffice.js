@@ -23,6 +23,7 @@ import PopUpWarning from "../Popups/PopUpWarning";
 import PopUpOpDone from "../Popups/PopUpOpDone";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
+import {errorAlert} from '../../features/alerts/alerts';
 
 const useStyles = makeStyles(activitiesTableStyle);
 
@@ -128,6 +129,7 @@ const ActivitiesListBackoffice = () => {
       .catch((e) => {
         setModalOperation([true, "error"]);
         setIsLoading(false);
+        errorAlert("Error", "Error al eliminar la actividad", "error");
       });
   };
 

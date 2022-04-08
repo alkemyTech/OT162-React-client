@@ -68,7 +68,7 @@ function App() {
           />
           <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
           <Route path="/gracias" element={<Thanks />} />
-          <Route path="/actividades" component={<ActivitiesList />} />
+          <Route path="/actividades" element={<ActivitiesList />} />
           <Route
             path="/backoffice/members"
             element={<BackofficeMembersList />}
@@ -76,12 +76,12 @@ function App() {
           <Route path="/Novedades/:id" element={<NewsDetail />} />
           <Route path="/backoffice/news" element={<News />} />
           <Route path="/Novedades" element={<NewsSection />} />
-          <Route path="/backoffice/users" component={UserList} />
+          <Route path="/backoffice/users" element={UserList} />
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
       <div className="App">

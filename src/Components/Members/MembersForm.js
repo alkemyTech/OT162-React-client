@@ -8,6 +8,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import {  getMemberById, updateMember } from "../../Services/membersApiService";
+import { errorAlert } from "../../features/alerts/alerts";
 
 
 const MembersForm = () => {
@@ -66,6 +67,7 @@ const MembersForm = () => {
       })
       .catch((e) => {
         console.log("ERROR", e.message);
+        errorAlert("Error","Error al obtener información de miembros","error")
       });
       
   }, [id]);

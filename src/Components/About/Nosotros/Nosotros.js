@@ -2,6 +2,7 @@ import axios from 'axios'
 import {React,useEffect,useState} from 'react'
 import rutas from '../../../config/rutas'
 import Title from '../../Title/Title'
+import {errorAlert} from '../../../features/alerts/alerts'
 
 const Nosotros = () => {
     const [title, setTitle] = useState('')
@@ -20,6 +21,7 @@ const Nosotros = () => {
           console.log(result)
       })
       .catch((e) => {
+        errorAlert("Error","Hubo un problema al obtener la información","error")
         console.log("ERROR", e.message);
       }); 
   }, []);

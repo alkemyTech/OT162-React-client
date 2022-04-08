@@ -9,6 +9,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useParams } from 'react-router-dom'
+import { errorAlert } from "../../features/alerts/alerts";
 
 const SiteDataForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -82,6 +83,7 @@ const SiteDataForm = () => {
       })
       .catch((e) => {
         console.log("ERROR", e.message);
+        errorAlert("Error", e.message, "error")
       });
   }, []);
 
