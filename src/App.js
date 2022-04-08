@@ -21,7 +21,7 @@ import Home from "./Components/Home/index";
 import ActivitiesListBackoffice from "./Components/Activities/ActivitiesListBackoffice";
 import HomeForm from "./Components/Backoffice/Organization/HomeForm";
 import Backoffice from "./Backoffice/Backoffice";
-// import Nosotros from './Components/About/Nosotros/Nosotros';
+import Nosotros from './Components/About/Nosotros/Nosotros';
 import Donation from "./Donations/Donation";
 import Thanks from "./Donations/Thanks";
 import Contact from "./Components/Contact/Contact";
@@ -45,6 +45,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path='/pruebass' element={<Nosotros/>} />
           <Route path="/" exact element={<Home />} />
           <Route path="/create-activity" element={<ActivitiesForm />} />
           <Route path="/create-category" element={<CategoriesForm />} />
