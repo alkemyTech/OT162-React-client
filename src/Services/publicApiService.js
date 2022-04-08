@@ -1,5 +1,5 @@
-import axios from "axios";
-import swal from "sweetalert";
+import axios from 'axios';
+
 
 const config = {
   headers: {
@@ -9,30 +9,24 @@ const config = {
 const baseUrl = "https://ongapi.alkemy.org/api";
 
 const Get = async (endpoint, id) => {
-  try {
-    if (id) {
-      const resp = await axios.get(`${baseUrl}/${endpoint}/${id}`, config);
-      const { success, message, data } = resp.data;
-      if (success) {
-        swal("Success", message, "success");
-        return data;
-      } else {
-        swal("Error", message, "error");
-      }
-    } else {
-      const resp = await axios.get(`${baseUrl}/${endpoint}`);
-      const { success, message, data } = resp.data;
-      if (success) {
-        swal("Success", message, "success");
-        return data;
-      } else {
-        swal("Error", message, "error");
-      }
+    try{
+        if(id) {
+          const resp = await axios.get(`${baseUrl}/${endpoint}/${id}`, config)
+          const {success, data} = resp.data;
+          if(success) {
+            return data
+          } 
+        } else {
+            const resp = await axios.get(`${baseUrl}/${endpoint}`, config)
+            const {success,data} = resp.data;
+            if(success) {
+              return data;
+            } 
+        }
     }
-  } catch (error) {
-    console.log(error);
-    swal("Error", "Oops! Something went wrong", "error");
-  }
+    catch(error){
+        console.log(error);
+    }
 };
 
 const Post = (endpoint, body) => {

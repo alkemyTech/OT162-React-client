@@ -1,28 +1,28 @@
 import { Get, Post, Put, Patch, Delete } from "./privateApiService";
 
-const categoriesRoute = `${process.env.URL_BASE}${process.env.CATEGORIES_ROUTE}` 
+const categoriesRoute = `${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_CATEGORIES_ROUTE}`;
 
 const getCategories = () => {
-  Get(categoriesRoute);
+  return Get(categoriesRoute);
 };
 
 const getCategoriesById = (id) => {
-  Get(categoriesRoute, id);
+  return Get(categoriesRoute, id);
 };
 
 const postCategory = (data) => {
-  Post(categoriesRoute, data);
+  return Post(categoriesRoute, data);
 };
 
 const putCategory = (id, data) => {
-  Put(categoriesRoute, id, data);
+  return Put(categoriesRoute, id, data);
 };
 const patchCategory = (id, data) => {
-  Patch(categoriesRoute, id, data);
+  return Patch(categoriesRoute, id, data);
 };
 
 const deleteCategory = (id) => {
-  Delete(categoriesRoute, id);
+  return Delete(categoriesRoute, id);
 };
 
 export {
