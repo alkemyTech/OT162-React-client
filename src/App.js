@@ -31,7 +31,13 @@ import NewsSection from "./Components/News/NewsSection";
 import BackofficeMembersList from './Components/Members/BackofficeMembersList';
 import News from './Components/News/News';
 import SiteDataForm from './Components/SiteDataForm/SiteDataForm'
+<<<<<<< HEAD
 
+=======
+import BackofficeMembersList from "./Components/Members/BackofficeMembersList";
+import SiteDataForm from "./Components/SiteDataForm/SiteDataForm";
+import ContactForm from "./Components/Contact/ContactForm";
+>>>>>>> 2060295bd14a0a6afb56fb63fbdf31c52f7a8779
 import {
   GetNews,
   GetSingleNews,
@@ -80,6 +86,7 @@ function App() {
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
+          <Route path="/backoffice/contact/create" element={<ContactForm />} />
           <Route path="/backoffice" element={<Backoffice />} />
           <Route path="/login" element={<Login />} />
         </Routes>
