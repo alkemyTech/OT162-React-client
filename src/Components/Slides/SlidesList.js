@@ -11,13 +11,23 @@ import {
   Stack,
 } from "@mui/material";
 import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
+import { getSlides } from "../../features/slide/slideSlice";
 
 const slideURL = "https://ongapi.alkemy.org/api/slide";
 
 const SlidesList = () => {
+  const dispatch = useDispatch();
+  const slides = useSelector((state) => state.slide.list);
+
+  useEffect(() => {
+    dispatch(getSlides());
+  }, [dispatch]);
+
   const slidesMock = [
     {
       id: 1,
@@ -90,7 +100,7 @@ const SlidesList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {slidesMock.map((slide) => (
+            {slides.map((slide) => (
               <TableRow
                 key={slide.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
