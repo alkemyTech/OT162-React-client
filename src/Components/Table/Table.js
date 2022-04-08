@@ -6,13 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { GetNews } from "../../Services/newsApiService";
 import { useDispatch, useSelector } from "react-redux";
-import { getAsyncNewsSlice } from "../../features/news/newsSlice";
+import { getAsyncNewsThunk } from "../../features/news/newsSlice";
+import { Get } from "../../Services/publicApiService";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const fetchedNews = useSelector;
+  const { data, status, error } = useSelector((state) => state.news);
 
   const [news, setNews] = useState([]);
   const [rows, setRows] = useState([
@@ -26,10 +26,12 @@ export default function BasicTable() {
     return { id, name, image, createdAt, carbs, protein };
   }
   useEffect(() => {
-    dispatch(getAsyncNewsSlice);
-  }, []);
+    if (status === "loading") {
+      dispatch(getAsyncNewsThunk);
+    }
+  }, [dispatch]);
 
-  console.log(news);
+  console.log(data);
 
   // const eliminar = (row) => {
   //   setRows(rows.filter(x => x.id !== row.id));

@@ -1,22 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { GetNews } from "../../Services/newsApiService";
+import { Get } from "../../Services/publicApiService";
 
-const initialNewsState = { news: [] };
+const initialNewsState = { data: {}, status: "loading...", error: null };
 
-export const getAsyncNewsSlice = createAsyncThunk("url/news", async () => {
+export const getAsyncNewsThunk = createAsyncThunk("url/news", async () => {
   try {
-    return await GetNews();
+    const resp = await Get("news");
+    return resp;
   } catch (err) {
     console.log(err);
   }
 });
 
 const newsSlice = createSlice({
-  name: "newsState",
+  name: "news",
   initialState: initialNewsState,
   reducers: {
-    showNewsReducer(state) {
-      state.news = GetNews();
+    [getAsyncNewsThunk.pending]: (state, action) => {
+      return { ...state, status: "loading..." };
+    },
+    [getAsyncNewsThunk.fulfilled]: (state, action) => {
+      return { ...state, data: { ...action.payload }, status: "success" };
+    },
+    [getAsyncNewsThunk.rejected]: (state, action) => {
+      return { ...state, status: "failed :(" };
     },
   },
 });
