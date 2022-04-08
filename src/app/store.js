@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
-import aboutUsReducer from '../features/reducers/aboutUsSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "../features/counter/counterSlice";
+import slideReducer from "../features/slide/slideSlice";
 
 export default configureStore({
   reducer: {
-    // counter: counterReducer,
+    counter: counterReducer,
+    slide: slideReducer,
     aboutUs: aboutUsReducer,
   },
 });
