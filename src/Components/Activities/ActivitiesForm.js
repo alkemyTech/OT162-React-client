@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../FormStyles.css";
 import { Form, Formik } from "formik";
-import axios from "axios";
 import {
   Box,
   Button,
@@ -12,12 +11,14 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import swal from "sweetalert";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import {
+  createActivity,
+  updateActivity,
+} from "../../Services/ActivitiesApiService";
 // import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
-const url_api_base = "https://ongapi.alkemy.org/api";
-const activity_endpoint = "/activities";
 
 const ActivitiesForm = ({ activity }) => {
   const [initialValues, setInitialValues] = useState({
@@ -56,43 +57,30 @@ const ActivitiesForm = ({ activity }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (activity) {
-      axios
-        .put(
-          `${url_api_base}${activity_endpoint}/${initialValues.id}`,
-          initialValues
-        )
-        .then(() =>
-          swal({
-            title: "Actividad actualizada",
-            icon: "success",
-          })
-        )
+      updateActivity(
+        `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}/${initialValues.id}`,
+        initialValues
+      )
+        .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
         .catch((error) => {
-          swal({
-            title: "Error",
-            text: "Hubo un problema al actualizar la actividad",
-            icon: "error",
-          });
+          errorAlert(
+            "Error",
+            "Hubo un problema al actualizar la actividad",
+            "Exit"
+          );
           console.log(error);
         })
         .finally(() => setLoading(false));
     } else {
       // Si bien el ticket dice hacer el post al endpoint activities/create
       // lo hago a activities directamente ya que en los doc de la api dice eso
-      axios
-        .post(`${url_api_base}${activity_endpoint}`, initialValues)
-        .then(() =>
-          swal({
-            title: "Actividad creada",
-            icon: "success",
-          })
-        )
+      createActivity(
+        `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}`,
+        initialValues
+      )
+        .then(() => confirmAlert("Excelente", "Actividad creada", "Exit"))
         .catch((error) => {
-          swal({
-            title: "Error",
-            text: "Hubo un problema al crear la actividad",
-            icon: "error",
-          });
+          errorAlert("Error", "Hubo un problema al crear la actividad", "Exit");
           console.log(error);
         })
         .finally(() => setLoading(false));
