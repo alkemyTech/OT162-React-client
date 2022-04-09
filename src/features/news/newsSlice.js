@@ -5,7 +5,6 @@ const initialNewsState = { data: [], status: "loading...", error: null };
 
 export const getAsyncNewsThunk = createAsyncThunk("url/news", async () => {
   return GetNews().then((res) => {
-    console.log(res.data.data);
     return res.data.data;
   });
 });
@@ -14,7 +13,6 @@ export const deleteAsyncNewsThunk = createAsyncThunk(
   "url/deleteNews",
   async (id) => {
     return DeleteNews(id).then((res) => {
-      console.log(res.data.data);
       return res.data.data;
     });
   }
