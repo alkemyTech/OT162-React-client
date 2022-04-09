@@ -1,33 +1,48 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Get } from "../../Services/publicApiService";
+import { DeleteNews, GetNews } from "../../Services/newsApiService";
 
-const initialNewsState = { data: {}, status: "loading...", error: null };
+const initialNewsState = { data: [], status: "loading...", error: null };
 
 export const getAsyncNewsThunk = createAsyncThunk("url/news", async () => {
-  try {
-    const resp = await Get("news");
-    return resp;
-  } catch (err) {
-    console.log(err);
-  }
+  return GetNews().then((res) => {
+    console.log(res.data.data);
+    return res.data.data;
+  });
 });
+
+export const deleteAsyncNewsThunk = createAsyncThunk(
+  "url/deleteNews",
+  async (id) => {
+    return DeleteNews(id).then((res) => {
+      console.log(res.data.data);
+      return res.data.data;
+    });
+  }
+);
 
 const newsSlice = createSlice({
   name: "news",
   initialState: initialNewsState,
-  reducers: {
+  extraReducers: {
     [getAsyncNewsThunk.pending]: (state, action) => {
-      return { ...state, status: "loading..." };
+      state.status = "loading";
     },
     [getAsyncNewsThunk.fulfilled]: (state, action) => {
-      return { ...state, data: { ...action.payload }, status: "success" };
+      state.data = action.payload;
+      state.status = "success";
     },
     [getAsyncNewsThunk.rejected]: (state, action) => {
-      return { ...state, status: "failed :(" };
+      state.status = "failed";
+    },
+    [deleteAsyncNewsThunk.fulfilled]: (state, action) => {
+      const Allnews = state.data.filter(
+        (news) => news.id !== action.payload.id
+      );
+
+      state.data = [...Allnews];
+      state.status = "success";
     },
   },
 });
-
-export const newsActions = newsSlice.actions;
 
 export default newsSlice.reducer;

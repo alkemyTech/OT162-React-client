@@ -7,31 +7,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import { getAsyncNewsThunk } from "../../features/news/newsSlice";
-import { Get } from "../../Services/publicApiService";
+import {
+  getAsyncNewsThunk,
+  deleteAsyncNewsThunk,
+} from "../../features/news/newsSlice";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const { data, status, error } = useSelector((state) => state.news);
+  const data = useSelector((state) => state.news.data);
 
-  const [news, setNews] = useState([]);
-  const [rows, setRows] = useState([
-    createData(1, "Frozen yoghurt", 159, 6.0),
-    createData(2, "Ice cream sandwich", 237, 9.0),
-    createData(3, "Eclair", 262, 16.0),
-    createData(4, "Cupcake", 305, 3.7),
-    createData(5, "Gingerbread", 356, 16.0),
-  ]);
-  function createData(id, name, image, createdAt, carbs, protein) {
-    return { id, name, image, createdAt, carbs, protein };
-  }
   useEffect(() => {
-    if (status === "loading") {
-      dispatch(getAsyncNewsThunk);
-    }
+    dispatch(getAsyncNewsThunk());
+    console.log(data);
   }, [dispatch]);
-
-  console.log(data);
 
   // const eliminar = (row) => {
   //   setRows(rows.filter(x => x.id !== row.id));
@@ -48,7 +36,7 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((row) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -56,13 +44,17 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="center">{row.image}</TableCell>
-              <TableCell align="center">{row.createdAt}</TableCell>
+              <TableCell align="center">
+                <img src={row.image} style={{ maxHeight: 60 }}></img>
+              </TableCell>
+              <TableCell align="center">{row.created_at}</TableCell>
               <TableCell align="right">
                 <button>Editar</button>
               </TableCell>
               <TableCell align="right">
-                <button>Eliminar</button>
+                <button onClick={dispatch(deleteAsyncNewsThunk)}>
+                  Eliminar
+                </button>
               </TableCell>
             </TableRow>
           ))}

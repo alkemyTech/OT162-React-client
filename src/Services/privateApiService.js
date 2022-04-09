@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const config = {
-  headers: {
-    Group: 162, //Aqui va el ID del equipo!!
-  },
+  headers: {},
 };
 
 const Put = (route, id, data) => {
@@ -27,7 +25,7 @@ const Patch = (ruta, obj, id) => {
   });
 };
 // "https://jsonplaceholder.typicode.com/users"
-const Get = (url, id) => {
+const Get = async (url, id) => {
   const auth = GetAuth();
   config.headers.authorization = auth;
   let httpURL;
@@ -37,20 +35,16 @@ const Get = (url, id) => {
   } else {
     httpURL = url;
   }
-  return axios
-    .get(httpURL, config)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  return await axios.get(httpURL, config);
 };
 
 const Post = (URL, Body) => {
-  return axios
-    .post(URL, Body, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: GetAuth(),
-      },
-    })
+  return axios.post(URL, Body, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: GetAuth(),
+    },
+  });
 };
 
 const GetAuth = () => {
