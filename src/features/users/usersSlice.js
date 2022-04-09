@@ -41,7 +41,6 @@ export const populateUsersList = createAsyncThunk(
   "users/populateUsersList",
   async () => {
     const response = await getUsers();
-    console.log("response.data.data", response.data.data);
     const usersList = response.data.data;
     return usersList;
   }
