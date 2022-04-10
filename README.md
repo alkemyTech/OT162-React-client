@@ -5,8 +5,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Loader component:
 
-In order to use the component, the developer has to pass on a prop in the Loader component --> loading={false}
-Then, in its component, the developer has to set a conditional rendering --> loading ? : <some code>
+In order to use the component, the developer has to pass on a prop in the Loader component --> circular="circular" , rectangular="rectangular", text="text" or a combination of them (all 3 of them can be used at once). 
+Then, in its component, the developer has to set a conditional rendering --> 
+
+    loading ? : <Loader desiredVariant="desiredVariant"/>
 
 ## Available Scripts
 
