@@ -6,6 +6,6 @@ export default configureStore({
   reducer: {
     counter: counterReducer,
     slide: slideReducer,
-    aboutUs: aboutUsReducer,
+    // aboutUs: aboutUsReducer,
   },
 });

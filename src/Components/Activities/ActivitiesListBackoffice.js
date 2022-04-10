@@ -21,7 +21,7 @@ import PopUpWarning from "../Popups/PopUpWarning";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
-import { deleteActivity } from "../../Services/ActivitiesApiService";
+import { deleteActivity } from "../../Services/activitiesApiService";
 const useStyles = makeStyles(activitiesTableStyle);
 
 const ActivitiesListBackoffice = () => {
