@@ -9,6 +9,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useParams } from 'react-router-dom'
+import { errorAlert } from "../../features/alerts/alerts";
 
 const SiteDataForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -52,7 +53,7 @@ const SiteDataForm = () => {
   };
 
   const handleUpdate = () => {
-    axios.put(`${rutas.GET_ORGANIZATION_URL}/1}`, initialValues, {
+    axios.put(`${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_ORGANIZATION}/1`, initialValues, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
@@ -68,7 +69,7 @@ const SiteDataForm = () => {
 
   useEffect(() => {
     axios
-      .get(`${rutas.GET_ORGANIZATION_URL}`)
+      .get(`${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_ORGANIZATION}`)
       .then((result) => {
         setInitialValues({
           name: result.data.data.name,
@@ -82,6 +83,7 @@ const SiteDataForm = () => {
       })
       .catch((e) => {
         console.log("ERROR", e.message);
+        errorAlert("Error", e.message, "error")
       });
   }, []);
 
