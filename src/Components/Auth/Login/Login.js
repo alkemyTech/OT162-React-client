@@ -3,6 +3,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import { useState, useEffect } from "react";
+import { errorAlert } from "../../../features/alerts/alerts";
 
 const Login = () => {
   const [login, setLogin] = useState(false);
@@ -85,9 +86,11 @@ const Login = () => {
               .catch((error) => {
                 console.log(error);
                 console.log("Usuario inexistente");
+                errorAlert("Error", "Usuario inexistente", "error");
               });
           } catch (error) {
             console.log(error);
+            errorAlert("Error", "Usuario inexistente", "error");
           }
         }}
       >

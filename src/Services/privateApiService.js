@@ -1,33 +1,28 @@
 import axios from "axios";
 
+const GetAuth = () => {
+  let token = localStorage.getItem("token");
+  return token !== null ? `Bearer ${token}` : null;
+};
+
 const config = {
-  headers: {},
+  headers: {
+    Group: 162, //Aqui va el ID del equipo!!
+    "Content-Type": "application/json",
+  },
 };
 
 const Put = (route, id, data) => {
-  return axios
-    .put(`${route}/${id}`, data, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: GetAuth(),
-      },
-    })
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+  config.headers.Authorization = GetAuth();
+  axios.put(`${route}/${id}`, data, config);
 };
 
 const Patch = (ruta, obj, id) => {
-  return axios.patch(`${ruta}/${id}`, obj, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: GetAuth(),
-    },
-  });
+  config.headers.Authorization = GetAuth();
+  axios.patch(`${ruta}/${id}`, obj, config);
 };
-// "https://jsonplaceholder.typicode.com/users"
-const Get = async (url, id) => {
-  const auth = GetAuth();
-  config.headers.authorization = auth;
+
+const Get = (url, id) => {
   let httpURL;
 
   if (id) {
@@ -35,35 +30,17 @@ const Get = async (url, id) => {
   } else {
     httpURL = url;
   }
-  return await axios.get(httpURL, config);
+  return axios.get(httpURL, config);
 };
 
 const Post = (URL, Body) => {
-  return axios.post(URL, Body, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: GetAuth(),
-    },
-  });
-};
-
-const GetAuth = () => {
-  let token = localStorage.getItem("token");
-  return token !== null ? `Bearer ${token}` : null;
+  config.headers.Authorization = GetAuth();
+  axios.post(URL, Body, config);
 };
 
 const Delete = (path, id) => {
-  let token = localStorage.getItem("token");
-  let baseURL = "https://ongapi.alkemy.org/api/";
-  let pathSection = path;
-  let idContent = id;
-
-  if (token !== null || token !== undefined) {
-    return axios
-      .delete(baseURL + pathSection + "/" + idContent)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  }
+  config.headers.Authorization = GetAuth();
+  axios.delete(path + "/" + id, config);
 };
 
 export { Get, GetAuth, Post, Put, Patch, Delete };
