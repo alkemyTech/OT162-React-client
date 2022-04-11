@@ -53,7 +53,7 @@ const SiteDataForm = () => {
   };
 
   const handleUpdate = () => {
-    axios.put(`${rutas.GET_ORGANIZATION_URL}/1}`, initialValues, {
+    axios.put(`${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_ORGANIZATION}/1`, initialValues, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
@@ -69,7 +69,7 @@ const SiteDataForm = () => {
 
   useEffect(() => {
     axios
-      .get(`${rutas.GET_ORGANIZATION_URL}`)
+      .get(`${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_ORGANIZATION}`)
       .then((result) => {
         setInitialValues({
           name: result.data.data.name,

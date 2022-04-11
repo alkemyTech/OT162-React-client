@@ -77,7 +77,7 @@ function App() {
           <Route path="/Novedades/:id" element={<NewsDetail />} />
           <Route path="/backoffice/news" element={<News />} />
           <Route path="/Novedades" element={<NewsSection />} />
-          <Route path="/backoffice/users" element={UserList} />
+          <Route path="/backoffice/users" element={<UserList />} />
           <Route path="/miembros" element={<MembersList />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/backoffice/Organization" element={<HomeForm />} />
