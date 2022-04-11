@@ -188,6 +188,7 @@ const Player = ({
             onChange={handleVolumeChange}
             sx={{
               color: playerSlidersColor,
+              mr: "16px !important",
               "& .MuiSlider-track": {
                 border: "none",
               },
