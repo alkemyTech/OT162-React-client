@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { ErrorMessage, Formik } from "formik";
 import "../FormStyles.css";
+import { errorAlert } from "../../features/alerts/alerts";
 const UserForm = ({ user }) => {
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -74,6 +75,7 @@ const UserForm = ({ user }) => {
         })
         .catch((resp) => {
           console.log(resp);
+          errorAlert("Error", "An error has occurred while updating the user", "error");
         });
     } else {
       axios
@@ -89,6 +91,7 @@ const UserForm = ({ user }) => {
         })
         .catch((resp) => {
           console.log(resp);
+          errorAlert("Error", "An error has occurred while creating the user", "error");
         });
     }
   };
