@@ -15,8 +15,9 @@ import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import {
   createActivity,
   updateActivity,
-} from "../../Services/ActivitiesApiService";
+} from "../../Services/activitiesApiService";
 // import DescriptionField from "./DescriptionField";
+import { postActivities } from '../../features/activities/activitiesSlice';
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 
