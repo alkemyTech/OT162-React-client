@@ -6,6 +6,7 @@ import { Grid } from "@mui/material";
 import axios from "axios";
 import { errorAlert } from "../../features/alerts/alerts";
 import Loading from "../Utilities/Loading";
+import LastEvent from "./LastEvent";
 
 const NewsSection = () => {
   const [news, setNews] = useState([]);
@@ -59,6 +60,7 @@ const NewsSection = () => {
           </Grid>
         </div>
       )}
+      <LastEvent />
     </div>
   );
 };
