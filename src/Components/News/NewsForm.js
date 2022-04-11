@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import { PhotoCamera } from "@mui/icons-material";
+import { errorAlert } from "../../features/alerts/alerts";
 
 const NewsForm = (props) => {
   const { news } = props;
@@ -82,6 +83,7 @@ const NewsForm = (props) => {
       })
       .catch(function (error) {
         console.log("ERROR: ", error);
+        errorAlert("Error", "Error al actualizar noticia", "error");
       });
   };
 
@@ -98,6 +100,7 @@ const NewsForm = (props) => {
       })
       .catch(function (error) {
         console.log("ERROR: ", error);
+        errorAlert("Error", "Error al crear noticia", "error");
       });
     setInitialValues({
       name: "",
