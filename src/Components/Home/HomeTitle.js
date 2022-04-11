@@ -1,8 +1,6 @@
-import { useState } from "react";
 import "../HomeTitle.css";
 
-const HomeTitle = () => {
-  const [title, setTitle] = useState("Bienvenido a la ONG");
+const HomeTitle = ({title}) => {
   return <h1>{title}</h1>;
 };
 
