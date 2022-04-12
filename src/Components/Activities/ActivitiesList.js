@@ -4,27 +4,16 @@ import { errorAlert } from "../../features/alerts/alerts";
 import { useEffect, useState } from "react";
 import Loading from "../Utilities/Loading";
 
-import { selectActivities, getActivitiesStatus, getActivitiesError, fetchActivities } from "../../features/activities/activitiesSlice";
-import { useSelector, useDispatch } from "react-redux";
-
 const ActivitiesList = () => {
   
-  const [loading, setLoading] = useState(true);
-
-  const dispatch = useDispatch();
-  const activities = useSelector(selectActivities);
-  const activitiesStatus = useSelector(getActivitiesStatus);
-  const activitiesError = useSelector(getActivitiesError);
-  console.log(activities);
+  const [loading, setLoading] = useState(true);  
 
   useEffect(() => {
     setTimeout(() =>{
       setLoading(false);
-    }, 2000);
+    }, 2000);    
 
-    activitiesStatus === "idle" && dispatch(fetchActivities());
-
-  }, [activitiesStatus, dispatch]);
+  }, []);
   
   const activitiesMock = [
     { id: 2, name: "Titulo de prueba", description: "Descripcion de prueba" },
@@ -38,8 +27,8 @@ const ActivitiesList = () => {
 
   return (
     <div>{ 
-      // loading? 
-      //   Loading() :
+      loading? 
+        Loading() :
         <div>
           <Title title="Actividades" img="/images/banner-img.jpg" />
           <ul className="list-container">

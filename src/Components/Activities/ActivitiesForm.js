@@ -17,7 +17,7 @@ import {
   updateActivity,
 } from "../../Services/activitiesApiService";
 // import DescriptionField from "./DescriptionField";
-import { postActivities } from '../../features/activities/activitiesSlice';
+
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 
