@@ -1,0 +1,11 @@
+.rounded-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.rounded-container img {
+    width: auto;
+    height: 100%;
+}

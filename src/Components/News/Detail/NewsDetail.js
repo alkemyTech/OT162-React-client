@@ -4,6 +4,7 @@ import axios from "axios";
 import Title from "../../Title/Title";
 import Loading from "../../Utilities/Loading";
 import { errorAlert } from "../../../features/alerts/alerts";
+import Comments from '../../Comments/Comments';
 
 const NewsDetail = () => {
   let { id } = useParams();
@@ -30,6 +31,7 @@ const NewsDetail = () => {
 
   return (
     <div>
+      <div>
       {isLoading && <Loading />}
       {details.data && (
         <div>
@@ -40,6 +42,8 @@ const NewsDetail = () => {
           />
         </div>
       )}
+      </div>
+      <Comments/>
     </div>
   );
 };
