@@ -1,4 +1,3 @@
-
 const footerStyle = {
   root: {
     flexGrow: 1,
@@ -8,9 +7,10 @@ const footerStyle = {
     marginTop: 10,
   },
   textoInf: {
-    padding: "10px",
-    marginTop: "20px",
+    padding: "0px",
+    fontSize: "14px",
     textShadow: "0.1px 0.1px 0.1px white",
+    color: "white !important",
     // fontStyle: "italic",
   },
 };
