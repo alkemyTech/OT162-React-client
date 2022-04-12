@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Grid, Card, CardContent, Typography, Button, Box} from '@mui/material';
 import {Facebook, LinkedIn} from '@mui/icons-material';
 import './MembersList.css';
+import { errorAlert } from '../../features/alerts/alerts';
 
 const InnerHTML = ({html}) => {
     function createMarkup(){
@@ -19,6 +20,10 @@ const MembersList = () => {
         axios.get('https://ongapi.alkemy.org/api/members')
         .then((res) => {
             setMembers(res.data.data);
+        })
+        .catch((err) => {
+            console.log(err);
+            errorAlert("Error", "Error: No se pudo obtener información de miembros", "error");
         })
     }, [])
     return (
