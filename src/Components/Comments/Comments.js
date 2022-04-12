@@ -1,6 +1,7 @@
 import react, {useEffect, useState} from 'react';
 import {Get} from '../../Services/publicApiService';
 import {Card, Box, Grid, CardContent, Typography} from '@mui/material';
+import Loader from '../Loader/Loader';
 import './Comments.css';
 
 const Comments = () => {
@@ -14,6 +15,7 @@ const Comments = () => {
 
     return (
         <Box m={4}>
+            {comments.length > 0 ?
             <Grid 
             container 
             rowSpacing={1} 
@@ -38,6 +40,7 @@ const Comments = () => {
                 </Grid>
             ))}
             </Grid>
+            : <Loader texto="texto" rectangular="rectangular"/>}
         </Box>
     )
 }
