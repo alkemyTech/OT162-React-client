@@ -75,8 +75,6 @@ export default function Footer() {
     });
   }, []);
 
-  console.log(organization);
-
   return (
     <>
       <Card
