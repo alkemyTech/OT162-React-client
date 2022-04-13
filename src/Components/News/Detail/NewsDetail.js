@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Title from "../../Title/Title";
@@ -29,6 +29,21 @@ const NewsDetail = () => {
       });
   }, [id]);
 
+  const myRef = useRef();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries, observer) => {
+      const entry = entries[0];
+      setIsVisible(entry.isIntersecting);
+    }, {
+      root: null,
+      rootMargin: "0px",
+      threshold: [0, 0.25, 0.5, 0.75, 1]
+    });
+    observer.observe(myRef.current);
+  }, []);
+
   return (
     <div>
       <div>
@@ -43,7 +58,9 @@ const NewsDetail = () => {
         </div>
       )}
       </div>
-      <Comments/>
+      <div ref={myRef}>
+        {isVisible && <Comments/>}
+      </div>
     </div>
   );
 };
