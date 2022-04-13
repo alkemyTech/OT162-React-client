@@ -4,6 +4,7 @@ import Carousel from "./Carousel";
 import HomeTitle from "./HomeTitle";
 import NewsList from "./NewsList";
 import { errorAlert } from "../../features/alerts/alerts";
+import Footer from "./Footer";
 import {GetTitle, GetSlides, GetNews} from "../../Services/homeApiService";
 
 const Home = () => {
@@ -46,6 +47,7 @@ const Home = () => {
       )}
       {/* background is Carousel's backgroundColor  */}
       <NewsList news={news} />
+      <Footer />
     </div>
   );
 };
