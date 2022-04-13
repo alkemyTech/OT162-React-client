@@ -12,11 +12,11 @@ const ToysCampaign = () => {
     },
     {
       label: "Wanna Play?",
-      imgPath: "./images/Juguetes2.png",
+      imgPath: "./images/Juguetes2.jpg",
     },
     {
       label: "The same pic lol",
-      imgPath: "./images/Juguetes2.png",
+      imgPath: "./images/Juguetes2.jpg",
     },
   ];
   return (
