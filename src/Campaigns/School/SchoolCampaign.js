@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import Slider from "./Slider";
+import CampaignSlider from "../../Components/Utilities/CampaignSlider";
 import Content from "./Content";
 import Footer from "./Footer";
 
@@ -22,7 +22,7 @@ const SchoolCampaign = () => {
   return (
     <>
       <Header />
-      <Slider images={images} intervalInSec={5} showStepDots />
+      <CampaignSlider images={images} intervalInSec={5} showStepDots />
       <Content />
       <Footer />
     </>

@@ -12,7 +12,7 @@ import { useMediaQuery } from "@mui/material";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-function Slider({ images, showStepDots = false, interval = 5 }) {
+function CampaignSlider({ images, showStepDots = false, interval = 5 }) {
   const [activeStep, setActiveStep] = useState(0);
   const matches = useMediaQuery("(min-width:768px)");
   const maxSteps = images.length;
@@ -127,9 +127,8 @@ function Slider({ images, showStepDots = false, interval = 5 }) {
           </Button>
         }
       />
-      {/* </Grid> */}
     </Box>
   );
 }
 
-export default Slider;
+export default CampaignSlider;
