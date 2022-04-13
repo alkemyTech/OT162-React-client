@@ -40,6 +40,7 @@ import {
   PutNews,
   DeleteNews,
 } from "./Services/newsApiService";
+import Footer from "./Campaigns/Toys/Footer";
 
 function App() {
   return (
@@ -105,6 +106,7 @@ function App() {
         >
           asdasd
         </button>
+        <Footer />
       </div>
     </>
   );
