@@ -25,13 +25,13 @@ const Comments = () => {
                 <Grid item xs={12} sm={6} md={3} key={index}>
                     <Card sx={{ boxShadow: 3, borderRadius: '6px' }}>
                         <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
-                            <div className='rounded-container'>
+                            <div className='rounded-container center-image'>
                                 <img src={item.image}/>
                                 <img src="../images/blank-profile-picture-640.png"/>
                             </div>
                             <Typography 
                             align="center" 
-                            variation="primary"
+                            variation="primary" 
                             mt={2}>
                                 "{item.text}"
                             </Typography>
