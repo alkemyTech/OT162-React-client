@@ -5,62 +5,23 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
-
+import store from '../../app/store';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMembers } from '../../features/reducers/membersSlice';
 
 const baseUrl ="https://ongapi.alkemy.org/api";
-const mockMembers = [
-  {
-    "id": 519,
-    "name": "Marita Gómez",
-    "image": "http://ongapi.alkemy.org/storage/N6oQhXMxTO.jpeg",
-    "description": "<p>Fundadora</p>",
-    "facebookUrl": "https://www.facebook.com/",
-    "linkedinUrl": "https://www.linkedin.com/",
-    "created_at": "2022-02-28T14:22:20.000000Z",
-    "updated_at": "2022-02-28T14:22:20.000000Z",
-    "deleted_at": null,
-    "group_id": 36
-  },
-  {
-    "id": 520,
-    "name": "Miriam Rodriguez",
-    "image": "http://ongapi.alkemy.org/storage/9tJ1IBi42b.jpeg",
-    "description": "<p>Terapista Ocupacional</p>",
-    "facebookUrl": "https://www.facebook.com/",
-    "linkedinUrl": "https://www.linkedin.com/",
-    "created_at": "2022-02-28T14:23:06.000000Z",
-    "updated_at": "2022-02-28T14:23:06.000000Z",
-    "deleted_at": null,
-    "group_id": 36
-  },
-  {
-    "id": 521,
-    "name": "Cecilia Mendez",
-    "image": "http://ongapi.alkemy.org/storage/Ly1bfZhxhx.jpeg",
-    "description": "<p>Psicopedagoga</p>",
-    "facebookUrl": "https://www.facebook.com/",
-    "linkedinUrl": "https://www.linkedin.com/",
-    "created_at": "2022-02-28T14:24:13.000000Z",
-    "updated_at": "2022-02-28T14:24:13.000000Z",
-    "deleted_at": null,
-    "group_id": 36
-  },
-  {
-    "id": 542,
-    "name": "Andrés Ibarra",
-    "image": "https://socialtools.me/wp-content/uploads/2016/04/foto-de-perfil.jpg",
-    "description": "Asesor Jurídico",
-    "facebookUrl": "https://facebook.com",
-    "linkedinUrl": "https://linkedin.com",
-    "created_at": "2022-03-26T20:11:22.000000Z",
-    "updated_at": "2022-03-26T20:11:22.000000Z",
-    "deleted_at": null,
-    "group_id": null
-  }
-    
-]
 
 const BackofficeMembersList = () => {
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    store.dispatch(fetchMembers())
+  })
+  
+  const currentMembers = useSelector((state) => state.members)
+  const members = Array.from(currentMembers)
+
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const editMember = (id) => {
@@ -121,7 +82,7 @@ const BackofficeMembersList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mockMembers.map((member) => (
+            {members.map((member) => (
               <TableRow
                 key={member.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
