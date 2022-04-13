@@ -5,10 +5,12 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
+import { errorAlert } from '../../features/alerts/alerts';
 import store from '../../app/store';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMembers } from '../../features/reducers/membersSlice';
+
 
 const baseUrl ="https://ongapi.alkemy.org/api";
 
@@ -46,12 +48,8 @@ const BackofficeMembersList = () => {
           .then(() => {
             setLoading(false)
             swal('Success','Member deleted successfully','success')})
-          .catch((err) => {
-            swal(
-             "Error",
-              "Oops! something went wrong, please try again",
-              "error",
-            );
+          .catch((err) => {           
+            errorAlert("Error","Oops! something went wrong, please try again","error")
             setLoading(false)
             console.log(err);
           });

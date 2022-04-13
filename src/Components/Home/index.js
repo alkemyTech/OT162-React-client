@@ -1,23 +1,24 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import rutas from "../../config/rutas";
 import Loading from "../Utilities/Loading";
 import Carousel from "./Carousel";
 import HomeTitle from "./HomeTitle";
 import NewsList from "./NewsList";
 import { errorAlert } from "../../features/alerts/alerts";
+import Footer from "./Footer";
+import {GetTitle, GetSlides, GetNews} from "../../Services/homeApiService";
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState([]);
+  const [title, setTitle] = useState("Bienvenido a la ONG");
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(rutas.GET_SLIDES_URL)
+    GetSlides()
       .then((res) => {
-        console.log(res.data.data);
-        setSlides(res.data.data);
+        console.log(res);
+        setSlides(res);
       })
       .catch((err) => {
         errorAlert(
@@ -28,18 +29,25 @@ const Home = () => {
         console.log(err);
       })
       .finally(() => setLoading(false));
+      GetTitle().then((res) => {
+        setTitle(res.name);
+      });
+      GetNews().then((res) => {
+        setNews(res);
+      });
   }, []);
 
   return (
     <div>
-      <HomeTitle />
+      <HomeTitle title={title} />
       {loading ? (
         <Loading />
       ) : (
         <Carousel slides={slides} background={"#90a4ae"} />
       )}
       {/* background is Carousel's backgroundColor  */}
-      <NewsList />
+      <NewsList news={news} />
+      <Footer />
     </div>
   );
 };
