@@ -71,7 +71,7 @@ export default function Footer() {
         className={classes.root}
         style={{
           background: "#1cabe2",
-          minHeight: "150px",
+          // minHeight: "130px",
           marginTop: "20px",
           bottom: 0,
           position: "relative",
@@ -82,44 +82,50 @@ export default function Footer() {
             container
             direction="row"
             justifyContent="space-between"
-            alignItems="flex-start"
+            alignItems={matches ? "flex-start" : "center"}
           >
-            <Grid item xs={12} md={3} style={{ marginTop: "20px" }}>
+            <Grid item xs={6} xl={3}>
               <Grid
                 container
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
               >
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={3}>
                   <img
                     src={logoONG}
                     alt={organization.name}
                     // class="responsive"
-                    style={{ width: "100%" }}
+                    style={{ width: "auto" }}
                   />
                 </Grid>
                 <Grid
                   item
                   xs={12}
-                  md={7}
+                  md={9}
                   sx={{ display: { xs: "none", sm: "block" } }}
                 >
                   <Typography
                     className={classes.textoInf}
                     style={{
                       fontWeight: "bold",
-                      padding: "10px",
+                      // padding: "10px",
                       fontSize: "17px",
                     }}
                   >
-                    {organization.name}
+                    <a
+                      href={"/"}
+                      rel="noreferrer"
+                      style={{ color: "white", textDecoration: "none" }}
+                    >
+                      {organization.name}
+                    </a>
                   </Typography>
                 </Grid>
               </Grid>
             </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={6} xl={6}>
               <Typography
                 variant="h5"
                 className={classes.textoInf}
@@ -151,9 +157,16 @@ export default function Footer() {
             </Grid>
             <Grid
               item
-              xs={12}
-              md={3}
-              sx={{ display: { xl: "block", lg: "none" } }}
+              xl={3}
+              sx={{
+                display: {
+                  xl: "block",
+                  lg: "none",
+                  md: "none",
+                  sm: "none",
+                  xs: "none",
+                },
+              }}
             >
               <Typography
                 variant="h5"
