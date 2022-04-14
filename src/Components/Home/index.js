@@ -47,7 +47,6 @@ const Home = () => {
       )}
       {/* background is Carousel's backgroundColor  */}
       <NewsList news={news} />
-      <Footer />
     </div>
   );
 };

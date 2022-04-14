@@ -20,10 +20,11 @@ import Home from "../Components/Home";
 import Footer from "../Components/Home/Footer";
 import { Fragment } from "react";
 
-const PublicRoute = () => {
+const PublicLayout = () => {
   return (
     <Fragment>
       <BrowserRouter>
+        {/* Here Goes the Header component of public web-> OT162-124 */}
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -49,4 +50,4 @@ const PublicRoute = () => {
   );
 };
 
-export default PublicRoute;
+export default PublicLayout;

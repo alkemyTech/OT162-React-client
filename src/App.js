@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
 
-import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
+import PublicLayout from "./routes/PublicLayout";
 
 function App() {
   return (
     <div className="App">
-      <PublicRoute />
+      <PublicLayout />
       <PrivateRoute />
     </div>
   );
