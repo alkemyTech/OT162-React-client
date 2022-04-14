@@ -10,11 +10,12 @@ import Loading from "../Utilities/Loading";
 const NewsSection = () => {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const baseRoute = process.env.REACT_APP_NEWS_ROUTE
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("https://ongapi.alkemy.org/api/news")
+      .get(baseRoute)
       .then((res) => {
         setNews(res.data.data);
         setIsLoading(false);
