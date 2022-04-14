@@ -17,30 +17,35 @@ import MembersList from "../Components/Members/MembersList";
 import Contact from "../Components/Contact/Contact";
 import Login from "../Components/Auth/Login/Login";
 import Home from "../Components/Home";
+import Footer from "../Components/Home/Footer";
+import { Fragment } from "react";
 
 const PublicRoute = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/create-activity" element={<ActivitiesForm />} />
-        <Route path="/create-category" element={<CategoriesForm />} />
-        <Route path="/create-testimonials" element={<TestimonialForm />} />
-        <Route path="/create-user" element={<UserForm />} />
-        <Route path="/create-project" element={<ProjectsForm />} />
-        <Route path="/school-campaign" element={<SchoolCampaign />} />
-        <Route path="/toys-campaign" element={<ToysCampaign />} />
-        <Route path="/actividades/:id" element={<ActivityDetail />} />
-        <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
-        <Route path="/gracias" element={<Thanks />} />
-        <Route path="/actividades" element={<ActivitiesList />} />
-        <Route path="/Novedades/:id" element={<NewsDetail />} />
-        <Route path="/Novedades" element={<NewsSection />} />
-        <Route path="/miembros" element={<MembersList />} />
-        <Route path="/contacto" element={<Contact />} />
-      </Routes>
-    </BrowserRouter>
+    <Fragment>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/create-activity" element={<ActivitiesForm />} />
+          <Route path="/create-category" element={<CategoriesForm />} />
+          <Route path="/create-testimonials" element={<TestimonialForm />} />
+          <Route path="/create-user" element={<UserForm />} />
+          <Route path="/create-project" element={<ProjectsForm />} />
+          <Route path="/school-campaign" element={<SchoolCampaign />} />
+          <Route path="/toys-campaign" element={<ToysCampaign />} />
+          <Route path="/actividades/:id" element={<ActivityDetail />} />
+          <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
+          <Route path="/gracias" element={<Thanks />} />
+          <Route path="/actividades" element={<ActivitiesList />} />
+          <Route path="/Novedades/:id" element={<NewsDetail />} />
+          <Route path="/Novedades" element={<NewsSection />} />
+          <Route path="/miembros" element={<MembersList />} />
+          <Route path="/contacto" element={<Contact />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </Fragment>
   );
 };
 
