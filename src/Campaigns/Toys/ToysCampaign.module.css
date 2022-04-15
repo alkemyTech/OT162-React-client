@@ -92,10 +92,10 @@
    
     }
     .images figure:first-child{
-        transform: rotate(45deg)
+        transform: rotate(-45deg)
     }
     .images figure:last-child{
-        transform: rotate(-45deg)
+        transform: rotate(45deg)
     }
     .images figure img{
         max-width: 100%;
@@ -107,12 +107,12 @@
 @media screen and (min-width:1201px)  {
     .container{
         opacity: .5;
-    }
-    .info{
-     height: 100%;
-  
+        max-width: 1200px;
+        margin: 0 auto;
 
     }
+   
+    
    
     .countdown{
         display: block;
@@ -122,7 +122,7 @@
         
         display: flex;
         position: absolute;
-        width: 95%;
+        width: 65%;
         justify-content: space-between;
         z-index: -1;
         top: 15px;
@@ -132,8 +132,8 @@
     }
 
     .images figure{
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
    
     }
     .images figure:first-child{

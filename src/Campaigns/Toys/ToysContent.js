@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { useCountdown } from '../../hooks/useCountdown';
 
@@ -11,7 +11,7 @@ import background2 from '../../assets/img/toys2.png' ;
 import styles from './ToysCampaign.module.css'
 
 
-const Content = ({description, date, time, place}) => {
+const Content = ({description, date, time, location, deadline}) => {
 
   const [days, hours, minutes, seconds] = useCountdown('Mon Apr 18 2022 12:01:43');
 
@@ -41,19 +41,13 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
 </div>
 <div className={styles.images}>
             <figure>
-                <img src={background} alt="" />
+                <img src={background} alt="toy1" />
             </figure>
             <figure>
-                <img src={background2} alt="" />
+                <img src={background2} alt="toy2" />
             </figure>
 
           </div>
-    
-     
-
-      
-
-      
     </div>
   );
 }
