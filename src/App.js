@@ -53,7 +53,7 @@ function App() {
           <Route path="/backoffice/slides" element={<SlidesList />} />
           <Route path="/backoffice/categories" element={<CategoriesTable />} />
           <Route path="/create-testimonials" element={<TestimonialForm />} />
-          <Route path="/create-user" element={<UserForm />} />
+          <Route path="/registro" element={<UserForm />} />
           <Route
             path="/backoffice/members/edit/:id"
             element={<MembersForm />}
@@ -86,7 +86,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <div className="App">
-        <UserForm />
+      
         <button
           onClick={() =>
             PutNews(1, {
