@@ -5,7 +5,7 @@ import HomeTitle from "./HomeTitle";
 import NewsList from "./NewsList";
 import { errorAlert } from "../../features/alerts/alerts";
 import Footer from "./Footer";
-import {GetTitle, GetSlides, GetNews} from "../../Services/homeApiService";
+import { GetTitle, GetSlides, GetNews } from "../../Services/homeApiService";
 
 const Home = () => {
   const [slides, setSlides] = useState([]);
@@ -29,12 +29,12 @@ const Home = () => {
         console.log(err);
       })
       .finally(() => setLoading(false));
-      GetTitle().then((res) => {
-        setTitle(res.name);
-      });
-      GetNews().then((res) => {
-        setNews(res);
-      });
+    GetTitle().then((res) => {
+      setTitle(res.name);
+    });
+    GetNews().then((res) => {
+      setNews(res);
+    });
   }, []);
 
   return (

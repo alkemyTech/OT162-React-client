@@ -4,6 +4,7 @@ import newsReducer from "../features/news/newsSlice";
 import slideReducer from "../features/slide/slideSlice";
 import usersSlice from "../features/users/usersSlice";
 import aboutUsReducer from "../features/reducers/aboutUsSlice";
+import membersSlice from '../features/reducers/membersSlice';
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     slide: slideReducer,
     users: usersSlice,
     // aboutUs: aboutUsReducer,
+    members: membersSlice,
   },
 });
