@@ -11,6 +11,7 @@ import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
 
 
+import { errorAlert } from "../../features/alerts/alerts";
 const UserForm = ({ user }) => {
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -116,6 +117,7 @@ const UserForm = ({ user }) => {
         })
         .catch((resp) => {
           console.log(resp);
+          errorAlert("Error", "An error has occurred while updating the user", "error");
         });
     } else {
       axios
@@ -131,6 +133,7 @@ const UserForm = ({ user }) => {
         })
         .catch((resp) => {
           console.log(resp);
+          errorAlert("Error", "An error has occurred while creating the user", "error");
         });
     }
   };
