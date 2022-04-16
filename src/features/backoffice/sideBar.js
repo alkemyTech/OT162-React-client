@@ -15,8 +15,10 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import BOSections from './backOfficeSections';
+import { Link } from 'react-router-dom';
+import "../../styles/backOfficeSideBar.css"
 
 const referenceWidth = 240;
 
@@ -96,12 +98,14 @@ export default function PersistentSideBar(){
                     </SidebarHeader>
                     <Divider/>
                     <List>
-                        {['Novedades', 'Actividades', 'Categorias', 'Testimonios', 'Organización', 'Slides', 'Usuarios', 'Miembros'].map((text, index) => (
-                            <ListItem button key={text}>
+                        {BOSections.map((section) => (
+                            <ListItem button key={section.name}>
                                 <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                                    <ArrowForwardIosIcon/>
                                 </ListItemIcon>
-                                <ListItemText primary={text}/>
+                                <ListItemText>
+                                    <Link to={section.path}>{section.name}</Link>
+                                </ListItemText>
                             </ListItem>
                         ))}
                     </List>
