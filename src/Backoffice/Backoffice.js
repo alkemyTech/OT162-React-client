@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Card, CardContent, Grid, Typography, Button, Box, Modal, Fade} from '@mui/material/';
 import './Backoffice.css';
+import PersistentSideBar from '../features/backoffice/sideBar';
 
 const style = {
     position: 'absolute',
@@ -20,6 +21,9 @@ const Backoffice = () => {
 
     return (
         <>
+        <div>
+            <PersistentSideBar/>
+        </div>
             <div>
                 <Modal open={open} onClose={handleClose}>
                     <Fade in={open}>
