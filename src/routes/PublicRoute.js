@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../Components/Utilities/Loading";
+import Header from "../Components/Header/Header";
 
 const ActivitiesForm = lazy(() =>
   import("../Components/Activities/ActivitiesForm")
@@ -34,6 +35,7 @@ const PublicRoute = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading open={true} />}>
+       <Header/>
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
