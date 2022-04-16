@@ -111,7 +111,7 @@ const SlidesList = () => {
                 <TableCell align="center">{slide.name}</TableCell>
                 <TableCell align="center">{slide.description}</TableCell>
                 <TableCell align="center">
-                  <img src={slide.image} alt={slide.name} />
+                  <img src={slide.image} alt={slide.name} height="300"/>
                 </TableCell>
                 <TableCell align="center">
                   <Stack direction="row" spacing={2}>
