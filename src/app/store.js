@@ -5,18 +5,17 @@ import slideReducer from "../features/slide/slideSlice";
 import usersSlice from "../features/users/usersSlice";
 import aboutUsReducer from "../features/reducers/aboutUsSlice";
 import activitiesReducer from "../features/activities/activitiesSlice";
+import membersSlice from '../features/reducers/membersSlice';
 
 export default configureStore({
   reducer: {
     counter: counterReducer,
     news: newsReducer,
     slide: slideReducer,
-<<<<<<< HEAD
     aboutUs: aboutUsReducer,
     activities: activitiesReducer,
-=======
     users: usersSlice,
     // aboutUs: aboutUsReducer,
->>>>>>> 4b25e70882681b627abfa06041cb00ea23bff70c
+    members: membersSlice,
   },
 });
