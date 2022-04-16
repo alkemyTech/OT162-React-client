@@ -18,7 +18,7 @@ import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
 
-const slideURL = "https://ongapi.alkemy.org/api/slide";
+const slideURL = "https://ongapi.alkemy.org/api/slides";
 
 const SlidesList = () => {
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const SlidesList = () => {
           .delete(`${slideURL}/${id}`)
           .then(() => swal({ title: "Slide deleted", icon: "success" }))
           .catch((err) => {            
-            errorAlert("Error", "An error has ocurred while trying to delete teh slide");
+            errorAlert("Error", "An error has ocurred while trying to delete the slide");
             console.log(err);
           });
       }
