@@ -12,11 +12,14 @@ import News from "../Components/News/News";
 import UserList from "../Components/Users/UserList/UserList";
 import HomeForm from "../Components/Backoffice/Organization/HomeForm";
 import ContactForm from "../Components/Contact/ContactForm";
+import Home from "../Components/Home";
+import CategoriesForm from "../Components/Categories/CategoriesForm";
 
 const PrivateRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" exact element={<Home />} />
         <Route path="/backoffice" element={<Backoffice />} />
         <Route path="/backoffice/news/create" element={<NewsForm />} />
         <Route path="/backoffice/create-slide" element={<SlidesForm />} />
@@ -32,6 +35,7 @@ const PrivateRoute = () => {
         <Route path="/backoffice/users" element={<UserList />} />
         <Route path="/backoffice/Organization" element={<HomeForm />} />
         <Route path="/backoffice/contact/create" element={<ContactForm />} />
+        <Route path="/create-category" element={<CategoriesForm />} />
       </Routes>
     </BrowserRouter>
   );

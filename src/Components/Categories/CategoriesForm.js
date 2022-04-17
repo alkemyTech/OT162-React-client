@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import CKEditor from "ckeditor4-react";
 import { Formik } from "formik";
 import { putCategory, postCategory } from "../../Services/categoriesApiService";
@@ -47,70 +47,77 @@ const CategoriesForm = ({ category }) => {
   console.log(initialValues);
 
   return (
-    <Formik
-      initialValues={initialValues}
-      enableReinitialize
-      validate={(values) => {
-        const errors = {};
-        if (!values.name) {
-          errors.name = "Nombre es requerido";
-        } else if (values.name.length < 4) {
-          errors.name = "El nombre debe tener al menos 4 caracteres";
-        }
-        if (!values.description) {
-          errors.description = "Descripción requerida";
-        }
-        if (!values.image) {
-          errors.image = "Imagen requerida";
-        }
+    <Fragment>
+      <h1>Create or edit a category</h1>
+      <Formik
+        initialValues={initialValues}
+        enableReinitialize
+        validate={(values) => {
+          const errors = {};
+          if (!values.name) {
+            errors.name = "Nombre es requerido";
+          } else if (values.name.length < 4) {
+            errors.name = "El nombre debe tener al menos 4 caracteres";
+          }
+          if (!values.description) {
+            errors.description = "Descripción requerida";
+          }
+          if (!values.image) {
+            errors.image = "Imagen requerida";
+          }
 
-        return errors;
-      }}
-      onSubmit={handleSubmit}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
-        <form className="form-container" onSubmit={handleSubmit}>
-          <input
-            className="input-field"
-            type="text"
-            name="name"
-            onChange={handleChange}
-            value={initialValues.name}
-            placeholder="Name"
-          />
-          {errors.name && touched.name && errors.name}
+          return errors;
+        }}
+        onSubmit={handleSubmit}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (
+          <form className="form-container" onSubmit={handleSubmit}>
+            <input
+              className="input-field"
+              type="text"
+              name="name"
+              onChange={handleChange}
+              value={initialValues.name}
+              placeholder="Name"
+            />
+            {errors.name && touched.name && errors.name}
 
-          <CKEditor
-            initData={initialValues.description}
-            id="description"
-            name="description"
-            onChange={handleChange}
-          />
-          {errors.description && touched.description && errors.description}
+            <CKEditor
+              initData={initialValues.description}
+              id="description"
+              name="description"
+              onChange={handleChange}
+            />
+            {errors.description && touched.description && errors.description}
 
-          <input
-            className="input-field"
-            type="file"
-            id="image"
-            accept=".jpg, .png"
-            name="image"
-            onChange={handleChange}
-          ></input>
-          {errors.image && touched.image && errors.image}
+            <input
+              className="input-field"
+              type="file"
+              id="image"
+              accept=".jpg, .png"
+              name="image"
+              onChange={handleChange}
+            ></input>
+            {errors.image && touched.image && errors.image}
 
-          <button className="submit-btn" type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </form>
-      )}
-    </Formik>
+            <button
+              className="submit-btn"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              Submit
+            </button>
+          </form>
+        )}
+      </Formik>
+    </Fragment>
   );
 };
 

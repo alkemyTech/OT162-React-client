@@ -1,4 +1,6 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import moment from "moment";
+import "moment/locale/es";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,23 +13,34 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
+import { Grid } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
-import { deleteCategory } from "../../Services/categoriesApiService";
-
-function createData(id, name, createdAt) {
-  return { id, name, createdAt };
-}
-const DUMMY_CATEGORIES = [
-  createData("1", "Category 1", "10 Marzo 2021"),
-  createData("2", "Category 2", "10 Abril 2021"),
-  createData("3", "Category 3", "08 Abril 2021"),
-];
+import {
+  deleteCategory,
+  getCategories,
+} from "../../Services/categoriesApiService";
+import { infoAlert } from "../../features/alerts/alerts";
 
 const CategoriesTable = () => {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategories().then((res) => {
+      console.log(res);
+      setCategories(res.data.data);
+    });
+  }, []);
+
   const deleteHandler = (id) => {
-    deleteCategory(id);
+    deleteCategory(id).then(() => {
+      infoAlert("Listo!", "Categoria eliminada", "OK");
+      getCategories().then((res) => {
+        console.log(res);
+        setCategories(res.data.data);
+      });
+    });
   };
   const editHandler = (id) => {
     navigate("/create-category");
@@ -35,12 +48,14 @@ const CategoriesTable = () => {
   };
 
   return (
-    <Fragment>
-      <Button
-        variant="contained"
-        sx={{ margin: 2 }}
-        href="/backoffice/Categorias/create"
-      >
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
         Go to Backoffice
       </Button>
       <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000 }}>
@@ -54,34 +69,34 @@ const CategoriesTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {DUMMY_CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <TableRow key={category.name}>
                 <TableCell component="th" scope="row">
                   {category.name}
                 </TableCell>
-                <TableCell align="center">{category.createdAt}</TableCell>
                 <TableCell align="center">
-                  <Link
-                    component="button"
-                    onClick={() => deleteHandler(category.id)}
-                  >
-                    <DeleteIcon />
-                  </Link>
+                  {moment(category.created_at).calendar()}
                 </TableCell>
                 <TableCell align="center">
-                  <Link
-                    component="button"
-                    onClick={() => editHandler(category.id)}
+                  <Button onClick={() => deleteHandler(category.id)}>
+                    <DeleteIcon />
+                  </Button>
+                </TableCell>
+                <TableCell align="center">
+                  <Button
+                    onClick={() => {
+                      editHandler(category.id);
+                    }}
                   >
                     <EditIcon />
-                  </Link>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    </Fragment>
+    </Grid>
   );
 };
 
