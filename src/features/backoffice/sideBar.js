@@ -102,14 +102,16 @@ export default function PersistentSideBar(){
                     <Divider/>
                     <List>
                         {BOSections.map((section) => (
-                            <ListItem button key={section.name}>
-                                <ListItemIcon>
-                                    <ArrowForwardIosIcon/>
-                                </ListItemIcon>
-                                <ListItemText>
-                                    <Link style={sideBarStyle} to={section.path}>{section.name}</Link>
-                                </ListItemText>
-                            </ListItem>
+                            <Link style={sideBarStyle} to={section.path}>
+                                <ListItem button key={section.name}>
+                                    <ListItemIcon>
+                                        <ArrowForwardIosIcon/>
+                                    </ListItemIcon>
+                                        <ListItemText>
+                                            {section.name}
+                                        </ListItemText>
+                                </ListItem>
+                            </Link>
                         ))}
                     </List>
                 </Drawer>

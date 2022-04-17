@@ -2,6 +2,10 @@
 
 const BOSections = [
     {
+        name: 'Principal',
+        path: '/backoffice'
+    },
+    {
         name: 'Novedades',
         path: '/backoffice/news'
     },
@@ -12,6 +16,10 @@ const BOSections = [
     {
         name: 'Categorias',
         path: '/backoffice/categories'
+    },
+    {
+        name: 'Testimonios',
+        path: '/backoffice/testimonials'
     },
     {
         name: 'Organización',
