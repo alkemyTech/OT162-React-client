@@ -7,6 +7,7 @@ const GetAuth = () => {
 
 const config = {
   headers: {
+    Group: 162, //Aqui va el ID del equipo!!
     "Content-Type": "application/json",
   },
 };

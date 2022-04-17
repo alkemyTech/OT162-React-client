@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
@@ -37,7 +37,6 @@ const CategoriesTable = () => {
     deleteCategory(id).then(() => {
       infoAlert("Listo!", "Categoria eliminada", "OK");
       getCategories().then((res) => {
-        console.log(res);
         setCategories(res.data.data);
       });
     });
@@ -83,13 +82,11 @@ const CategoriesTable = () => {
                   </Button>
                 </TableCell>
                 <TableCell align="center">
-                  <Button
-                    onClick={() => {
-                      editHandler(category.id);
-                    }}
-                  >
-                    <EditIcon />
-                  </Button>
+                  <Link to="/create-category">
+                    <Button>
+                      <EditIcon />
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
