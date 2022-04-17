@@ -26,6 +26,15 @@ export const postActivities = createAsyncThunk('activities/postActivities', asyn
         return error.message
     }
 })
+export const updateActivities = createAsyncThunk('activities/updateActivities', async (initialData) => {
+    try {
+        const response = await axios.put(`https://ongapi.alkemy.org/api/activities/${initialData.id}`, initialData)
+        console.log(response.data)
+        return response.data
+    } catch (error) {
+        return error.message
+    }
+})
 
 
 export const activitiesSlice = createSlice({
@@ -49,6 +58,11 @@ export const activitiesSlice = createSlice({
             state.error = action.error.message
         })
         .addCase(postActivities.fulfilled, (state, action) => {
+            console.log(action.payload)            
+            state.activities.push(action.payload)
+            console.log(state.activities)
+        })
+        .addCase(updateActivities.fulfilled, (state, action) => {
             console.log(action.payload)            
             state.activities.push(action.payload)
             console.log(state.activities)
