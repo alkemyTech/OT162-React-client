@@ -35,7 +35,7 @@ const Get = (url, id) => {
 
 const Post = (URL, Body) => {
   config.headers.Authorization = GetAuth();
-  axios.post(URL, Body, config);
+  return axios.post(URL, Body, config);
 };
 
 const Delete = (path, id) => {
