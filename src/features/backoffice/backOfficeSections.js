@@ -14,10 +14,6 @@ const BOSections = [
         path: '/backoffice/categories'
     },
     {
-        name: 'Testimonios',
-        path: '/backoffice/testimonials'
-    },
-    {
         name: 'Organización',
         path: '/backoffice/organization'
     },

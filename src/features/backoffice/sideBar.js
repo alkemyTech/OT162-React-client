@@ -18,9 +18,12 @@ import ListItemText from '@mui/material/ListItemText';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import BOSections from './backOfficeSections';
 import { Link } from 'react-router-dom';
-import "../../styles/backOfficeSideBar.css"
 
 const referenceWidth = 240;
+
+const sideBarStyle = {
+    color: "#33B1FF"
+}
 
 const SideBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -104,7 +107,7 @@ export default function PersistentSideBar(){
                                     <ArrowForwardIosIcon/>
                                 </ListItemIcon>
                                 <ListItemText>
-                                    <Link to={section.path}>{section.name}</Link>
+                                    <Link style={sideBarStyle} to={section.path}>{section.name}</Link>
                                 </ListItemText>
                             </ListItem>
                         ))}

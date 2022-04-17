@@ -22,6 +22,8 @@ import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { deleteActivity } from "../../Services/activitiesApiService";
+import PersistentSideBar from '../../features/backoffice/sideBar';
+
 const useStyles = makeStyles(activitiesTableStyle);
 
 const ActivitiesListBackoffice = () => {
@@ -130,6 +132,9 @@ const ActivitiesListBackoffice = () => {
 
   return (
     <div className={classes.root}>
+      <div>
+        <PersistentSideBar/>
+      </div>
       <Grid container spacing={3} justifyContent="center" alignItems="flex-end">
         <Grid item xs={12} md={11.5} lg={11}>
           <Button

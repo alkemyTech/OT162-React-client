@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
+import PersistentSideBar from "../../features/backoffice/sideBar";
 
 const slideURL = "https://ongapi.alkemy.org/api/slide";
 
@@ -79,62 +80,67 @@ const SlidesList = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Button
-        component={Link}
-        to="/backoffice/create-slide"
-        variant="contained"
-        sx={{ float: "right", marginBottom: "2rem" }}
-      >
-        Create a new slide
-      </Button>
-      <TableContainer component={Paper} elevation={3}>
-        <Table sx={{ minWidth: 768 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Order</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Description</TableCell>
-              <TableCell align="center">Image</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {slides.map((slide) => (
-              <TableRow
-                key={slide.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {slide.id}
-                </TableCell>
-                <TableCell align="center">{slide.name}</TableCell>
-                <TableCell align="center">{slide.description}</TableCell>
-                <TableCell align="center">
-                  <img src={slide.image} alt={slide.name} />
-                </TableCell>
-                <TableCell align="center">
-                  <Stack direction="row" spacing={2}>
-                    <Button
-                      variant="outlined"
-                      onClick={() => editSlide(slide.id)}
-                    >
-                      EDIT
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => deleteSlide(slide.id)}
-                    >
-                      DELETE
-                    </Button>
-                  </Stack>
-                </TableCell>
+    <div>
+      <div>
+        <PersistentSideBar/>
+      </div>
+      <Container maxWidth="lg">
+        <Button
+          component={Link}
+          to="/backoffice/create-slide"
+          variant="contained"
+          sx={{ float: "right", marginBottom: "2rem" }}
+        >
+          Create a new slide
+        </Button>
+        <TableContainer component={Paper} elevation={3}>
+          <Table sx={{ minWidth: 768 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Order</TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Description</TableCell>
+                <TableCell align="center">Image</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+            </TableHead>
+            <TableBody>
+              {slides.map((slide) => (
+                <TableRow
+                  key={slide.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {slide.id}
+                  </TableCell>
+                  <TableCell align="center">{slide.name}</TableCell>
+                  <TableCell align="center">{slide.description}</TableCell>
+                  <TableCell align="center">
+                    <img src={slide.image} alt={slide.name} />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Stack direction="row" spacing={2}>
+                      <Button
+                        variant="outlined"
+                        onClick={() => editSlide(slide.id)}
+                      >
+                        EDIT
+                      </Button>
+                      <Button
+                        variant="contained"
+                        onClick={() => deleteSlide(slide.id)}
+                      >
+                        DELETE
+                      </Button>
+                    </Stack>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    </div>
   );
 };
 

@@ -15,6 +15,8 @@ import Link from "@mui/material/Link";
 import { useNavigate } from "react-router-dom";
 import { deleteCategory } from "../../Services/categoriesApiService";
 
+import PersistentSideBar from "../../features/backoffice/sideBar"
+
 function createData(id, name, createdAt) {
   return { id, name, createdAt };
 }
@@ -35,53 +37,56 @@ const CategoriesTable = () => {
   };
 
   return (
-    <Fragment>
-      <Button
-        variant="contained"
-        sx={{ margin: 2 }}
-        href="/backoffice/Categorias/create"
-      >
-        Go to Backoffice
-      </Button>
-      <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000 }}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="center">Created at</TableCell>
-              <TableCell align="center">Delete</TableCell>
-              <TableCell align="center">Edit</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {DUMMY_CATEGORIES.map((category) => (
-              <TableRow key={category.name}>
-                <TableCell component="th" scope="row">
-                  {category.name}
-                </TableCell>
-                <TableCell align="center">{category.createdAt}</TableCell>
-                <TableCell align="center">
-                  <Link
-                    component="button"
-                    onClick={() => deleteHandler(category.id)}
-                  >
-                    <DeleteIcon />
-                  </Link>
-                </TableCell>
-                <TableCell align="center">
-                  <Link
-                    component="button"
-                    onClick={() => editHandler(category.id)}
-                  >
-                    <EditIcon />
-                  </Link>
-                </TableCell>
+    <div>
+      <PersistentSideBar/>
+      <Fragment>
+        <Button
+          variant="contained"
+          sx={{ margin: 2 }}
+          href="/backoffice/Categorias/create"
+        >
+          Go to Backoffice
+        </Button>
+        <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000 }}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="center">Created at</TableCell>
+                <TableCell align="center">Delete</TableCell>
+                <TableCell align="center">Edit</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Fragment>
+            </TableHead>
+            <TableBody>
+              {DUMMY_CATEGORIES.map((category) => (
+                <TableRow key={category.name}>
+                  <TableCell component="th" scope="row">
+                    {category.name}
+                  </TableCell>
+                  <TableCell align="center">{category.createdAt}</TableCell>
+                  <TableCell align="center">
+                    <Link
+                      component="button"
+                      onClick={() => deleteHandler(category.id)}
+                    >
+                      <DeleteIcon />
+                    </Link>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Link
+                      component="button"
+                      onClick={() => editHandler(category.id)}
+                    >
+                      <EditIcon />
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Fragment>
+    </div>
   );
 };
 
