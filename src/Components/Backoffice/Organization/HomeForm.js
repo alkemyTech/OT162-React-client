@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Formik } from 'formik';
 import './HomeForm.css';
+import {PostSliders} from '../../../Services/homeApiService';
 
 const HomeForm = () => {
     const [submittedForm, setSubmittedForm] = useState(false);
@@ -49,7 +50,7 @@ const HomeForm = () => {
         }}
         onSubmit={(values, {resetForm}) => {
             resetForm();
-            // Here goes the submit action
+            PostSliders(values);
             setSubmittedForm(true);
             setTimeout(() => setSubmittedForm(false), 5000);
          }}>

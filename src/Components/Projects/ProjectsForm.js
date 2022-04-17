@@ -17,6 +17,7 @@ import DatePicker from "@mui/lab/DatePicker";
 import moment from "moment";
 import axios from "axios";
 import swal from "sweetalert";
+import { errorAlert } from "../../features/alerts/alerts";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 const url_api_base = "https://ongapi.alkemy.org/api";
@@ -72,12 +73,8 @@ const ProjectsForm = ({ project }) => {
             icon: "success",
           });
         })
-        .catch((error) => {
-          swal({
-            title: "Error",
-            text: "An error has occurred while updating the project",
-            icon: "error",
-          });
+        .catch((error) => {          
+          errorAlert("Error", "An error has occurred while updating the project", "error");
           console.log(error);
         })
         .finally(() => setLoading(false));
@@ -90,12 +87,8 @@ const ProjectsForm = ({ project }) => {
             icon: "success",
           })
         )
-        .catch((error) => {
-          swal({
-            title: "Error",
-            text: "An error has occurred while creating the project",
-            icon: "error",
-          });
+        .catch((error) => {          
+          errorAlert("Error", "An error has occurred while creating the project", "error");
           console.log(error);
         })
         .finally(() => setLoading(false));

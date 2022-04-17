@@ -1,5 +1,4 @@
-import axios from 'axios';
-
+import axios from "axios";
 
 const config = {
   headers: {
@@ -9,30 +8,23 @@ const config = {
 const baseUrl = "https://ongapi.alkemy.org/api";
 
 const Get = async (endpoint, id) => {
-    try{
-        if(id){
-          const resp= await axios.get(`${baseUrl}/${endpoint}/${id}`,config)
-          const {success, data} = resp.data
-          if(success){
-              return data
-          } 
-          
-    
-        } else{
-            const resp= await  axios.get(`${baseUrl}/${endpoint}`, config)
-            const {success,data} = resp.data
-            if(success){
-                return data
-            } 
-            
-           
-          
-        }
-
+  try {
+    if (id) {
+      const resp = await axios.get(`${baseUrl}/${endpoint}/${id}`, config);
+      const { success, data } = resp.data;
+      if (success) {
+        return data;
+      }
+    } else {
+      const resp = await axios.get(`${baseUrl}/${endpoint}`, config);
+      const { success, data } = resp.data;
+      if (success) {
+        return data;
+      }
     }
-    catch(error){
-        console.log(error)
-    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const Post = (endpoint, body) => {

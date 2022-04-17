@@ -3,7 +3,11 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import axios from "axios";
+=======
+import { errorAlert } from "../../../features/alerts/alerts";
+>>>>>>> 8fe36f5e6728a0a3fec3fa4a3e0b64cfcbad7c83
 
 const Login = () => {
   const [login, setLogin] = useState(false);
@@ -80,9 +84,11 @@ const Login = () => {
               .catch((error) => {
                 console.log(error);
                 console.log("Usuario inexistente");
+                errorAlert("Error", "Usuario inexistente", "error");
               });
           } catch (error) {
             console.log(error);
+            errorAlert("Error", "Usuario inexistente", "error");
           }
         }}
       >

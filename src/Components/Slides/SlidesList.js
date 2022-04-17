@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
+import { errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
 
 const slideURL = "https://ongapi.alkemy.org/api/slide";
@@ -69,12 +70,8 @@ const SlidesList = () => {
         axios
           .delete(`${slideURL}/${id}`)
           .then(() => swal({ title: "Slide deleted", icon: "success" }))
-          .catch((err) => {
-            swal({
-              title: "Error",
-              text: "An error has ocurred while trying to delete teh slide",
-              icon: "error",
-            });
+          .catch((err) => {            
+            errorAlert("Error", "An error has ocurred while trying to delete teh slide");
             console.log(err);
           });
       }
