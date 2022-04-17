@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import { putCategory, postCategory } from "../../Services/categoriesApiService";
 
 import "../FormStyles.css";
+import { confirmAlert } from "../../features/alerts/alerts";
 
 const CategoriesForm = ({ category }) => {
   const [initialValues, setInitialValues] = useState({
@@ -38,9 +39,12 @@ const CategoriesForm = ({ category }) => {
 
   const handleSubmit = (e) => {
     if (category) {
-      putCategory(initialValues.id, initialValues);
+      putCategory(initialValues.id, initialValues).then(() => {
+        confirmAlert("Operacion exitosa", "Categoria creada", "OK");
+      });
     } else {
-      postCategory(initialValues).then((res) => console.log(res));
+      postCategory(initialValues);
+      confirmAlert("Operacion exitosa", "Categoria creada", "OK");
     }
   };
 
