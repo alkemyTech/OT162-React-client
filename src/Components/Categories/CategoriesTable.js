@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,20 +12,24 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteCategory } from "../../Services/categoriesApiService";
+import { getCategoriesSlice } from "../../features/categories/categoriesSlice";
 
 function createData(id, name, createdAt) {
   return { id, name, createdAt };
 }
-const DUMMY_CATEGORIES = [
-  createData("1", "Category 1", "10 Marzo 2021"),
-  createData("2", "Category 2", "10 Abril 2021"),
-  createData("3", "Category 3", "08 Abril 2021"),
-];
 
 const CategoriesTable = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.list);
+
+  useEffect(() => {
+    dispatch(getCategoriesSlice());
+  }, [dispatch]);
+
   const deleteHandler = (id) => {
     deleteCategory(id);
   };
@@ -54,7 +58,7 @@ const CategoriesTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {DUMMY_CATEGORIES.map((category) => (
+            {categories.map((category) => (
               <TableRow key={category.name}>
                 <TableCell component="th" scope="row">
                   {category.name}
