@@ -3,6 +3,15 @@ import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
 
 const RegisterForm = () => {
+  var map;
+  const google = window.google;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: 43.5293, lng: -5.6773 },
+      zoom: 13,
+    });
+  }
+
   const [initialValues, setInitialValues] = useState({
     name: "",
     lastName: "",
@@ -103,6 +112,7 @@ const RegisterForm = () => {
               component="div"
               className="invalid-feedback"
             />
+
             <input
               className="input-field"
               type="text"
@@ -148,6 +158,8 @@ const RegisterForm = () => {
           </form>
         )}
       </Formik>
+      <div id="map">
+      </div>
     </div>
   );
 };

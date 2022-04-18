@@ -29,6 +29,7 @@ const MembersList = lazy(() => import("../Components/Members/MembersList"));
 const Contact = lazy(() => import("../Components/Contact/Contact"));
 const Login = lazy(() => import("../Components/Auth/Login/Login"));
 const Home = lazy(() => import("../Components/Home"));
+const RegisterForm = lazy(() => import("../Components/Auth/RegisterForm"));
 
 const PublicRoute = () => {
   return (
@@ -37,6 +38,7 @@ const PublicRoute = () => {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<RegisterForm />} />
           <Route path="/create-activity" element={<ActivitiesForm />} />
           <Route path="/create-category" element={<CategoriesForm />} />
           <Route path="/create-testimonials" element={<TestimonialForm />} />
