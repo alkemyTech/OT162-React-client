@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getCategoriesSlice, deleteCategorySlice } from "../../features/categories/categoriesSlice";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,10 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getCategoriesSlice, deleteCategorySlice } from "../../features/categories/categoriesSlice";
+import swal from "sweetalert";
 
 function createData(id, name, createdAt) {
   return { id, name, createdAt };
@@ -30,7 +29,16 @@ const CategoriesTable = () => {
   }, [dispatch]);
 
   const deleteHandler = (id) => {
-    dispatch(deleteCategorySlice(id));
+    swal({
+      title: "¿Estás seguro que quieres eliminar esta categoría?",
+      text: "Esta acción no se puede revertir.",
+      buttons: ["No", "Si"],
+      dangerMode: "true",
+    }).then((willDelete) => {
+      if (willDelete) {
+        dispatch(deleteCategorySlice(id));
+      }
+    });
   };
 
   const editHandler = (id) => {
