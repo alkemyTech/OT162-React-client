@@ -14,8 +14,7 @@ import Link from "@mui/material/Link";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteCategory } from "../../Services/categoriesApiService";
-import { getCategoriesSlice } from "../../features/categories/categoriesSlice";
+import { getCategoriesSlice, deleteCategorySlice } from "../../features/categories/categoriesSlice";
 
 function createData(id, name, createdAt) {
   return { id, name, createdAt };
@@ -31,8 +30,9 @@ const CategoriesTable = () => {
   }, [dispatch]);
 
   const deleteHandler = (id) => {
-    deleteCategory(id);
+    dispatch(deleteCategorySlice(id));
   };
+
   const editHandler = (id) => {
     navigate("/create-category");
     //Go to the Category Form, it is in /create-category. By now the only way to edit a category

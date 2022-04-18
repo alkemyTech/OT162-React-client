@@ -40,7 +40,7 @@ const Post = (URL, Body) => {
 
 const Delete = (path, id) => {
   config.headers.Authorization = GetAuth();
-  axios.delete(path + "/" + id, config);
+  return axios.delete(path + "/" + id, config);
 };
 
 export { Get, GetAuth, Post, Put, Patch, Delete };
