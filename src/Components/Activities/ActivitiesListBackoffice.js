@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -22,6 +22,8 @@ import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { deleteActivity } from "../../Services/activitiesApiService";
+import { useDispatch, useSelector } from "react-redux";
+import { getActivities } from "../../features/activities/activitiesSlice";
 const useStyles = makeStyles(activitiesTableStyle);
 
 const ActivitiesListBackoffice = () => {
@@ -33,6 +35,13 @@ const ActivitiesListBackoffice = () => {
   const [modalOperation, setModalOperation] = useState([false, ""]);
   const [isLoading, setIsLoading] = useState(false);
   const [activity, setActivity] = useState(false);
+
+  const dispatch = useDispatch();
+  const activities = useSelector((state) => state.activities.list);
+
+  useEffect(() => {
+    dispatch(getActivities());
+  }, [dispatch]);
 
   const rows = [
     {
@@ -93,7 +102,7 @@ const ActivitiesListBackoffice = () => {
       dataKey: "Imagen",
     },
     {
-      id: "createdAt",
+      id: "created_at",
       minWidth: 245,
       label: "Fecha Creacion",
       dataKey: "Fecha Creacion",
@@ -167,8 +176,8 @@ const ActivitiesListBackoffice = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.length > 0 ? (
-                    rows
+                  {activities.length > 0 ? (
+                    activities
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
@@ -194,7 +203,7 @@ const ActivitiesListBackoffice = () => {
                                       }}
                                       src={value}
                                     />
-                                  ) : column.id === "createdAt" ? (
+                                  ) : column.id === "created_at" ? (
                                     value.slice(0, -17)
                                   ) : (
                                     value
@@ -251,7 +260,7 @@ const ActivitiesListBackoffice = () => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 15]}
               component="div"
-              count={rows.length}
+              count={activities.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onPageChange={handleChangePage}
