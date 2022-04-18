@@ -55,7 +55,7 @@ const CategoriesTable = () => {
       >
         Go to Backoffice
       </Button>
-      <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000 }}>
+      <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
