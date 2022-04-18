@@ -3,7 +3,6 @@ import { getCategories } from "../../Services/categoriesApiService";
 
 export const getCategoriesSlice = createAsyncThunk("category/getCategoriesSlice", async () => {
     return getCategories().then((res) => {
-        console.log("patito",res.data.data);
         return res.data.data;
     });
   });
