@@ -14,12 +14,12 @@ const config = {
 
 const Put = (route, id, data) => {
   config.headers.Authorization = GetAuth();
-  axios.put(`${route}/${id}`, data, config);
+  return axios.put(`${route}/${id}`, data, config);
 };
 
 const Patch = (ruta, obj, id) => {
   config.headers.Authorization = GetAuth();
-  axios.patch(`${ruta}/${id}`, obj, config);
+  return axios.patch(`${ruta}/${id}`, obj, config);
 };
 
 const Get = (url, id) => {
