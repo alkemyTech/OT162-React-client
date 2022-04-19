@@ -15,13 +15,10 @@ import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import moment from "moment";
-import axios from "axios";
-import swal from "sweetalert";
-import { errorAlert } from "../../features/alerts/alerts";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import { postProjects, putProjects } from "../../Services/projectsApiService";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
-const url_api_base = "https://ongapi.alkemy.org/api";
-const projects_endpoint = "/projects";
 
 const ProjectsForm = ({ project }) => {
   const [initialValues, setInitialValues] = useState({
@@ -62,33 +59,28 @@ const ProjectsForm = ({ project }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (project) {
-      axios
-        .put(
-          `${url_api_base}${projects_endpoint}/${initialValues.id}`,
-          initialValues
+      putProjects(project.id, initialValues)
+        .then(() =>
+          confirmAlert("Proyecto actualizado correctamente", "", "OK")
         )
-        .then(() => {
-          swal({
-            title: "Project updated",
-            icon: "success",
-          });
-        })
-        .catch((error) => {          
-          errorAlert("Error", "An error has occurred while updating the project", "error");
+        .catch((error) => {
+          errorAlert(
+            "Error",
+            "Ha ocurrido un error al actualizar el proyecto",
+            "OK"
+          );
           console.log(error);
         })
         .finally(() => setLoading(false));
     } else {
-      axios
-        .post(`${url_api_base}${projects_endpoint}`, initialValues)
-        .then(() =>
-          swal({
-            title: "Project created",
-            icon: "success",
-          })
-        )
-        .catch((error) => {          
-          errorAlert("Error", "An error has occurred while creating the project", "error");
+      postProjects(initialValues)
+        .then(() => confirmAlert("Proyecto creado correctamente!", "", "OK"))
+        .catch((error) => {
+          errorAlert(
+            "Error",
+            "Ha ocurrido un error al crear el proyecto",
+            "OK"
+          );
           console.log(error);
         })
         .finally(() => setLoading(false));
