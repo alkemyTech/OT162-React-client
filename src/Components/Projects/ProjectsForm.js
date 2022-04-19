@@ -119,9 +119,7 @@ const ProjectsForm = ({ project }) => {
           <h1>{project ? "Edit your project!" : "Create a new project!"}</h1>
           <Form className="form-container">
             <div className="image-controls">
-              {!image && (
-                <span className="image-msg">Nothing Uploaded Yet!</span>
-              )}
+              {!image && <span className="image-msg">No hay imagen aún!</span>}
               <Button
                 variant="contained"
                 id="image"
@@ -129,7 +127,7 @@ const ProjectsForm = ({ project }) => {
                 className="image-edit-btn"
                 startIcon={image ? <Edit /> : <PhotoCamera />}
               >
-                {image ? "Edit Image" : "Upload Image*"}
+                {image ? "Editar Imagen" : "Subir Imagen*"}
                 <input
                   type="file"
                   accept=".jpg,.png"
@@ -147,7 +145,7 @@ const ProjectsForm = ({ project }) => {
               label="Title"
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Titulo"
               value={props.values.title}
               onChange={handleChange}
               helperText={props.errors.title}
@@ -159,7 +157,7 @@ const ProjectsForm = ({ project }) => {
               label="Description"
               type="text"
               name="description"
-              placeholder="Write some description"
+              placeholder="Escribe una descripción"
               value={props.values.description}
               onChange={handleChange}
               helperText={props.errors.description}
