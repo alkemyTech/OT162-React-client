@@ -1,26 +1,38 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import Loading from "../Components/Utilities/Loading";
 
-import ActivitiesForm from "../Components/Activities/ActivitiesForm";
-import CategoriesForm from "../Components/Categories/CategoriesForm";
-import TestimonialForm from "../Components/Testimonials/TestimonialsForm";
-import UserForm from "../Components/Users/UsersForm";
-import ProjectsForm from "../Components/Projects/ProjectsForm";
-import SchoolCampaign from "../Campaigns/School/SchoolCampaign";
-import ToysCampaign from "../Campaigns/Toys/ToysCampaign";
-import ActivityDetail from "../Components/Activities/Detail/ActivityDetail";
-import Donation from "../Donations/Donation";
-import Thanks from "../Donations/Thanks";
-import ActivitiesList from "../Components/Activities/ActivitiesList";
-import NewsDetail from "../Components/News/Detail/NewsDetail";
-import NewsSection from "../Components/News/NewsSection";
-import MembersList from "../Components/Members/MembersList";
-import Contact from "../Components/Contact/Contact";
-import Login from "../Components/Auth/Login/Login";
-import Home from "../Components/Home";
+const ActivitiesForm = lazy(() =>
+  import("../Components/Activities/ActivitiesForm")
+);
+const CategoriesForm = lazy(() =>
+  import("../Components/Categories/CategoriesForm")
+);
+const TestimonialForm = lazy(() =>
+  import("../Components/Testimonials/TestimonialsForm")
+);
+const UserForm = lazy(() => import("../Components/Users/UsersForm"));
+const ProjectsForm = lazy(() => import("../Components/Projects/ProjectsForm"));
+const SchoolCampaign = lazy(() => import("../Campaigns/School/SchoolCampaign"));
+const ToysCampaign = lazy(() => import("../Campaigns/Toys/ToysCampaign"));
+const ActivityDetail = lazy(() =>
+  import("../Components/Activities/Detail/ActivityDetail")
+);
+const Donation = lazy(() => import("../Donations/Donation"));
+const Thanks = lazy(() => import("../Donations/Thanks"));
+const ActivitiesList = lazy(() =>
+  import("../Components/Activities/ActivitiesList")
+);
+const NewsDetail = lazy(() => import("../Components/News/Detail/NewsDetail"));
+const NewsSection = lazy(() => import("../Components/News/NewsSection"));
+const MembersList = lazy(() => import("../Components/Members/MembersList"));
+const Contact = lazy(() => import("../Components/Contact/Contact"));
+const Login = lazy(() => import("../Components/Auth/Login/Login"));
+const Home = lazy(() => import("../Components/Home"));
 
 const PublicRoute = () => {
   return (
-    <BrowserRouter>
+    <Suspense fallback={<Loading open={true} />}>
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -40,7 +52,7 @@ const PublicRoute = () => {
         <Route path="/miembros" element={<MembersList />} />
         <Route path="/contacto" element={<Contact />} />
       </Routes>
-    </BrowserRouter>
+    </Suspense>
   );
 };
 
