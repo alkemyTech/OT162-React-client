@@ -43,7 +43,7 @@ const Carousel = (props) => {
         alignItems="center"
       >
         {slides.length > 0 && (
-          <Grid item xs={12} md={10} lg={8}>
+          <Grid item xs={12}>
             <Paper
               square
               elevation={10}
@@ -94,7 +94,7 @@ const Carousel = (props) => {
                           component="img"
                           sx={{
                             height: matches ? "500px" : "250px",
-                            width: "800px",
+                            width: "100%",
                             maxWidth: "100%",
                             margin: "auto",
                             alignItems: "center",
