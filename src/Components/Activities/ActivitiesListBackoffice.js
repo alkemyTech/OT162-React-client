@@ -21,7 +21,7 @@ import PopUpWarning from "../Popups/PopUpWarning";
 import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
-import { deleteActivity } from "../../Services/activitiesApiService";
+import { deleteActivity } from "../../Services/activitiesApiService.js";
 import PersistentSideBar from '../../features/backoffice/sideBar';
 
 const useStyles = makeStyles(activitiesTableStyle);
