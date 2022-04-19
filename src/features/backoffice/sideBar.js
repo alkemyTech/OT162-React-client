@@ -66,7 +66,7 @@ export default function PersistentSideBar(){
     return(
         <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
-            <SideBar position="fixed" open={open}>
+            <SideBar position="flex" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"

@@ -1,0 +1,154 @@
+.container{
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+   
+
+}
+
+
+.info{
+    padding-top: 1em;
+    font-size: 1.5em;
+}
+.info h1{
+  
+    font-size: 2rem;
+
+}
+
+.text{
+    margin-top: .6em;
+}
+
+
+
+
+.countdown{
+    display: none;
+    margin-bottom: .5em;
+    
+    font-size: 1.1em;
+}
+
+.images{
+    display: none;
+
+
+  
+}
+
+
+
+@media screen and (max-width:480px) {
+  
+}
+
+@media screen and (min-width:481px) and (max-width:768px) {
+    
+    .countdown{
+        display: block;
+
+    }
+
+}
+@media screen and (min-width:769px) and (max-width:1024px) {
+   
+    .countdown{
+        display: block;
+    }
+}
+@media screen and (min-width:1025px) and (max-width:1200px) {
+   
+    .info{
+   
+     height: 100%;
+  
+
+    }
+   
+    .countdown{
+        display: block;
+    }
+    .text{
+        margin-top: 1.5em;
+    }
+    .images{
+     
+        
+        display: flex;
+        position: absolute;
+        width: 95%;
+        justify-content: space-between;
+        z-index: -1;
+   
+
+
+        
+    }
+
+    .images figure{
+        width: 180px;
+        height: 180px;
+   
+    }
+    .images figure:first-child{
+        transform: rotate(-45deg)
+    }
+    .images figure:last-child{
+        transform: rotate(45deg)
+    }
+    .images figure img{
+        max-width: 100%;
+    }
+}
+
+
+
+@media screen and (min-width:1201px)  {
+    .container{
+        opacity: .5;
+        max-width: 1200px;
+        margin: 0 auto;
+
+    }
+   
+    
+   
+    .countdown{
+        display: block;
+    }
+    .images{
+        
+        
+        display: flex;
+        position: absolute;
+        width: 65%;
+        justify-content: space-between;
+        z-index: -1;
+   
+
+
+        
+    }
+
+    .images figure{
+        width: 200px;
+        height: 200px;
+   
+    }
+    .images figure:first-child{
+        transform: rotate(-45deg)
+    }
+    .images figure:last-child{
+        transform: rotate(45deg)
+    }
+    .images figure img{
+        max-width: 100%;
+    }
+}
+

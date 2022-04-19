@@ -13,17 +13,18 @@ import {
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
 import PersistentSideBar from "../../features/backoffice/sideBar";
 
-const slideURL = "https://ongapi.alkemy.org/api/slide";
+const slideURL = "https://ongapi.alkemy.org/api/slides";
 
 const SlidesList = () => {
   const dispatch = useDispatch();
   const slides = useSelector((state) => state.slide.list);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSlides());
@@ -58,6 +59,7 @@ const SlidesList = () => {
 
   const editSlide = (id) => {
     console.log(id);
+    navigate('/backoffice/create-slide');
     // navigate(`/slides/edit/${id}`)
   };
   const deleteSlide = (id) => {
@@ -72,7 +74,7 @@ const SlidesList = () => {
           .delete(`${slideURL}/${id}`)
           .then(() => swal({ title: "Slide deleted", icon: "success" }))
           .catch((err) => {            
-            errorAlert("Error", "An error has ocurred while trying to delete teh slide");
+            errorAlert("Error", "An error has ocurred while trying to delete the slide");
             console.log(err);
           });
       }
@@ -84,62 +86,64 @@ const SlidesList = () => {
       <div>
         <PersistentSideBar/>
       </div>
-      <Container maxWidth="lg">
-        <Button
-          component={Link}
-          to="/backoffice/create-slide"
-          variant="contained"
-          sx={{ float: "right", marginBottom: "2rem" }}
-        >
-          Create a new slide
-        </Button>
-        <TableContainer component={Paper} elevation={3}>
-          <Table sx={{ minWidth: 768 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Order</TableCell>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Description</TableCell>
-                <TableCell align="center">Image</TableCell>
-                <TableCell align="center">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {slides.map((slide) => (
-                <TableRow
-                  key={slide.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {slide.id}
-                  </TableCell>
-                  <TableCell align="center">{slide.name}</TableCell>
-                  <TableCell align="center">{slide.description}</TableCell>
-                  <TableCell align="center">
-                    <img src={slide.image} alt={slide.name} />
-                  </TableCell>
-                  <TableCell align="center">
-                    <Stack direction="row" spacing={2}>
-                      <Button
-                        variant="outlined"
-                        onClick={() => editSlide(slide.id)}
-                      >
-                        EDIT
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => deleteSlide(slide.id)}
-                      >
-                        DELETE
-                      </Button>
-                    </Stack>
-                  </TableCell>
+      <div>
+        <Container maxWidth="lg">
+          <Button
+            component={Link}
+            to="/backoffice/create-slide"
+            variant="contained"
+            sx={{ float: "right", marginBottom: "2rem" }}
+          >
+            Create a new slide
+          </Button>
+          <TableContainer component={Paper} elevation={3}>
+            <Table sx={{ minWidth: 768 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Order</TableCell>
+                  <TableCell align="center">Name</TableCell>
+                  <TableCell align="center">Description</TableCell>
+                  <TableCell align="center">Image</TableCell>
+                  <TableCell align="center">Actions</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Container>
+              </TableHead>
+              <TableBody>
+                {slides.map((slide) => (
+                  <TableRow
+                    key={slide.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {slide.id}
+                    </TableCell>
+                    <TableCell align="center">{slide.name}</TableCell>
+                    <TableCell align="center">{slide.description}</TableCell>
+                    <TableCell align="center">
+                      <img src={slide.image} alt={slide.name} height="300"/>
+                    </TableCell>
+                    <TableCell align="center">
+                      <Stack direction="row" spacing={2}>
+                        <Button
+                          variant="outlined"
+                          onClick={() => editSlide(slide.id)}
+                        >
+                          EDIT
+                        </Button>
+                        <Button
+                          variant="contained"
+                          onClick={() => deleteSlide(slide.id)}
+                        >
+                          DELETE
+                        </Button>
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
+      </div>
     </div>
   );
 };

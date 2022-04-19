@@ -3,6 +3,7 @@ import Header from "./Header";
 import CampaignSlider from "../../Components/Utilities/CampaignSlider";
 import Content from "./Content";
 import Footer from "./Footer";
+import NewsletterForm from "../../features/newsletter/subscribeNewsletterForm";
 
 const SchoolCampaign = () => {
   const images = [
@@ -24,6 +25,7 @@ const SchoolCampaign = () => {
       <Header />
       <CampaignSlider images={images} intervalInSec={5} showStepDots />
       <Content />
+      <NewsletterForm />
       <Footer />
     </>
   );
