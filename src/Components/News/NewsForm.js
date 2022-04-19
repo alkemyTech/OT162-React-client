@@ -21,6 +21,7 @@ import { errorAlert } from "../../features/alerts/alerts";
 
 const NewsForm = (props) => {
   const { news } = props;
+  const baseRoute = process.env.REACT_APP_NEWS_ROUTE
 
   const [initialValues, setInitialValues] = useState(
     news
@@ -71,7 +72,7 @@ const NewsForm = (props) => {
       });
     }
     axios
-      .put(`${rutas.NEWS_URL}/${news.id}`, dataNew, {
+      .put(`https://ongapi.alkemy.org/api/news/${news.id}`, dataNew, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
@@ -88,7 +89,7 @@ const NewsForm = (props) => {
 
   const handleCreateNew = () => {
     axios
-      .post(rutas.NEWS_URL, initialValues, {
+      .post(baseRoute, initialValues, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",

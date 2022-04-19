@@ -24,7 +24,6 @@ const PublicLayout = () => {
   return (
     <Fragment>
       <BrowserRouter>
-        {/* Here Goes the Header component of public web-> OT162-124 */}
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />

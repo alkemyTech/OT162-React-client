@@ -1,5 +1,6 @@
 import React from "react";
 import "../CardListStyles.css";
+import ImageRenderer from "../LazyImages/ImageRenderer";
 
 const Card = ({ image, title, description, placeholder }) => {
   return (
@@ -7,7 +8,7 @@ const Card = ({ image, title, description, placeholder }) => {
       <div className="card-img-div">
         {image ? (
           <div className="card-img">
-            <img src={image} alt={title} />
+            <ImageRenderer src={image} alt={title}/>
           </div>
         ) : (
           <h3>{placeholder}</h3>
