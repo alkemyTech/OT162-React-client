@@ -15,13 +15,10 @@ import DateAdapter from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import moment from "moment";
-import axios from "axios";
-import swal from "sweetalert";
-import { errorAlert } from "../../features/alerts/alerts";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import { postProjects, putProjects } from "../../Services/projectsApiService";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
-const url_api_base = "https://ongapi.alkemy.org/api";
-const projects_endpoint = "/projects";
 
 const ProjectsForm = ({ project }) => {
   const [initialValues, setInitialValues] = useState({
@@ -62,33 +59,28 @@ const ProjectsForm = ({ project }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (project) {
-      axios
-        .put(
-          `${url_api_base}${projects_endpoint}/${initialValues.id}`,
-          initialValues
+      putProjects(project.id, initialValues)
+        .then(() =>
+          confirmAlert("Proyecto actualizado correctamente", "", "OK")
         )
-        .then(() => {
-          swal({
-            title: "Project updated",
-            icon: "success",
-          });
-        })
-        .catch((error) => {          
-          errorAlert("Error", "An error has occurred while updating the project", "error");
+        .catch((error) => {
+          errorAlert(
+            "Error",
+            "Ha ocurrido un error al actualizar el proyecto",
+            "OK"
+          );
           console.log(error);
         })
         .finally(() => setLoading(false));
     } else {
-      axios
-        .post(`${url_api_base}${projects_endpoint}`, initialValues)
-        .then(() =>
-          swal({
-            title: "Project created",
-            icon: "success",
-          })
-        )
-        .catch((error) => {          
-          errorAlert("Error", "An error has occurred while creating the project", "error");
+      postProjects(initialValues)
+        .then(() => confirmAlert("Proyecto creado correctamente!", "", "OK"))
+        .catch((error) => {
+          errorAlert(
+            "Error",
+            "Ha ocurrido un error al crear el proyecto",
+            "OK"
+          );
           console.log(error);
         })
         .finally(() => setLoading(false));
@@ -124,12 +116,10 @@ const ProjectsForm = ({ project }) => {
     >
       {(props) => (
         <Container maxWidth="lg" component="main">
-          <h1>{project ? "Edit your project!" : "Create a new project!"}</h1>
+          <h1>{project ? "Edita tu proyecto!" : "Crea un nuevo proyecto!"}</h1>
           <Form className="form-container">
             <div className="image-controls">
-              {!image && (
-                <span className="image-msg">Nothing Uploaded Yet!</span>
-              )}
+              {!image && <span className="image-msg">No hay imagen aún!</span>}
               <Button
                 variant="contained"
                 id="image"
@@ -137,7 +127,7 @@ const ProjectsForm = ({ project }) => {
                 className="image-edit-btn"
                 startIcon={image ? <Edit /> : <PhotoCamera />}
               >
-                {image ? "Edit Image" : "Upload Image*"}
+                {image ? "Editar Imagen" : "Subir Imagen*"}
                 <input
                   type="file"
                   accept=".jpg,.png"
@@ -155,7 +145,7 @@ const ProjectsForm = ({ project }) => {
               label="Title"
               type="text"
               name="title"
-              placeholder="Title"
+              placeholder="Titulo"
               value={props.values.title}
               onChange={handleChange}
               helperText={props.errors.title}
@@ -167,7 +157,7 @@ const ProjectsForm = ({ project }) => {
               label="Description"
               type="text"
               name="description"
-              placeholder="Write some description"
+              placeholder="Escribe una descripción"
               value={props.values.description}
               onChange={handleChange}
               helperText={props.errors.description}
@@ -203,7 +193,7 @@ const ProjectsForm = ({ project }) => {
                 }
                 onClick={props.handleBlur}
               >
-                Send
+                Enviar
               </Button>
               {loading && (
                 <CircularProgress

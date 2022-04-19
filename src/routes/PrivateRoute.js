@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Backoffice from "../Backoffice/Backoffice";
 import NewsForm from "../Components/News/NewsForm";
@@ -15,25 +15,23 @@ import ContactForm from "../Components/Contact/ContactForm";
 
 const PrivateRoute = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/backoffice" element={<Backoffice />} />
-        <Route path="/backoffice/news/create" element={<NewsForm />} />
-        <Route path="/backoffice/create-slide" element={<SlidesForm />} />
-        <Route path="/backoffice/slides" element={<SlidesList />} />
-        <Route path="/backoffice/categories" element={<CategoriesTable />} />
-        <Route path="/backoffice/members/edit/:id" element={<MembersForm />} />
-        <Route
-          path="/backoffice/activities"
-          element={<ActivitiesListBackoffice />}
-        />
-        <Route path="/backoffice/members" element={<BackofficeMembersList />} />
-        <Route path="/backoffice/news" element={<News />} />
-        <Route path="/backoffice/users" element={<UserList />} />
-        <Route path="/backoffice/Organization" element={<HomeForm />} />
-        <Route path="/backoffice/contact/create" element={<ContactForm />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/backoffice" element={<Backoffice />} />
+      <Route path="/backoffice/news/create" element={<NewsForm />} />
+      <Route path="/backoffice/create-slide" element={<SlidesForm />} />
+      <Route path="/backoffice/slides" element={<SlidesList />} />
+      <Route path="/backoffice/categories" element={<CategoriesTable />} />
+      <Route path="/backoffice/members/edit/:id" element={<MembersForm />} />
+      <Route
+        path="/backoffice/activities"
+        element={<ActivitiesListBackoffice />}
+      />
+      <Route path="/backoffice/members" element={<BackofficeMembersList />} />
+      <Route path="/backoffice/news" element={<News />} />
+      <Route path="/backoffice/users" element={<UserList />} />
+      <Route path="/backoffice/Organization" element={<HomeForm />} />
+      <Route path="/backoffice/contact/create" element={<ContactForm />} />
+    </Routes>
   );
 };
 
