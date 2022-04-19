@@ -193,7 +193,7 @@ const ProjectsForm = ({ project }) => {
                 }
                 onClick={props.handleBlur}
               >
-                Send
+                Enviar
               </Button>
               {loading && (
                 <CircularProgress
