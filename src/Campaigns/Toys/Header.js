@@ -2,10 +2,7 @@ import React from 'react';
 import { Card, Grid } from '@mui/material';
 import logoONG from "../../assets/img/logo-somos-mas.png";
 import campaignLogo from "../../assets/img/logo-toys-campaign.png";
-
-const imageStyle = {
-  width: '150px',
-}
+import "../../styles/ToysCampaingHeader.css"
 
 const campaingSlogan = "Slogan de campaña"
 
@@ -14,13 +11,14 @@ const Header = () => {
     <div>
       <Card>
         <Grid
+          className="CampaingHeader"
           container
           direction="row"
           justifyContent="space-between"
           alignItems="flex-start">
-          <img src={campaignLogo} style={imageStyle}/>
-          <img src={logoONG} style={imageStyle}/>
-          <h2>{campaingSlogan}</h2>
+          <img id="campaingLogo" src={campaignLogo}/>
+          <img id="ongLogo" src={logoONG}/>
+          <h2 id="slogan">{campaingSlogan}</h2>
         </Grid>
       </Card>
     </div>
