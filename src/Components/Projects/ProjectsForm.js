@@ -116,7 +116,7 @@ const ProjectsForm = ({ project }) => {
     >
       {(props) => (
         <Container maxWidth="lg" component="main">
-          <h1>{project ? "Edit your project!" : "Create a new project!"}</h1>
+          <h1>{project ? "Edita tu proyecto!" : "Crea un nuevo proyecto!"}</h1>
           <Form className="form-container">
             <div className="image-controls">
               {!image && <span className="image-msg">No hay imagen aún!</span>}
