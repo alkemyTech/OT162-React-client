@@ -13,16 +13,17 @@ import {
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
 
-const slideURL = "https://ongapi.alkemy.org/api/slide";
+const slideURL = "https://ongapi.alkemy.org/api/slides";
 
 const SlidesList = () => {
   const dispatch = useDispatch();
   const slides = useSelector((state) => state.slide.list);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSlides());
@@ -57,6 +58,7 @@ const SlidesList = () => {
 
   const editSlide = (id) => {
     console.log(id);
+    navigate('/backoffice/create-slide');
     // navigate(`/slides/edit/${id}`)
   };
   const deleteSlide = (id) => {
@@ -71,7 +73,7 @@ const SlidesList = () => {
           .delete(`${slideURL}/${id}`)
           .then(() => swal({ title: "Slide deleted", icon: "success" }))
           .catch((err) => {            
-            errorAlert("Error", "An error has ocurred while trying to delete teh slide");
+            errorAlert("Error", "An error has ocurred while trying to delete the slide");
             console.log(err);
           });
       }
@@ -111,7 +113,7 @@ const SlidesList = () => {
                 <TableCell align="center">{slide.name}</TableCell>
                 <TableCell align="center">{slide.description}</TableCell>
                 <TableCell align="center">
-                  <img src={slide.image} alt={slide.name} />
+                  <img src={slide.image} alt={slide.name} height="300"/>
                 </TableCell>
                 <TableCell align="center">
                   <Stack direction="row" spacing={2}>

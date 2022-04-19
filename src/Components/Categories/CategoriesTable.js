@@ -1,4 +1,6 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
+import moment from "moment";
+import "moment/locale/es";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCategoriesSlice, deleteCategorySlice } from "../../features/categories/categoriesSlice";
@@ -14,10 +16,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import swal from "sweetalert";
+//import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
+import { infoAlert } from "../../features/alerts/alerts";
 
-function createData(id, name, createdAt) {
-  return { id, name, createdAt };
-}
 
 const CategoriesTable = () => {
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ const CategoriesTable = () => {
     }).then((willDelete) => {
       if (willDelete) {
         dispatch(deleteCategorySlice(id));
+        infoAlert("Listo!", "Categoria eliminada", "OK");
       }
     });
   };
@@ -47,12 +50,14 @@ const CategoriesTable = () => {
   };
 
   return (
-    <Fragment>
-      <Button
-        variant="contained"
-        sx={{ margin: 2 }}
-        href="/backoffice/Categorias/create"
-      >
+    <Grid
+      container
+      spacing={0}
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
         Go to Backoffice
       </Button>
       <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
@@ -71,21 +76,19 @@ const CategoriesTable = () => {
                 <TableCell component="th" scope="row">
                   {category.name}
                 </TableCell>
-                <TableCell align="center">{category.createdAt}</TableCell>
                 <TableCell align="center">
-                  <Link
-                    component="button"
-                    onClick={() => deleteHandler(category.id)}
-                  >
-                    <DeleteIcon />
-                  </Link>
+                  {moment(category.created_at).calendar()}
                 </TableCell>
                 <TableCell align="center">
-                  <Link
-                    component="button"
-                    onClick={() => editHandler(category.id)}
-                  >
-                    <EditIcon />
+                  <Button onClick={() => deleteHandler(category.id)}>
+                    <DeleteIcon />
+                  </Button>
+                </TableCell>
+                <TableCell align="center">
+                  <Link to="/create-category">
+                    <Button onClick={() => editHandler(category.id)}>
+                      <EditIcon />
+                    </Button>
                   </Link>
                 </TableCell>
               </TableRow>
@@ -93,7 +96,7 @@ const CategoriesTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Fragment>
+    </Grid>
   );
 };
 
