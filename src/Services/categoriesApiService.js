@@ -1,6 +1,6 @@
 import { Get, Post, Put, Patch, Delete } from "./privateApiService";
 
-const categoriesRoute = `${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_CATEGORIES_ROUTE}`;
+const categoriesRoute = "https://ongapi.alkemy.org/api/categories";
 
 const getCategories = () => {
   return Get(categoriesRoute);
