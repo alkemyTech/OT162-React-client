@@ -1,30 +1,13 @@
-import axios from "axios";
+import { Delete, Get, Post } from "./privateApiService";
 
 const slidesUrl = `${process.env.REACT_APP_SLIDES_ROUTE}`;
 
-const getSlideList = () => {
-  return axios.get(slidesUrl);
-};
+const getSlideList = () => Get(slidesUrl);
 
-const getSlide = (id) => {
-  axios
-    .get(slidesUrl + id)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
-};
+const getSlide = (id) => Get(slidesUrl, id);
 
-const postSlide = (slide) => {
-  axios
-    .post(slidesUrl, slide)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
-};
+const postSlide = (slide) => Post(slidesUrl, slide);
 
-const deleteSlide = (id) => {
-  axios
-    .get(slidesUrl + id)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error));
-};
+const deleteSlide = (id) => Delete(slidesUrl, id);
 
 export { getSlideList, getSlide, postSlide, deleteSlide };
