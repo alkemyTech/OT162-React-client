@@ -59,7 +59,7 @@ export default function Footer() {
   ];
 
   useEffect(() => {
-    Get(`${process.env.REACT_APP_ORGANIZATION_ROUTE}`, 1).then((res) => {
+    Get("organization", 1).then((res) => {
       setOrganization(res);
       setIsLoading(false);
     });
