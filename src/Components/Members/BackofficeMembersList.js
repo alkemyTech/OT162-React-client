@@ -10,6 +10,7 @@ import store from '../../app/store';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMembers } from '../../features/reducers/membersSlice';
+import PersistentSideBar from '../../features/backoffice/sideBar';
 
 
 const baseUrl ="https://ongapi.alkemy.org/api";
@@ -58,63 +59,68 @@ const BackofficeMembersList = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Button
-        component={Link}
-        to="/backoffice/members/create"
-        variant="contained"
-        sx={{ margin: '20px 0' }}
-      >
-        Add new member
-      </Button>
-      { loading ? <div style={{ width: '100%', height: '200px', display: 'grid', placeItems: 'center' }}>
-        <CircularProgress />
-        </div> : <TableContainer component={Paper} elevation={3}>
-        <Table sx={{ minWidth: 550 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Photo</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {members.map((member) => (
-              <TableRow
-                key={member.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-              
-              <TableCell component="th" align="center" scope="row">
-                {member.name}
-              </TableCell>
-                <TableCell align="center">
-                  <img src={member.image} style={{maxWidth: '120px'}} alt={member.name} />
-                </TableCell>
-                <TableCell align="center">
-                 
-                    <Button
-                      variant="outlined"
-                      onClick={() => editMember(member.id)}
-                      style={{marginRight: '25px'}}
-                    >
-                      <EditIcon/>
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => deleteMember(member.id)}
-                    >
-                     <DeleteIcon/>
-                    </Button>
-              
-                </TableCell>
+    <div>
+      <div>
+            <PersistentSideBar/>
+      </div>
+      <Container maxWidth="lg">
+        <Button
+          component={Link}
+          to="/backoffice/members/create"
+          variant="contained"
+          sx={{ margin: '20px 0' }}
+        >
+          Add new member
+        </Button>
+        { loading ? <div style={{ width: '100%', height: '200px', display: 'grid', placeItems: 'center' }}>
+          <CircularProgress />
+          </div> : <TableContainer component={Paper} elevation={3}>
+          <Table sx={{ minWidth: 550 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Photo</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>}
-    </Container>
+            </TableHead>
+            <TableBody>
+              {members.map((member) => (
+                <TableRow
+                  key={member.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                
+                <TableCell component="th" align="center" scope="row">
+                  {member.name}
+                </TableCell>
+                  <TableCell align="center">
+                    <img src={member.image} style={{maxWidth: '120px'}} alt={member.name} />
+                  </TableCell>
+                  <TableCell align="center">
+                  
+                      <Button
+                        variant="outlined"
+                        onClick={() => editMember(member.id)}
+                        style={{marginRight: '25px'}}
+                      >
+                        <EditIcon/>
+                      </Button>
+                      <Button
+                        variant="contained"
+                        onClick={() => deleteMember(member.id)}
+                      >
+                      <DeleteIcon/>
+                      </Button>
+                
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>}
+      </Container>
+    </div>
   );
 };
 
