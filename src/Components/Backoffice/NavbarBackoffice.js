@@ -18,6 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import BOSections from '../../features/backoffice/backOfficeSections';
 import { Link } from 'react-router-dom';
+import { Get } from '../../Services/privateApiService';
 
 const referenceWidth = 240;
 
@@ -54,6 +55,14 @@ const SidebarHeader = styled('div')(({ theme }) => ({
 export default function NavbarBackoffice(){
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [navbarName, setNavbarName] = useState('Backoffice');
+
+    useEffect(() => {
+        Get('https://ongapi.alkemy.org/public/api/organization')
+        .then((res) => {
+            setNavbarName(res.data.data.name);
+        })
+    });
 
     const SideBarOpen = () => {
         setOpen(true);
@@ -78,7 +87,7 @@ export default function NavbarBackoffice(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Backoffice
+                        {navbarName}
                     </Typography>
                 </Toolbar>
                 <Drawer
