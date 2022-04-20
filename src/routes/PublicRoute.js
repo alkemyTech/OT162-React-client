@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../Components/Utilities/Loading";
 import Header from "../Components/Header/Header";
@@ -33,6 +33,7 @@ const Home = lazy(() => import("../Components/Home"));
 
 const PublicRoute = () => {
   return (
+<<<<<<< HEAD
     <BrowserRouter>
       <Suspense fallback={<Loading open={true} />}>
        <Header/>
@@ -57,6 +58,29 @@ const PublicRoute = () => {
         </Routes>
       </Suspense>
     </BrowserRouter>
+=======
+    <Suspense fallback={<Loading open={true} />}>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/create-activity" element={<ActivitiesForm />} />
+        <Route path="/create-category" element={<CategoriesForm />} />
+        <Route path="/create-testimonials" element={<TestimonialForm />} />
+        <Route path="/create-user" element={<UserForm />} />
+        <Route path="/create-project" element={<ProjectsForm />} />
+        <Route path="/school-campaign" element={<SchoolCampaign />} />
+        <Route path="/toys-campaign" element={<ToysCampaign />} />
+        <Route path="/actividades/:id" element={<ActivityDetail />} />
+        <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
+        <Route path="/gracias" element={<Thanks />} />
+        <Route path="/actividades" element={<ActivitiesList />} />
+        <Route path="/Novedades/:id" element={<NewsDetail />} />
+        <Route path="/Novedades" element={<NewsSection />} />
+        <Route path="/miembros" element={<MembersList />} />
+        <Route path="/contacto" element={<Contact />} />
+      </Routes>
+    </Suspense>
+>>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
   );
 };
 

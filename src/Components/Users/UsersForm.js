@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { ErrorMessage, Formik } from "formik";
 import "../FormStyles.css";
+import Popup from "reactjs-popup";
+import { Document } from "react-pdf";
+import { Page, pdfjs,  } from "react-pdf";
+import samplePdf from '../../assets/pdf/pdfPrueba.pdf'
+import '../../assets/styles/Modal.css'
+import swal from "sweetalert";
+
+
 import { errorAlert } from "../../features/alerts/alerts";
 const UserForm = ({ user }) => {
   const [initialValues, setInitialValues] = useState({
@@ -12,8 +20,34 @@ const UserForm = ({ user }) => {
     profilePhoto: "",
     password: "",
   });
+  const [checked, setChecked] = useState(false)
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1); 
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    setPageNumber(1);
+  }
+
+  function changePage(offset) {
+    setPageNumber(prevPageNumber => prevPageNumber + offset);
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
+  }
+
+
+
   const [imageFile, setImageFile] = useState({});
 
+  const handleChecked = (e) =>{
+     setChecked(e.target.checked);
+  }
   useEffect(() => {
     if (user) {
       setInitialValues(user);
@@ -34,6 +68,11 @@ const UserForm = ({ user }) => {
       };
     });
   };
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+  }, [])
+  
 
   const handleChange = async (e) => {
     switch (e.target.name) {
@@ -58,7 +97,10 @@ const UserForm = ({ user }) => {
   };
 
   const handleEdit = (e) => {
-    e.preventDefault();
+   
+    if (!checked) return swal('Error', 'You must accept our terms and conditions', 'error')
+
+    
 
     if (user) {
       axios
@@ -123,7 +165,7 @@ const UserForm = ({ user }) => {
             errors.password = "Campo obligatorio";
           } else if (!password.length >= 8) {
             errors.password = "La contraseña debe tener al menos 8 caracteres.";
-          }
+          } 
           return errors;
         }}
         onSubmit={handleEdit}
@@ -198,12 +240,76 @@ const UserForm = ({ user }) => {
               component="div"
               className="invalid-feedback"
             />
-            <button className="submit-btn" type="submit">
+               
+
+            
+            <label>
+            <input type="checkbox" name="check" checked={checked}  
+            onChange={handleChecked}
+             />
+              Acepto
+              <Popup trigger={<button type= 'button'className="btn"> Terminos y condiciones</button>}  modal>
+       
+     {close => (
+      <div className="full">
+
+      <div className="modal">
+        <button className="close" onClick={close}>
+          &times;
+        </button>
+        <div className="Example__container">
+        <div className="Example__container__document">
+        <Document
+        file={samplePdf}
+        options={{ workerSrc: "/pdf.worker.js" }}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        <Page pageNumber={pageNumber} />
+      </Document>
+      <div className="navigation">
+        
+        <button type="button" disabled={pageNumber <= 1} onClick={previousPage} className="left">
+          ←
+        </button>
+        <p>
+          Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+        </p>
+        <button
+          type="button"
+          disabled={pageNumber >= numPages}
+          onClick={nextPage}
+          className="right"
+        >
+          →
+        </button>
+      </div>
+          
+        </div>
+      </div>
+               
+            
+             
+    
+        
+      </div>
+      </div>
+    )}
+  </Popup>
+              </label>
+              <ErrorMessage
+              name="check"
+              component="div"
+              className="invalid-feedback"
+            />
+           
+            <button disabled={!checked} className="submit-btn" type="submit">
               Send
             </button>
           </form>
         )}
       </Formik>
+      
+
     </div>
   );
 };

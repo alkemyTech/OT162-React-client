@@ -6,6 +6,7 @@ import usersSlice from "../features/users/usersSlice";
 import aboutUsReducer from "../features/reducers/aboutUsSlice";
 import activitiesReducer from "../features/activities/activitiesSlice";
 import membersSlice from '../features/reducers/membersSlice';
+import categoriesSlice from '../features/categories/categoriesSlice';
 
 export default configureStore({
   reducer: {
@@ -17,5 +18,6 @@ export default configureStore({
     users: usersSlice,
     // aboutUs: aboutUsReducer,
     members: membersSlice,
+    categories: categoriesSlice
   },
 });
