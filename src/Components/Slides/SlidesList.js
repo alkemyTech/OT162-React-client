@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
-import PersistentSideBar from "../../features/backoffice/sideBar";
+import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 const slideURL = "https://ongapi.alkemy.org/api/slides";
 
@@ -84,7 +84,7 @@ const SlidesList = () => {
   return (
     <div>
       <div>
-        <PersistentSideBar/>
+        <NavbarBackoffice/>
       </div>
       <div>
         <Container maxWidth="lg">

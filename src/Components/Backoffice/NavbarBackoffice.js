@@ -1,5 +1,5 @@
 import { styled, useTheme } from '@mui/material/styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import BOSections from './backOfficeSections';
+import BOSections from '../../features/backoffice/backOfficeSections';
 import { Link } from 'react-router-dom';
 
 const referenceWidth = 240;
@@ -51,7 +51,7 @@ const SidebarHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function PersistentSideBar(){
+export default function NavbarBackoffice(){
     const theme = useTheme();
     const [open, setOpen] = useState(false);
 

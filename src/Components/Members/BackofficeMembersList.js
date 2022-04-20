@@ -10,7 +10,7 @@ import store from '../../app/store';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMembers } from '../../features/reducers/membersSlice';
-import PersistentSideBar from '../../features/backoffice/sideBar';
+import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 
 const baseUrl ="https://ongapi.alkemy.org/api";
@@ -61,7 +61,7 @@ const BackofficeMembersList = () => {
   return (
     <div>
       <div>
-            <PersistentSideBar/>
+        <NavbarBackoffice/>
       </div>
       <Container maxWidth="lg">
         <Button

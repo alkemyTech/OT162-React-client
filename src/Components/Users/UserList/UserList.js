@@ -21,7 +21,7 @@ import {
 import { errorAlert } from "../../../features/alerts/alerts";
 import Loading from "../../Utilities/Loading";
 import { useState, useEffect } from "react";
-import PersistentSideBar from "../../../features/backoffice/sideBar";
+import NavbarBackoffice from '../..//Backoffice/NavbarBackoffice';
 
 const UserList = () => {
   const usersList = useSelector(selectUsersList);
@@ -52,7 +52,7 @@ const UserList = () => {
   return (
     <div>
       <div>
-        <PersistentSideBar/>
+        <NavbarBackoffice/>
       </div>
       <h3>User's List</h3>
       <Button variant="contained">
