@@ -4,7 +4,7 @@ import logoONG from "../../assets/img/logo-somos-mas.png";
 import campaignLogo from "../../assets/img/logo-toys-campaign.png";
 import "../../styles/CampaingHeader.css";
 
-const campaingSlogan = "Hora de jugar!"
+const campaingSlogan = "A la hora de jugar, somos más!"
 
 const Header = () => {
   return (
