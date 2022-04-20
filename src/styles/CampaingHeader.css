@@ -2,6 +2,11 @@
     width: 150px;
 }
 
+#slogan{
+    user-select: none;
+    margin-top: 5%;
+}
+
 /* smartphone screen */
 @media screen
     and (orientation: portrait)
@@ -41,8 +46,3 @@
             display: none
         }
     }    
-
-
-/* desktop-laptop screen */
-
-/* smart TV screen */

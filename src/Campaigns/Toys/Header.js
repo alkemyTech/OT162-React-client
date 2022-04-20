@@ -2,9 +2,9 @@ import React from 'react';
 import { Card, Grid } from '@mui/material';
 import logoONG from "../../assets/img/logo-somos-mas.png";
 import campaignLogo from "../../assets/img/logo-toys-campaign.png";
-import "../../styles/ToysCampaingHeader.css"
+import "../../styles/CampaingHeader.css";
 
-const campaingSlogan = "Slogan de campaña"
+const campaingSlogan = "Hora de jugar!"
 
 const Header = () => {
   return (
@@ -17,8 +17,8 @@ const Header = () => {
           justifyContent="space-between"
           alignItems="flex-start">
           <img id="campaingLogo" src={campaignLogo}/>
-          <img id="ongLogo" src={logoONG}/>
           <h2 id="slogan">{campaingSlogan}</h2>
+          <img id="ongLogo" src={logoONG}/>
         </Grid>
       </Card>
     </div>
