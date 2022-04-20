@@ -62,7 +62,7 @@ export default function NavbarBackoffice(){
         .then((res) => {
             setNavbarName(res.data.data.name);
         })
-    });
+    }, []);
 
     const SideBarOpen = () => {
         setOpen(true);
@@ -75,7 +75,7 @@ export default function NavbarBackoffice(){
     return(
         <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
-            <SideBar position="flex" open={open}>
+            <SideBar position="absolute" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
