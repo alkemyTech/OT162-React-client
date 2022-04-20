@@ -12,4 +12,4 @@ const updateSlide = (id, slide) => Put(slidesUrl, id, slide);
 
 const deleteSlide = (id) => Delete(slidesUrl, id);
 
-export { getSlideList, getSlide, postSlide, deleteSlide };
+export { getSlideList, getSlide, postSlide, deleteSlide, updateSlide };
