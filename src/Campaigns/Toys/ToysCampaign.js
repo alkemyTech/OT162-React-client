@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import CampaignSlider from "../../Components/Utilities/CampaignSlider";
-import Content from "./Content";
+import ToysContent from '../Toys/ToysContent'
+
 import Footer from "./Footer";
 
 const ToysCampaign = () => {
@@ -23,7 +24,7 @@ const ToysCampaign = () => {
     <>
       <Header />
       <CampaignSlider images={images} intervalInSec={5} showStepDots />
-      <Content />
+      <ToysContent /> 
       <Footer />
     </>
   );

@@ -3,53 +3,78 @@ import Title from "../Title/Title";
 import { errorAlert } from "../../features/alerts/alerts";
 import { useEffect, useState } from "react";
 import Loading from "../Utilities/Loading";
+import { getActivities } from "../../Services/activitiesApiService";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 const ActivitiesList = () => {
-  
-  const [loading, setLoading] = useState(true);  
+  const [loading, setLoading] = useState(true);
+  const [activities, setActivities] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() =>{
-      setLoading(false);
-    }, 2000);    
-
+    setLoading(true);
+    getActivities()
+      .then((response) => setActivities(response.data.data))
+      .catch((error) => errorAlert(error, error.message, "Ok"))
+      .finally(() => setLoading(false));
   }, []);
-  
-  const activitiesMock = [
-    { id: 2, name: "Titulo de prueba", description: "Descripcion de prueba" },
-    { id: 1, name: "Titulo de prueba", description: "Descripcion de prueba" },
-    { id: 3, name: "Titulo de prueba", description: "Descripcion de prueba" },
-  ];
-
-  if(activitiesMock !== null || activitiesMock !== undefined){
-    errorAlert('Ha ocurrido un error', 'No hay actividades para mostrar', 'Continuar...')
-  }
 
   return (
-    <div>{ 
-      loading? 
-        Loading() :
-        <div>
+    <Box>
+      {loading ? (
+        <Loading open={true} />
+      ) : (
+        <>
           <Title title="Actividades" img="/images/banner-img.jpg" />
-          <ul className="list-container">
-            {activitiesMock.length > 0 ? (
-              activitiesMock.map((activity) => {
+          <Grid container spacing={2}>
+            {activities.length > 0 ? (
+              activities.map((activity) => {
                 return (
-                  <li className="card-info" key={activity.id}>
-                    <h3>{activity.name}</h3>
-                    <p>{activity.description}</p>
-                  </li>
+                  <Grid item xs={12} sm={6} md={3} key={activity.id}>
+                    <Card sx={{ maxWidth: 345 }}>
+                      <CardActionArea
+                        onClick={() => navigate(`/actividades/${activity.id}`)}
+                      >
+                        <CardMedia
+                          component="img"
+                          height="140"
+                          image={activity.image}
+                          alt={activity.name}
+                        />
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="div">
+                            {activity.name}
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            dangerouslySetInnerHTML={{
+                              __html: activity.description,
+                            }}
+                          />
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
                 );
               })
             ) 
             : (
               <p>No hay actividades</p>
-            )
-            }
-          </ul>
-        </div>
-      }
-    </div>
+            )}
+          </Grid>
+        </>
+      )}
+    </Box>
   );
 };
 

@@ -3,7 +3,6 @@ const footerStyle = {
     flexGrow: 1,
     textAlign: "center",
     width: "100%",
-    minHeight: "400px",
     marginTop: 10,
   },
   textoInf: {
