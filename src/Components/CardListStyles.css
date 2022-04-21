@@ -20,7 +20,7 @@
 
 .card {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-direction: column;
   min-height: 450px;
   max-width: 280px;

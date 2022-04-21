@@ -32,7 +32,7 @@ const Home = () => {
     GetTitle().then((res) => {
       setTitle(res.name);
     });
-    GetNews().then((res) => {
+    GetNews(5).then((res) => {
       setNews(res);
     });
   }, []);

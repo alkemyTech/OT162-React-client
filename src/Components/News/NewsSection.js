@@ -11,7 +11,7 @@ import LastEvent from "./LastEvent";
 const NewsSection = () => {
   const [news, setNews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const baseRoute = process.env.REACT_APP_NEWS_ROUTE
+  const baseRoute = process.env.REACT_APP_NEWS_ROUTE;
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,9 +45,9 @@ const NewsSection = () => {
 
           <Grid
             container
-            justifyContent="center"
-            alignItems="center"
-            sx={{ margin: 3 }}
+            justifyContent="space-evenly"
+            alignItems="stretch"
+            sx={{ margin: 3, gap: "2em 0" }}
           >
             {news.map((item) => (
               <Card
