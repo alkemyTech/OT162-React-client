@@ -108,12 +108,10 @@ const ActivitiesForm = ({ activity }) => {
     >
       {(props) => (
         <Container maxWidth="lg" component="main">
-          <h1>{activity ? "Edit your activity!" : "Create a new activity!"}</h1>
+          <h1>{activity ? "Editar actividad" : "Crear una nueva actividad"}</h1>
           <Form className="form-container">
             <div className="image-controls">
-              {!image && (
-                <span className="image-msg">Nothing Uploaded Yet!</span>
-              )}
+              {!image && <span className="image-msg">Nada subido aún!</span>}
               <Button
                 variant="contained"
                 id="image"
@@ -121,7 +119,7 @@ const ActivitiesForm = ({ activity }) => {
                 className="image-edit-btn"
                 startIcon={image ? <EditIcon /> : <PhotoCameraIcon />}
               >
-                {image ? "Edit Image" : "Upload Image*"}
+                {image ? "Editar Imagen" : "Subir Imagen*"}
                 <input
                   type="file"
                   accept=".jpg,.png"
@@ -136,10 +134,10 @@ const ActivitiesForm = ({ activity }) => {
             <FormHelperText error children={props.errors.image} />
             <TextField
               id="outlined-helperText"
-              label="Activity Title"
+              label="Titulo de la actividad"
               type="text"
               name="name"
-              placeholder="Activity Title"
+              placeholder="Titulo de la actividad"
               value={props.values.name}
               onChange={handleChange}
               onBlur={props.handleBlur}
@@ -153,14 +151,6 @@ const ActivitiesForm = ({ activity }) => {
               onChange={handleChange}
               data={initialValues.description}
             />
-            {/* <Field
-              component={DescriptionField}
-              className="input-field"
-              type="text"
-              name="description"
-              placeholder="Write some activity description"
-              onChange={handleChange}
-            /> */}
             <Box sx={{ m: 1, position: "relative" }}>
               <Button
                 sx={{
@@ -175,7 +165,7 @@ const ActivitiesForm = ({ activity }) => {
                 }
                 onClick={props.handleBlur}
               >
-                Submit
+                Enviar
               </Button>
               {loading && (
                 <CircularProgress
