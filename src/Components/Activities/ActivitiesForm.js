@@ -18,6 +18,7 @@ import {
 } from "../../Services/activitiesApiService";
 // import DescriptionField from "./DescriptionField";
 
+
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 
 const ActivitiesForm = ({ activity }) => {
