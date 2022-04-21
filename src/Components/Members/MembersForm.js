@@ -7,7 +7,7 @@ import { Fab, Grid, Icon, TextField } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import {  getMemberById, updateMember } from "../../Services/membersApiService";
+import {  getMemberById, updateMember, addNewMember } from "../../Services/membersApiService";
 import { errorAlert } from "../../features/alerts/alerts";
 
 
@@ -47,14 +47,16 @@ const MembersForm = () => {
 
   const handleEdit = () => {
     console.log(initialValues);
-    updateMember(id, initialValues)
-  
+    updateMember(id, initialValues)  
+  };
+  const handleCreate = () => {
+    console.log(initialValues);
+    addNewMember(initialValues)  
   };
 
   useEffect(() => {
-  getMemberById(id)
- 
- 
+
+  getMemberById(id) 
      .then((result) => {
           setInitialValues({
             name: result.data.name,
@@ -115,7 +117,7 @@ const MembersForm = () => {
 
           return errors;
         }}
-        onSubmit={handleEdit}
+        onSubmit={id ? handleEdit : handleCreate}
       >
         {({ handleBlur, handleSubmit }) => (
           <form className="form-container" onSubmit={handleSubmit}>
