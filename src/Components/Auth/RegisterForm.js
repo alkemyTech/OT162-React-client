@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
+import  MapContainer  from "../Utilities/MapContainer";
 
 const RegisterForm = () => {
   var map;
@@ -158,7 +159,9 @@ const RegisterForm = () => {
           </form>
         )}
       </Formik>
-      <div id="map">
+      <div style={{width:"300px",height:"200px"}}>
+        <MapContainer />
+
       </div>
     </div>
   );
