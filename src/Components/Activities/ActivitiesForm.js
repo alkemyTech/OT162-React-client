@@ -16,7 +16,7 @@ import {
   createActivity,
   updateActivity,
 } from "../../Services/activitiesApiService";
-// import DescriptionField from "./DescriptionField";
+import DescriptionField from "./DescriptionField";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 
@@ -57,10 +57,7 @@ const ActivitiesForm = ({ activity }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (activity) {
-      updateActivity(
-        `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}/${initialValues.id}`,
-        initialValues
-      )
+      updateActivity(initialValues.id, initialValues)
         .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
         .catch((error) => {
           errorAlert(
@@ -74,10 +71,7 @@ const ActivitiesForm = ({ activity }) => {
     } else {
       // Si bien el ticket dice hacer el post al endpoint activities/create
       // lo hago a activities directamente ya que en los doc de la api dice eso
-      createActivity(
-        `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}`,
-        initialValues
-      )
+      createActivity(initialValues)
         .then(() => confirmAlert("Excelente", "Actividad creada", "Exit"))
         .catch((error) => {
           errorAlert("Error", "Hubo un problema al crear la actividad", "Exit");
@@ -152,6 +146,12 @@ const ActivitiesForm = ({ activity }) => {
               helperText={props.errors.name}
               error={!!props.errors.name}
               required
+            />
+            <DescriptionField
+              className="input-field"
+              name="description"
+              onChange={handleChange}
+              data={initialValues.description}
             />
             {/* <Field
               component={DescriptionField}
