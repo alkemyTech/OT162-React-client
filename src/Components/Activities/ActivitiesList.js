@@ -67,7 +67,8 @@ const ActivitiesList = () => {
                   </Grid>
                 );
               })
-            ) : (
+            ) 
+            : (
               <p>No hay actividades</p>
             )}
           </Grid>
