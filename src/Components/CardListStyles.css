@@ -4,6 +4,9 @@
   display: flex;
   justify-content: space-around;
   gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .card-info {
