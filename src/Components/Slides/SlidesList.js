@@ -67,7 +67,7 @@ const SlidesList = () => {
             component={Link}
             to="/backoffice/create-slide"
             variant="contained"
-            sx={{ float: "right", marginBottom: "2rem" }}
+            sx={{ float: "right", my: "2rem" }}
           >
             Crear un nuevo slider
           </Button>
