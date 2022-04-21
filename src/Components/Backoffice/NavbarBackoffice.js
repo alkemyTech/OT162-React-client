@@ -75,7 +75,7 @@ export default function NavbarBackoffice(){
     return(
         <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
-            <SideBar position="absolute" open={open}>
+            <SideBar position="static" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
