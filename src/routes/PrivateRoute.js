@@ -12,6 +12,7 @@ import News from "../Components/News/News";
 import UserList from "../Components/Users/UserList/UserList";
 import HomeForm from "../Components/Backoffice/Organization/HomeForm";
 import ContactForm from "../Components/Contact/ContactForm";
+import CategoriesForm from "../Components/Categories/CategoriesForm";
 
 const PrivateRoute = () => {
   return (
@@ -23,6 +24,10 @@ const PrivateRoute = () => {
       <Route path="/backoffice/slides" element={<SlidesList />} />
       <Route path="/backoffice/categories" element={<CategoriesTable />} />
       <Route path="/backoffice/members/edit/:id" element={<MembersForm />} />
+      <Route
+        path="/backoffice/categories/edit/:id"
+        element={<CategoriesForm />}
+      />
       <Route
         path="/backoffice/activities"
         element={<ActivitiesListBackoffice />}

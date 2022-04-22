@@ -1,18 +1,33 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import CKEditor from "ckeditor4-react";
 import { Formik } from "formik";
-import { putCategory, postCategory } from "../../Services/categoriesApiService";
+import {
+  putCategory,
+  postCategory,
+  getCategoriesById,
+} from "../../Services/categoriesApiService";
 
 import "../FormStyles.css";
-import { confirmAlert } from "../../features/alerts/alerts";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 
-const CategoriesForm = ({ category }) => {
+const CategoriesForm = () => {
+  const { id } = useParams();
+  let navigate = useNavigate();
   const [initialValues, setInitialValues] = useState({
-    name: category ? category.name : "",
-    description: category ? category.description : "",
-    image: category ? category.image : "",
-    id: category ? category.id : "",
+    name: "",
+    description: "",
+    image: "",
+    id: "",
   });
+
+  useEffect(() => {
+    if (id) {
+      getCategoriesById(id).then((response) => {
+        setInitialValues({ ...response.data.data, image: "" });
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     if (e?.target?.name === "name") {
@@ -38,10 +53,13 @@ const CategoriesForm = ({ category }) => {
   };
 
   const handleSubmit = (e) => {
-    if (category) {
-      putCategory(initialValues.id, initialValues).then(() => {
-        confirmAlert("Operacion exitosa", "Categoria creada", "OK");
-      });
+    if (id) {
+      putCategory(id, initialValues)
+        .then(() => {
+          confirmAlert("Operacion exitosa", "Categoria editada", "OK");
+        })
+        .catch((error) => errorAlert("Error", error.message, "Continuar"))
+        .finally(navigate("/backoffice/categories"));
     } else {
       postCategory(initialValues);
       confirmAlert("Operacion exitosa", "Categoria creada", "OK");
@@ -52,7 +70,7 @@ const CategoriesForm = ({ category }) => {
 
   return (
     <Fragment>
-      <h1>Create or edit a category</h1>
+      <h1>Crear o editar una categoría</h1>
       <Formik
         initialValues={initialValues}
         enableReinitialize
@@ -95,6 +113,7 @@ const CategoriesForm = ({ category }) => {
 
             <CKEditor
               initData={initialValues.description}
+              data={initialValues.description}
               id="description"
               name="description"
               onChange={handleChange}
@@ -103,6 +122,7 @@ const CategoriesForm = ({ category }) => {
 
             <input
               className="input-field"
+              // value={}
               type="file"
               id="image"
               accept=".jpg, .png"
