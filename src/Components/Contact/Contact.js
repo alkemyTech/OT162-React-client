@@ -1,5 +1,6 @@
 import React from 'react';
 import Title from '../Title/Title';
+import Leaflet from '../Leaflet/Leaflet';
 import {Grid, Box, Typography, Button} from '@mui/material';
 import {Facebook, Instagram, Twitter, LinkedIn, PhoneAndroid, LocationOn, LocalPhone} from '@mui/icons-material';
 import './Contact.css';
@@ -7,6 +8,7 @@ import './Contact.css';
 const Contact = ({data}) => {
     return (
         <div>
+            <Leaflet/>
             <Title title="Contacto" text="" img="images/contacto-title-alkemy.png"/>
             <Box mt={2}>
                 {data ?

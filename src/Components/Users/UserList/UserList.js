@@ -21,6 +21,8 @@ import {
 import { errorAlert } from "../../../features/alerts/alerts";
 import Loading from "../../Utilities/Loading";
 import { useState, useEffect } from "react";
+import PersistentSideBar from "../../../features/backoffice/sideBar";
+
 const UserList = () => {
   const usersList = useSelector(selectUsersList);
   const usersStatus = useSelector(selectUsersState);
@@ -49,6 +51,9 @@ const UserList = () => {
 
   return (
     <div>
+      <div>
+        <PersistentSideBar/>
+      </div>
       <h3>User's List</h3>
       <Button variant="contained">
         <Link to="/backoffice/users/create">Create</Link>
