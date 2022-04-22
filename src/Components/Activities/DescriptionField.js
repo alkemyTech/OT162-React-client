@@ -3,10 +3,10 @@ import CKEditor from "ckeditor4-react";
 const DescriptionField = (props) => {
   return (
     <CKEditor
-      name={props.field.name}
+      name={props.name}
       editor="classic"
       onChange={props.onChange}
-      data={props.field.value}
+      data={props.data}
       config={{
         toolbar: [
           ["Source", "-", "NewPage", "Preview", "-", "Templates"],

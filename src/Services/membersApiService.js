@@ -1,7 +1,6 @@
 import { Delete, Get, Post, Put } from "./privateApiService";
 
-// const memebersRoute = `${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_MEMBERS}`;
-const memebersRoute = `https://ongapi.alkemy.org/api/members`;
+const memebersRoute = `${process.env.REACT_APP_URL_BASE}${process.env.REACT_APP_MEMBERS}`;
 
 const getMembers = () => Get(memebersRoute);
 

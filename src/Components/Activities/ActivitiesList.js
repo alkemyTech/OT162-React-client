@@ -35,12 +35,12 @@ const ActivitiesList = () => {
       ) : (
         <>
           <Title title="Actividades" img="/images/banner-img.jpg" />
-          <Grid container spacing={2}>
+          <Grid container spacing={3} sx={{ m: "auto", p: "0 5em" }}>
             {activities.length > 0 ? (
               activities.map((activity) => {
                 return (
                   <Grid item xs={12} sm={6} md={3} key={activity.id}>
-                    <Card sx={{ maxWidth: 345 }}>
+                    <Card sx={{ maxWidth: 345, height: "100%" }}>
                       <CardActionArea
                         onClick={() => navigate(`/actividades/${activity.id}`)}
                       >
@@ -67,7 +67,8 @@ const ActivitiesList = () => {
                   </Grid>
                 );
               })
-            ) : ( 
+            ) 
+            : (
               <p>No hay actividades</p>
             )}
           </Grid>
