@@ -1,5 +1,6 @@
-import { Button, Container } from '@mui/material'
-import React from 'react'
+import { Button, Container } from '@mui/material';
+import React from 'react';
+import { redirectMP } from '../Services/mercadoPagoApiService';
 
 const Donation = ({text}) => {
   return (
@@ -13,7 +14,7 @@ fontSize: '36px',
 lineHeight: '50px',
 letterSpacing: '-0.015em'
 }}>{text}</h2>
-        <Button variant="contained">Mercado pago</Button>
+        <Button variant="contained" onClick={() => redirectMP()}>Mercado pago</Button>
     </Container>
 
    
