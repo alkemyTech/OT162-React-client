@@ -9,9 +9,8 @@ import { Page, pdfjs,  } from "react-pdf";
 import samplePdf from '../../assets/pdf/pdfPrueba.pdf'
 import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
-
-
 import { errorAlert } from "../../features/alerts/alerts";
+
 const UserForm = ({ user }) => {
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -138,8 +137,16 @@ const UserForm = ({ user }) => {
     }
   };
 
+  // User Verification
+  const [userLogged, setUserLogged] = useState(false);
+  const getToken = localStorage.getItem("token");
+
+  if(getToken !== null || undefined){
+    setUserLogged(true)
+  }
   return (
     <div>
+      {userLogged ? <h1>Autenticado</h1> : <h1>no autenticado</h1>}
       <Formik
         initialValues={initialValues}
         validate={() => {
