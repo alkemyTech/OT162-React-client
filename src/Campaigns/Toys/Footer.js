@@ -59,7 +59,7 @@ export default function Footer() {
   ];
 
   useEffect(() => {
-    Get(`organization`, 1).then((res) => {
+    Get(`${process.env.REACT_APP_ORGANIZATION}`, 1).then((res) => {
       setOrganization(res);
       setIsLoading(false);
     });
@@ -144,6 +144,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noreferrer"
                     style={{ color: "white", textDecoration: "none" }}
+                    key={element.url}
                   >
                     <Button
                       endIcon={element.icon}

@@ -59,7 +59,7 @@ export default function Footer() {
   ];
 
   useEffect(() => {
-    Get("organization", 1).then((res) => {
+    Get(`${process.env.REACT_APP_ORGANIZATION}`, 1).then((res) => {
       setOrganization(res);
       setIsLoading(false);
     });
@@ -138,7 +138,7 @@ export default function Footer() {
                 Redes Sociales
               </Typography>
               {RedesSociales.map((element) => (
-                <Typography variant="h6">
+                <Typography variant="h6" key={element.name}>
                   <a
                     href={element.url}
                     target="_blank"
@@ -180,7 +180,7 @@ export default function Footer() {
                 Otras Campañas
               </Typography>
               {navegationItems.map((element) => (
-                <Typography variant="h6">
+                <Typography variant="h6" key={element.name}>
                   <Link to={element.src} className={classes.textoInf}>
                     {element.name}
                   </Link>
