@@ -7,11 +7,16 @@ import { Fab, Grid, Icon, TextField } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import {  getMemberById, updateMember, addNewMember } from "../../Services/membersApiService";
-import { errorAlert } from "../../features/alerts/alerts";
-
+import {
+  getMemberById,
+  updateMember,
+  addNewMember,
+} from "../../Services/membersApiService";
+import { errorAlert, confirmAlert } from "../../features/alerts/alerts";
+import { useNavigate } from "react-router-dom";
 
 const MembersForm = () => {
+  let navigate = useNavigate();
   const [initialValues, setInitialValues] = useState({
     name: "",
     image: "",
@@ -47,32 +52,48 @@ const MembersForm = () => {
 
   const handleEdit = () => {
     console.log(initialValues);
-    updateMember(id, initialValues)  
+    updateMember(id, initialValues)
+      .then(() =>
+        confirmAlert("Miembro actualizado correctamente", "", "Continuar")
+      )
+      .catch((error) => errorAlert("Error", error.message, "Continuar"))
+      .finally(() => {
+        navigate("/backoffice/members");
+      });
   };
   const handleCreate = () => {
     console.log(initialValues);
-    addNewMember(initialValues)  
+    addNewMember(initialValues)
+    .then(() =>
+        confirmAlert("Miembro creado correctamente", "", "Continuar")
+      )
+      .catch((error) => errorAlert("Error", error.message, "Continuar"))
+      .finally(() => {
+        navigate("/backoffice/members");
+      });
   };
 
   useEffect(() => {
-
-  getMemberById(id) 
-     .then((result) => {
-          setInitialValues({
-            name: result.data.name,
-            image: result.data.image,
-           description: result.data.description,
-           facebookUrl: result.data.facebookUrl,
-            linkedinUrl: result.data.linkedinUrl,
-          });
-        console.log(result)
+    getMemberById(id)
+      .then((result) => {
+        setInitialValues({
+          name: result.data.data.name,
+          image: result.data.data.image,
+          description: result.data.data.description,
+          facebookUrl: result.data.data.facebookUrl,
+          linkedinUrl: result.data.data.linkedinUrl,
+        });
+        console.log(result);
       })
       .catch((e) => {
         console.log("ERROR", e.message);
-        errorAlert("Error","Error al obtener información de miembros","error")
+        errorAlert(
+          "Error",
+          "Error al obtener información de miembros",
+          "error"
+        );
       });
-      
-  }, [id]);
+  }, []);
 
   return (
     <div>
