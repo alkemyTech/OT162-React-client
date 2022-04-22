@@ -1,27 +1,43 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import './Navbar.css'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
-  return (
-    <div className='navbar'>
-        <div>
-            <NavLink to="/">Inicio</NavLink>
-        </div>
-        <div>
-            <NavLink to="/miembros">Nosotros</NavLink>
-        </div>
-        <div>
-            <NavLink to="/contacto">Contacto</NavLink>
-        </div>
-        <div>
-            <NavLink to="/school-campaign">Campañas: Escuelas</NavLink>
-        </div>
-        <div>
-            <NavLink to="/toys-campaign">Campañas: Juguetes</NavLink>
-        </div>
-    </div>
-  )
-}
+  const menuItems = [
+    {
+      name: "inicio",
+      path: "/",
+    },
+    {
+      name: "Nosotros",
+      path: "/miembros",
+    },
+    {
+      name: "Contacto",
+      path: "/contacto",
+    },
+    {
+      name: "Campañas: Escuelas",
+      path: "/school-campaign",
+    },
+    {
+      name: "Campañas: Juguetes",
+      path: "/toys-campaign",
+    },
+  ];
 
-export default Navbar
+  return (
+    <div className="navbar">
+      {menuItems.map((link) => {
+        return (
+          <div>
+            <NavLink to={link.path}>{link.name}</NavLink>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Navbar;
+
