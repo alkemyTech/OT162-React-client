@@ -66,7 +66,7 @@ const CategoriesTable = () => {
         <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
           Go to Backoffice
         </Button>
-        <CategoriesSearch />
+        <CategoriesSearch/>
         <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
           <Table aria-label="simple table">
             <TableHead>

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getCategories, deleteCategory } from "../../Services/categoriesApiService";
+import axios from 'axios';
 
 export const getCategoriesSlice = createAsyncThunk("category/getCategoriesSlice", async () => {
   return getCategories().then((res) => {
@@ -15,6 +16,15 @@ export const deleteCategorySlice = createAsyncThunk("category/deleteCategorySlic
     return res.data.data;
   });
 });
+
+let categoriesList = ''
+
+export const filterCategorySlice = createAsyncThunk("category/filterCategorySlice", async (value) => {
+  return axios.get('https://ongapi.alkemy.org/public/api/categories?search='+value).then((res) => {
+    categoriesList = res.data.data;
+    return res.data.data;
+});
+})
 
 const categoriesSlice = createSlice({
     name: "category",
@@ -44,6 +54,11 @@ const categoriesSlice = createSlice({
         },
         [deleteCategorySlice.rejected]: (state, action) => {
           state.status = "failed";
+        },
+        [filterCategorySlice.fulfilled]: (state, action) => {
+          const categories = categoriesList;
+          state.list = [...categories]
+          state.status = "success";
         }
     },
 });
