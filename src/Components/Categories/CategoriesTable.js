@@ -20,6 +20,7 @@ import swal from "sweetalert";
 import { Grid } from "@mui/material";
 import { infoAlert } from "../../features/alerts/alerts";
 import PersistentSideBar from "../../features/backoffice/sideBar";
+import CategoriesSearch from './CategoriesSearch';
 
 
 const CategoriesTable = () => {
@@ -65,6 +66,7 @@ const CategoriesTable = () => {
         <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
           Go to Backoffice
         </Button>
+        <CategoriesSearch />
         <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
           <Table aria-label="simple table">
             <TableHead>
