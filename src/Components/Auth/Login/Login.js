@@ -3,13 +3,17 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { errorAlert } from "../../../features/alerts/alerts";
+
 
 const Login = () => {
   const [login, setLogin] = useState(false);
   const [invalidPass, setInvalidPass] = useState(false);
   const [mensajeError, setMensajeError] = useState("");
   const [name, setName] = useState("");
+
+  const auth = process.env.REACT_APP_AUTH;
 
   useEffect(() => {
     if (invalidPass) {
@@ -47,7 +51,7 @@ const Login = () => {
             if (
               !/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$/.test(inputs.password)
             ) {
-              errores.password = "La contraseña debe tener al menos un número, una letra, un símbolo";
+              errores.password = "La contraseña debe tener al menos un número, una letra y un símbolo";
             }
           }
           return errores;
@@ -58,20 +62,9 @@ const Login = () => {
             password: inputs.password,
           };
           try {
-            fetch("http://localhost:3003/api/user/login", {
-              method: "POST",
-              redirect: "follow",
-              //   mode: "cors", // no-cors, *cors, same-origin
-              cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-              //   credentials: "same-origin", // include, *same-origin, omit
-              headers: {
-                "Content-Type": "application/json",
-                "Acces-Control-Allow-Origin": "*",
-              },
-              body: JSON.stringify(userInfo),
-            })
-              .then((response) => response.json())
+            axios.post("https://ongapi.alkemy.org/api/login", userInfo)            
               .then((res) => {
+                console.log(res.data)
                 if (res.success) {
                   console.log("Bienvenido", userInfo.email);
                   setInvalidPass(false);
@@ -81,6 +74,9 @@ const Login = () => {
                 if (res.error) {
                   console.log("Contraseña invalida");
                   setInvalidPass(true);
+                }
+                if (res.data.error) {
+                  console.log("Usuario inexistente");                 
                 }
               })
               .catch((error) => {
