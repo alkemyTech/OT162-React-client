@@ -28,7 +28,7 @@ const ActivitiesListBackoffice = () => {
   const classes = useStyles();
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(5); 
   const [modalConfirmation, setModalConfirmation] = useState(false);
   const [modalOperation, setModalOperation] = useState([false, ""]);
   const [isLoading, setIsLoading] = useState(false);
