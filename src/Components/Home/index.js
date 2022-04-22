@@ -1,55 +1,57 @@
-import React, { useEffect, useState } from "react";
-import Loading from "../Utilities/Loading";
-import Carousel from "./Carousel";
-import HomeTitle from "./HomeTitle";
-import NewsList from "./NewsList";
-import { errorAlert } from "../../features/alerts/alerts";
-import Footer from "./Footer";
-import { GetTitle, GetSlides, GetNews } from "../../Services/homeApiService";
+import { useEffect, useState } from 'react'
+import Loading from '../Utilities/Loading'
+import Carousel from './Carousel'
+import HomeTitle from './HomeTitle'
+import NewsList from './NewsList'
+import { errorAlert } from '../../features/alerts/alerts'
+import Footer from './Footer'
+import { GetTitle, GetSlides, GetNews } from '../../Services/homeApiService'
 
 const Home = () => {
-  const [slides, setSlides] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [news, setNews] = useState([]);
-  const [title, setTitle] = useState("Bienvenido a la ONG");
+  const [slides, setSlides] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [news, setNews] = useState([])
+  const [title, setTitle] = useState('Bienvenido a la ONG')
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     GetSlides()
       .then((res) => {
-        console.log(res);
-        setSlides(res);
+        console.log(res)
+        setSlides(res)
       })
       .catch((err) => {
         errorAlert(
-          "Error",
-          "An error has occurred while getting data from server.",
-          "Ok"
-        );
-        console.log(err);
+          'Error',
+          'An error has occurred while getting data from server.',
+          'Ok'
+        )
+        console.log(err)
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoading(false))
     GetTitle().then((res) => {
-      setTitle(res.name);
-    });
+      setTitle(res.name)
+    })
     GetNews(4).then((res) => {
-      setNews(res);
-    });
-  }, []);
+      setNews(res)
+    })
+  }, [])
 
   return (
     <div>
       <HomeTitle title={title} />
-      {loading ? (
+      {loading
+        ? (
         <Loading />
-      ) : (
-        <Carousel slides={slides} background={"#90a4ae"} />
-      )}
+          )
+        : (
+        <Carousel slides={slides} background={'#90a4ae'} />
+          )}
       {/* background is Carousel's backgroundColor  */}
       <NewsList news={news} />
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
