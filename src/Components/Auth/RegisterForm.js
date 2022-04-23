@@ -36,7 +36,7 @@ const RegisterForm = () => {
   const handleSubmit = (e) => {
     localStorage.setItem("token", "tokenValueExample");
     console.log("submiting..");
-    axios.post("https://ongapi.alkemy.org/api/users");
+    axios.post("https://ongapi.alkemy.org/api/user");
   };
 
   return (
