@@ -10,6 +10,7 @@ import samplePdf from '../../assets/pdf/pdfPrueba.pdf'
 import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = ({ user }) => {
   const [initialValues, setInitialValues] = useState({
@@ -137,6 +138,8 @@ const UserForm = ({ user }) => {
     }
   };
 
+  const navigate = useNavigate()
+
   // User Verification
   const [userLogged, setUserLogged] = useState(false);
   const getToken = localStorage.getItem("token");
@@ -146,7 +149,9 @@ const UserForm = ({ user }) => {
   }
   return (
     <div>
-      {userLogged ? <h1>Autenticado</h1> : <h1>no autenticado</h1>}
+      {/* {userLogged ? <h1>Autenticado</h1> : <h1>no autenticado</h1>} */}
+      {userLogged ? 
+      navigate('/') : 
       <Formik
         initialValues={initialValues}
         validate={() => {
@@ -309,12 +314,15 @@ const UserForm = ({ user }) => {
               className="invalid-feedback"
             />
            
+           {userLogged ? <br/> :
             <button disabled={!checked} className="submit-btn" type="submit">
               Send
             </button>
+            }
           </form>
         )}
       </Formik>
+      }
       
 
     </div>
