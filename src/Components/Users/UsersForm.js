@@ -317,10 +317,10 @@ const UserForm = ({ user }) => {
            
            {userLogged ? 
           //  <br/> :
-            <button disabled={!checked} className="submit-btn" type="submit">
+            <button id="disabledButton" disabled={!checked} className="submit-btn" type="submit">
               Send
             </button> :
-            <button id="disabledButton" disabled={!checked} className="submit-btn" type="submit">
+            <button  disabled={!checked} className="submit-btn" type="submit">
               Send
             </button>
             }
