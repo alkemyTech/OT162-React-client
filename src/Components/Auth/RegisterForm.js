@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
+import axios from "axios";
 
 const RegisterForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -32,9 +33,10 @@ const RegisterForm = () => {
     }
   };
 
-  const handleEdit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (e) => {
     localStorage.setItem("token", "tokenValueExample");
+    console.log("submiting..");
+    axios.post("https://ongapi.alkemy.org/api/users");
   };
 
   return (
@@ -71,10 +73,9 @@ const RegisterForm = () => {
               "Las contraseñas deben ser de al menos 6 caracteres y contener al menos 1 simbolo, 1 letra y 1 numero";
           }
 
-          console.log(errors);
           return errors;
         }}
-        onSubmit={handleEdit}
+        onSubmit={handleSubmit}
       >
         {({ handleSubmit }) => (
           <form className="form-container" onSubmit={handleSubmit}>
@@ -90,6 +91,7 @@ const RegisterForm = () => {
               name="name"
               component="div"
               className="invalid-feedback"
+              data-testid="validation"
             />
             <input
               className="input-field"
@@ -143,7 +145,11 @@ const RegisterForm = () => {
               component="div"
               className="invalid-feedback"
             />
-            <button className="submit-btn" type="submit">
+            <button
+              className="submit-btn"
+              type="submit"
+              onSubmit={handleSubmit}
+            >
               Register
             </button>
           </form>
