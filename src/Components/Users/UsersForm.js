@@ -11,6 +11,7 @@ import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { useNavigate } from "react-router-dom";
+import "../../../src/styles/registerUserButton.css";
 
 const UserForm = ({ user }) => {
   const [initialValues, setInitialValues] = useState({
@@ -314,8 +315,12 @@ const UserForm = ({ user }) => {
               className="invalid-feedback"
             />
            
-           {userLogged ? <br/> :
+           {userLogged ? 
+          //  <br/> :
             <button disabled={!checked} className="submit-btn" type="submit">
+              Send
+            </button> :
+            <button id="disabledButton" disabled={!checked} className="submit-btn" type="submit">
               Send
             </button>
             }

@@ -1,0 +1,5 @@
+#disabledButton{
+    background-color: #C0C0C0;
+    text-decoration: line-through;
+    pointer-events: none;
+}
