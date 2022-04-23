@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
 import axios from "axios";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 
 const RegisterForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -33,10 +34,23 @@ const RegisterForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     localStorage.setItem("token", "tokenValueExample");
     console.log("submiting..");
-    axios.post("https://ongapi.alkemy.org/api/user");
+    return await axios
+      .post("https://ongapi.alkemy.org/api/register", initialValues)
+      .then((data) => {
+        confirmAlert("suscripto!", "Felicitaciones, estas registrado", "ok");
+        console.log(data);
+      })
+
+      .catch((err) =>
+        errorAlert(
+          "Oh no!",
+          "Hubo un problema con tu registro, es probable que este usuario ya se encuentre registrado",
+          "ok"
+        )
+      );
   };
 
   return (
@@ -86,12 +100,12 @@ const RegisterForm = () => {
               value={initialValues.name}
               onChange={handleChange}
               placeholder="Enter name"
+              data-testid="nameValidation"
             ></input>
             <ErrorMessage
               name="name"
               component="div"
               className="invalid-feedback"
-              data-testid="validation"
             />
             <input
               className="input-field"
@@ -100,6 +114,7 @@ const RegisterForm = () => {
               value={initialValues.lastName}
               onChange={handleChange}
               placeholder="Enter last name"
+              data-testid="lastNameValidation"
             ></input>
             <ErrorMessage
               name="lastName"
@@ -113,6 +128,7 @@ const RegisterForm = () => {
               value={initialValues.email}
               onChange={handleChange}
               placeholder="Enter email"
+              data-testid="emailValidation"
             ></input>
             <ErrorMessage
               name="email"
@@ -126,6 +142,7 @@ const RegisterForm = () => {
               value={initialValues.password}
               onChange={handleChange}
               placeholder="Enter password"
+              data-testid="passwordValidation"
             ></input>
             <ErrorMessage
               name="password"
@@ -139,6 +156,7 @@ const RegisterForm = () => {
               value={initialValues.confirmPassword}
               onChange={handleChange}
               placeholder="Repeat password"
+              data-testid="passwordRepeatValidation"
             ></input>
             <ErrorMessage
               name="confirmPassword"
@@ -150,7 +168,7 @@ const RegisterForm = () => {
               type="submit"
               onSubmit={handleSubmit}
             >
-              Register
+              Registrarse
             </button>
           </form>
         )}
