@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../Components/Utilities/Loading";
+import RegisterForm from "../Components/Auth/RegisterForm";
 
 const ActivitiesForm = lazy(() =>
   import("../Components/Activities/ActivitiesForm")
@@ -35,6 +36,7 @@ const PublicRoute = () => {
     <Suspense fallback={<Loading open={true} />}>
       <Routes>
         <Route path="/" exact element={<Home />} />
+        <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-activity" element={<ActivitiesForm />} />
         <Route path="/create-category" element={<CategoriesForm />} />
