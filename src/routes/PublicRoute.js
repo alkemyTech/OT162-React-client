@@ -5,13 +5,9 @@ import Loading from "../Components/Utilities/Loading";
 const ActivitiesForm = lazy(() =>
   import("../Components/Activities/ActivitiesForm")
 );
-const CategoriesForm = lazy(() =>
-  import("../Components/Categories/CategoriesForm")
-);
 const TestimonialForm = lazy(() =>
   import("../Components/Testimonials/TestimonialsForm")
 );
-const UserForm = lazy(() => import("../Components/Users/UsersForm"));
 const ProjectsForm = lazy(() => import("../Components/Projects/ProjectsForm"));
 const SchoolCampaign = lazy(() => import("../Campaigns/School/SchoolCampaign"));
 const ToysCampaign = lazy(() => import("../Campaigns/Toys/ToysCampaign"));
@@ -36,11 +32,9 @@ const PublicRoute = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create-activity" element={<ActivitiesForm />} />
-        <Route path="/create-category" element={<CategoriesForm />} />
-        <Route path="/create-testimonials" element={<TestimonialForm />} />
-        <Route path="/create-user" element={<UserForm />} />
-        <Route path="/create-project" element={<ProjectsForm />} />
+        {/* <Route path="/create-activity" element={<ActivitiesForm />} /> */}
+        {/* <Route path="/create-testimonials" element={<TestimonialForm />} /> */}
+        {/* <Route path="/create-project" element={<ProjectsForm />} /> */}
         <Route path="/school-campaign" element={<SchoolCampaign />} />
         <Route path="/toys-campaign" element={<ToysCampaign />} />
         <Route path="/actividades/:id" element={<ActivityDetail />} />
