@@ -11,53 +11,67 @@ import {
   getAsyncNewsThunk,
   deleteAsyncNewsThunk,
 } from "../../features/news/newsSlice";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.news.data);
+  let navigate = useNavigate();
+  const handleEdit = (id) => {
+    navigate(`/backoffice/news/edit/${id}`);
+  };
 
   useEffect(() => {
-    dispatch(getAsyncNewsThunk());
-    console.log(data);
-  }, [dispatch]);
-
-  // const eliminar = (row) => {
-  //   setRows(rows.filter(x => x.id !== row.id));
-  // }
+    if (data[0] === undefined) {
+      dispatch(getAsyncNewsThunk());
+    }
+  }, [data, dispatch]);
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="center">Image</TableCell>
-            <TableCell align="center">Created at</TableCell>
+            <TableCell>Nombre</TableCell>
+            <TableCell align="center">Imagen</TableCell>
+            <TableCell align="center">Creado el</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="center">
-                <img src={row.image} style={{ maxHeight: 60 }}></img>
-              </TableCell>
-              <TableCell align="center">{row.created_at}</TableCell>
-              <TableCell align="right">
-                <button>Editar</button>
-              </TableCell>
-              <TableCell align="right">
-                <button onClick={dispatch(deleteAsyncNewsThunk)}>
-                  Eliminar
-                </button>
-              </TableCell>
-            </TableRow>
-          ))}
+          {data[0] !== undefined &&
+            data.map((row) => (
+              <TableRow
+                key={row.name}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="center">
+                  <img src={row.image} style={{ maxHeight: 60 }}></img>
+                </TableCell>
+                <TableCell align="center">
+                  {new Date(row.created_at).toLocaleString()}
+                </TableCell>
+                <TableCell align="right">
+                  <Button
+                    variant="contained"
+                    onClick={() => handleEdit(row.id)}
+                  >
+                    Editar
+                  </Button>
+                </TableCell>
+                <TableCell align="right">
+                  <Button
+                    variant="contained"
+                    onClick={dispatch(deleteAsyncNewsThunk)}
+                  >
+                    Eliminar
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
