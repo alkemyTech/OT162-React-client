@@ -39,7 +39,7 @@ const NewsSection = () => {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
             }
             img={
-              "https://site.groupe-psa.com/content/uploads/sites/3/2016/12/white-background-2.jpg"
+              "./images/novedadesBackground.jpg"
             }
           />
 
@@ -73,3 +73,5 @@ const NewsSection = () => {
 };
 
 export default NewsSection;
+
+// https://site.groupe-psa.com/content/uploads/sites/3/2016/12/white-background-2.jpg
