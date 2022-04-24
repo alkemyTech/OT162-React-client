@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 const News = () => {
   return (
     <>
-      <div>
+      <div style={{ marginBottom: 64 }}>
         <PersistentSideBar />
       </div>
       <Link to="/backoffice/news/create">

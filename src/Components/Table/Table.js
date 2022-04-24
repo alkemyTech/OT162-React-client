@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,22 +11,23 @@ import {
   getAsyncNewsThunk,
   deleteAsyncNewsThunk,
 } from "../../features/news/newsSlice";
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.news.data);
   let navigate = useNavigate();
-  const handleEdit = (id) => {
-    navigate(`/backoffice/news/edit/${id}`);
+  const handleEdit = (id) => navigate(`/backoffice/news/edit/${id}`);
+
+  const handleDelete = (id) => {
+    dispatch(deleteAsyncNewsThunk(id));
+    dispatch(getAsyncNewsThunk());
   };
 
   useEffect(() => {
-    if (data[0] === undefined) {
-      dispatch(getAsyncNewsThunk());
-    }
-  }, [data, dispatch]);
+    dispatch(getAsyncNewsThunk());
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -36,6 +37,7 @@ export default function BasicTable() {
             <TableCell>Nombre</TableCell>
             <TableCell align="center">Imagen</TableCell>
             <TableCell align="center">Creado el</TableCell>
+            <TableCell align="center">Acciones</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,21 +56,21 @@ export default function BasicTable() {
                 <TableCell align="center">
                   {new Date(row.created_at).toLocaleString()}
                 </TableCell>
-                <TableCell align="right">
-                  <Button
-                    variant="contained"
-                    onClick={() => handleEdit(row.id)}
-                  >
-                    Editar
-                  </Button>
-                </TableCell>
-                <TableCell align="right">
-                  <Button
-                    variant="contained"
-                    onClick={dispatch(deleteAsyncNewsThunk)}
-                  >
-                    Eliminar
-                  </Button>
+                <TableCell align="center">
+                  <Stack direction="row" spacing={3} justifyContent="center">
+                    <Button
+                      variant="contained"
+                      onClick={() => handleEdit(row.id)}
+                    >
+                      Editar
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleDelete(row.id)}
+                    >
+                      Eliminar
+                    </Button>
+                  </Stack>
                 </TableCell>
               </TableRow>
             ))}

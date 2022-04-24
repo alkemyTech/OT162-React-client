@@ -55,9 +55,7 @@ const newsSlice = createSlice({
       state.status = "failed";
     },
     [deleteAsyncNewsThunk.fulfilled]: (state, action) => {
-      const Allnews = state.data.filter(
-        (news) => news.id !== action.payload.id
-      );
+      const Allnews = state.data.filter((news) => news.id !== action.meta.arg);
 
       state.data = [...Allnews];
       state.status = "success";
