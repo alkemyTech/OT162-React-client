@@ -87,7 +87,7 @@ const NewsForm = () => {
       .then(() => navigate("/backoffice/news"))
       .catch((error) => {
         console.log("ERROR: ", error);
-        errorAlert("Error", "Error al actualizar noticia", "error");
+        errorAlert("Error", "Error al actualizar noticia", "Continuar");
       });
   };
 
@@ -97,7 +97,7 @@ const NewsForm = () => {
       .then(() => navigate("/backoffice/news"))
       .catch((error) => {
         console.log("ERROR: ", error);
-        errorAlert("Error", "Error al crear noticia", "error");
+        errorAlert("Error", "Error al crear noticia", "Continuar");
       });
   };
 
