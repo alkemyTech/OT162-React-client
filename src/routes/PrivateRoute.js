@@ -18,6 +18,7 @@ const PrivateRoute = () => {
     <Routes>
       <Route path="/backoffice" element={<Backoffice />} />
       <Route path="/backoffice/news/create" element={<NewsForm />} />
+      <Route path="/backoffice/news/edit/:id" element={<NewsForm />} />
       <Route path="/backoffice/create-slide" element={<SlidesForm />} />
       <Route path="/backoffice/edit-slide/:id" element={<SlidesForm />} />
       <Route path="/backoffice/slides" element={<SlidesList />} />
