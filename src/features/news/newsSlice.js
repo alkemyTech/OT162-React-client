@@ -1,13 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DeleteNews, GetNews } from "../../Services/newsApiService";
+import {
+  DeleteNews,
+  GetNews,
+  GetSingleNews,
+} from "../../Services/newsApiService";
 
-const initialNewsState = { data: [], status: "loading...", error: null };
+const initialNewsState = { data: [], status: "idle", error: null };
 
 export const getAsyncNewsThunk = createAsyncThunk("url/news", async () => {
   return GetNews().then((res) => {
     return res.data.data;
   });
 });
+export const getAsyncNewsByIdThunk = createAsyncThunk(
+  "url/newsById",
+  async (id) => {
+    return GetSingleNews(id).then((res) => {
+      return res.data.data;
+    });
+  }
+);
 
 export const deleteAsyncNewsThunk = createAsyncThunk(
   "url/deleteNews",
@@ -30,6 +42,16 @@ const newsSlice = createSlice({
       state.status = "success";
     },
     [getAsyncNewsThunk.rejected]: (state, action) => {
+      state.status = "failed";
+    },
+    [getAsyncNewsByIdThunk.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [getAsyncNewsByIdThunk.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.status = "success";
+    },
+    [getAsyncNewsByIdThunk.rejected]: (state, action) => {
       state.status = "failed";
     },
     [deleteAsyncNewsThunk.fulfilled]: (state, action) => {
