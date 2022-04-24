@@ -36,7 +36,7 @@ const NewsSection = () => {
           <Title
             title="Novedades"
             text={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+              "Enterate de todas las novedades!"
             }
             img={
               "./images/novedadesBackground.jpg"
