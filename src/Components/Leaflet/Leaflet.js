@@ -71,7 +71,7 @@ function Leaflet() {
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13104.956889312587!2d-58.28460245682372!3d-34.799922902685644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a3295dd551c88b%3A0xdc7b602cee9bff8e!2sCentro%20M%C3%A9dico%20Monteagudo!5e0!3m2!1ses-419!2sar!4v1650590070048!5m2!1ses-419!2sar"
       width="100%"
       height="250"
-      style={{border:0}}
+      style={{ border: 0 }}
       allowFullScreen=""
       loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"
