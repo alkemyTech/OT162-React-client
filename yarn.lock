@@ -1599,25 +1599,11 @@
     "react-is" "^17.0.2"
     "react-transition-group" "^4.4.2"
     "rifm" "^0.12.1"
-<<<<<<< HEAD
-"@mui/material@^5.2.8":
-  "integrity" "sha512-r4p1u9eDlSqW3TS/Iq9yolifWHpuW6e0BSeqEJW3EEIcKfPVVk4WNUNJ+s8DtN7dBoDcveXxcQVVjYXTIv1d9g=="
-  "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.5.2.tgz"
-  "version" "5.5.2"
-<<<<<<< HEAD
-=======
-=======
 
-<<<<<<< HEAD
-"@mui/material@^5.0.0", "@mui/material@^5.2.8":
->>>>>>> b1c0feb3d40028aae840ca3bf8b6476ed64a6e8b
-=======
 "@mui/material@^5.2.8":
->>>>>>> 4bb89e761012e0daadf4d7d64ea300ec0eecd7a7
   "integrity" "sha512-bJSYgymgSZ7btPTNnWFrr2EmGoVQc4A/0WLfP/ESY2dxnhnbFDwt7twiOKmJp3u84YXriEDt5v9EZQLf7A+y0Q=="
   "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.5.1.tgz"
   "version" "5.5.1"
->>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
   dependencies:
     "@babel/runtime" "^7.17.2"
     "@mui/base" "5.0.0-alpha.72"
@@ -1672,29 +1658,11 @@
     "jss-plugin-rule-value-function" "^10.8.2"
     "jss-plugin-vendor-prefixer" "^10.8.2"
     "prop-types" "^15.7.2"
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-"@mui/system@^5.5.2":
-=======
->>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
-  "integrity" "sha512-OATYFI36nliud8xh0u+ZNqDo0jWjxpO0vZLlzqNB+ZtkR5Q/+1X3GgboA9ruiB8Rq+udnJlMBQNGW0qqjvAOHQ=="
-  "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.5.2.tgz"
-  "version" "5.5.2"
-=======
-
-<<<<<<< HEAD
-"@mui/system@^5.2.8", "@mui/system@^5.5.1":
-  "integrity" "sha512-2hynI4hN8304hOCT8sc4knJviwUUYJ7XK3mXwQ0nagVGOPnWSOad/nYADm7K0vdlCeUXLIbDbe7oNN3Kaiu2kA=="
-  "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.5.1.tgz"
-  "version" "5.5.1"
->>>>>>> b1c0feb3d40028aae840ca3bf8b6476ed64a6e8b
-=======
 "@mui/system@^5.5.1", "@mui/system@^5.5.2":
   "integrity" "sha512-OATYFI36nliud8xh0u+ZNqDo0jWjxpO0vZLlzqNB+ZtkR5Q/+1X3GgboA9ruiB8Rq+udnJlMBQNGW0qqjvAOHQ=="
   "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.5.2.tgz"
   "version" "5.5.2"
->>>>>>> 4bb89e761012e0daadf4d7d64ea300ec0eecd7a7
   dependencies:
     "@babel/runtime" "^7.17.2"
     "@mui/private-theming" "^5.4.4"
@@ -2125,21 +2093,9 @@
   "version" "1.2.2"
 
 "@types/node@*":
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "integrity" "sha512-8FwbVoG4fy+ykY86XCAclKZDORttqE5/s7dyWZKLXTdv3vRy5HozBEinG5IqhvPXXzIZEcTVbuHlQEI6iuwcmw=="
-  "resolved" "https://registry.npmjs.org/@types/node/-/node-17.0.22.tgz"
-  "version" "17.0.22"
-=======
-  "integrity" "sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw=="
-  "resolved" "https://registry.npmjs.org/@types/node/-/node-17.0.23.tgz"
-  "version" "17.0.23"
-=======
->>>>>>> b1c0feb3d40028aae840ca3bf8b6476ed64a6e8b
   "integrity" "sha512-DBZCJbhII3r90XbQxI8Y9IjjiiOGlZ0Hr32omXIZvwwZ7p4DMMXGrKXVyPfuoBOri9XNtL0UK69jYIBIsRX3QQ=="
   "resolved" "https://registry.npmjs.org/@types/node/-/node-17.0.21.tgz"
   "version" "17.0.21"
->>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
 
 "@types/normalize-package-data@^2.4.0":
   "integrity" "sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw=="
@@ -2196,28 +2152,11 @@
   "version" "4.4.4"
   dependencies:
     "@types/react" "*"
-<<<<<<< HEAD
-"@types/react@*":
-<<<<<<< HEAD
-  "integrity" "sha512-e7U2WC8XQP/xfR7bwhOhNFZKPTfW1ph+MiqtudKb8tSV8RyCsovQx2sNVtKoOryjxFKpHPPC/yNiGfdeVM5Gyw=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-16.14.24.tgz"
-  "version" "16.14.24"
-=======
-  "integrity" "sha512-nuab3x3CpJ7VFeNA+3HTUuEkvClYHXqWtWd7Ud6AZYW7Z3NH9WKtgU+tFB0ZLcHq+niB/HnzLcaZPqMJ95+k5Q=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.42.tgz"
-  "version" "17.0.42"
-=======
 
-<<<<<<< HEAD
-"@types/react@*", "@types/react@^15.0.0 || ^16.0.0", "@types/react@^16.8.6 || ^17.0.0":
->>>>>>> b1c0feb3d40028aae840ca3bf8b6476ed64a6e8b
-=======
 "@types/react@*":
->>>>>>> 4bb89e761012e0daadf4d7d64ea300ec0eecd7a7
   "integrity" "sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.40.tgz"
   "version" "17.0.40"
->>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -8391,18 +8330,6 @@
     "for-in" "^1.0.2"
     "is-extendable" "^1.0.1"
 
-<<<<<<< HEAD
-"mkdirp@^0.5.1", "mkdirp@^0.5.3":
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  "integrity" "sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw=="
-  "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.6.tgz"
-  "version" "0.5.6"
-"mkdirp@^0.5.1":
-=======
->>>>>>> b1c0feb3d40028aae840ca3bf8b6476ed64a6e8b
-=======
 "mkdirp@^0.5.1":
   "integrity" "sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ=="
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.5.tgz"
@@ -8411,19 +8338,13 @@
     "minimist" "^1.2.5"
 
 "mkdirp@^0.5.3":
->>>>>>> 4bb89e761012e0daadf4d7d64ea300ec0eecd7a7
   "integrity" "sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ=="
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.5.tgz"
   "version" "0.5.5"
   dependencies:
     "minimist" "^1.2.5"
 
-<<<<<<< HEAD
-"mkdirp@^0.5.3":
->>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
-=======
 "mkdirp@^0.5.5":
->>>>>>> b1c0feb3d40028aae840ca3bf8b6476ed64a6e8b
   "integrity" "sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ=="
   "resolved" "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.5.tgz"
   "version" "0.5.5"
@@ -10273,17 +10194,9 @@
     "scheduler" "^0.19.1"
 
 "react-error-overlay@^6.0.9":
-<<<<<<< HEAD
-  "integrity" "sha512-mKR90fX7Pm5seCOfz8q9F+66VCc1PGsWSBxKbITjfKVQHMNF2zudxHnMdJiB1fRCb+XsbQV9sO9DCkgsMQgBIA=="
-  "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.10.tgz"
-  "version" "6.0.10"
-<<<<<<< HEAD
-=======
-=======
   "integrity" "sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew=="
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   "version" "6.0.9"
->>>>>>> 4bb89e761012e0daadf4d7d64ea300ec0eecd7a7
 
 "react-event-listener@^0.6.0":
   "integrity" "sha512-+hCNqfy7o9wvO6UgjqFmBzARJS7qrNoda0VqzvOuioEpoEXKutiKuv92dSz6kP7rYLmyHPyYNLesi5t/aH1gfw=="
@@ -10293,7 +10206,6 @@
     "@babel/runtime" "^7.2.0"
     "prop-types" "^15.6.0"
     "warning" "^4.0.1"
->>>>>>> c10856b3804666b1cb06d5f1c2e58ca6cc8fa4ec
 
 "react-fast-compare@^2.0.1":
   "integrity" "sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw=="
