@@ -111,8 +111,8 @@ export default function NavbarBackoffice(){
                     <Divider/>
                     <List>
                         {BOSections.map((section, index) => (
-                            <Link style={sideBarStyle} to={section.path} key={index}>
-                                <ListItem button key={section.name}>
+                            <Link key={index} style={sideBarStyle} to={section.path}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <ArrowForwardIosIcon/>
                                     </ListItemIcon>
