@@ -8,9 +8,10 @@ import { Page, pdfjs,  } from "react-pdf";
 import samplePdf from '../../assets/pdf/pdfPrueba.pdf'
 import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
-import { errorAlert } from "../../features/alerts/alerts";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { useParams } from "react-router-dom";
 import { getUserByID, putUsers, postUsers } from "../../Services/usersApiService";
+import { useNavigate } from "react-router-dom";
 
 const UserForm = ({ user }) => {
   const getId = useParams(user)
@@ -20,7 +21,7 @@ const UserForm = ({ user }) => {
     name: "",
     email: "",
     roleId: "",
-    profile_image: null,
+    profile_image: "",
     password: "",
   });
   const [checked, setChecked] = useState(false)
@@ -104,29 +105,34 @@ const UserForm = ({ user }) => {
     }
   };
 
+  const navigate = useNavigate();
+
   const handleEdit = (e) => {
     if (!checked) return swal('Error', 'You must accept our terms and conditions', 'error')
 
     if (userToEditID !== undefined) {
-      delete initialValues.profile_image
-      console.log(initialValues);
+      delete initialValues.profile_image;
       putUsers(userToEditID, initialValues)
         .then((resp) => {
           console.log(resp);
+          confirmAlert('Usuario modificado correctamente','', 'Continuar')
+          navigate('/backoffice/users');
         })
         .catch((resp) => {
           console.log(resp);
-          errorAlert("Error", "An error has occurred while updating the user", "error");
+          errorAlert("Error", "Ha ocurrido un error en la modificación de este usuario", "Continuar");
         });
       console.log(e)
     } else {
+      delete initialValues.profile_image;
       postUsers(e)
         .then((resp) => {
           console.log(resp);
+          confirmAlert('Usuario creado correctamente','Ahora es parte de Somos Mas', 'Continuar')
         })
         .catch((resp) => {
           console.log(resp);
-          errorAlert("Error", "An error has occurred while creating the user", "error");
+          errorAlert("Error", "Ha ocurrido un error en la creación de este usuario", "Continuar");
         });
     }
   };
