@@ -51,7 +51,6 @@ const UserList = () => {
   };
 
   const editUser = (user) => {
-    
     navigate(`/backoffice/edit-user/${user.id}`)
   }
 
@@ -62,7 +61,7 @@ const UserList = () => {
       </div>
       <h3>User's List</h3>
       <Button variant="contained">
-        <Link to="/backoffice/users/create">Create</Link>
+        <Link to="/create-user">Create</Link>
       </Button>
       <TableContainer component={Paper}>
         <Table>
