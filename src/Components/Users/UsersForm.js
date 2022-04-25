@@ -9,10 +9,14 @@ import { Page, pdfjs,  } from "react-pdf";
 import samplePdf from '../../assets/pdf/pdfPrueba.pdf'
 import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
-
-
 import { errorAlert } from "../../features/alerts/alerts";
+import { useParams } from "react-router-dom";
+import { getUserByID } from "../../Services/usersApiService";
+
 const UserForm = ({ user }) => {
+  const getId = useParams(user)
+  const userToEditID = getId.id
+
   const [initialValues, setInitialValues] = useState({
     name: "",
     email: "",
@@ -49,8 +53,12 @@ const UserForm = ({ user }) => {
      setChecked(e.target.checked);
   }
   useEffect(() => {
-    if (user) {
-      setInitialValues(user);
+    if (userToEditID) {
+      getUserByID(userToEditID)
+        .then(async (response) =>{
+          let userData = response.data.data
+          setInitialValues(userData)
+        })
     }
   }, [user]);
 

@@ -51,7 +51,7 @@ const UserList = () => {
   };
 
   const editUser = (user) => {
-    // console.log(user.id)
+    
     navigate(`/backoffice/edit-user/${user.id}`)
   }
 
