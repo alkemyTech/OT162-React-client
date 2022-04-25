@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Card, CardContent, Grid, Typography, Button, Box, Modal, Fade} from '@mui/material/';
 import './Backoffice.css';
+import { Link } from "react-router-dom";
+import PersistentSideBar from '../features/backoffice/sideBar';
 
 const style = {
     position: 'absolute',
@@ -20,6 +22,9 @@ const Backoffice = () => {
 
     return (
         <>
+        <div>
+            <PersistentSideBar/>
+        </div>
             <div>
                 <Modal open={open} onClose={handleClose}>
                     <Fade in={open}>
@@ -56,9 +61,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/novedades-icon.png' alt='logo' className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/news">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -74,9 +81,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/actividades-icon.png' alt='logo' className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/activities">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -92,9 +101,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/categorias-icon.png' alt="logo" className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/categories">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -110,9 +121,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/testimonios-icon.png' alt="logo" className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/testimonials">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -128,9 +141,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/organizacion-icon.jpg' alt="logo" className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/organization">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -146,9 +161,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/slides-icon.png' alt="logo" className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/slides">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -164,9 +181,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/usuarios-icon.jpg' alt="logo" className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/users">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>
@@ -182,9 +201,11 @@ const Backoffice = () => {
                                 </Typography>
                                 <img src='images/miembros-icon.png' alt="logo" className='round-image center mt mb'/>
                                 <Box textAlign='center'>
-                                    <Button variant="contained" sx={{backgroundColor: '#319795'}}>
-                                        Ir
-                                    </Button>
+                                    <Link to="/backoffice/members">
+                                        <Button variant="contained" sx={{backgroundColor: '#319795'}}>
+                                            Ir
+                                        </Button>
+                                    </Link>
                                 </Box>
                             </CardContent>
                         </Card>

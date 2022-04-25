@@ -13,65 +13,43 @@ import {
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
-import { errorAlert } from "../../features/alerts/alerts";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { getSlides } from "../../features/slide/slideSlice";
+import PersistentSideBar from "../../features/backoffice/sideBar";
 
-const slideURL = "https://ongapi.alkemy.org/api/slide";
+const slideURL = process.env.REACT_APP_SLIDES_ROUTE;
 
 const SlidesList = () => {
   const dispatch = useDispatch();
   const slides = useSelector((state) => state.slide.list);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSlides());
   }, [dispatch]);
 
-  const slidesMock = [
-    {
-      id: 1,
-      name: "Titulo de prueba",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at pretium ligula. Vivamus egestas erat at sem interdum porttitor. Aliquam ut purus tortor. Nulla ut.",
-      image:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAG1BMVEXMzMyWlpacnJy+vr6jo6PFxcW3t7eqqqqxsbHbm8QuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAiklEQVRYhe3QMQ6EIBAF0C+GSInF9mYTs+1ewRsQbmBlayysKefYO2asXbbYxvxHQj6ECQMAEREREf2NQ/fCtp5Zky6vtRMkSJEzhyISynWJnzH6Z8oQlzS7lEc/fLmmQUSvc16OrCPqRl1JePxQYo1ZSWVj9nxrrOb5esw+eXdvzTWfTERERHRXH4tWFZGswQ2yAAAAAElFTkSuQmCC",
-    },
-    {
-      id: 2,
-      name: "Titulo de prueba",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at pretium ligula. Vivamus egestas erat at sem interdum porttitor. Aliquam ut purus tortor. Nulla ut.",
-      image:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAG1BMVEXMzMyWlpacnJy+vr6jo6PFxcW3t7eqqqqxsbHbm8QuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAiklEQVRYhe3QMQ6EIBAF0C+GSInF9mYTs+1ewRsQbmBlayysKefYO2asXbbYxvxHQj6ECQMAEREREf2NQ/fCtp5Zky6vtRMkSJEzhyISynWJnzH6Z8oQlzS7lEc/fLmmQUSvc16OrCPqRl1JePxQYo1ZSWVj9nxrrOb5esw+eXdvzTWfTERERHRXH4tWFZGswQ2yAAAAAElFTkSuQmCC",
-    },
-    {
-      id: 3,
-      name: "Titulo de prueba",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at pretium ligula. Vivamus egestas erat at sem interdum porttitor. Aliquam ut purus tortor. Nulla ut.",
-      image:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAG1BMVEXMzMyWlpacnJy+vr6jo6PFxcW3t7eqqqqxsbHbm8QuAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAiklEQVRYhe3QMQ6EIBAF0C+GSInF9mYTs+1ewRsQbmBlayysKefYO2asXbbYxvxHQj6ECQMAEREREf2NQ/fCtp5Zky6vtRMkSJEzhyISynWJnzH6Z8oQlzS7lEc/fLmmQUSvc16OrCPqRl1JePxQYo1ZSWVj9nxrrOb5esw+eXdvzTWfTERERHRXH4tWFZGswQ2yAAAAAElFTkSuQmCC",
-    },
-  ];
-
-  const editSlide = (id) => {
-    console.log(id);
-    // navigate(`/slides/edit/${id}`)
-  };
+  const editSlide = (id) => navigate(`/backoffice/edit-slide/${id}`);
   const deleteSlide = (id) => {
     swal({
-      title: "Are you sure you want to delete the slide?",
-      text: "This change cannot be reverted.",
-      buttons: ["No", "Yes"],
+      title: "¿Está seguro que quiere eliminar el slide?",
+      text: "Este cambio es irreversible.",
+      buttons: ["No", "Si"],
       dangerMode: "true",
     }).then((willDelete) => {
       if (willDelete) {
         axios
           .delete(`${slideURL}/${id}`)
-          .then(() => swal({ title: "Slide deleted", icon: "success" }))
-          .catch((err) => {            
-            errorAlert("Error", "An error has ocurred while trying to delete teh slide");
+          .then(() => {
+            confirmAlert("Slide eliminado", "", "Continuar");
+            dispatch(getSlides());
+          })
+          .catch((err) => {
+            errorAlert(
+              "Error",
+              "Un error ha ocurrido al intentar eliminar el slide."
+            );
             console.log(err);
           });
       }
@@ -79,62 +57,80 @@ const SlidesList = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Button
-        component={Link}
-        to="/backoffice/create-slide"
-        variant="contained"
-        sx={{ float: "right", marginBottom: "2rem" }}
-      >
-        Create a new slide
-      </Button>
-      <TableContainer component={Paper} elevation={3}>
-        <Table sx={{ minWidth: 768 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Order</TableCell>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Description</TableCell>
-              <TableCell align="center">Image</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {slides.map((slide) => (
-              <TableRow
-                key={slide.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {slide.id}
-                </TableCell>
-                <TableCell align="center">{slide.name}</TableCell>
-                <TableCell align="center">{slide.description}</TableCell>
-                <TableCell align="center">
-                  <img src={slide.image} alt={slide.name} />
-                </TableCell>
-                <TableCell align="center">
-                  <Stack direction="row" spacing={2}>
-                    <Button
-                      variant="outlined"
-                      onClick={() => editSlide(slide.id)}
-                    >
-                      EDIT
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => deleteSlide(slide.id)}
-                    >
-                      DELETE
-                    </Button>
-                  </Stack>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+    <div>
+      <div>
+        <PersistentSideBar />
+      </div>
+      <div>
+        <Container maxWidth="lg">
+          <Button
+            component={Link}
+            to="/backoffice/create-slide"
+            variant="contained"
+            sx={{ float: "right", my: "2rem" }}
+          >
+            Crear un nuevo slider
+          </Button>
+          <TableContainer component={Paper} elevation={3}>
+            <Table sx={{ minWidth: 768 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Orden</TableCell>
+                  <TableCell align="center">Nombre</TableCell>
+                  <TableCell align="center">Descripción</TableCell>
+                  <TableCell align="center">Imagen</TableCell>
+                  <TableCell align="center">Acciones</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {slides.map((slide) => (
+                  <TableRow
+                    key={slide.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {slide.id}
+                    </TableCell>
+                    <TableCell align="center">{slide.name}</TableCell>
+                    <TableCell align="center">
+                      <span
+                        dangerouslySetInnerHTML={{ __html: slide.description }}
+                      />
+                    </TableCell>
+                    <TableCell align="center">
+                      <img
+                        src={slide.image}
+                        alt={slide.name}
+                        style={{
+                          maxWidth: "300px",
+                          maxHeight: "150px",
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell align="center">
+                      <Stack direction="row" spacing={2}>
+                        <Button
+                          variant="outlined"
+                          onClick={() => editSlide(slide.id)}
+                        >
+                          EDITAR
+                        </Button>
+                        <Button
+                          variant="contained"
+                          onClick={() => deleteSlide(slide.id)}
+                        >
+                          ELIMINAR
+                        </Button>
+                      </Stack>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
+      </div>
+    </div>
   );
 };
 

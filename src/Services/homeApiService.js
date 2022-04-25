@@ -37,8 +37,8 @@ const GetSlides = () => {
     return Get("slides");
 }
 
-const GetNews = () => {
-    return Get("news");
+const GetNews = (limit="") => {
+    return Get(`news?limit=${limit}`);
 }
 
 export {PostSliders, GetTitle, GetSlides, GetNews};

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const config = {
   headers: {
-    Group: 162, //Aqui va el ID del equipo!!
+    // Group: 162, //Aqui va el ID del equipo!!
   },
 };
 const baseUrl = "https://ongapi.alkemy.org/api";

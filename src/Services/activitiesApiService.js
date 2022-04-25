@@ -1,16 +1,22 @@
-import { Put, Post, Delete } from "./privateApiService";
+import { Put, Post, Delete, Get } from "./privateApiService";
 
-const updateActivity = (url, initialValues) => {
-  let id = initialValues.id;
-  return Put(url, id, initialValues);
+const activitiesURL = `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}`;
+
+const getActivities = () => Get(activitiesURL);
+
+const getActivitiesById = (id) => Get(activitiesURL, id);
+
+const updateActivity = (id, initialValues) =>
+  Put(activitiesURL, id, initialValues);
+
+const createActivity = (initialValues) => Post(activitiesURL, initialValues);
+
+const deleteActivity = (id) => Delete(activitiesURL, id);
+
+export {
+  getActivities,
+  getActivitiesById,
+  updateActivity,
+  createActivity,
+  deleteActivity,
 };
-
-const createActivity = (url, initialValues) => {
-  return Post(url, initialValues);
-};
-
-const deleteActivity = (path, activity) => {
-  return Delete(path, activity);
-};
-
-export { updateActivity, createActivity, deleteActivity };
