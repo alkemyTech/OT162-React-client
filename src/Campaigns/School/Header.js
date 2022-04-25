@@ -37,7 +37,7 @@ const Header = () => {
         <Grid item 
           md={4} 
           sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center", alignItems: "center"}}>
-          <h2>Juguetes por más sonrisas</h2>
+          <h2>¡Juntos en la vuelta al cole!</h2>
         </Grid>
         <Grid item 
           sm={6} 
