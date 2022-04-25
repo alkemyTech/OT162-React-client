@@ -54,26 +54,38 @@ const MembersList = () => {
                                 <Grid container xs={12}>
                                     <Grid item xs={6}>
                                         <Box textAlign='center'>
-                                            <Button 
-                                            startIcon={<Facebook sx={{fontSize: '60px'}}/>} 
-                                            variant='contained' 
-                                            style={{backgroundColor: "#3b5998"}}
+                                            <a
+                                            href={"//"+item.facebookUrl}
                                             target="_blank"
-                                            href={item.facebookUrl}>
-                                                Facebook
-                                            </Button>
+                                            rel="noopener noreferrer external"
+                                            style={{ color: "white", textDecoration: "none" }}
+                                            >
+                                                <Button 
+                                                startIcon={<Facebook sx={{fontSize: '60px'}}/>} 
+                                                variant='contained' 
+                                                style={{backgroundColor: "#3b5998"}}
+                                                >
+                                                    Facebook
+                                                </Button>
+                                            </a>
                                         </Box>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Box textAlign='center'>
-                                            <Button 
-                                            startIcon={<LinkedIn sx={{fontSize: '60px'}}/>} 
-                                            variant='contained' 
-                                            style={{backgroundColor: "#2867B2"}} 
-                                            target="_blank" 
-                                            href={item.linkedinUrl}>
-                                                LinkedIn
-                                            </Button>
+                                            <a
+                                            href={"//"+item.linkedinUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer external"
+                                            style={{ color: "white", textDecoration: "none" }}
+                                            >
+                                                <Button 
+                                                startIcon={<LinkedIn sx={{fontSize: '60px'}}/>} 
+                                                variant='contained' 
+                                                style={{backgroundColor: "#2867B2"}} 
+                                                >
+                                                    LinkedIn
+                                                </Button>
+                                            </a>
                                         </Box>
                                     </Grid>
                                 </Grid>

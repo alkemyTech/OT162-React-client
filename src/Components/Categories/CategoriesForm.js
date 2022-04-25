@@ -2,6 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CKEditor from "ckeditor4-react";
 import { Formik } from "formik";
+import { Box, Button, CircularProgress } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import {
   putCategory,
   postCategory,
@@ -11,7 +14,17 @@ import {
 import "../FormStyles.css";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
+
 const CategoriesForm = () => {
+  const [image, setImage] = useState("");
   const { id } = useParams();
   let navigate = useNavigate();
   const [initialValues, setInitialValues] = useState({
@@ -23,8 +36,18 @@ const CategoriesForm = () => {
 
   useEffect(() => {
     if (id) {
-      getCategoriesById(id).then((response) => {
-        setInitialValues({ ...response.data.data, image: "" });
+      getCategoriesById(id).then(async (response) => {
+        await setInitialValues({ ...response.data.data });
+        let blob = await fetch(response.data.data.image).then((r) => r.blob());
+
+        getBase64(blob).then((data) => {
+          setInitialValues({
+            ...initialValues,
+            ...response.data.data,
+            image: data,
+          });
+        });
+        setImage(response.data.data.image);
       });
     }
   }, []);
@@ -37,7 +60,11 @@ const CategoriesForm = () => {
       let reader = new FileReader();
       let file = e.target.files[0];
       if (file) {
-        reader.readAsDataURL(file);
+        let imageFile = e.target.files[0];
+        getBase64(imageFile).then((data) => {
+          setInitialValues({ ...initialValues, image: data });
+          setImage(data);
+        });
       }
       reader.addEventListener(
         "load",
@@ -120,15 +147,28 @@ const CategoriesForm = () => {
             />
             {errors.description && touched.description && errors.description}
 
-            <input
-              className="input-field"
-              // value={}
-              type="file"
-              id="image"
-              accept=".jpg, .png"
-              name="image"
-              onChange={handleChange}
-            ></input>
+            <div className="image-controls">
+              {!image && <span className="image-msg">Nada Subido Aún!</span>}
+              <Button
+                variant="contained"
+                id="image"
+                component="label"
+                className="image-edit-btn"
+                startIcon={image ? <EditIcon /> : <PhotoCameraIcon />}
+              >
+                <input
+                  className="input-field"
+                  value={undefined}
+                  type="file"
+                  id="image"
+                  accept=".jpg, .png"
+                  name="image"
+                  onChange={handleChange}
+                  hidden
+                ></input>
+              </Button>
+              {image && <img src={image} alt="" />}
+            </div>
             {errors.image && touched.image && errors.image}
 
             <button
