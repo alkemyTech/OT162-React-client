@@ -22,7 +22,7 @@ import swal from "sweetalert";
 //import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { infoAlert } from "../../features/alerts/alerts";
-import PersistentSideBar from "../../features/backoffice/sideBar";
+import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 const CategoriesTable = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const CategoriesTable = () => {
   return (
     <div>
       <div>
-        <PersistentSideBar />
+        <NavbarBackoffice/>
       </div>
       <Grid
         container
