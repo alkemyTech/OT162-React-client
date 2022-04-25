@@ -66,7 +66,7 @@ export default function PersistentSideBar(){
     return(
         <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
-            <SideBar position="flex" open={open}>
+            <SideBar open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -102,8 +102,8 @@ export default function PersistentSideBar(){
                     <Divider/>
                     <List>
                         {BOSections.map((section) => (
-                            <Link style={sideBarStyle} to={section.path}>
-                                <ListItem button key={section.name}>
+                            <Link key={section.name} style={sideBarStyle} to={section.path}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <ArrowForwardIosIcon/>
                                     </ListItemIcon>
