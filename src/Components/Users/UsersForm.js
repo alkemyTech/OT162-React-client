@@ -20,7 +20,7 @@ const UserForm = ({ user }) => {
     name: "",
     email: "",
     roleId: "",
-    profilePhoto: "",
+    profile_image: null,
     password: "",
   });
   const [checked, setChecked] = useState(false)
@@ -44,9 +44,7 @@ const UserForm = ({ user }) => {
     changePage(1);
   }
 
-
-
-  const [imageFile, setImageFile] = useState({});
+  const [imageFile, setImageFile] = useState();
 
   const handleChecked = (e) =>{
      setChecked(e.target.checked);
@@ -69,6 +67,7 @@ const UserForm = ({ user }) => {
       fileReader.onloadend = () => {
         const imageResult = fileReader.result;
         const imageBase64 = imageResult.split(',')[1];
+        // const image64String = JSON.stringify(imageBase64)
         resolve(imageBase64)
       };
 
@@ -101,8 +100,7 @@ const UserForm = ({ user }) => {
       const file = e.target.files[0];
       const profilePhoto64 = await convertBase64(file);
       setImageFile(file);
-      setInitialValues({ ...initialValues, profilePhoto: profilePhoto64 });
-      console.log(profilePhoto64)
+      setInitialValues({ ...initialValues, profile_image: profilePhoto64 })
     }
   };
 
@@ -110,6 +108,8 @@ const UserForm = ({ user }) => {
     if (!checked) return swal('Error', 'You must accept our terms and conditions', 'error')
 
     if (userToEditID !== undefined) {
+      delete initialValues.profile_image
+      console.log(initialValues);
       putUsers(userToEditID, initialValues)
         .then((resp) => {
           console.log(resp);
@@ -136,7 +136,7 @@ const UserForm = ({ user }) => {
       <Formik
         initialValues={initialValues}
         validate={() => {
-          const { name, email, profilePhoto, roleId, password } = initialValues;
+          const { name, email, profile_image, roleId, password } = initialValues;
           const emailRegex = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+/i;
           const imageRegex = /[/].?[jpg?].?[png]/i;
           const errors = {};
@@ -148,10 +148,12 @@ const UserForm = ({ user }) => {
             errors.email = "Campo obligatorio";
           } else if (!emailRegex.test(email)) {
             errors.email = "Email incorrecto.";
-          } else if (!profilePhoto) {
-            errors.profilePhoto = "Debe cargar una imagen, formato JPG o PNG";
-          } else if (profilePhoto && !imageRegex.test(imageFile.type)) {
-            errors.profilePhoto = "El formato de la imagen debe ser JPG o PNG";
+          } else if (!userToEditID) {
+            if(!profile_image){
+              errors.profile_image = "Debe cargar una imagen, formato JPG o PNG";
+            }
+          } else if (profile_image && !imageRegex.test(imageFile.type)) {
+            errors.profile_image = "El formato de la imagen debe ser JPG o PNG";
           } else if (roleId !== "1" && roleId !== "2") {
             errors.roleId = "Debe elegir un rol de usuario.";
           } else if (!password) {
@@ -194,11 +196,11 @@ const UserForm = ({ user }) => {
             <input
               className="input-field"
               type="file"
-              name="profilePhoto"
+              name="profile_image"
               onChange={handleChange}
             />
             <ErrorMessage
-              name="profilePhoto"
+              name="profile_image"
               component="div"
               className="invalid-feedback"
             />
