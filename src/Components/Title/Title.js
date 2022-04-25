@@ -21,4 +21,5 @@ const Title = ({ title, text, img }) => {
   );
 };
 
+
 export default Title;
