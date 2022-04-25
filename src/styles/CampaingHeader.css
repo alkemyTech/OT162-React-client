@@ -1,0 +1,48 @@
+.CampaingHeader img{
+    width: 150px;
+}
+
+#slogan{
+    user-select: none;
+    margin-top: 5%;
+}
+
+/* smartphone screen */
+@media screen
+    and (orientation: portrait)
+    and (min-width: 250px)
+    and (max-width: 950px){
+    
+    #campaingLogo{
+        display: blocK;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #ongLogo{
+        display: none;
+    }
+    #slogan{
+        display: none;
+    }
+}
+
+/* tablet screen */
+@media screen
+    and (orientation: portrait)
+    and (min-width: 500px)
+    and (max-width: 1368px){
+
+        #campaingLogo{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #ongLogo{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #slogan{
+            display: none
+        }
+    }    
