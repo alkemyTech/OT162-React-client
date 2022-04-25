@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import moment from "moment";
 import "moment/locale/es";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getCategoriesSlice, deleteCategorySlice } from "../../features/categories/categoriesSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getCategoriesSlice,
+  deleteCategorySlice,
+} from "../../features/categories/categoriesSlice";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -21,7 +24,6 @@ import { Grid } from "@mui/material";
 import { infoAlert } from "../../features/alerts/alerts";
 import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
-
 const CategoriesTable = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const CategoriesTable = () => {
 
   useEffect(() => {
     dispatch(getCategoriesSlice());
-  }, [dispatch]);
+  }, [dispatch, categories]);
 
   const deleteHandler = (id) => {
     swal({
@@ -46,8 +48,7 @@ const CategoriesTable = () => {
   };
 
   const editHandler = (id) => {
-    navigate("/create-category");
-    //Go to the Category Form, it is in /create-category. By now the only way to edit a category
+    navigate(`/backoffice/categories/edit/${id}`);
   };
 
   return (
@@ -65,7 +66,15 @@ const CategoriesTable = () => {
         <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
           Go to Backoffice
         </Button>
-        <TableContainer component={Paper} sx={{ minWidth: 650, maxWidth: 1000, marginLeft: 'auto', marginRight: 'auto' }}>
+        <TableContainer
+          component={Paper}
+          sx={{
+            minWidth: 650,
+            maxWidth: 1000,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
