@@ -27,6 +27,10 @@ const PrivateRoute = () => {
       <Route path="/backoffice/categories" element={<CategoriesTable />} />
       <Route path="/backoffice/members/edit/:id" element={<MembersForm />} />
       <Route
+        path="/backoffice/categories/create"
+        element={<CategoriesForm />}
+      />
+      <Route
         path="/backoffice/categories/edit/:id"
         element={<CategoriesForm />}
       />
@@ -38,6 +42,7 @@ const PrivateRoute = () => {
       <Route path="/backoffice/news" element={<News />} />
       <Route path="/backoffice/users" element={<UserList />} />
       <Route path="/backoffice/edit-user/:id" element={<UserForm/>}/>
+      <Route path="/backoffice/users/create" element={<UserForm />} />
       <Route path="/backoffice/Organization" element={<HomeForm />} />
       <Route path="/backoffice/contact/create" element={<ContactForm />} />
       <Route path="/backoffice/members/create" element={<MembersForm />} />
