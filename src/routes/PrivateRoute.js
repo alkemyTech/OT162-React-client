@@ -13,6 +13,7 @@ import UserList from "../Components/Users/UserList/UserList";
 import HomeForm from "../Components/Backoffice/Organization/HomeForm";
 import ContactForm from "../Components/Contact/ContactForm";
 import CategoriesForm from "../Components/Categories/CategoriesForm";
+import UserForm from "../Components/Users/UsersForm";
 
 const PrivateRoute = () => {
   return (
@@ -36,6 +37,7 @@ const PrivateRoute = () => {
       <Route path="/backoffice/members" element={<BackofficeMembersList />} />
       <Route path="/backoffice/news" element={<News />} />
       <Route path="/backoffice/users" element={<UserList />} />
+      <Route path="/backoffice/edit-user/:id" element={<UserForm/>}/>
       <Route path="/backoffice/Organization" element={<HomeForm />} />
       <Route path="/backoffice/contact/create" element={<ContactForm />} />
       <Route path="/backoffice/members/create" element={<MembersForm />} />

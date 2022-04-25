@@ -6,7 +6,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import { EditUser, DeleteUser } from "./ButtonActions";
 import { columns } from "./Columns";
 import { UserInfoRow } from "./Row";
 import { Link } from "react-router-dom";
@@ -22,11 +21,13 @@ import { errorAlert } from "../../../features/alerts/alerts";
 import Loading from "../../Utilities/Loading";
 import { useState, useEffect } from "react";
 import PersistentSideBar from "../../../features/backoffice/sideBar";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const usersList = useSelector(selectUsersList);
   const usersStatus = useSelector(selectUsersState);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -48,6 +49,11 @@ const UserList = () => {
     // visual o cartel de confirmacion
     dispatch(removeUserById(id));
   };
+
+  const editUser = (user) => {
+    // console.log(user.id)
+    navigate(`/backoffice/edit-user/${user.id}`)
+  }
 
   return (
     <div>
@@ -82,7 +88,7 @@ const UserList = () => {
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <Button variant="contained" onClick={() => EditUser(user)}>
+                    <Button variant="contained" onClick={() => editUser(user)}>
                       Edit
                     </Button>
                     <Button
