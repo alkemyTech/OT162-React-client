@@ -20,7 +20,7 @@ const BackofficeMembersList = () => {
   
   useEffect(() => {
     store.dispatch(fetchMembers())
-  })
+  }, [dispatch])
   
   const currentMembers = useSelector((state) => state.members)
   const members = Array.from(currentMembers)
@@ -37,9 +37,9 @@ const BackofficeMembersList = () => {
   const deleteMember = (id) => {
     
     swal({
-      title: "Are you sure you want to delete?",
-      text: "This change cannot be reverted",
-      buttons: ["No", "Yes"],
+      title: "¿Está seguro que desea eliminar el miembro?",
+      text: "Este cambio es irreversible",
+      buttons: ["No", "Si"],
       dangerMode: "true",
     }).then((willDelete) => {
       if (willDelete) {
@@ -48,9 +48,9 @@ const BackofficeMembersList = () => {
           .delete(`${baseUrl}/members/${id}`)
           .then(() => {
             setLoading(false)
-            swal('Success','Member deleted successfully','success')})
+            swal('Miembro eliminado correctamente','','success')})
           .catch((err) => {           
-            errorAlert("Error","Oops! something went wrong, please try again","error")
+            errorAlert("Error","Hubo un problema al eliminar el miembro.","Continuar")
             setLoading(false)
             console.log(err);
           });
@@ -70,7 +70,7 @@ const BackofficeMembersList = () => {
           variant="contained"
           sx={{ margin: '20px 0' }}
         >
-          Add new member
+          Agregar un nuevo miembro
         </Button>
         { loading ? <div style={{ width: '100%', height: '200px', display: 'grid', placeItems: 'center' }}>
           <CircularProgress />
@@ -79,9 +79,9 @@ const BackofficeMembersList = () => {
             <TableHead>
               <TableRow>
                 
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Photo</TableCell>
-                <TableCell align="center">Actions</TableCell>
+                <TableCell align="center">Nombre</TableCell>
+                <TableCell align="center">Imagen</TableCell>
+                <TableCell align="center">Acciones</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
