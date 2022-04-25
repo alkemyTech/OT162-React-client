@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { ErrorMessage, Formik } from "formik";
 import "../FormStyles.css";
 import Popup from "reactjs-popup";
@@ -11,7 +10,7 @@ import '../../assets/styles/Modal.css'
 import swal from "sweetalert";
 import { errorAlert } from "../../features/alerts/alerts";
 import { useParams } from "react-router-dom";
-import { getUserByID } from "../../Services/usersApiService";
+import { getUserByID, putUsers, postUsers } from "../../Services/usersApiService";
 
 const UserForm = ({ user }) => {
   const getId = useParams(user)
@@ -67,8 +66,10 @@ const UserForm = ({ user }) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
+      fileReader.onloadend = () => {
+        const imageResult = fileReader.result;
+        const imageBase64 = imageResult.split(',')[1];
+        resolve(imageBase64)
       };
 
       fileReader.onerror = (error) => {
@@ -101,25 +102,15 @@ const UserForm = ({ user }) => {
       const profilePhoto64 = await convertBase64(file);
       setImageFile(file);
       setInitialValues({ ...initialValues, profilePhoto: profilePhoto64 });
+      console.log(profilePhoto64)
     }
   };
 
   const handleEdit = (e) => {
-   
     if (!checked) return swal('Error', 'You must accept our terms and conditions', 'error')
 
-    
-
-    if (user) {
-      axios
-        .put(`https://ongapi.alkemy.org/docs/users/${user.id}`, {
-          id: user.id,
-          name: initialValues.name,
-          email: initialValues.email,
-          password: initialValues.password,
-          role_id: initialValues.roleId,
-          profile_image: initialValues.profilePhoto,
-        })
+    if (userToEditID !== undefined) {
+      putUsers(userToEditID, initialValues)
         .then((resp) => {
           console.log(resp);
         })
@@ -127,15 +118,9 @@ const UserForm = ({ user }) => {
           console.log(resp);
           errorAlert("Error", "An error has occurred while updating the user", "error");
         });
+      console.log(e)
     } else {
-      axios
-        .post(`https://ongapi.alkemy.org/docs/users`, {
-          name: initialValues.name,
-          email: initialValues.email,
-          password: initialValues.password,
-          role_id: initialValues.roleId,
-          profile_image: initialValues.profilePhoto,
-        })
+      postUsers(e)
         .then((resp) => {
           console.log(resp);
         })
@@ -176,7 +161,7 @@ const UserForm = ({ user }) => {
           } 
           return errors;
         }}
-        onSubmit={handleEdit}
+        onSubmit={() => handleEdit(initialValues)}
       >
         {({ handleSubmit }) => (
           <form className="form-container" onSubmit={handleSubmit}>
@@ -311,7 +296,7 @@ const UserForm = ({ user }) => {
             />
            
             <button disabled={!checked} className="submit-btn" type="submit">
-              Send
+              Enviar
             </button>
           </form>
         )}
