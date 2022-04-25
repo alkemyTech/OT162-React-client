@@ -31,7 +31,7 @@ const CategoriesTable = () => {
 
   useEffect(() => {
     dispatch(getCategoriesSlice());
-  }, [dispatch, categories]);
+  }, [dispatch]);
 
   const deleteHandler = (id) => {
     swal({
@@ -63,8 +63,12 @@ const CategoriesTable = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
-          Go to Backoffice
+        <Button
+          variant="contained"
+          sx={{ margin: 4 }}
+          href="/backoffice/categories/create"
+        >
+          Create category
         </Button>
         <TableContainer
           component={Paper}
