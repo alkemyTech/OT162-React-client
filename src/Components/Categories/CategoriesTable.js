@@ -63,7 +63,11 @@ const CategoriesTable = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Button variant="contained" sx={{ margin: 4 }} href="/create-category">
+        <Button
+          variant="contained"
+          sx={{ margin: 4 }}
+          href="/backoffice/categories/create"
+        >
           Create category
         </Button>
         <TableContainer
