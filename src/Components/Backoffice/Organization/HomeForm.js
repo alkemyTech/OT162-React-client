@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import { Formik } from 'formik';
 import './HomeForm.css';
 import {PostSliders} from '../../../Services/homeApiService';
-import PersistentSideBar from '../../../features/backoffice/sideBar';
+import NavbarBackoffice from '../NavbarBackoffice';
 
 const HomeForm = () => {
     const [submittedForm, setSubmittedForm] = useState(false);
   return (
     <div>
         <div>
-          <PersistentSideBar/>
+          <NavbarBackoffice/>
         </div>
         <div>
             <Formik

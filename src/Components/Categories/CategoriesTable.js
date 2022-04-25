@@ -22,7 +22,7 @@ import swal from "sweetalert";
 //import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
 import { infoAlert } from "../../features/alerts/alerts";
-import PersistentSideBar from "../../features/backoffice/sideBar";
+import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 const CategoriesTable = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const CategoriesTable = () => {
 
   useEffect(() => {
     dispatch(getCategoriesSlice());
-  }, [dispatch, categories]);
+  }, [dispatch]);
 
   const deleteHandler = (id) => {
     swal({
@@ -54,7 +54,7 @@ const CategoriesTable = () => {
   return (
     <div>
       <div>
-        <PersistentSideBar />
+        <NavbarBackoffice/>
       </div>
       <Grid
         container
@@ -63,8 +63,12 @@ const CategoriesTable = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Button variant="contained" sx={{ margin: 2 }} href="/backoffice">
-          Go to Backoffice
+        <Button
+          variant="contained"
+          sx={{ margin: 4 }}
+          href="/backoffice/categories/create"
+        >
+          Create category
         </Button>
         <TableContainer
           component={Paper}
