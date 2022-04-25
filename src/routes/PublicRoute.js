@@ -32,7 +32,6 @@ const Home = lazy(() => import("../Components/Home"));
 
 const PublicRoute = () => {
   return (
-    <BrowserRouter>
       <Suspense fallback={<Loading open={true} />}>
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -54,7 +53,6 @@ const PublicRoute = () => {
           <Route path="/contacto" element={<Contact />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
   );
 };
 

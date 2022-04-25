@@ -15,11 +15,11 @@ import ContactForm from "../Components/Contact/ContactForm";
 
 const PrivateRoute = () => {
 
-  const auth = "Adminisstrador"
+  const auth = "Administrador"
+  
   return (
-    <BrowserRouter>
       <Routes>
-        <Route path="/backoffice" element={auth !== "Administrador" ? <Navigate to="/" /> : <Backoffice />} />
+        <Route path="/backoffice" element={auth !== "Administrador" ?   <Navigate to="/" /> : <Backoffice />} />
         <Route path="/backoffice/news/create" element={auth !== "Administrador" ? <Navigate to="/" /> : <NewsForm />} />
         <Route path="/backoffice/create-slide" element={auth !== "Administrador" ? <Navigate to="/" /> : <SlidesForm />} />
         <Route path="/backoffice/slides" element={auth !== "Administrador" ? <Navigate to="/" /> : <SlidesList />} />
@@ -32,7 +32,6 @@ const PrivateRoute = () => {
         <Route path="/backoffice/Organization" element={auth !== "Administrador" ? <Navigate to="/" /> : <HomeForm />} />
         <Route path="/backoffice/contact/create" element={auth !== "Administrador" ? <Navigate to="/" /> : <ContactForm />} />
       </Routes>
-    </BrowserRouter>
   );
 };
 
