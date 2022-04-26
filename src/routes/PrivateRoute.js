@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Backoffice from "../Backoffice/Backoffice";
 import NewsForm from "../Components/News/NewsForm";
@@ -21,34 +21,25 @@ const PrivateRoute = () => {
   
   return (
     <Routes>
-      <Route path="/backoffice" element={<Backoffice />} />
-      <Route path="/backoffice/news/create" element={<NewsForm />} />
-      <Route path="/backoffice/news/edit/:id" element={<NewsForm />} />
-      <Route path="/backoffice/create-slide" element={<SlidesForm />} />
-      <Route path="/backoffice/edit-slide/:id" element={<SlidesForm />} />
-      <Route path="/backoffice/slides" element={<SlidesList />} />
-      <Route path="/backoffice/categories" element={<CategoriesTable />} />
-      <Route path="/backoffice/members/edit/:id" element={<MembersForm />} />
-      <Route
-        path="/backoffice/categories/create"
-        element={<CategoriesForm />}
-      />
-      <Route
-        path="/backoffice/categories/edit/:id"
-        element={<CategoriesForm />}
-      />
-      <Route
-        path="/backoffice/activities"
-        element={<ActivitiesListBackoffice />}
-      />
-      <Route path="/backoffice/members" element={<BackofficeMembersList />} />
-      <Route path="/backoffice/news" element={<News />} />
-      <Route path="/backoffice/users" element={<UserList />} />
-      <Route path="/backoffice/edit-user/:id" element={<UserForm/>}/>
-      <Route path="/backoffice/users/create" element={<UserForm />} />
-      <Route path="/backoffice/Organization" element={<HomeForm />} />
-      <Route path="/backoffice/contact/create" element={<ContactForm />} />
-      <Route path="/backoffice/members/create" element={<MembersForm />} />
+      <Route path="/backoffice" element={auth !== "Administrador" ?   <Navigate to="/" /> : <Backoffice />} />
+      <Route path="/backoffice/news/create" element={auth !== "Administrador" ?   <Navigate to="/" /> : <NewsForm />} />
+      <Route path="/backoffice/news/edit/:id" element={auth !== "Administrador" ?   <Navigate to="/" /> : <NewsForm />} />
+      <Route path="/backoffice/create-slide" element={auth !== "Administrador" ?   <Navigate to="/" /> : <SlidesForm />} />
+      <Route path="/backoffice/edit-slide/:id" element={auth !== "Administrador" ?   <Navigate to="/" /> : <SlidesForm />} />
+      <Route path="/backoffice/slides" element={auth !== "Administrador" ?   <Navigate to="/" /> : <SlidesList />} />
+      <Route path="/backoffice/categories" element={auth !== "Administrador" ?   <Navigate to="/" /> : <CategoriesTable />} />
+      <Route path="/backoffice/members/edit/:id" element={auth !== "Administrador" ?   <Navigate to="/" /> : <MembersForm />} />
+      <Route path="/backoffice/categories/create" element={auth !== "Administrador" ?   <Navigate to="/" /> : <CategoriesForm />} />
+      <Route path="/backoffice/categories/edit/:id" element={auth !== "Administrador" ?   <Navigate to="/" /> : <CategoriesForm />} />
+      <Route path="/backoffice/activities" element={auth !== "Administrador" ?   <Navigate to="/" /> : <ActivitiesListBackoffice />} />
+      <Route path="/backoffice/members" element={auth !== "Administrador" ?   <Navigate to="/" /> : <BackofficeMembersList />} />
+      <Route path="/backoffice/news" element={auth !== "Administrador" ?   <Navigate to="/" /> : <News />} />
+      <Route path="/backoffice/users" element={auth !== "Administrador" ?   <Navigate to="/" /> : <UserList />} />
+      <Route path="/backoffice/edit-user/:id" element={auth !== "Administrador" ?   <Navigate to="/" /> : <UserForm/>}/>
+      <Route path="/backoffice/users/create" element={auth !== "Administrador" ?   <Navigate to="/" /> : <UserForm />} />
+      <Route path="/backoffice/Organization" element={auth !== "Administrador" ?   <Navigate to="/" /> : <HomeForm />} />
+      <Route path="/backoffice/contact/create" element={auth !== "Administrador" ?   <Navigate to="/" /> : <ContactForm />} />
+      <Route path="/backoffice/members/create" element={auth !== "Administrador" ?   <Navigate to="/" /> : <MembersForm />} />
     </Routes>
   );
 };
