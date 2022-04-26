@@ -2,24 +2,15 @@ import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
 import MapContainer from "../Utilities/MapContainer";
-import MapRegister from "../Utilities/MapRegister";
 
 const RegisterForm = () => {
-  var map;
-  const google = window.google;
-  function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 43.5293, lng: -5.6773 },
-      zoom: 13,
-    });
-  }
-
   const [initialValues, setInitialValues] = useState({
     name: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    direction: "",
   });
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -54,8 +45,14 @@ const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         validate={() => {
-          const { password, confirmPassword, name, email, lastName } =
-            initialValues;
+          const {
+            password,
+            confirmPassword,
+            name,
+            email,
+            lastName,
+            direction,
+          } = initialValues;
           const specialCaracRegex = /\W/i;
           const numbersRegex = /[0-9]/;
           const errors = {};
@@ -80,11 +77,9 @@ const RegisterForm = () => {
             errors.password =
               "Las contraseñas deben ser de al menos 6 caracteres y contener al menos 1 simbolo, 1 letra y 1 numero";
           }
-
-          console.log(errors);
           return errors;
         }}
-        onSubmit={handleEdit}
+        onSubmit={() => console.log(initialValues)}
       >
         {({ handleSubmit }) => (
           <form className="form-container" onSubmit={handleSubmit}>
@@ -114,7 +109,12 @@ const RegisterForm = () => {
               component="div"
               className="invalid-feedback"
             />
-
+            <div style={{ width: "300px", height: "230px" }}>
+              <MapContainer
+                setInitialValues={setInitialValues}
+                initialValues={initialValues}
+              />
+            </div>
             <input
               className="input-field"
               type="text"
@@ -160,9 +160,6 @@ const RegisterForm = () => {
           </form>
         )}
       </Formik>
-      <div style={{ width: "300px", height: "200px" }}>
-        <MapContainer />
-      </div>
     </div>
   );
 };

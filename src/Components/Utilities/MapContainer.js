@@ -1,5 +1,5 @@
-import { Component } from "react";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import { Component, useEffect } from "react";
+import { Map, GoogleApiWrapper, Marker, Listing } from "google-maps-react";
 import axios from "axios";
 
 class MapContainer extends Component {
@@ -15,32 +15,42 @@ class MapContainer extends Component {
     this.mapClicked = this.mapClicked.bind(this);
   }
 
+  fetchPlaces(mapProps, map) {
+    const { google } = mapProps;
+    const service = new google.maps.places.PlacesService(map);
+    // ...
+  }
+
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition((position) =>
+    navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
-      })
-    );
+      });
+      this.props.setInitialValues({
+        ...this.props.initialValues,
+        direction: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+      });
+    });
   }
 
-  mapClicked(e, coord) {
-    console.log(e);
-    const { latLng } = coord;
-    const lat = latLng.lat();
-    const lng = latLng.lng();
+  mapClicked(mapP, map) {
+    const lat = map.data.map.center.lat();
+    const lng = map.data.map.center.lng();
 
-    this.setState((previousState) => {
-      return {
-        markers: [
-          ...previousState.markers,
-          {
-            title: "",
-            name: "",
-            position: { lat, lng },
-          },
-        ],
-      };
+    this.setState({
+      lat: lat,
+      lng: lng,
+    });
+    this.props.setInitialValues({
+      ...this.props.initialValues,
+      direction: {
+        lat: lat,
+        lng: lng,
+      },
     });
   }
 
@@ -48,7 +58,10 @@ class MapContainer extends Component {
     return (
       <Map
         google={this.props.google}
-        style={{ width: "100%", height: "30%" }}
+        style={{
+          width: "60%",
+          height: "30%",
+        }}
         zoom={13}
         initialCenter={{
           lat: this.state.lat,
@@ -58,7 +71,8 @@ class MapContainer extends Component {
           lat: this.state.lat,
           lng: this.state.lng,
         }}
-        onClick={this.mapClicked}
+        onClick={(mapP, map) => this.mapClicked(mapP, map)}
+        onReady={this.fetchPlaces}
       >
         <Marker
           title={"Geolocation"}
