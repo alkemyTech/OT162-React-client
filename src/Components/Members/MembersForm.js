@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
 import CKEditor from "ckeditor4-react";
-import { Fab, Grid, Icon, TextField } from "@mui/material";
+import { Button, Fab, Grid, Icon, TextField } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -14,6 +14,15 @@ import {
 } from "../../Services/membersApiService";
 import { errorAlert, confirmAlert } from "../../features/alerts/alerts";
 import { useNavigate } from "react-router-dom";
+
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
 
 const MembersForm = () => {
   let navigate = useNavigate();
@@ -51,7 +60,6 @@ const MembersForm = () => {
   };
 
   const handleEdit = () => {
-    console.log(initialValues);
     updateMember(id, initialValues)
       .then(() =>
         confirmAlert("Miembro actualizado correctamente", "", "Continuar")
@@ -62,11 +70,8 @@ const MembersForm = () => {
       });
   };
   const handleCreate = () => {
-    console.log(initialValues);
     addNewMember(initialValues)
-    .then(() =>
-        confirmAlert("Miembro creado correctamente", "", "Continuar")
-      )
+      .then(() => confirmAlert("Miembro creado correctamente", "", "Continuar"))
       .catch((error) => errorAlert("Error", error.message, "Continuar"))
       .finally(() => {
         navigate("/backoffice/members");
@@ -76,14 +81,19 @@ const MembersForm = () => {
   useEffect(() => {
     getMemberById(id)
       .then((result) => {
-        setInitialValues({
-          name: result.data.data.name,
-          image: result.data.data.image,
-          description: result.data.data.description,
-          facebookUrl: result.data.data.facebookUrl,
-          linkedinUrl: result.data.data.linkedinUrl,
-        });
-        console.log(result);
+        fetch(result.data.data.image)
+          .then((r) => r.blob())
+          .then((blob) => {
+            getBase64(blob).then((data) => {
+              setInitialValues({
+                name: result.data.data.name,
+                image: data,
+                description: result.data.data.description,
+                facebookUrl: result.data.data.facebookUrl,
+                linkedinUrl: result.data.data.linkedinUrl,
+              });
+            });
+          });
       })
       .catch((e) => {
         console.log("ERROR", e.message);
@@ -103,37 +113,37 @@ const MembersForm = () => {
         validate={() => {
           const errors = {};
           if (!initialValues.name) {
-            errors.name = "Required";
+            errors.name = "Requerido";
           } else if (!/^.{4,}$/i.test(initialValues.name)) {
-            errors.name = "Minimum length of 4 characters";
+            errors.name = "Mínimo debe tener 4 caracteres";
           }
 
           if (!initialValues.description) {
-            errors.description = "Required";
+            errors.description = "Requerido";
           }
 
           if (!initialValues.facebookUrl) {
-            errors.facebookUrl = "Required";
+            errors.facebookUrl = "Requerido";
           } else if (
             !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/i.test(
               initialValues.facebookUrl
             )
           ) {
-            errors.facebookUrl = "Please enter a valid url format";
+            errors.facebookUrl = "Porfavor ingrese una url válida";
           }
 
           if (!initialValues.linkedinUrl) {
-            errors.linkedinUrl = "Required";
+            errors.linkedinUrl = "Requerido";
           } else if (
             !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/i.test(
               initialValues.linkedinUrl
             )
           ) {
-            errors.linkedinUrl = "Please enter a valid url format";
+            errors.linkedinUrl = "Porfavor ingrese una url válida";
           }
 
           if (!initialValues.image) {
-            errors.image = "Required";
+            errors.image = "Requerido";
           }
 
           return errors;
@@ -142,12 +152,12 @@ const MembersForm = () => {
       >
         {({ handleBlur, handleSubmit }) => (
           <form className="form-container" onSubmit={handleSubmit}>
-            <label htmlFor="text">Name</label>
+            <label htmlFor="text">Nombre</label>
             <input
               className="input-field"
               type="text"
               name="name"
-              placeholder="Please enter a name..."
+              placeholder="Porfavor ingrese un nombre..."
               onChange={handleChange}
               onBlur={handleBlur}
               value={initialValues.name}
@@ -205,7 +215,7 @@ const MembersForm = () => {
               className="invalid-feedback"
               style={{ fontSize: "10px", color: "red" }}
             />
-            <label htmlFor="text">Image</label>
+            <label htmlFor="text">Imagen</label>
             <Grid
               container
               spacing={3}
@@ -241,7 +251,7 @@ const MembersForm = () => {
                     style={{ padding: "15px" }}
                   >
                     <PhotoCamera />
-                    Upload photo
+                    Subir Imagen
                   </Fab>
                 </label>
               </Grid>
@@ -313,9 +323,9 @@ const MembersForm = () => {
               className="invalid-feedback"
               style={{ fontSize: "10px", color: "red" }}
             />
-            <button className="submit-btn" type="submit">
-              Send
-            </button>
+            <Button type="submit" variant="contained">
+              Enviar
+            </Button>
           </form>
         )}
       </Formik>
