@@ -9,26 +9,35 @@ import {
   TableRow,
   Container,
   Stack,
+  TextField,
 } from "@mui/material";
 import axios from "axios";
-import { useEffect } from "react";
+import { Field } from "formik";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
-import { getSlides } from "../../features/slide/slideSlice";
-import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
+import { getSlides, getSlidesSearch } from "../../features/slide/slideSlice";
+import NavbarBackoffice from "../Backoffice/NavbarBackoffice";
+import Loading from "../Utilities/Loading";
 
 const slideURL = process.env.REACT_APP_SLIDES_ROUTE;
 
 const SlidesList = () => {
   const dispatch = useDispatch();
   const slides = useSelector((state) => state.slide.list);
+  const loading = useSelector((state) => state.slide.status);
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    dispatch(getSlides());
-  }, [dispatch]);
+    if (search.length > 2) {
+      dispatch(getSlidesSearch(search));
+    } else {
+      dispatch(getSlides());
+    }
+  }, [dispatch, search]);
 
   const editSlide = (id) => navigate(`/backoffice/edit-slide/${id}`);
   const deleteSlide = (id) => {
@@ -59,10 +68,18 @@ const SlidesList = () => {
   return (
     <div>
       <div>
-        <NavbarBackoffice/>
+        <NavbarBackoffice />
       </div>
       <div>
         <Container maxWidth="lg">
+          <TextField
+            label="Buscar..."
+            id="standard-size-small"
+            size="small"
+            variant="standard"
+            sx={{ float: "left", my: "2rem" }}
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <Button
             component={Link}
             to="/backoffice/create-slide"
@@ -128,6 +145,7 @@ const SlidesList = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <Loading open={loading === "loading"}/>
         </Container>
       </div>
     </div>

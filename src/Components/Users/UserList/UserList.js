@@ -58,7 +58,7 @@ const UserList = () => {
     <div>
       <div>
         <NavbarBackoffice/>
-        <PersistentSideBar />
+        {/* <PersistentSideBar /> */}
       </div>
       <h3>User's List</h3>
       <Button variant="contained">
