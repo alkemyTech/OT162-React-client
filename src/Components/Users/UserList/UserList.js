@@ -57,8 +57,7 @@ const UserList = () => {
   return (
     <div>
       <div>
-        <NavbarBackoffice/>
-        <PersistentSideBar />
+        <NavbarBackoffice/>   
       </div>
       <h3>User's List</h3>
       <Button variant="contained">

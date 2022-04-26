@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../FormStyles.css";
 import { Form, Formik } from "formik";
 import {
@@ -17,6 +17,8 @@ import {
   updateActivity,
 } from "../../Services/activitiesApiService";
 import DescriptionField from "./DescriptionField";
+import { useDispatch, useSelector } from "react-redux";
+import { selectActivities, getActivitiesStatus, getActivitiesError, postActivities, updateActivities } from "../../features/activities/activitiesSlice";
 
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
@@ -30,6 +32,26 @@ const ActivitiesForm = ({ activity }) => {
   });
   const [image, setImage] = useState(activity ? activity.image : "");
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const activities = useSelector(selectActivities);
+  const activitiesStatus = useSelector(getActivitiesStatus);
+  const activitiesError = useSelector(getActivitiesError);
+  console.log(activity);
+
+  useEffect(() => {
+    
+    activitiesStatus === "pending" && setLoading(true);
+    // activitiesStatus === "succeeded" && setLoading(false);
+    if (activitiesStatus === "failed") {
+      errorAlert("Error", "Error al crear actividad", "Ok");
+    }
+    if (activitiesStatus === "succeeded") {
+      setLoading(false);
+      confirmAlert("Excelente", "Actividad creada", "Ok")
+    }
+    
+  }, [activitiesStatus, dispatch]);
 
   const handleChange = (e) => {
     if (e?.target?.name === "name") {
@@ -58,27 +80,21 @@ const ActivitiesForm = ({ activity }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (activity) {
-      updateActivity(initialValues.id, initialValues)
-        .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
-        .catch((error) => {
-          errorAlert(
-            "Error",
-            "Hubo un problema al actualizar la actividad",
-            "Exit"
-          );
-          console.log(error);
-        })
-        .finally(() => setLoading(false));
+      dispatch(updateActivities(initialValues))    
+        // .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
+        // .catch((error) => {
+        //   errorAlert(
+        //     "Error",
+        //     "Hubo un problema al actualizar la actividad",
+        //     "Exit"
+        //   );
+        //   console.log(error);
+        // })
+        // .finally(() => setLoading(false));
     } else {
       // Si bien el ticket dice hacer el post al endpoint activities/create
       // lo hago a activities directamente ya que en los doc de la api dice eso
-      createActivity(initialValues)
-        .then(() => confirmAlert("Excelente", "Actividad creada", "Exit"))
-        .catch((error) => {
-          errorAlert("Error", "Hubo un problema al crear la actividad", "Exit");
-          console.log(error);
-        })
-        .finally(() => setLoading(false));
+      dispatch(postActivities(initialValues))       
     }
   };
 

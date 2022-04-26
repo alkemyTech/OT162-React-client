@@ -11,10 +11,10 @@ const initialState = {
 
 export const fetchActivities = createAsyncThunk('activities/fetchActivities', async () => {
     try {
-        const response = await axios.get(ACTIVITIES_URL)
+        const response = await axios.get()
         return response.data
     } catch (error) {
-        return error.message
+        return console.log("no cargo un carajo", error.message)
     }
 })
 export const postActivities = createAsyncThunk('activities/postActivities', async (initialData) => {
@@ -32,7 +32,7 @@ export const updateActivities = createAsyncThunk('activities/updateActivities', 
         console.log(response.data)
         return response.data
     } catch (error) {
-        return error.message
+        return console.log("error desde updateActivities", error.message)        
     }
 })
 
@@ -58,14 +58,20 @@ export const activitiesSlice = createSlice({
             state.error = action.error.message
         })
         .addCase(postActivities.fulfilled, (state, action) => {
-            console.log(action.payload)            
-            state.activities.push(action.payload)
-            console.log(state.activities)
+            state.status = 'succeeded'                      
+            state.activities.push(action.payload)          
+        })
+        .addCase(postActivities.rejected, (state, action) => {
+            state.status = 'failed'
+            state.error = action.error.message
         })
         .addCase(updateActivities.fulfilled, (state, action) => {
-            console.log(action.payload)            
-            state.activities.push(action.payload)
-            console.log(state.activities)
+            state.status = 'succeeded'                    
+            state.activities.push(action.payload)         
+        })
+        .addCase(updateActivities.rejected, (state, action) => {
+            state.status = 'failed'
+            state.error = action.error.message          
         })
     }
 })
