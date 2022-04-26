@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Card, CardContent, Grid, Typography, Button, Box, Modal, Fade} from '@mui/material/';
 import './Backoffice.css';
 import { Link } from "react-router-dom";
+import NavbarBackoffice from '../Components/Backoffice/NavbarBackoffice';
 
 const style = {
     position: 'absolute',
@@ -21,6 +22,9 @@ const Backoffice = () => {
 
     return (
         <>
+        <div>
+            <NavbarBackoffice/>
+        </div>
             <div>
                 <Modal open={open} onClose={handleClose}>
                     <Fade in={open}>
