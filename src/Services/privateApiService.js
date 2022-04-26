@@ -7,19 +7,19 @@ const GetAuth = () => {
 
 const config = {
   headers: {
-    Group: 162, //Aqui va el ID del equipo!!
+    // Group: 162, //Aqui va el ID del equipo!!
     "Content-Type": "application/json",
   },
 };
 
 const Put = (route, id, data) => {
   config.headers.Authorization = GetAuth();
-  axios.put(`${route}/${id}`, data, config);
+  return axios.put(`${route}/${id}`, data, config);
 };
 
 const Patch = (ruta, obj, id) => {
   config.headers.Authorization = GetAuth();
-  axios.patch(`${ruta}/${id}`, obj, config);
+  return axios.patch(`${ruta}/${id}`, obj, config);
 };
 
 const Get = (url, id) => {
@@ -35,12 +35,12 @@ const Get = (url, id) => {
 
 const Post = (URL, Body) => {
   config.headers.Authorization = GetAuth();
-  axios.post(URL, Body, config);
+  return axios.post(URL, Body, config);
 };
 
 const Delete = (path, id) => {
   config.headers.Authorization = GetAuth();
-  axios.delete(path + "/" + id, config);
+  return axios.delete(path + "/" + id, config);
 };
 
 export { Get, GetAuth, Post, Put, Patch, Delete };

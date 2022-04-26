@@ -10,6 +10,7 @@ import store from '../../app/store';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMembers } from '../../features/reducers/membersSlice';
+import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 
 const baseUrl ="https://ongapi.alkemy.org/api";
@@ -19,7 +20,7 @@ const BackofficeMembersList = () => {
   
   useEffect(() => {
     store.dispatch(fetchMembers())
-  })
+  }, [dispatch])
   
   const currentMembers = useSelector((state) => state.members)
   const members = Array.from(currentMembers)
@@ -36,9 +37,9 @@ const BackofficeMembersList = () => {
   const deleteMember = (id) => {
     
     swal({
-      title: "Are you sure you want to delete?",
-      text: "This change cannot be reverted",
-      buttons: ["No", "Yes"],
+      title: "¿Está seguro que desea eliminar el miembro?",
+      text: "Este cambio es irreversible",
+      buttons: ["No", "Si"],
       dangerMode: "true",
     }).then((willDelete) => {
       if (willDelete) {
@@ -47,9 +48,9 @@ const BackofficeMembersList = () => {
           .delete(`${baseUrl}/members/${id}`)
           .then(() => {
             setLoading(false)
-            swal('Success','Member deleted successfully','success')})
+            swal('Miembro eliminado correctamente','','success')})
           .catch((err) => {           
-            errorAlert("Error","Oops! something went wrong, please try again","error")
+            errorAlert("Error","Hubo un problema al eliminar el miembro.","Continuar")
             setLoading(false)
             console.log(err);
           });
@@ -58,63 +59,68 @@ const BackofficeMembersList = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Button
-        component={Link}
-        to="/backoffice/members/create"
-        variant="contained"
-        sx={{ margin: '20px 0' }}
-      >
-        Add new member
-      </Button>
-      { loading ? <div style={{ width: '100%', height: '200px', display: 'grid', placeItems: 'center' }}>
-        <CircularProgress />
-        </div> : <TableContainer component={Paper} elevation={3}>
-        <Table sx={{ minWidth: 550 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Photo</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {members.map((member) => (
-              <TableRow
-                key={member.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-              
-              <TableCell component="th" align="center" scope="row">
-                {member.name}
-              </TableCell>
-                <TableCell align="center">
-                  <img src={member.image} style={{maxWidth: '120px'}} alt={member.name} />
-                </TableCell>
-                <TableCell align="center">
-                 
-                    <Button
-                      variant="outlined"
-                      onClick={() => editMember(member.id)}
-                      style={{marginRight: '25px'}}
-                    >
-                      <EditIcon/>
-                    </Button>
-                    <Button
-                      variant="contained"
-                      onClick={() => deleteMember(member.id)}
-                    >
-                     <DeleteIcon/>
-                    </Button>
-              
-                </TableCell>
+    <div>
+      <div>
+        <NavbarBackoffice/>
+      </div>
+      <Container maxWidth="lg">
+        <Button
+          component={Link}
+          to="/backoffice/members/create"
+          variant="contained"
+          sx={{ margin: '20px 0' }}
+        >
+          Agregar un nuevo miembro
+        </Button>
+        { loading ? <div style={{ width: '100%', height: '200px', display: 'grid', placeItems: 'center' }}>
+          <CircularProgress />
+          </div> : <TableContainer component={Paper} elevation={3}>
+          <Table sx={{ minWidth: 550 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                
+                <TableCell align="center">Nombre</TableCell>
+                <TableCell align="center">Imagen</TableCell>
+                <TableCell align="center">Acciones</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>}
-    </Container>
+            </TableHead>
+            <TableBody>
+              {members.map((member) => (
+                <TableRow
+                  key={member.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                
+                <TableCell component="th" align="center" scope="row">
+                  {member.name}
+                </TableCell>
+                  <TableCell align="center">
+                    <img src={member.image} style={{maxWidth: '120px'}} alt={member.name} />
+                  </TableCell>
+                  <TableCell align="center">
+                  
+                      <Button
+                        variant="outlined"
+                        onClick={() => editMember(member.id)}
+                        style={{marginRight: '25px'}}
+                      >
+                        <EditIcon/>
+                      </Button>
+                      <Button
+                        variant="contained"
+                        onClick={() => deleteMember(member.id)}
+                      >
+                      <DeleteIcon/>
+                      </Button>
+                
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>}
+      </Container>
+    </div>
   );
 };
 
