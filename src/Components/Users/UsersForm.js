@@ -1,22 +1,62 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import axios from "axios";
 import { ErrorMessage, Formik } from "formik";
 import "../FormStyles.css";
-import { errorAlert } from "../../features/alerts/alerts";
+import Popup from "reactjs-popup";
+import { Document } from "react-pdf";
+import { Page, pdfjs,  } from "react-pdf";
+import samplePdf from '../../assets/pdf/pdfPrueba.pdf'
+import '../../assets/styles/Modal.css'
+import swal from "sweetalert";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import { useParams } from "react-router-dom";
+import { getUserByID, putUsers, postUsers } from "../../Services/usersApiService";
+import { useNavigate } from "react-router-dom";
+
 const UserForm = ({ user }) => {
+  const getId = useParams(user)
+  const userToEditID = getId.id
+
   const [initialValues, setInitialValues] = useState({
     name: "",
     email: "",
     roleId: "",
-    profilePhoto: "",
+    profile_image: "",
     password: "",
   });
-  const [imageFile, setImageFile] = useState({});
+  const [checked, setChecked] = useState(false)
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1); 
 
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    setPageNumber(1);
+  }
+
+  function changePage(offset) {
+    setPageNumber(prevPageNumber => prevPageNumber + offset);
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
+  }
+
+  const [imageFile, setImageFile] = useState();
+
+  const handleChecked = (e) =>{
+     setChecked(e.target.checked);
+  }
   useEffect(() => {
-    if (user) {
-      setInitialValues(user);
+    if (userToEditID) {
+      getUserByID(userToEditID)
+        .then(async (response) =>{
+          let userData = response.data.data
+          setInitialValues(userData)
+        })
     }
   }, [user]);
 
@@ -25,8 +65,11 @@ const UserForm = ({ user }) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
+      fileReader.onloadend = () => {
+        const imageResult = fileReader.result;
+        const imageBase64 = imageResult.split(',')[1];
+        // const image64String = JSON.stringify(imageBase64)
+        resolve(imageBase64)
       };
 
       fileReader.onerror = (error) => {
@@ -34,6 +77,11 @@ const UserForm = ({ user }) => {
       };
     });
   };
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+  }, [])
+  
 
   const handleChange = async (e) => {
     switch (e.target.name) {
@@ -53,45 +101,38 @@ const UserForm = ({ user }) => {
       const file = e.target.files[0];
       const profilePhoto64 = await convertBase64(file);
       setImageFile(file);
-      setInitialValues({ ...initialValues, profilePhoto: profilePhoto64 });
+      setInitialValues({ ...initialValues, profile_image: profilePhoto64 })
     }
   };
 
-  const handleEdit = (e) => {
-    e.preventDefault();
+  const navigate = useNavigate();
 
-    if (user) {
-      axios
-        .put(`https://ongapi.alkemy.org/docs/users/${user.id}`, {
-          id: user.id,
-          name: initialValues.name,
-          email: initialValues.email,
-          password: initialValues.password,
-          role_id: initialValues.roleId,
-          profile_image: initialValues.profilePhoto,
-        })
+  const handleEdit = (e) => {
+    if (!checked) return swal('Error', 'You must accept our terms and conditions', 'error')
+
+    if (userToEditID !== undefined) {
+      delete initialValues.profile_image;
+      putUsers(userToEditID, initialValues)
         .then((resp) => {
           console.log(resp);
+          confirmAlert('Usuario modificado correctamente','', 'Continuar')
+          navigate('/backoffice/users');
         })
         .catch((resp) => {
           console.log(resp);
-          errorAlert("Error", "An error has occurred while updating the user", "error");
+          errorAlert("Error", "Ha ocurrido un error en la modificación de este usuario", "Continuar");
         });
+      console.log(e)
     } else {
-      axios
-        .post(`https://ongapi.alkemy.org/docs/users`, {
-          name: initialValues.name,
-          email: initialValues.email,
-          password: initialValues.password,
-          role_id: initialValues.roleId,
-          profile_image: initialValues.profilePhoto,
-        })
+      delete initialValues.profile_image;
+      postUsers(e)
         .then((resp) => {
           console.log(resp);
+          confirmAlert('Usuario creado correctamente','Ahora es parte de Somos Mas', 'Continuar')
         })
         .catch((resp) => {
           console.log(resp);
-          errorAlert("Error", "An error has occurred while creating the user", "error");
+          errorAlert("Error", "Ha ocurrido un error en la creación de este usuario", "Continuar");
         });
     }
   };
@@ -101,7 +142,7 @@ const UserForm = ({ user }) => {
       <Formik
         initialValues={initialValues}
         validate={() => {
-          const { name, email, profilePhoto, roleId, password } = initialValues;
+          const { name, email, profile_image, roleId, password } = initialValues;
           const emailRegex = /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+/i;
           const imageRegex = /[/].?[jpg?].?[png]/i;
           const errors = {};
@@ -113,20 +154,22 @@ const UserForm = ({ user }) => {
             errors.email = "Campo obligatorio";
           } else if (!emailRegex.test(email)) {
             errors.email = "Email incorrecto.";
-          } else if (!profilePhoto) {
-            errors.profilePhoto = "Debe cargar una imagen, formato JPG o PNG";
-          } else if (profilePhoto && !imageRegex.test(imageFile.type)) {
-            errors.profilePhoto = "El formato de la imagen debe ser JPG o PNG";
+          } else if (!userToEditID) {
+            if(!profile_image){
+              errors.profile_image = "Debe cargar una imagen, formato JPG o PNG";
+            }
+          } else if (profile_image && !imageRegex.test(imageFile.type)) {
+            errors.profile_image = "El formato de la imagen debe ser JPG o PNG";
           } else if (roleId !== "1" && roleId !== "2") {
             errors.roleId = "Debe elegir un rol de usuario.";
           } else if (!password) {
             errors.password = "Campo obligatorio";
           } else if (!password.length >= 8) {
             errors.password = "La contraseña debe tener al menos 8 caracteres.";
-          }
+          } 
           return errors;
         }}
-        onSubmit={handleEdit}
+        onSubmit={() => handleEdit(initialValues)}
       >
         {({ handleSubmit }) => (
           <form className="form-container" onSubmit={handleSubmit}>
@@ -159,11 +202,11 @@ const UserForm = ({ user }) => {
             <input
               className="input-field"
               type="file"
-              name="profilePhoto"
+              name="profile_image"
               onChange={handleChange}
             />
             <ErrorMessage
-              name="profilePhoto"
+              name="profile_image"
               component="div"
               className="invalid-feedback"
             />
@@ -198,12 +241,76 @@ const UserForm = ({ user }) => {
               component="div"
               className="invalid-feedback"
             />
-            <button className="submit-btn" type="submit">
-              Send
+               
+
+            
+            <label>
+            <input type="checkbox" name="check" checked={checked}  
+            onChange={handleChecked}
+             />
+              Acepto
+              <Popup trigger={<button type= 'button'className="btn"> Terminos y condiciones</button>}  modal>
+       
+     {close => (
+      <div className="full">
+
+      <div className="modal">
+        <button className="close" onClick={close}>
+          &times;
+        </button>
+        <div className="Example__container">
+        <div className="Example__container__document">
+        <Document
+        file={samplePdf}
+        options={{ workerSrc: "/pdf.worker.js" }}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        <Page pageNumber={pageNumber} />
+      </Document>
+      <div className="navigation">
+        
+        <button type="button" disabled={pageNumber <= 1} onClick={previousPage} className="left">
+          ←
+        </button>
+        <p>
+          Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
+        </p>
+        <button
+          type="button"
+          disabled={pageNumber >= numPages}
+          onClick={nextPage}
+          className="right"
+        >
+          →
+        </button>
+      </div>
+          
+        </div>
+      </div>
+               
+            
+             
+    
+        
+      </div>
+      </div>
+    )}
+  </Popup>
+              </label>
+              <ErrorMessage
+              name="check"
+              component="div"
+              className="invalid-feedback"
+            />
+           
+            <button disabled={!checked} className="submit-btn" type="submit">
+              Enviar
             </button>
           </form>
         )}
       </Formik>
+      
+
     </div>
   );
 };
