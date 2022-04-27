@@ -9,12 +9,12 @@ const initialState = {
     error: null,
 }
 
-export const fetchActivities = createAsyncThunk('activities/fetchActivities', async () => {
+export const fetchActivities = createAsyncThunk('activities/fetchActivities', async (initialState) => {
     try {
         const response = await axios.get()
         return response.data
     } catch (error) {
-        return console.log("no cargo un carajo", error.message)
+        return initialState.error = error            
     }
 })
 export const postActivities = createAsyncThunk('activities/postActivities', async (initialData) => {

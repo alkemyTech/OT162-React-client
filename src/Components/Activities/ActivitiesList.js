@@ -34,7 +34,7 @@ const ActivitiesList = () => {
 
   useEffect(() => {
     
-      console.log(activities.data);   
+      // console.log(activities.data);   
       activitiesStatus === "idle" && dispatch(fetchActivities());
       console.log(activitiesStatus);     
       activitiesError !== null && errorAlert("Error", "Error al obtener actividades", "Ok")     
@@ -53,7 +53,7 @@ const ActivitiesList = () => {
         <>
           <Title title="Actividades" img="/images/banner-img.jpg" />
           <Grid container spacing={3} sx={{ m: "auto", p: "0 5em" }}>
-            {activities.data ? (
+            {activitiesStatus === "succeded" ? (
               activities.data.map((activity) => {
                 return (
                   <Grid item xs={12} sm={6} md={3} key={activity.id}>
