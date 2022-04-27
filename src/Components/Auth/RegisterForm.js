@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
-import MapContainer from "../Utilities/MapContainer";
+import MapRegister from "../Utilities/MapRegister";
 
 const RegisterForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -109,8 +109,15 @@ const RegisterForm = () => {
               component="div"
               className="invalid-feedback"
             />
-            <div style={{ width: "300px", height: "230px" }}>
-              <MapContainer
+            <p>Agrega tu dirección</p>
+            <div style={{ width: "100%", height: "290px" }}>
+              <MapRegister
+                googleMapURL={
+                  "https://maps.googleapis.com/maps/api/js?v3.exp&key=AIzaSyDExPRXE3odJ_31sK4Kc2lsEgiHEmC6RCw"
+                }
+                containerElement={<div style={{ height: "230px" }} />}
+                mapElement={<div style={{ height: "100%" }} />}
+                loadingElement={<p>Cargando</p>}
                 setInitialValues={setInitialValues}
                 initialValues={initialValues}
               />
@@ -130,7 +137,7 @@ const RegisterForm = () => {
             />
             <input
               className="input-field"
-              type="text"
+              type="password"
               name="password"
               value={initialValues.password}
               onChange={handleChange}
@@ -143,7 +150,7 @@ const RegisterForm = () => {
             />
             <input
               className="input-field"
-              type="text"
+              type="password"
               name="confirmPassword"
               value={initialValues.confirmPassword}
               onChange={handleChange}

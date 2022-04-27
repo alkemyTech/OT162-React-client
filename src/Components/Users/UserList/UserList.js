@@ -20,7 +20,7 @@ import {
 import { errorAlert } from "../../../features/alerts/alerts";
 import Loading from "../../Utilities/Loading";
 import { useState, useEffect } from "react";
-import NavbarBackoffice from '../..//Backoffice/NavbarBackoffice';
+import NavbarBackoffice from "../..//Backoffice/NavbarBackoffice";
 import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
@@ -57,8 +57,8 @@ const UserList = () => {
   return (
     <div>
       <div>
-        <NavbarBackoffice/>
-        <PersistentSideBar />
+        <NavbarBackoffice />
+        {/* <PersistentSideBar /> */}
       </div>
       <h3>User's List</h3>
       <Button variant="contained">
