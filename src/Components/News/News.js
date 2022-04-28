@@ -1,12 +1,12 @@
 import React from "react";
 import Table from "../Table/Table";
-import PersistentSideBar from "../../features/backoffice/sideBar";
+import NavbarBackoffice from "../Backoffice/NavbarBackoffice";
 
 const News = () => {
   return (
     <>
       <div style={{ marginBottom: 64 }}>
-        <PersistentSideBar />
+        <NavbarBackoffice />
       </div>
       <Table />
     </>

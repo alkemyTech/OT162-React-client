@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../Components/Utilities/Loading";
+import Header from "../Components/Header/Header";
 
 const ActivitiesForm = lazy(() =>
   import("../Components/Activities/ActivitiesForm")
@@ -28,6 +29,8 @@ const Home = lazy(() => import("../Components/Home"));
 
 const PublicRoute = () => {
   return (
+    <>
+    <Header/>
     <Suspense fallback={<Loading open={true} />}>
       <Routes>
         <Route path="/" exact element={<Home />} />
@@ -47,6 +50,7 @@ const PublicRoute = () => {
         <Route path="/contacto" element={<Contact />} />
       </Routes>
     </Suspense>
+    </>
   );
 };
 

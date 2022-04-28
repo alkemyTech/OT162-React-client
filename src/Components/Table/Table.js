@@ -14,20 +14,20 @@ import {
 } from "../../features/news/newsSlice";
 import { Button, Input, Stack } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
+import useDebounce from "../../hooks/useDebounce";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.news.data);
   let navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
-    if (search.length >= 3) {
-      dispatch(searchAsyncNewsThunk(search));
-    } else {
-      dispatch(getAsyncNewsThunk());
-    }
-  }, [search, dispatch]);
+    if (debouncedSearch.length >= 3)
+      dispatch(searchAsyncNewsThunk(debouncedSearch));
+    else dispatch(getAsyncNewsThunk());
+  }, [debouncedSearch, dispatch]);
 
   const handleEdit = (id) => navigate(`/backoffice/news/edit/${id}`);
 
