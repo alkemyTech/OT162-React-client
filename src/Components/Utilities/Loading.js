@@ -4,7 +4,7 @@ import { Backdrop } from "@mui/material";
 
 function Loading(props) {
   return (
-    <Backdrop style={{ zIndex: "10", color: "#fff" }} open={props.open}>
+    <Backdrop style={{ zIndex: "10", color: "#fff" }} open={true}>
       <div
         style={{
           display: "flex",
