@@ -65,6 +65,9 @@
 //     )
 //   }
 
+<<<<<<< HEAD
+//   export default Leaflet;
+=======
 function Leaflet() {
   return (
     <iframe
@@ -80,3 +83,4 @@ function Leaflet() {
 }
 
 export default Leaflet;
+>>>>>>> 775d6cb4f69dac26e006bfe6bd341f5237a07233
