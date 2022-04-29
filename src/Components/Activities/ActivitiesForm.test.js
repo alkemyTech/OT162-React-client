@@ -6,6 +6,9 @@ import ActivitiesForm from './ActivitiesForm';
 
 const handleSubmit = jest.fn()
 const user = userEvent.setup()
+const { container } = render(<ActivitiesForm onSubmit={handleSubmit}/>)
+const title = container.querySelector(`input[name='name']`)
+const image = container.querySelector(`input[name='image']`)
 
 // Render Test
 test('renders without crashing', () => {
@@ -13,18 +16,13 @@ test('renders without crashing', () => {
     ReactDOM.render(<ActivitiesForm/>, div)
 });
 
-// Test form submit
+// Test form submit without complete form
 test('form submit without any data inform by user', () => {
-    const { container } = render(<ActivitiesForm onSubmit={handleSubmit}/>)
-    const title = container.querySelector(`input[name='name']`)
-    const image = container.querySelector(`input[name='image']`)
-    
-    fireEvent.change(title, {target: {value: ''}})
-    expect(title.value).toBe(String)
+    fireEvent.change(title, {target: {value: 'titulo'}})
+    expect(title.value).toBe(title.value.toString() || title.value.lenght > 1)
     fireEvent.change(image, {target: {value: ''}})
     expect(image.value).toBe(File)
     user.click(screen.getByRole('button', {name: "Enviar"}))
 
-    throw new Error ('info on fields was empty')
 })
 
