@@ -152,6 +152,7 @@ const NewsForm = () => {
                 placeholder="Please enter a title..."
                 onChange={handleChange}
                 onBlur={handleBlur}
+                data-testid="titleTest"
                 value={initialValues.name}
               />
               <ErrorMessage
@@ -163,6 +164,7 @@ const NewsForm = () => {
               <label htmlFor="text">Contenido</label>
               <CKEditor
                 name="content"
+                data-testid="contentTest"
                 data={initialValues.content}
                 onChange={(evt) => {
                   setInitialValues({
@@ -220,6 +222,7 @@ const NewsForm = () => {
                     disabled
                     id="outlined-disabled"
                     label="Image"
+                    data-testid="imageTest"
                     value={initialValues.image}
                     fullWidth={true}
                   />
@@ -260,6 +263,7 @@ const NewsForm = () => {
                 name="category"
                 onChange={handleChange}
                 value={initialValues.category_id}
+                data-testid="categoryTest"
               >
                 <option value="" disabled>
                   Seleccione una categoria
