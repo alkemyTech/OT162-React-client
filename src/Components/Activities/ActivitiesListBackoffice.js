@@ -22,7 +22,7 @@ import Loading from "../Utilities/Loading";
 import { Backdrop } from "@mui/material";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { deleteActivity } from "../../Services/activitiesApiService.js";
-import PersistentSideBar from '../../features/backoffice/sideBar';
+import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 const useStyles = makeStyles(activitiesTableStyle);
 
@@ -30,7 +30,7 @@ const ActivitiesListBackoffice = () => {
   const classes = useStyles();
 
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(5); 
   const [modalConfirmation, setModalConfirmation] = useState(false);
   const [modalOperation, setModalOperation] = useState([false, ""]);
   const [isLoading, setIsLoading] = useState(false);
@@ -133,7 +133,7 @@ const ActivitiesListBackoffice = () => {
   return (
     <div className={classes.root}>
       <div>
-        <PersistentSideBar/>
+        <NavbarBackoffice/>
       </div>
       <Grid container spacing={3} justifyContent="center" alignItems="flex-end">
         <Grid item xs={12} md={11.5} lg={11}>

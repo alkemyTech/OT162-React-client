@@ -1,18 +1,56 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import CKEditor from "ckeditor4-react";
 import { Formik } from "formik";
-import { putCategory, postCategory } from "../../Services/categoriesApiService";
+import { Box, Button, CircularProgress } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import {
+  putCategory,
+  postCategory,
+  getCategoriesById,
+} from "../../Services/categoriesApiService";
 
 import "../FormStyles.css";
-import { confirmAlert } from "../../features/alerts/alerts";
+import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 
-const CategoriesForm = ({ category }) => {
-  const [initialValues, setInitialValues] = useState({
-    name: category ? category.name : "",
-    description: category ? category.description : "",
-    image: category ? category.image : "",
-    id: category ? category.id : "",
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
   });
+}
+
+const CategoriesForm = () => {
+  const [image, setImage] = useState("");
+  const { id } = useParams();
+  let navigate = useNavigate();
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    description: "",
+    image: "",
+    id: "",
+  });
+
+  useEffect(() => {
+    if (id) {
+      getCategoriesById(id).then(async (response) => {
+        await setInitialValues({ ...response.data.data });
+        let blob = await fetch(response.data.data.image).then((r) => r.blob());
+
+        getBase64(blob).then((data) => {
+          setInitialValues({
+            ...initialValues,
+            ...response.data.data,
+            image: data,
+          });
+        });
+        setImage(response.data.data.image);
+      });
+    }
+  }, []);
 
   const handleChange = (e) => {
     if (e?.target?.name === "name") {
@@ -22,7 +60,11 @@ const CategoriesForm = ({ category }) => {
       let reader = new FileReader();
       let file = e.target.files[0];
       if (file) {
-        reader.readAsDataURL(file);
+        let imageFile = e.target.files[0];
+        getBase64(imageFile).then((data) => {
+          setInitialValues({ ...initialValues, image: data });
+          setImage(data);
+        });
       }
       reader.addEventListener(
         "load",
@@ -38,10 +80,13 @@ const CategoriesForm = ({ category }) => {
   };
 
   const handleSubmit = (e) => {
-    if (category) {
-      putCategory(initialValues.id, initialValues).then(() => {
-        confirmAlert("Operacion exitosa", "Categoria creada", "OK");
-      });
+    if (id) {
+      putCategory(id, initialValues)
+        .then(() => {
+          confirmAlert("Operacion exitosa", "Categoria editada", "OK");
+        })
+        .catch((error) => errorAlert("Error", error.message, "Continuar"))
+        .finally(navigate("/backoffice/categories"));
     } else {
       postCategory(initialValues);
       confirmAlert("Operacion exitosa", "Categoria creada", "OK");
@@ -52,7 +97,7 @@ const CategoriesForm = ({ category }) => {
 
   return (
     <Fragment>
-      <h1>Create or edit a category</h1>
+      <h1>Crear o editar una categoría</h1>
       <Formik
         initialValues={initialValues}
         enableReinitialize
@@ -95,20 +140,35 @@ const CategoriesForm = ({ category }) => {
 
             <CKEditor
               initData={initialValues.description}
+              data={initialValues.description}
               id="description"
               name="description"
               onChange={handleChange}
             />
             {errors.description && touched.description && errors.description}
 
-            <input
-              className="input-field"
-              type="file"
-              id="image"
-              accept=".jpg, .png"
-              name="image"
-              onChange={handleChange}
-            ></input>
+            <div className="image-controls">
+              {!image && <span className="image-msg">Nada Subido Aún!</span>}
+              <Button
+                variant="contained"
+                id="image"
+                component="label"
+                className="image-edit-btn"
+                startIcon={image ? <EditIcon /> : <PhotoCameraIcon />}
+              >
+                <input
+                  className="input-field"
+                  value={undefined}
+                  type="file"
+                  id="image"
+                  accept=".jpg, .png"
+                  name="image"
+                  onChange={handleChange}
+                  hidden
+                ></input>
+              </Button>
+              {image && <img src={image} alt="" />}
+            </div>
             {errors.image && touched.image && errors.image}
 
             <button
