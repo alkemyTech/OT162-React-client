@@ -14,10 +14,8 @@ const CategoriesSearch = () => {
     useEffect(() => {
         if (debouncedSearch.length < 4) {
             dispatch(getCategoriesSlice());
-            console.log("send less than 4");
         } else {
             dispatch(filterCategorySlice(debouncedSearch));
-            console.log("send");
         }
     }, [debouncedSearch, dispatch])
 
