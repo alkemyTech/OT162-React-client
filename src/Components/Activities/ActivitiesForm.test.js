@@ -1,28 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ActivitiesForm from './ActivitiesForm';
 
+const handleSubmit = jest.fn()
+const user = userEvent.setup()
+
 // Render Test
-it('renders without crashing', () => {
+test('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<ActivitiesForm/>, div)
 });
 
 // Test form submit
-test('form submit', () => {
-    const handleSubmit = jest.fn()
-    render(<ActivitiesForm onSubmit={handleSubmit}/>)
-    const user = userEvent.setup()
-
-    user.type(screen.getByLabelText("Titulo de la actividad", {exact: false}))
-    // user.type(screen.getByTestId('descriptionField', {exact: false}))
+test('form submit without any data inform by user', () => {
+    const { container } = render(<ActivitiesForm onSubmit={handleSubmit}/>)
+    const title = container.querySelector(`input[name='name']`)
+    const image = container.querySelector(`input[name='image']`)
+    
+    fireEvent.change(title, {target: {value: ''}})
+    expect(title.value).toBe(String)
+    fireEvent.change(image, {target: {value: ''}})
+    expect(image.value).toBe(File)
     user.click(screen.getByRole('button', {name: "Enviar"}))
 
-    waitFor(() => 
-        expect(handleSubmit).toHaveBeenCalledWith({
-            image: null,
-            name: null,
-        }))
+    throw new Error ('info on fields was empty')
 })
+
