@@ -283,7 +283,11 @@ const NewsForm = () => {
                 className="invalid-feedback"
                 style={{ fontSize: "10px", color: "red" }}
               />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                data-testid="buttonSend"
+              >
                 Enviar
               </Button>
             </form>
