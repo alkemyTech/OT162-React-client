@@ -21,7 +21,9 @@ test('form submit without any data inform by user', () => {
     fireEvent.change(title, {target: {value: 'titulo'}})
     expect(title.value).toBe(title.value.toString() || title.value.lenght > 1)
     fireEvent.change(image, {target: {value: ''}})
-    expect(image.value).toBe(File)
+
+    // as the image will be send as base64 string ->
+    expect(image.value).toBe(image.value.toString() || title.value.lenght > 1)
     user.click(screen.getByRole('button', {name: "Enviar"}))
 
 })
