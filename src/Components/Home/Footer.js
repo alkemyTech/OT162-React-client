@@ -69,7 +69,7 @@ export default function Footer() {
   ];
 
   useEffect(() => {
-    Get(`organization`, 1).then((res) => {
+    Get(`/organization`, 1).then((res) => {
       setOrganization(res);
       setIsLoading(false);
     });
