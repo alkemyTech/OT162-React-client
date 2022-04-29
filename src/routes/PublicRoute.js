@@ -35,12 +35,7 @@ const PublicRoute = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create-activity" element={<ActivitiesForm activity={ {
-          id: 1,
-          name: "Caminata",
-          description: "Caminata en la ciudad de México",
-          image: "https://picsum.photos/200/300",
-        } }/>} />
+        <Route path="/create-activity" element={<ActivitiesForm />} />
         {/* <Route path="/create-testimonials" element={<TestimonialForm />} /> */}
         {/* <Route path="/create-project" element={<ProjectsForm />} /> */}
         <Route path="/school-campaign" element={<SchoolCampaign />} />
