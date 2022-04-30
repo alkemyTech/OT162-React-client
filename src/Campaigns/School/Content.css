@@ -1,0 +1,16 @@
+.counter {
+    background-color: #58dae7;
+    width: fit-content;
+    margin: 3% auto;
+    padding: 2%;
+    border-radius: 10px;
+    font-family: quicksand;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 375px) {
+    .counter {
+        display: none;
+    }
+}
+    
