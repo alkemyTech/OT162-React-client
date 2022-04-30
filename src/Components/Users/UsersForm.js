@@ -315,9 +315,14 @@ const UserForm = ({ user }) => {
             />
            
            {userLogged ? 
+<<<<<<< HEAD
           //  <br/> :
             <button disabled={true} className="submit-btn" type="submit">
               Enviar
+=======
+            <button id="disabledButton" disabled={!checked} className="submit-btn" type="submit">
+              Send
+>>>>>>> refs/remotes/origin/feature/OT162-143
             </button> :
             <button  disabled={!checked} className="submit-btn" type="submit">
               Enviar
