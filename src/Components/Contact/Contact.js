@@ -1,34 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Title from '../Title/Title';
 import Leaflet from '../Leaflet/Leaflet';
 import {Grid, Box, Typography, Button} from '@mui/material';
 import {Facebook, Instagram, Twitter, LinkedIn, PhoneAndroid, LocationOn, LocalPhone} from '@mui/icons-material';
 import './Contact.css';
+import { Get } from '../../Services/publicApiService';
 
-const Contact = ({data}) => {
+const Contact = () => {
+    const [ contact, setContact ] = useState({});
+    useEffect(() => {
+        Get('organization').then((res) => {
+            setContact(res);
+        })
+    }, [])
+
     return (
         <div>
             <Leaflet/>
             <Title title="Contacto" text="" img="images/contacto-title-alkemy.png"/>
             <Box mt={2}>
-                {data ?
+                {contact ?
                 <Grid container rowSpacing={2} sx={{justifyContent: "center"}}>
                     <Grid item xs={12} sm={6}>
-                        <img src={data.logo} alt="logo" className="rounded-img center"/>
+                        <img src={contact.logo} alt="logo" className="rounded-img center"/>
                     </Grid>
                     <Grid item xs={12} sm={6} p={2}>
                         <Grid>
                             <Typography sx={{fontWeight: 'bold', fontSize: '30px'}}>
-                                {data.name}
+                                {contact.name}
                             </Typography>
                             <Typography>
-                                <PhoneAndroid/>{data.cellphone}
+                                <PhoneAndroid/>{contact.cellphone}
                             </Typography>
                             <Typography>
-                                <LocalPhone/>{data.phone}
+                                <LocalPhone/>{contact.phone}
                             </Typography>
                             <Typography>
-                                <LocationOn/>{data.address}
+                                <LocationOn/>{contact.address}
                             </Typography>
                         </Grid>
                         <Grid container spacing={1} mt={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
