@@ -21,6 +21,7 @@ import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { getSlides, getSlidesSearch } from "../../features/slide/slideSlice";
 import NavbarBackoffice from "../Backoffice/NavbarBackoffice";
 import Loading from "../Utilities/Loading";
+// import debounce from "lodash.debounce";
 
 const slideURL = process.env.REACT_APP_SLIDES_ROUTE;
 
@@ -31,7 +32,16 @@ const SlidesList = () => {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
 
+  const debounce = (fn, delay = 500) => {
+    let time;
+    return (...args) => {
+      clearTimeout(time);
+      time = setTimeout(() => fn(...args), delay);
+    };
+  };
+
   useEffect(() => {
+    console.log("ass");
     if (search.length > 2) {
       dispatch(getSlidesSearch(search));
     } else {
@@ -65,6 +75,21 @@ const SlidesList = () => {
     });
   };
 
+  let handleChange = debounceFunction((value) => {
+    setSearch(value);
+  }, 400);
+
+  function debounceFunction(callback, delay = 400) {
+    let timer;
+
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        callback(...args);
+      }, delay);
+    };
+  }
+
   return (
     <div>
       <div>
@@ -78,7 +103,7 @@ const SlidesList = () => {
             size="small"
             variant="standard"
             sx={{ float: "left", my: "2rem" }}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => handleChange(e.target.value)}
           />
           <Button
             component={Link}
@@ -145,7 +170,7 @@ const SlidesList = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Loading open={loading === "loading"}/>
+          <Loading open={loading === "loading"} />
         </Container>
       </div>
     </div>
