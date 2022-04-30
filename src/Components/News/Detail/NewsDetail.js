@@ -4,7 +4,8 @@ import axios from "axios";
 import Title from "../../Title/Title";
 import Loading from "../../Utilities/Loading";
 import { errorAlert } from "../../../features/alerts/alerts";
-import Comments from '../../Comments/Comments';
+import Comments from "../../Comments/Comments";
+import { Navigate } from "react-router-dom";
 
 const NewsDetail = () => {
   let { id } = useParams();
@@ -33,34 +34,42 @@ const NewsDetail = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries, observer) => {
-      const entry = entries[0];
-      setIsVisible(entry.isIntersecting);
-    }, {
-      root: null,
-      rootMargin: "0px",
-      threshold: [0, 0.25, 0.5, 0.75, 1]
-    });
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        const entry = entries[0];
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
     observer.observe(myRef.current);
   }, []);
+
+  // Se que no esta bien esto pero es para facilitar el testing y no implementarlo por completo
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  if (localStorage.getItem("token") === null) {
+    return <Navigate to="/login" />;
+  }
+  ///////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div>
       <div>
-      {isLoading && <Loading />}
-      {details.data && (
-        <div>
-          <Title
-            title={details.data.name}
-            text={details.data.content}
-            img={details.data.image}
-          />
-        </div>
-      )}
+        {isLoading && <Loading />}
+        {details.data && (
+          <div>
+            <Title
+              title={details.data.name}
+              text={details.data.content}
+              img={details.data.image}
+            />
+          </div>
+        )}
       </div>
-      <div ref={myRef}>
-        {isVisible && <Comments/>}
-      </div>
+      <div ref={myRef}>{isVisible && <Comments />}</div>
     </div>
   );
 };
