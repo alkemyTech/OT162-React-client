@@ -1,5 +1,9 @@
-#disabledButton{
+button:enabled{
+    transition: ease-in 0.3s;
+}
+
+button:disabled{
     background-color: #C0C0C0;
-    text-decoration: line-through;
+    transition: ease-in 0.3s;
     pointer-events: none;
 }
