@@ -44,18 +44,18 @@ describe("Register Form Test", () => {
   test("Validate wrong HTTP request", async () => {
     const { getByTestId, getByText, getByRole } = render(<RegisterForm />);
 
-    userEvent.type(getByTestId("nameValidation"), "lea");
-    userEvent.type(getByTestId("lastNameValidation"), "lea");
-    userEvent.type(getByTestId("emailValidation"), "leajhg@mdoaj.com");
+    userEvent.type(getByTestId("nameValidation"), "Leandro");
+    userEvent.type(getByTestId("lastNameValidation"), "Comeron");
+    userEvent.type(getByTestId("emailValidation"), "leocomeron@gmail.com");
     userEvent.type(getByTestId("passwordValidation"), "lcomeron.123");
     userEvent.type(getByTestId("passwordRepeatValidation"), "lcomeron.123");
 
     await wait(() => {
       userEvent.click(getByText("Registrarse"));
-      axiosMock.post.mockResolvedValueOnce();
+      axiosMock.post.mockRejectedValueOnce();
     });
 
-    const errorMsg = getByText("suscripto!");
+    const errorMsg = getByText("Oh no!");
     await wait(() => expect(errorMsg).toBeInTheDocument());
   });
 });
