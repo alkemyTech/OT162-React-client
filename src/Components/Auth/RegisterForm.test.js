@@ -52,6 +52,7 @@ describe("Register Form Test", () => {
 
     await wait(() => {
       userEvent.click(getByText("Registrarse"));
+      axiosMock.post.mockResolvedValueOnce();
     });
 
     const errorMsg = getByText("suscripto!");
