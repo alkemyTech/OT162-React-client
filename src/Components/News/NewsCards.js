@@ -16,8 +16,8 @@ const NewsCards = () => {
   // aplicar debounce!!!
 
   useEffect(() => {
-    setIsLoading(true);
     if (newsSearch.length <= 2) {
+      setIsLoading(true);
       axios
         .get(baseRoute)
         .then((res) => {
@@ -30,6 +30,7 @@ const NewsCards = () => {
           setIsLoading(false);
         });
     } else {
+      setIsLoading(true);
       const delayDebounceFn = setTimeout(() => {
         axios
           .get(`${baseRoute}? search=${newsSearch}`)
