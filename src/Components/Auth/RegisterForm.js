@@ -36,12 +36,10 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     localStorage.setItem("token", "tokenValueExample");
-    console.log("submiting..");
     return await axios
       .post("https://ongapi.alkemy.org/api/register", initialValues)
       .then((data) => {
         confirmAlert("suscripto!", "Felicitaciones, estas registrado", "ok");
-        console.log(data);
       })
 
       .catch((err) =>
