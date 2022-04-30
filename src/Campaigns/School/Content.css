@@ -7,10 +7,43 @@
     font-family: quicksand;
     font-weight: 500;
 }
+.sc_container__middle {
+    display: none;    
+    justify-content: space-evenly;
+}
+.sc_container__middle img {
+    height: inherit;
+}
+.sc_container__middle div {
+    height: 150px;
+    width: 150px;
+}
+.sc_container__middle div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+
 
 @media screen and (max-width: 375px) {
     .counter {
         display: none;
     }
 }
+@media screen and (min-width: 1200px) {
+    .sc_container__middle {
+        display: flex;
+    }
+}
+@media screen and (min-width: 1400px) {
+    .sc_container{
+        background-color: #8aeab242;
+        margin: auto;
+        width: 90%;
+    }
+}
+
+
     
