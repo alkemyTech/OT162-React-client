@@ -16,7 +16,7 @@ const NewsCards = () => {
   // aplicar debounce!!!
 
   useEffect(() => {
-    if (newsSearch.length <= 2) {
+    if (newsSearch.length == 0) {
       setIsLoading(true);
       axios
         .get(baseRoute)
@@ -43,7 +43,7 @@ const NewsCards = () => {
             errorAlert(err, "Invalid request", "Exit");
             setIsLoading(false);
           });
-      }, 1000);
+      }, 3000);
 
       return () => clearTimeout(delayDebounceFn);
     }
@@ -65,8 +65,9 @@ const NewsCards = () => {
           {news.length == 0 && <p>No se encontraron novedades</p>}
           {isLoading && <Loading />}
 
-          {news.map((item) => (
+          {news.map((item, index) => (
             <Grid
+              key={index}
               item
               justifyContent="space-evenly"
               alignItems="stretch"

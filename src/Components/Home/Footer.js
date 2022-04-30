@@ -12,7 +12,13 @@ import {
 import { Get } from "../../Services/publicApiService";
 import logoONG from "../../assets/img/logo-somos-mas.png";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Twitter, LinkedIn } from "@mui/icons-material";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  LinkedIn,
+  FlashOffRounded,
+} from "@mui/icons-material";
 import Loading from "../Utilities/Loading";
 
 const useStyles = makeStyles(footerStyle);
@@ -20,7 +26,7 @@ export default function Footer() {
   const classes = useStyles();
 
   const [organization, setOrganization] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navegationItems = [
     {
@@ -177,7 +183,6 @@ export default function Footer() {
           </Grid>
         </CardContent>
       </Card>
-      <Loading open={isLoading} />
     </>
   );
 }
