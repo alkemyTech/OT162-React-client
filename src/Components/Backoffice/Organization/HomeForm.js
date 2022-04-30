@@ -71,7 +71,8 @@ const HomeForm = () => {
                                 value={values.welcome}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="welcomeValidation"/>
                             <div>{touched.welcome && errors.welcome && <div className="error-feedback">{errors.welcome}</div>}</div>
                         </div>
                         <div className="section-box form-container">
@@ -84,7 +85,8 @@ const HomeForm = () => {
                                 value={values.photo}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="photo1Validation"/>
                             <div>{touched.photo1 && errors.photo1 && <div className="error-feedback">{errors.photo1}</div>}</div>
                             <input 
                                 type="text" 
@@ -94,7 +96,8 @@ const HomeForm = () => {
                                 value={values.photo}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="photoName1Validation"/>
                             <div>{touched.photoName1 && errors.photoName1 && <div className="error-feedback">{errors.photoName1}</div>}</div>
                         </div>
                         <div className="section-box form-container">
@@ -107,7 +110,8 @@ const HomeForm = () => {
                                 value={values.photo}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="photo2Validation"/>
                             <div>{touched.photo2 && errors.photo2 && <div className="error-feedback">{errors.photo2}</div>}</div>
                             <input 
                                 type="text" 
@@ -117,7 +121,8 @@ const HomeForm = () => {
                                 value={values.photo}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="photoName2Validation"/>
                             <div>{touched.photoName2 && errors.photoName2 && <div className="error-feedback">{errors.photoName2}</div>}</div>
                         </div>
                         <div className="section-box form-container">
@@ -130,7 +135,8 @@ const HomeForm = () => {
                                 value={values.photo}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="photo3Validation"/>
                             <div>{touched.photo3 && errors.photo3 && <div className="error-feedback">{errors.photo3}</div>}</div>
                             <input 
                                 type="text" 
@@ -140,7 +146,8 @@ const HomeForm = () => {
                                 value={values.photo}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                className="input-field"/>
+                                className="input-field"
+                                data-testid="photoName3Validation"/>
                             <div>{touched.photoName3 && errors.photoName3 && <div className="error-feedback">{errors.photoName3}</div>}</div>
                         </div>
                         <button type="submit" className="submit-btn">Enviar</button>
