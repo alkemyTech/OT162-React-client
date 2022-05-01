@@ -5,7 +5,7 @@ import {PostSliders} from '../../../Services/homeApiService';
 import NavbarBackoffice from '../NavbarBackoffice';
 
 const HomeForm = () => {
-    const [submittedForm, setSubmittedForm] = useState(false);
+    const [feedback, setFeedback] = useState('');
   return (
     <div>
         <div>
@@ -55,9 +55,12 @@ const HomeForm = () => {
             }}
             onSubmit={(values, {resetForm}) => {
                 resetForm();
-                PostSliders(values);
-                setSubmittedForm(true);
-                setTimeout(() => setSubmittedForm(false), 5000);
+                PostSliders(values)
+                .then(setFeedback('Formulario enviado con exito'))
+                .catch(err => {
+                    setFeedback('Ha ocurrido un error');
+                });
+                setTimeout(() => setFeedback(''), 5000);
             }}>
                 {( {values, errors, touched, handleSubmit, handleChange, handleBlur}) => (
                     <form onSubmit={handleSubmit} className="form-container">
@@ -151,7 +154,7 @@ const HomeForm = () => {
                             <div>{touched.photoName3 && errors.photoName3 && <div className="error-feedback">{errors.photoName3}</div>}</div>
                         </div>
                         <button type="submit" className="submit-btn">Enviar</button>
-                        {submittedForm && <p className="success-feedback">Formulario enviado con exito</p>}
+                        <p className="success-feedback">{feedback}</p>
                     </form>
                 )}
             </Formik>
