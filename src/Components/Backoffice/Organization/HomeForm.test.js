@@ -23,7 +23,7 @@ describe('Submit HomeForm test', () => {
         component.getByText('Texto de bienvenida');
     })
     
-    test('Successfully HTTP request', async () => {
+    test('Successful HTTP request', async () => {
         userEvent.type(component.getByTestId("welcomeValidation"), "ONG - SOMOS MÁS!!!!!");
         userEvent.type(component.getByTestId("photo1Validation"), "https://ongapi.alkemy.org/storage/VTUOm9uqgU.jpeg");
         userEvent.type(component.getByTestId("photoName1Validation"), "Hospital");
