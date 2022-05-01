@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../Components/Utilities/Loading";
 import PublicLayout from "./PublicLayout";
+import RegisterForm from "../Components/Auth/RegisterForm";
 
 const SchoolCampaign = lazy(() => import("../Campaigns/School/SchoolCampaign"));
 const ToysCampaign = lazy(() => import("../Campaigns/Toys/ToysCampaign"));
@@ -27,6 +28,7 @@ const PublicRoute = () => {
         <Routes>
           <Route element={<PublicLayout />}>
             <Route path="/" exact element={<Home />} />
+            <Route path="registro" element={<RegisterForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="/actividades/:id" element={<ActivityDetail />} />
             <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
