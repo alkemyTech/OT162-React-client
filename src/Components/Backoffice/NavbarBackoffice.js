@@ -19,6 +19,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import BOSections from '../../features/backoffice/backOfficeSections';
 import { Link } from 'react-router-dom';
 import { Get } from '../../Services/privateApiService';
+import './NavbarBackoffice.css';
+import { useNavigate } from 'react-router-dom';
 
 const referenceWidth = 240;
 
@@ -57,6 +59,14 @@ export default function NavbarBackoffice(){
     const [open, setOpen] = useState(false);
     const [navbarName, setNavbarName] = useState('Backoffice');
 
+    const navigate = useNavigate();
+
+    const Logout = () => {
+        localStorage.removeItem('token');
+        // window.location.href = '/';
+        navigate('/', { replace: true });
+    }
+
     useEffect(() => {
         Get('https://ongapi.alkemy.org/public/api/organization')
         .then((res) => {
@@ -88,7 +98,12 @@ export default function NavbarBackoffice(){
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
                         {navbarName}
-                    </Typography>
+                    </Typography>                    
+                <div className='logout'>
+                    <button onClick={Logout}>
+                        Log out
+                    </button>
+                </div>
                 </Toolbar>
                 <Drawer
                     sx={{
@@ -123,6 +138,7 @@ export default function NavbarBackoffice(){
                             </Link>
                         ))}
                     </List>
+            
                 </Drawer>
             </SideBar>
         </Box>
