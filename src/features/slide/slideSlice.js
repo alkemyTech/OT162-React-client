@@ -1,8 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getSlideList, postSlide, deleteSlide } from "../../Services/slideService";
+import { getSlideList, postSlide, deleteSlide,getSlideSearch } from "../../Services/slideService";
 
 export const getSlides = createAsyncThunk("slide/getSlides", async () => {
   return getSlideList().then((res) => {
+    return res.data.data;
+  });
+});
+
+export const getSlidesSearch = createAsyncThunk("slide/getSlidesSearch", async (search) => {
+  return getSlideSearch(search).then((res) => {
     return res.data.data;
   });
 });
@@ -41,6 +47,16 @@ const slideSlice = createSlice({
       state.status = "failed";
     },
 
+    [getSlidesSearch.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [getSlidesSearch.fulfilled]: (state, { payload }) => {
+      state.list = payload;
+      state.status = "success";
+    },
+    [getSlidesSearch.rejected]: (state, action) => {
+      state.status = "failed";
+    },
 
     [addSlide.fulfilled]: (state, { payload }) => {
       state.list = [payload, ...state.list];
