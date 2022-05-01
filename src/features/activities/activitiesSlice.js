@@ -9,31 +9,23 @@ const initialState = {
     error: null,
 }
 
-export const fetchActivities = createAsyncThunk('activities/fetchActivities', async () => {
+export const fetchActivities = createAsyncThunk('activities/fetchActivities', async (initialState) => {
     try {
         const response = await axios.get(ACTIVITIES_URL)
         return response.data
     } catch (error) {
-        return error.message
+        return initialState.error = error            
     }
 })
-export const postActivities = createAsyncThunk('activities/postActivities', async (initialData) => {
-    try {
-        const response = await axios.post(ACTIVITIES_URL, initialData)
+export const postActivities = createAsyncThunk('activities/postActivities', async (initialData) => {   
+        const response = await axios.post(  ACTIVITIES_URL, initialData)
         console.log(response.data)
-        return response.data
-    } catch (error) {
-        return error.message
-    }
+        return response.data    
 })
-export const updateActivities = createAsyncThunk('activities/updateActivities', async (initialData) => {
-    try {
+export const updateActivities = createAsyncThunk('activities/updateActivities', async (initialData, initialState) => {  
         const response = await axios.put(`https://ongapi.alkemy.org/api/activities/${initialData.id}`, initialData)
         console.log(response.data)
         return response.data
-    } catch (error) {
-        return error.message
-    }
 })
 
 
@@ -57,15 +49,28 @@ export const activitiesSlice = createSlice({
             state.status = 'failed'
             state.error = action.error.message
         })
+        .addCase(postActivities.pending, (state, action) => {
+            state.status = 'loading'
+        })
         .addCase(postActivities.fulfilled, (state, action) => {
-            console.log(action.payload)            
-            state.activities.push(action.payload)
-            console.log(state.activities)
+            state.status = 'succeeded'                      
+            state.activities.push(action.payload)    
+            // state.activities = [...state.activities, action.payload]
+        })
+        .addCase(postActivities.rejected, (state, action) => {
+            state.status = 'failed'
+            state.error = action.error.message
+        })
+        .addCase(updateActivities.pending, (state, action) => {
+            state.status = 'loading'
         })
         .addCase(updateActivities.fulfilled, (state, action) => {
-            console.log(action.payload)            
-            state.activities.push(action.payload)
-            console.log(state.activities)
+            state.status = 'succeeded'                    
+            state.activities = [...state.activities, action.payload]      
+        })
+        .addCase(updateActivities.rejected, (state, action) => {
+            state.status = 'failed'
+            state.error = action.error.message          
         })
     }
 })
