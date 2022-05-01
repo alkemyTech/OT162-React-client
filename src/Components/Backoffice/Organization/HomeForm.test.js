@@ -36,4 +36,22 @@ describe('Submit HomeForm test', () => {
             expect(success).toBeInTheDocument();
         });
     })
+
+    test('Incorrect submit', async () => {
+        userEvent.type(component.getByTestId("welcomeValidation"), "Pocos caracteres");
+        userEvent.type(component.getByTestId("photo1Validation"), "https://ongapi.alkemy.org/storage/VTUOm9uqgU.jpeg");
+        userEvent.type(component.getByTestId("photoName1Validation"), "Hospital");
+        userEvent.type(component.getByTestId("photo2Validation"), "Algo distinto a una url");
+        userEvent.type(component.getByTestId("photoName2Validation"), "Museo");
+        userEvent.type(component.getByTestId("photo3Validation"), "https://ongapi.alkemy.org/storage/HULlbUxo5P.jpeg");
+        userEvent.type(component.getByTestId("photoName3Validation"), "");
+        const button = component.getByText('Enviar');
+        fireEvent.click(button)
+        await wait(() => {
+            const welcomeError = component.queryByText('Debe contener al menos 20 caracteres');
+            const emailError = component.queryByText('Debes introducir un link valido');
+            const error = component.queryByText('Este campo es obligatorio');
+            expect(emailError || welcomeError || error).toBeInTheDocument();
+        });
+    })
 })
