@@ -51,7 +51,7 @@ describe('Submit HomeForm test', () => {
             const welcomeError = component.queryByText('Debe contener al menos 20 caracteres');
             const emailError = component.queryByText('Debes introducir un link valido');
             const error = component.queryByText('Este campo es obligatorio');
-            expect(emailError || welcomeError || error).toBeInTheDocument();
+            expect(emailError && welcomeError && error).toBeInTheDocument();
         });
     })
 })
