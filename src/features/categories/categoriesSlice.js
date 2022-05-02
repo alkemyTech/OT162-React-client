@@ -17,11 +17,8 @@ export const deleteCategorySlice = createAsyncThunk("category/deleteCategorySlic
   });
 });
 
-let categoriesList = ''
-
 export const filterCategorySlice = createAsyncThunk("category/filterCategorySlice", async (value) => {
   return axios.get('https://ongapi.alkemy.org/public/api/categories?search='+value).then((res) => {
-    categoriesList = res.data.data;
     return res.data.data;
 });
 })
@@ -55,8 +52,8 @@ const categoriesSlice = createSlice({
         [deleteCategorySlice.rejected]: (state, action) => {
           state.status = "failed";
         },
-        [filterCategorySlice.fulfilled]: (state, action) => {
-          const categories = categoriesList;
+        [filterCategorySlice.fulfilled]: (state, { payload }) => {
+          const categories = payload;
           state.list = [...categories]
           state.status = "success";
         }
