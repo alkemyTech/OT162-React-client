@@ -30,6 +30,7 @@ const PublicRoute = () => {
             <Route path="/" exact element={<Home />} />
             <Route path="registro" element={<RegisterForm />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterForm />} />
             <Route path="/actividades/:id" element={<ActivityDetail />} />
             <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
             <Route path="/gracias" element={<Thanks />} />
