@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getCategories, deleteCategory } from "../../Services/categoriesApiService";
-import axios from 'axios';
 
 export const getCategoriesSlice = createAsyncThunk("category/getCategoriesSlice", async () => {
   return getCategories().then((res) => {
@@ -18,7 +17,7 @@ export const deleteCategorySlice = createAsyncThunk("category/deleteCategorySlic
 });
 
 export const filterCategorySlice = createAsyncThunk("category/filterCategorySlice", async (value) => {
-  return axios.get('https://ongapi.alkemy.org/public/api/categories?search='+value).then((res) => {
+  return getCategories('categories?search='+value).then((res) => {
     return res.data.data;
 });
 })
