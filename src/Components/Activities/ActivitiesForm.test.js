@@ -37,6 +37,9 @@ test('3# -> Form submit with data', () =>{
     renderForm()
     fireEvent.change(title, {target: {value: testTitle}})
     expect(title.value).toBe(title.value.toString() || title.value.lenght > 1)
+    async() =>{
+        (await user.upload(image, testImage))
+    } 
     user.click(screen.getByRole('button', { name: /enviar/i }))
     expect(handleSubmit)
 })
@@ -53,11 +56,24 @@ test('4# -> Render of error message on title field', () => {
 })
 
 // 5 - Render test for on image field
-test('5# -> Render of error message on image field', () =>{
+test('5# -> Render of error message on image field', () => {
     renderForm()
     fireEvent.change(image, {target: {value: ''}})
     user.click(screen.getByRole('button', { name: /enviar/i }))
     async() =>{
         (await expect(screen.getByText(/imagen requerida/i)))
     } 
+})
+
+// 6 - Test function createActivity (HTTP Request)
+test('6# -> Test createActivity function // HTTP Post Request', () => {
+    renderForm()
+    fireEvent.change(title, {target: {value: testTitle}})
+    async() =>{
+        (await user.upload(image, testImage))
+    } 
+    user.click(screen.getByRole('button', { name: /enviar/i }))
+    async() => {
+        (await expect(handleSubmit(createActivity())))
+    }
 })
