@@ -4,7 +4,7 @@ const categoriesRoute = "https://ongapi.alkemy.org/api/categories";
 
 const getCategories = (search) => {
   if (search) {
-    return Get('https://ongapi.alkemy.org/api/'+search);
+    return Get('https://ongapi.alkemy.org/api/categories?'+search);
   } else {
     return Get(categoriesRoute);
   }

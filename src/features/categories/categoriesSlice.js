@@ -17,7 +17,7 @@ export const deleteCategorySlice = createAsyncThunk("category/deleteCategorySlic
 });
 
 export const filterCategorySlice = createAsyncThunk("category/filterCategorySlice", async (value) => {
-  return getCategories('categories?search='+value).then((res) => {
+  return getCategories('search='+value).then((res) => {
     return res.data.data;
 });
 })
