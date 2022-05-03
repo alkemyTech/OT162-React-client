@@ -41,8 +41,8 @@ test('3# -> Form submit with data', () =>{
     expect(handleSubmit)
 })
 
-// 4 - Render test for errors on form
-test('4# -> Render of error message on form component', () => {
+// 4 - Render test for error on title field
+test('4# -> Render of error message on title field', () => {
     renderForm()
     fireEvent.change(title, {target: {value: ''}})
     user.click(screen.getByRole('button', { name: /enviar/i }))
@@ -50,4 +50,14 @@ test('4# -> Render of error message on form component', () => {
         (await expect(screen.getByText(/campo requerido/i)))
     } 
     
+})
+
+// 5 - Render test for on image field
+test('5# -> Render of error message on image field', () =>{
+    renderForm()
+    fireEvent.change(image, {target: {value: ''}})
+    user.click(screen.getByRole('button', { name: /enviar/i }))
+    async() =>{
+        (await expect(screen.getByText(/imagen requerida/i)))
+    } 
 })
