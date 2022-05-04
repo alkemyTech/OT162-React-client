@@ -7,6 +7,15 @@ import { BrowserRouter } from "react-router-dom";
 describe("Tests when user is authenticated", () => {
   beforeAll(() => localStorage.setItem("token", "12345"));
 
+  test("account menu should be rendered", () => {
+    const navbar = render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
+    expect(navbar.getByLabelText("account")).toBeInTheDocument();
+  });
+
   test("navbar should show 'Mi perfil' and navigation buttons if is not admin", () => {
     const navbar = render(
       <BrowserRouter>
