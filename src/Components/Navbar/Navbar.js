@@ -58,7 +58,7 @@ const Navbar = () => {
     <div className="navbar">
       {menuItems.map((link) => {
         return (
-          <div>
+          <div key={link.name}>
             <NavLink to={link.path}>{link.name}</NavLink>
           </div>
         );

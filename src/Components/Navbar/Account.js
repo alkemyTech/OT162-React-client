@@ -23,22 +23,23 @@ const Account = ({ onLogout, isAdmin, changeAdmin }) => {
   };
 
   const publicLinks = [
-    <MenuItem onClick={() => navigate("/profile")}>
-      <Avatar />
-      Mi perfil
-    </MenuItem>,
-    <MenuItem onClick={() => navigate("/actividades")}>Actividades</MenuItem>,
-    <MenuItem onClick={() => navigate("/Novedades")}>Novedades</MenuItem>,
-    <MenuItem onClick={() => navigate("/miembros")}>Miembros</MenuItem>,
-    <MenuItem onClick={() => navigate("/donar")}>Donar</MenuItem>,
-    <MenuItem onClick={() => navigate("/contacto")}>Contacto</MenuItem>,
+    {
+      onClick: () => navigate("/profile"),
+      name: "Mi perfil",
+      icon: <Avatar />,
+    },
+    { onClick: () => navigate("/actividades"), name: "Actividades" },
+    { onClick: () => navigate("/Novedades"), name: "Novedades" },
+    { onClick: () => navigate("/miembros"), name: "Miembros" },
+    { onClick: () => navigate("/donar"), name: "Donar" },
+    { onClick: () => navigate("/contacto"), name: "Contacto" },
   ];
 
   const adminLinks = [
-    <MenuItem onClick={() => navigate("/actividades")}>Actividades</MenuItem>,
-    <MenuItem onClick={() => navigate("/Novedades")}>Novedades</MenuItem>,
-    <MenuItem onClick={() => navigate("/miembros")}>Miembros</MenuItem>,
-    <MenuItem onClick={() => navigate("/backoffice")}>Escritorio</MenuItem>,
+    { onClick: () => navigate("/actividades"), name: "Actividades" },
+    { onClick: () => navigate("/Novedades"), name: "Novedades" },
+    { onClick: () => navigate("/miembros"), name: "Miembros" },
+    { onClick: () => navigate("/backoffice"), name: "Escritorio" },
   ];
 
   return (
@@ -47,6 +48,7 @@ const Account = ({ onLogout, isAdmin, changeAdmin }) => {
         onClick={handleClick}
         size="small"
         sx={{ ml: 2 }}
+        aria-label="account"
         aria-controls={open ? "account-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
@@ -54,6 +56,7 @@ const Account = ({ onLogout, isAdmin, changeAdmin }) => {
         <Avatar sx={{ width: 32, height: 32 }}>L</Avatar>
       </IconButton>
       <Menu
+        aria-label="account menu"
         anchorEl={anchorEl}
         id="account-menu"
         open={open}
@@ -88,8 +91,20 @@ const Account = ({ onLogout, isAdmin, changeAdmin }) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {!isAdmin && publicLinks.map((link) => link)}
-        {isAdmin && adminLinks.map((link) => link)}
+        {!isAdmin &&
+          publicLinks.map((link) => (
+            <MenuItem key={link.name} onClick={link.onClick}>
+              {link?.icon}
+              {link.name}
+            </MenuItem>
+          ))}
+        {isAdmin &&
+          adminLinks.map((link) => (
+            <MenuItem key={link.name} onClick={link.onClick}>
+              {link?.icon}
+              {link.name}
+            </MenuItem>
+          ))}
         <MenuItem onClick={onLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
