@@ -9,9 +9,9 @@ const DebounceSearch = ({query,setQuery,  setResult, setLoading}) => {
 
 
   useEffect(() => {
-    console.log('me volvi a montar')
+   
     if (  query.length == 0) {
-      console.log('me estoy ejecutando')
+     
       setLoading(true);
       axios
         .get(baseRoute)
