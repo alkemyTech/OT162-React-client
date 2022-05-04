@@ -8,7 +8,7 @@ const Card = ({ image, title, description, placeholder }) => {
       <div className="card-img-div">
         {image ? (
           <div className="card-img">
-            <ImageRenderer src={image} alt={title}/>
+            <ImageRenderer src={image} alt={title} />
           </div>
         ) : (
           <h3>{placeholder}</h3>
@@ -16,7 +16,10 @@ const Card = ({ image, title, description, placeholder }) => {
       </div>
       <div>
         <h3 className="card-title">{title}</h3>
-        <p className="card-description">{description}</p>
+        <span
+          className="card-description"
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </div>
     </div>
   );

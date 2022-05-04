@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../FormStyles.css";
 import { Form, Formik } from "formik";
 import {
@@ -16,7 +16,16 @@ import {
   createActivity,
   updateActivity,
 } from "../../Services/activitiesApiService";
-// import DescriptionField from "./DescriptionField";
+import DescriptionField from "./DescriptionField";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectActivities,
+  getActivitiesStatus,
+  getActivitiesError,
+  postActivities,
+  updateActivities,
+} from "../../features/activities/activitiesSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const acceptedImageFormats = ["image/jpeg", "image/png"];
 
@@ -29,6 +38,40 @@ const ActivitiesForm = ({ activity }) => {
   });
   const [image, setImage] = useState(activity ? activity.image : "");
   const [loading, setLoading] = useState(false);
+  const [method, setMethod] = useState(activity ? "PUT" : "POST");
+
+  const dispatch = useDispatch();
+  const activities = useSelector(selectActivities);
+  const activitiesStatus = useSelector(getActivitiesStatus);
+  const activitiesError = useSelector(getActivitiesError);
+  // console.log(activity);
+
+  useEffect(() => {
+    activitiesStatus === "idle" && setLoading(false);
+    activitiesStatus === "loading" && setLoading(true);
+    if(activitiesStatus === "failed" ){
+      if(method === "POST"){
+        errorAlert("Error", "Error al crear actividad", "Ok") 
+        setLoading(false)
+      }
+      if(method === "PUT"){
+        errorAlert("Error", "Error al actualizar actividad", "Ok") 
+        setLoading(false)
+      }      
+    } 
+    if(activitiesStatus === "succeeded" ){
+      if(method === "POST"){
+        confirmAlert("Excelente", "Actividad creada", "Ok");
+        setLoading(false)
+      }
+      if(method === "PUT"){
+        confirmAlert("Excelente", "Actividad actualizada", "Ok");
+        setLoading(false)
+      }      
+    }    
+    console.log(activitiesStatus)
+    
+  }, [activitiesStatus, activitiesError, activities, method]);
 
   const handleChange = (e) => {
     if (e?.target?.name === "name") {
@@ -57,33 +100,9 @@ const ActivitiesForm = ({ activity }) => {
   const handleSubmit = () => {
     setLoading(true);
     if (activity) {
-      updateActivity(
-        `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}/${initialValues.id}`,
-        initialValues
-      )
-        .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
-        .catch((error) => {
-          errorAlert(
-            "Error",
-            "Hubo un problema al actualizar la actividad",
-            "Exit"
-          );
-          console.log(error);
-        })
-        .finally(() => setLoading(false));
-    } else {
-      // Si bien el ticket dice hacer el post al endpoint activities/create
-      // lo hago a activities directamente ya que en los doc de la api dice eso
-      createActivity(
-        `${process.env.REACT_APP_API_URL_BASE}${process.env.REACT_APP_ACTIVITY_ROUTE}`,
-        initialValues
-      )
-        .then(() => confirmAlert("Excelente", "Actividad creada", "Exit"))
-        .catch((error) => {
-          errorAlert("Error", "Hubo un problema al crear la actividad", "Exit");
-          console.log(error);
-        })
-        .finally(() => setLoading(false));
+      dispatch(updateActivities(initialValues))      
+    } else {     
+      dispatch(postActivities(initialValues))       
     }
   };
 
@@ -114,12 +133,10 @@ const ActivitiesForm = ({ activity }) => {
     >
       {(props) => (
         <Container maxWidth="lg" component="main">
-          <h1>{activity ? "Edit your activity!" : "Create a new activity!"}</h1>
+          <h1>{activity ? "Editar actividad" : "Crear una nueva actividad"}</h1>
           <Form className="form-container">
             <div className="image-controls">
-              {!image && (
-                <span className="image-msg">Nothing Uploaded Yet!</span>
-              )}
+              {!image && <span className="image-msg">Nada subido aún!</span>}
               <Button
                 variant="contained"
                 id="image"
@@ -127,7 +144,7 @@ const ActivitiesForm = ({ activity }) => {
                 className="image-edit-btn"
                 startIcon={image ? <EditIcon /> : <PhotoCameraIcon />}
               >
-                {image ? "Edit Image" : "Upload Image*"}
+                {image ? "Editar Imagen" : "Subir Imagen*"}
                 <input
                   type="file"
                   accept=".jpg,.png"
@@ -142,10 +159,10 @@ const ActivitiesForm = ({ activity }) => {
             <FormHelperText error children={props.errors.image} />
             <TextField
               id="outlined-helperText"
-              label="Activity Title"
+              label="Titulo de la actividad"
               type="text"
               name="name"
-              placeholder="Activity Title"
+              placeholder="Titulo de la actividad"
               value={props.values.name}
               onChange={handleChange}
               onBlur={props.handleBlur}
@@ -153,14 +170,12 @@ const ActivitiesForm = ({ activity }) => {
               error={!!props.errors.name}
               required
             />
-            {/* <Field
-              component={DescriptionField}
+            <DescriptionField
               className="input-field"
-              type="text"
               name="description"
-              placeholder="Write some activity description"
               onChange={handleChange}
-            /> */}
+              data={initialValues.description}
+            />
             <Box sx={{ m: 1, position: "relative" }}>
               <Button
                 sx={{
@@ -175,7 +190,7 @@ const ActivitiesForm = ({ activity }) => {
                 }
                 onClick={props.handleBlur}
               >
-                Submit
+                Enviar
               </Button>
               {loading && (
                 <CircularProgress
@@ -198,3 +213,14 @@ const ActivitiesForm = ({ activity }) => {
 };
 
 export default ActivitiesForm;
+
+              // .then(() => confirmAlert("Excelente", "Actividad actualizada", "Exit"))
+              // .catch((error) => {
+              //   errorAlert(
+              //     "Error",
+              //     "Hubo un problema al actualizar la actividad",
+              //     "Exit"
+              //   );
+              //   console.log(error);
+              // })
+              // .finally(() => setLoading(false));

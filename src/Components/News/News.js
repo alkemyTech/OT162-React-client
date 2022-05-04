@@ -1,20 +1,16 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
-import Table from '../Table/Table';
-import PersistentSideBar from '../../features/backoffice/sideBar';
+import React from "react";
+import Table from "../Table/Table";
+import NavbarBackoffice from "../Backoffice/NavbarBackoffice";
 
 const News = () => {
   return (
-      <>
-        <div>
-          <PersistentSideBar/>
-        </div>
-        <Link to="/backoffice/news/create">
-            <button>Agregar Novedades</button>
-        </Link>
-        <Table/>
-      </>      
-  )
-}
+    <>
+      <div style={{ marginBottom: 64 }}>
+        <NavbarBackoffice />
+      </div>
+      <Table />
+    </>
+  );
+};
 
-export default News
+export default News;

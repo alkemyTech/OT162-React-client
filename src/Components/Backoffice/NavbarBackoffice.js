@@ -1,5 +1,5 @@
 import { styled, useTheme } from '@mui/material/styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,8 +16,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import BOSections from './backOfficeSections';
+import BOSections from '../../features/backoffice/backOfficeSections';
 import { Link } from 'react-router-dom';
+import { Get } from '../../Services/privateApiService';
 
 const referenceWidth = 240;
 
@@ -51,9 +52,17 @@ const SidebarHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-export default function PersistentSideBar(){
+export default function NavbarBackoffice(){
     const theme = useTheme();
     const [open, setOpen] = useState(false);
+    const [navbarName, setNavbarName] = useState('Backoffice');
+
+    useEffect(() => {
+        Get('https://ongapi.alkemy.org/public/api/organization')
+        .then((res) => {
+            setNavbarName(res.data.data.name);
+        })
+    }, []);
 
     const SideBarOpen = () => {
         setOpen(true);
@@ -66,7 +75,7 @@ export default function PersistentSideBar(){
     return(
         <Box sx={{ display: 'flex' }}>
             <CssBaseline/>
-            <SideBar position="flex" open={open}>
+            <SideBar position="static" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -78,7 +87,7 @@ export default function PersistentSideBar(){
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Backoffice
+                        {navbarName}
                     </Typography>
                 </Toolbar>
                 <Drawer
@@ -101,9 +110,9 @@ export default function PersistentSideBar(){
                     </SidebarHeader>
                     <Divider/>
                     <List>
-                        {BOSections.map((section) => (
-                            <Link style={sideBarStyle} to={section.path}>
-                                <ListItem button key={section.name}>
+                        {BOSections.map((section, index) => (
+                            <Link key={index} style={sideBarStyle} to={section.path}>
+                                <ListItem button>
                                     <ListItemIcon>
                                         <ArrowForwardIosIcon/>
                                     </ListItemIcon>

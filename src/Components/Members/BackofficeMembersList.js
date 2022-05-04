@@ -31,9 +31,9 @@ const BackofficeMembersList = () => {
   const deleteMember = (id) => {
     
     swal({
-      title: "Are you sure you want to delete?",
-      text: "This change cannot be reverted",
-      buttons: ["No", "Yes"],
+      title: "¿Está seguro que desea eliminar el miembro?",
+      text: "Este cambio es irreversible",
+      buttons: ["No", "Si"],
       dangerMode: "true",
     }).then((willDelete) => {
       if (willDelete) {
@@ -42,9 +42,9 @@ const BackofficeMembersList = () => {
           .delete(`${baseUrl}/members/${id}`)
           .then(() => {
             setLoading(false)
-            swal('Success','Member deleted successfully','success')})
+            swal('Miembro eliminado correctamente','','success')})
           .catch((err) => {           
-            errorAlert("Error","Oops! something went wrong, please try again","error")
+            errorAlert("Error","Hubo un problema al eliminar el miembro.","Continuar")
             setLoading(false)
             console.log(err);
           });
@@ -55,7 +55,7 @@ const BackofficeMembersList = () => {
   return (
     <div>
       <div>
-            <PersistentSideBar/>
+        <NavbarBackoffice/>
       </div>
       <Container maxWidth="lg">
 
@@ -72,7 +72,7 @@ const BackofficeMembersList = () => {
           variant="contained"
           sx={{ margin: '20px 0' }}
         >
-          Add new member
+          Agregar un nuevo miembro
         </Button>
        <DebounceSearch query={query} setQuery={setQuery} setResult={setResult} setLoading={setLoading} style={{ }}/>
         </div>
@@ -83,9 +83,9 @@ const BackofficeMembersList = () => {
             <TableHead>
               <TableRow>
                 
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Photo</TableCell>
-                <TableCell align="center">Actions</TableCell>
+                <TableCell align="center">Nombre</TableCell>
+                <TableCell align="center">Imagen</TableCell>
+                <TableCell align="center">Acciones</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

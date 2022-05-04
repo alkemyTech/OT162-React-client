@@ -1,13 +1,34 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { DeleteNews, GetNews } from "../../Services/newsApiService";
+import {
+  DeleteNews,
+  GetNews,
+  GetSingleNews,
+  SearchNews,
+} from "../../Services/newsApiService";
 
-const initialNewsState = { data: [], status: "loading...", error: null };
+const initialNewsState = { data: [], status: "idle", error: null };
 
 export const getAsyncNewsThunk = createAsyncThunk("url/news", async () => {
   return GetNews().then((res) => {
     return res.data.data;
   });
 });
+export const getAsyncNewsByIdThunk = createAsyncThunk(
+  "url/newsById",
+  async (id) => {
+    return GetSingleNews(id).then((res) => {
+      return res.data.data;
+    });
+  }
+);
+export const searchAsyncNewsThunk = createAsyncThunk(
+  "url/newsSearch",
+  async (searchParam) => {
+    return SearchNews(searchParam).then((res) => {
+      return res.data.data;
+    });
+  }
+);
 
 export const deleteAsyncNewsThunk = createAsyncThunk(
   "url/deleteNews",
@@ -32,10 +53,28 @@ const newsSlice = createSlice({
     [getAsyncNewsThunk.rejected]: (state, action) => {
       state.status = "failed";
     },
+    [getAsyncNewsByIdThunk.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [getAsyncNewsByIdThunk.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.status = "success";
+    },
+    [getAsyncNewsByIdThunk.rejected]: (state, action) => {
+      state.status = "failed";
+    },
+    [searchAsyncNewsThunk.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [searchAsyncNewsThunk.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.status = "success";
+    },
+    [searchAsyncNewsThunk.rejected]: (state, action) => {
+      state.status = "failed";
+    },
     [deleteAsyncNewsThunk.fulfilled]: (state, action) => {
-      const Allnews = state.data.filter(
-        (news) => news.id !== action.payload.id
-      );
+      const Allnews = state.data.filter((news) => news.id !== action.meta.arg);
 
       state.data = [...Allnews];
       state.status = "success";
