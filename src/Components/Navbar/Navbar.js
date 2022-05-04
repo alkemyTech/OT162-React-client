@@ -8,7 +8,9 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(
+    JSON.parse(localStorage.getItem("isAdmin"))
+  );
   let navigate = useNavigate();
 
   // Se que no esta bien esto pero es para facilitar el testing y no implementarlo por completo
