@@ -3,6 +3,8 @@ import {Card, CardContent, Grid, Typography, Button, Box, Modal, Fade} from '@mu
 import './Backoffice.css';
 import { Link } from "react-router-dom";
 import NavbarBackoffice from '../Components/Backoffice/NavbarBackoffice';
+import Header from '../Components/Header/Header';
+import PrivateLayout from '../routes/PrivateLayout';
 
 const style = {
     position: 'absolute',
@@ -23,7 +25,8 @@ const Backoffice = () => {
     return (
         <>
         <div>
-            <NavbarBackoffice/>
+           <PrivateLayout/>
+
         </div>
             <div>
                 <Modal open={open} onClose={handleClose}>

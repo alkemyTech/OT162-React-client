@@ -15,6 +15,7 @@ import ContactForm from "../Components/Contact/ContactForm";
 import CategoriesForm from "../Components/Categories/CategoriesForm";
 import UserForm from "../Components/Users/UsersForm";
 import { GetAuth } from "../Services/privateApiService";
+import PrivateLayout from "./PrivateLayout";
 
 const PrivateRoute = () => {
 
@@ -22,6 +23,8 @@ const PrivateRoute = () => {
 
   return (
     <Routes>
+    
+      
       <Route path="/backoffice" element={auth ? <Backoffice /> : <Navigate to="/" />} />
       <Route path="/backoffice/news/create" element={auth ? <NewsForm /> : <Navigate to="/" />} />
       <Route path="/backoffice/news/edit/:id" element={auth ? <NewsForm /> : <Navigate to="/" />} />
