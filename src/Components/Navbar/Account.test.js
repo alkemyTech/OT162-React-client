@@ -16,7 +16,7 @@ describe("Tests when user is authenticated", () => {
     expect(navbar.getByLabelText("account")).toBeInTheDocument();
   });
 
-  test("navbar should show 'Mi perfil' and navigation buttons if is not admin", () => {
+  test("account menu should show 'Mi perfil' and public navigation links if is not admin", () => {
     const navbar = render(
       <BrowserRouter>
         <Navbar />
@@ -32,7 +32,7 @@ describe("Tests when user is authenticated", () => {
     expect(accountMenu).toHaveTextContent("Contacto");
     expect(accountMenu).toHaveTextContent("Cerrar sesión");
   });
-  test("navbar should hide 'Contacto', 'Donation' and logins buttons and show 'Escritorio' button if is admin", () => {
+  test("account menu should hide 'Mi Perfil', 'Contacto', 'Donar' and logins buttons and show 'Escritorio' button if is admin", () => {
     const navbar = render(
       <BrowserRouter>
         <Navbar />
