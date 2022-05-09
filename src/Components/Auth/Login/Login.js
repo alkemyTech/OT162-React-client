@@ -69,7 +69,7 @@ const Login = () => {
                   console.log("Bienvenido", userInfo.email);
                   setInvalidPass(false);
                   setLogin(true);
-                  setName(userInfo.name);
+                  setName(userInfo.email);
                 }
                 if (res.error) {
                   console.log("Contraseña invalida");

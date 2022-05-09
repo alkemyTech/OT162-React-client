@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
+import { Formik, Field, ErrorMessage, Form } from "formik";
 
 import "../FormStyles.css";
 import { Post } from "../../Services/privateApiService";
@@ -15,26 +15,20 @@ const ContactForm = () => {
   });
   //I did it with useState because in the future we will need setInitialValues for submitting//
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setInitialValues({
-      ...initialValues,
-      name: e.currentTarget.name.value,
-      email: e.currentTarget.email.value,
-      phone: e.currentTarget.phone.value,
-      message: e.currentTarget.message.value,
-    });
-    addNewContact({
-      ...initialValues,
-      name: e.currentTarget.name.value,
-      email: e.currentTarget.email.value,
-      phone: e.currentTarget.phone.value,
-      message: e.currentTarget.message.value,
-    })
-      .then(() => confirmAlert("Contact created", "", "Ok"))
-      .catch(() =>
-        errorAlert("Error", "An error occurred while creating the contact.")
-      );
+  const handleSubmit = (values) => {
+     
+      setInitialValues({
+        ...initialValues,
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        message: values.message,
+      });    
+      addNewContact(initialValues)
+        .then(() => confirmAlert("Contact created", "", "Ok"))
+        .catch(() =>
+          errorAlert("Error", "An error occurred while creating the contact.")
+        );   
   };
 
   console.log(initialValues);
@@ -62,52 +56,80 @@ const ContactForm = () => {
         if (!values.message) {
           errors.message = "Mensaje requerido";
         }
-
+        
         return errors;
       }}
+      onSubmit={(values)=> handleSubmit(values)}
     >
-      {({ errors, touched, handleChange, isSubmitting }) => (
+      {({ errors, touched, handleChange, isSubmitting , values, e}) => (
         <div>
-          <form className="form-container" onSubmit={handleSubmit}>
+          <Form className="form-container" data-testid="testForm">
             <h2>Formulario de contacto</h2>
-            <input
+            <label htmlFor="name">Nombre</label>
+            <Field
               className="input-field"
               type="text"
               name="name"
               onChange={handleChange}
               placeholder="Nombre"
+              value={values.name}
+              id="name"
             />
-            {errors.name && touched.name && errors.name}
-
-            <input
+            <ErrorMessage
+                  name="name"
+                  component={() => (
+                    <div className="nameError">{errors.name}</div>
+                  )}
+                />           
+            <label htmlFor="email">Email</label>
+            <Field
               className="input-field"
               type="email"
               id="email"
               name="email"
               onChange={handleChange}
               placeholder="Email"
-            ></input>
-            {errors.email && touched.email && errors.email}
-
-            <input
+              value={values.email}
+             
+            ></Field>
+            <ErrorMessage
+                  name="email"
+                  component={() => (
+                    <div className="emailError">{errors.email}</div>
+                  )}
+                />      
+            <label htmlFor="phone">Teléfono</label>
+            <Field
               className="input-field"
               type="tel"
               id="phone"
               name="phone"
               onChange={handleChange}
               placeholder="Teléfono"
-            ></input>
-            {errors.phone && touched.phone && errors.phone}
-
-            <input
+              value={values.phone}
+            ></Field>
+            <ErrorMessage
+                  name="phone"
+                  component={() => (
+                    <div className="phoneError">{errors.phone}</div>
+                  )}
+                />                 
+            <label htmlFor="message">Mensaje</label>
+            <Field
               className="input-field"
               type="message"
               id="message"
               name="message"
               onChange={handleChange}
               placeholder="Escribe tu mensaje..."
-            ></input>
-            {errors.message && touched.message && errors.message}
+              value={values.message}
+            ></Field>
+            <ErrorMessage
+                  name="message"
+                  component={() => (
+                    <div className="messageError">{errors.message}</div>
+                  )}
+                />            
 
             <button
               className="submit-btn"
@@ -116,7 +138,7 @@ const ContactForm = () => {
             >
               Submit
             </button>
-          </form>
+          </Form>
         </div>
       )}
     </Formik>
