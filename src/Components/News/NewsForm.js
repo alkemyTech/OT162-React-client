@@ -82,6 +82,7 @@ const NewsForm = () => {
   };
 
   const handleUpdateNew = () => {
+    let notify = "NotiCreati"
     PutNews(news.id, initialValues)
       .then(() => confirmAlert("Noticia actualizada", "", "Continuar"))
       .then(() => navigate("/backoffice/news"))
@@ -92,8 +93,11 @@ const NewsForm = () => {
   };
 
   const handleCreateNew = () => {
+    let notify = "NotiCreati"
     PostNews(initialValues)
-      .then(() => confirmAlert("Noticia creada", "", "Continuar"))
+      .then(() => {
+        confirmAlert("Noticia creada", "", "Continuar");
+      })
       .then(() => navigate("/backoffice/news"))
       .catch((error) => {
         console.log("ERROR: ", error);
@@ -121,22 +125,23 @@ const NewsForm = () => {
           initialValues={initialValues}
           validate={() => {
             const errors = {};
-            if (!initialValues.name) {
-              errors.title = "Required";
-            } else if (!/^.{4,}$/i.test(initialValues.name)) {
-              errors.title = "Minimum length of 4 characters";
-            }
-            if (!initialValues.content) {
-              errors.content = "Required";
-            }
+            // if (!initialValues.name) {
+            //   errors.title = "Required";
+            // } else if (!/^.{4,}$/i.test(initialValues.name)) {
+            //   errors.title = "Minimum length of 4 characters";
+            // }
+            // if (!initialValues.content) {
+            //   errors.content = "Required";
+            // }
 
-            if (!initialValues.category_id) {
-              errors.category_id = "Required";
-            }
+            // if (!initialValues.category_id) {
+            //   errors.category_id = "Required";
+            // }
 
-            if (!initialValues.image) {
-              errors.image = "Required";
-            }
+            // if (!initialValues.image) {
+            //   errors.image = "Required";
+            // }
+            // errors.test = "Noticia Creada"
 
             return errors;
           }}
@@ -264,6 +269,7 @@ const NewsForm = () => {
                 onChange={handleChange}
                 value={initialValues.category_id}
                 data-testid="categoryTest"
+                role="listbox"
               >
                 <option value="" disabled>
                   Seleccione una categoria
@@ -271,7 +277,7 @@ const NewsForm = () => {
                 {categories.length > 0 &&
                   categories.map((cat) => {
                     return (
-                      <option key={cat.id} value={cat.id}>
+                      <option key={cat.id} value={cat.id} >
                         {cat.name}
                       </option>
                     );
