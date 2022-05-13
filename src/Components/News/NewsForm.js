@@ -141,7 +141,6 @@ const NewsForm = () => {
             // if (!initialValues.image) {
             //   errors.image = "Required";
             // }
-            // errors.test = "Noticia Creada"
 
             return errors;
           }}
