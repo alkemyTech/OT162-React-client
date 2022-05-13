@@ -6,7 +6,7 @@ const getContacts = () => Get(contactURL);
 
 const getContactById = (id) => Get(contactURL, id);
 
-const addNewContact = (contact) => Post(contactURL, contact);
+const addNewContact = (contact) => Post( contact);
 
 const updateContact = (id, newData) => Put(contactURL, id, newData);
 
