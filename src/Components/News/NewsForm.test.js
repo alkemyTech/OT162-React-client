@@ -29,6 +29,25 @@ describe("News Form Test", () => {
     const error = getAllByText("Required");
     await waitFor(() => expect(error[0]).toBeInTheDocument());
   });
+
+  test("Validate email field before submit", async () => {
+    store = mockStore(initialState);
+    const { getByTestId, getAllByText } = render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <NewsForm />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    await waitFor(() => {
+      userEvent.click(getByTestId("buttonSend"));
+    });
+    userEvent.type(getByTestId("titleTest"), "Tit");
+
+    const error = getAllByText("Minimum length of 4 characters");
+    await waitFor(() => expect(error[0]).toBeInTheDocument());
+  });
   
   test("Validate successfull HTTP request", async () => {
     store = mockStore(initialState);

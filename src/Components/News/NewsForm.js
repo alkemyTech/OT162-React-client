@@ -67,7 +67,7 @@ const NewsForm = () => {
   }, [newsStatus, dispatch]);
 
   const handleChange = (e) => {
-    if (e.target.name === "title") {
+    if (e.target.name === "name") {
       setInitialValues({ ...initialValues, name: e.target.value });
     }
     if (e.target.name === "image") {
@@ -82,7 +82,7 @@ const NewsForm = () => {
   };
 
   const handleUpdateNew = () => {
-    let notify = "NotiCreati"
+    let notify = "NotiCreati";
     PutNews(news.id, initialValues)
       .then(() => confirmAlert("Noticia actualizada", "", "Continuar"))
       .then(() => navigate("/backoffice/news"))
@@ -93,7 +93,7 @@ const NewsForm = () => {
   };
 
   const handleCreateNew = () => {
-    let notify = "NotiCreati"
+    let notify = "NotiCreati";
     PostNews(initialValues)
       .then(() => {
         confirmAlert("Noticia creada", "", "Continuar");
@@ -125,22 +125,23 @@ const NewsForm = () => {
           initialValues={initialValues}
           validate={() => {
             const errors = {};
-            // if (!initialValues.name) {
-            //   errors.title = "Required";
-            // } else if (!/^.{4,}$/i.test(initialValues.name)) {
-            //   errors.title = "Minimum length of 4 characters";
-            // }
-            // if (!initialValues.content) {
-            //   errors.content = "Required";
-            // }
+            if (!initialValues.name) {
+              errors.name = "Required";
+            } else if (!/^.{4,}$/i.test(initialValues.name)) {
+              errors.name = "Minimum length of 4 characters";
+            }
 
-            // if (!initialValues.category_id) {
-            //   errors.category_id = "Required";
-            // }
+            if (!initialValues.content) {
+              errors.content = "Required";
+            }
 
-            // if (!initialValues.image) {
-            //   errors.image = "Required";
-            // }
+            if (!initialValues.category_id) {
+              errors.category_id = "Required";
+            }
+
+            if (!initialValues.image) {
+              errors.image = "Required";
+            }
 
             return errors;
           }}
@@ -149,10 +150,21 @@ const NewsForm = () => {
           {({ handleBlur, handleSubmit }) => (
             <form className="form-container" onSubmit={handleSubmit}>
               <label htmlFor="text">Titulo</label>
+
+              {/* <TextField
+                id="outlined"
+                label="Title"
+                name="name"
+                data-testid="titleTest"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={initialValues.name}
+                fullWidth={true}
+              /> */}
               <input
                 className="input-field"
                 type="text"
-                name="title"
+                name="name"
                 placeholder="Please enter a title..."
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -160,7 +172,7 @@ const NewsForm = () => {
                 value={initialValues.name}
               />
               <ErrorMessage
-                name="title"
+                name="name"
                 component="div"
                 className="invalid-feedback"
                 style={{ fontSize: "10px", color: "red" }}
@@ -276,7 +288,7 @@ const NewsForm = () => {
                 {categories.length > 0 &&
                   categories.map((cat) => {
                     return (
-                      <option key={cat.id} value={cat.id} >
+                      <option key={cat.id} value={cat.id}>
                         {cat.name}
                       </option>
                     );
