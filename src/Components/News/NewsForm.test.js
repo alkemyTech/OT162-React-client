@@ -41,14 +41,18 @@ describe("News Form Test", () => {
     );
 
     await waitFor(() => {
+      userEvent.type(getByTestId("titleTest"), "Tit");
+    });
+
+    await waitFor(() => {
       userEvent.click(getByTestId("buttonSend"));
     });
-    userEvent.type(getByTestId("titleTest"), "Tit");
 
+    await waitFor(() => expect(getByTestId("titleTest")).toHaveValue("Tit"));
     const error = getAllByText("Minimum length of 4 characters");
     await waitFor(() => expect(error[0]).toBeInTheDocument());
   });
-  
+
   test("Validate successfull HTTP request", async () => {
     store = mockStore(initialState);
     const { getByTestId, getAllByText, getByText, getByRole } = render(
@@ -75,7 +79,6 @@ describe("News Form Test", () => {
     });
 
     expect(result).toBeTruthy();
-
   });
 
   test("Validate wrong HTTP request", async () => {
@@ -100,20 +103,4 @@ describe("News Form Test", () => {
 
     expect(result).toBeFalsy();
   });
-
-  // test("Validate wrong HTTP request", async () => {
-  //   const { getByTestId, getByText } = render(<NewsForm />);
-
-  //   userEvent.type(getByTestId("titleTest"), "Titulo Test");
-  //   userEvent.type(getByTestId("contentTest"), "Contenido Test");
-  //   userEvent.type(getByTestId("imageTest"), "Imagen Test");
-  //   userEvent.type(getByTestId("categoryTest"), "Categoria Test");
-
-  //   await wait(() => {
-  //     userEvent.click(getByText("Enviar"));
-  //   });
-
-  //   const error = getByText("No es posible agregar Categoria");
-  //   await wait(() => expect(error).toBeInTheDocument());
-  // });
 });
