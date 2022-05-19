@@ -82,7 +82,6 @@ const NewsForm = () => {
   };
 
   const handleUpdateNew = () => {
-    let notify = "NotiCreati";
     PutNews(news.id, initialValues)
       .then(() => confirmAlert("Noticia actualizada", "", "Continuar"))
       .then(() => navigate("/backoffice/news"))
@@ -93,7 +92,6 @@ const NewsForm = () => {
   };
 
   const handleCreateNew = () => {
-    let notify = "NotiCreati";
     PostNews(initialValues)
       .then(() => {
         confirmAlert("Noticia creada", "", "Continuar");
@@ -150,17 +148,6 @@ const NewsForm = () => {
           {({ handleBlur, handleSubmit }) => (
             <form className="form-container" onSubmit={handleSubmit}>
               <label htmlFor="text">Titulo</label>
-
-              {/* <TextField
-                id="outlined"
-                label="Title"
-                name="name"
-                data-testid="titleTest"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={initialValues.name}
-                fullWidth={true}
-              /> */}
               <input
                 className="input-field"
                 type="text"

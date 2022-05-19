@@ -30,7 +30,7 @@ describe("News Form Test", () => {
     await waitFor(() => expect(error[0]).toBeInTheDocument());
   });
 
-  test("Validate email field before submit", async () => {
+  test("Validate title field before submit", async () => {
     store = mockStore(initialState);
     const { getByTestId, getAllByText } = render(
       <Provider store={store}>
@@ -55,7 +55,7 @@ describe("News Form Test", () => {
 
   test("Validate successfull HTTP request", async () => {
     store = mockStore(initialState);
-    const { getByTestId, getAllByText, getByText, getByRole } = render(
+    render(
       <Provider store={store}>
         <BrowserRouter>
           <NewsForm />
@@ -83,7 +83,7 @@ describe("News Form Test", () => {
 
   test("Validate wrong HTTP request", async () => {
     store = mockStore(initialState);
-    const { getByTestId, getAllByText, getByText, getByRole } = render(
+    render(
       <Provider store={store}>
         <BrowserRouter>
           <NewsForm />
