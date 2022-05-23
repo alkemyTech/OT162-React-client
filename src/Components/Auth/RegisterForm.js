@@ -3,6 +3,7 @@ import "../FormStyles.css";
 import { ErrorMessage, Formik } from "formik";
 import axios from "axios";
 import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
+import MapRegister from "../Utilities/MapRegister";
 
 const RegisterForm = () => {
   const [initialValues, setInitialValues] = useState({
@@ -11,6 +12,7 @@ const RegisterForm = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    direction: "",
   });
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -35,6 +37,7 @@ const RegisterForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(initialValues)
     localStorage.setItem("token", "tokenValueExample");
     return await axios
       .post("https://ongapi.alkemy.org/api/register", initialValues)
@@ -58,8 +61,14 @@ const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         validate={() => {
-          const { password, confirmPassword, name, email, lastName } =
-            initialValues;
+          const {
+            password,
+            confirmPassword,
+            name,
+            email,
+            lastName,
+            direction,
+          } = initialValues;
           const specialCaracRegex = /\W/i;
           const numbersRegex = /[0-9]/;
           const errors = {};
@@ -119,6 +128,19 @@ const RegisterForm = () => {
               component="div"
               className="invalid-feedback"
             />
+            <p>Agrega tu dirección</p>
+            <div style={{ width: "100%", height: "290px" }}>
+              <MapRegister
+                googleMapURL={
+                  `https://maps.googleapis.com/maps/api/js?v3.exp&key=${process.env.REACT_APP_API_KEY_GOOGLE}`
+                }
+                containerElement={<div style={{ height: "230px" }} />}
+                mapElement={<div style={{ height: "100%" }} />}
+                loadingElement={<p>Cargando</p>}
+                setInitialValues={setInitialValues}
+                initialValues={initialValues}
+              />
+            </div>
             <input
               className="input-field"
               type="text"
@@ -135,7 +157,7 @@ const RegisterForm = () => {
             />
             <input
               className="input-field"
-              type="text"
+              type="password"
               name="password"
               value={initialValues.password}
               onChange={handleChange}
@@ -149,7 +171,7 @@ const RegisterForm = () => {
             />
             <input
               className="input-field"
-              type="text"
+              type="password"
               name="confirmPassword"
               value={initialValues.confirmPassword}
               onChange={handleChange}
