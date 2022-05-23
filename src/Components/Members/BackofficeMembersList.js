@@ -10,20 +10,17 @@ import store from '../../app/store';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMembers } from '../../features/reducers/membersSlice';
+
+
+import DebounceSearch from './DebounceSearch';
 import NavbarBackoffice from '../Backoffice/NavbarBackoffice';
 
 
 const baseUrl ="https://ongapi.alkemy.org/api";
 
 const BackofficeMembersList = () => {
-  const dispatch = useDispatch()
-  
-  useEffect(() => {
-    store.dispatch(fetchMembers())
-  }, [dispatch])
-  
-  const currentMembers = useSelector((state) => state.members)
-  const members = Array.from(currentMembers)
+  const [query, setQuery] = useState('')
+  const [result, setResult] = useState([])
 
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -32,7 +29,6 @@ const BackofficeMembersList = () => {
     navigate(`/backoffice/members/edit/${id}`)
 
   }
-  
 
   const deleteMember = (id) => {
     
@@ -64,6 +60,14 @@ const BackofficeMembersList = () => {
         <NavbarBackoffice/>
       </div>
       <Container maxWidth="lg">
+
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+
+
         <Button
           component={Link}
           to="/backoffice/members/create"
@@ -72,6 +76,8 @@ const BackofficeMembersList = () => {
         >
           Agregar un nuevo miembro
         </Button>
+       <DebounceSearch query={query} setQuery={setQuery} setResult={setResult} setLoading={setLoading} style={{ }}/>
+        </div>
         { loading ? <div style={{ width: '100%', height: '200px', display: 'grid', placeItems: 'center' }}>
           <CircularProgress />
           </div> : <TableContainer component={Paper} elevation={3}>
@@ -85,37 +91,52 @@ const BackofficeMembersList = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {members.map((member) => (
-                <TableRow
-                  key={member.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                
-                <TableCell component="th" align="center" scope="row">
-                  {member.name}
+             { result && result.length > 0 ?
+             
+             result.map((member) => (
+              <TableRow
+                key={member.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+              
+              <TableCell component="th" align="center" scope="row">
+                {member.name}
+              </TableCell>
+                <TableCell align="center">
+                  <img src={member.image} style={{maxWidth: '120px'}} alt={member.name} />
                 </TableCell>
-                  <TableCell align="center">
-                    <img src={member.image} style={{maxWidth: '120px'}} alt={member.name} />
-                  </TableCell>
-                  <TableCell align="center">
-                  
-                      <Button
-                        variant="outlined"
-                        onClick={() => editMember(member.id)}
-                        style={{marginRight: '25px'}}
-                      >
-                        <EditIcon/>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => deleteMember(member.id)}
-                      >
-                      <DeleteIcon/>
-                      </Button>
+                <TableCell align="center">
                 
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <Button
+                      variant="outlined"
+                      onClick={() => editMember(member.id)}
+                      style={{marginRight: '25px'}}
+                    >
+                      <EditIcon/>
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => deleteMember(member.id)}
+                    >
+                    <DeleteIcon/>
+                    </Button>
+              
+                </TableCell>
+              </TableRow>))
+              :
+              (
+                <TableRow
+               
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" align="center" scope="row">
+              </TableCell>
+                No hay resultados para: <b> {query}</b>
+              </TableRow>
+              )
+             
+          
+          }
             </TableBody>
           </Table>
         </TableContainer>}
