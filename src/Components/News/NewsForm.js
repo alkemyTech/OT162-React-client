@@ -67,7 +67,7 @@ const NewsForm = () => {
   }, [newsStatus, dispatch]);
 
   const handleChange = (e) => {
-    if (e.target.name === "title") {
+    if (e.target.name === "name") {
       setInitialValues({ ...initialValues, name: e.target.value });
     }
     if (e.target.name === "image") {
@@ -93,7 +93,9 @@ const NewsForm = () => {
 
   const handleCreateNew = () => {
     PostNews(initialValues)
-      .then(() => confirmAlert("Noticia creada", "", "Continuar"))
+      .then(() => {
+        confirmAlert("Noticia creada", "", "Continuar");
+      })
       .then(() => navigate("/backoffice/news"))
       .catch((error) => {
         console.log("ERROR: ", error);
@@ -122,10 +124,11 @@ const NewsForm = () => {
           validate={() => {
             const errors = {};
             if (!initialValues.name) {
-              errors.title = "Required";
+              errors.name = "Required";
             } else if (!/^.{4,}$/i.test(initialValues.name)) {
-              errors.title = "Minimum length of 4 characters";
+              errors.name = "Minimum length of 4 characters";
             }
+
             if (!initialValues.content) {
               errors.content = "Required";
             }
@@ -148,14 +151,15 @@ const NewsForm = () => {
               <input
                 className="input-field"
                 type="text"
-                name="title"
+                name="name"
                 placeholder="Please enter a title..."
                 onChange={handleChange}
                 onBlur={handleBlur}
+                data-testid="titleTest"
                 value={initialValues.name}
               />
               <ErrorMessage
-                name="title"
+                name="name"
                 component="div"
                 className="invalid-feedback"
                 style={{ fontSize: "10px", color: "red" }}
@@ -163,6 +167,7 @@ const NewsForm = () => {
               <label htmlFor="text">Contenido</label>
               <CKEditor
                 name="content"
+                data-testid="contentTest"
                 data={initialValues.content}
                 onChange={(evt) => {
                   setInitialValues({
@@ -220,6 +225,7 @@ const NewsForm = () => {
                     disabled
                     id="outlined-disabled"
                     label="Image"
+                    data-testid="imageTest"
                     value={initialValues.image}
                     fullWidth={true}
                   />
@@ -260,6 +266,8 @@ const NewsForm = () => {
                 name="category"
                 onChange={handleChange}
                 value={initialValues.category_id}
+                data-testid="categoryTest"
+                role="listbox"
               >
                 <option value="" disabled>
                   Seleccione una categoria
@@ -279,7 +287,11 @@ const NewsForm = () => {
                 className="invalid-feedback"
                 style={{ fontSize: "10px", color: "red" }}
               />
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                data-testid="buttonSend"
+              >
                 Enviar
               </Button>
             </form>

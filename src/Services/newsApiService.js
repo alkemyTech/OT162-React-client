@@ -6,7 +6,9 @@ const GetNews = () => Get(newsRoute);
 
 const SearchNews = (searchParam) => Get(`${newsRoute}?search=${searchParam}`);
 
-const PostNews = (body) => Post(newsRoute, body);
+const PostNews = (body) => {
+  return Post(newsRoute, body);
+};
 
 const GetSingleNews = (id) => Get(newsRoute, id);
 
