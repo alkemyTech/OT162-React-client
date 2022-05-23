@@ -12,6 +12,7 @@ import { confirmAlert, errorAlert } from "../../features/alerts/alerts";
 import { useParams } from "react-router-dom";
 import { getUserByID, putUsers, postUsers } from "../../Services/usersApiService";
 import { useNavigate } from "react-router-dom";
+import "../../../src/styles/registerUserButton.css";
 
 const UserForm = ({ user }) => {
   const getId = useParams(user)
@@ -137,8 +138,18 @@ const UserForm = ({ user }) => {
     }
   };
 
+  // User Verification
+  const [userLogged, setUserLogged] = useState(false);
+  const getToken = localStorage.getItem("token");
+
+  if(getToken !== null || undefined){
+    setUserLogged(true)
+  }
   return (
     <div>
+      {/* {userLogged ? <h1>Autenticado</h1> : <h1>no autenticado</h1>} */}
+      {userLogged ? 
+      navigate('/') : 
       <Formik
         initialValues={initialValues}
         validate={() => {
@@ -303,12 +314,18 @@ const UserForm = ({ user }) => {
               className="invalid-feedback"
             />
            
-            <button disabled={!checked} className="submit-btn" type="submit">
+           {userLogged ? 
+            <button disabled={true} className="submit-btn" type="submit">
+              Enviar
+            </button> :
+            <button  disabled={!checked} className="submit-btn" type="submit">
               Enviar
             </button>
+            }
           </form>
         )}
       </Formik>
+      }
       
 
     </div>
