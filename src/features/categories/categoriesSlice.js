@@ -16,6 +16,12 @@ export const deleteCategorySlice = createAsyncThunk("category/deleteCategorySlic
   });
 });
 
+export const filterCategorySlice = createAsyncThunk("category/filterCategorySlice", async (value) => {
+  return getCategories('search='+value).then((res) => {
+    return res.data.data;
+});
+})
+
 const categoriesSlice = createSlice({
     name: "category",
     initialState: {
@@ -44,6 +50,11 @@ const categoriesSlice = createSlice({
         },
         [deleteCategorySlice.rejected]: (state, action) => {
           state.status = "failed";
+        },
+        [filterCategorySlice.fulfilled]: (state, { payload }) => {
+          const categories = payload;
+          state.list = [...categories]
+          state.status = "success";
         }
     },
 });
