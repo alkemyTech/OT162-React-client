@@ -2,8 +2,12 @@ import { Get, Post, Put, Patch, Delete } from "./privateApiService";
 
 const categoriesRoute = "https://ongapi.alkemy.org/api/categories";
 
-const getCategories = () => {
-  return Get(categoriesRoute);
+const getCategories = (search) => {
+  if (search) {
+    return Get('https://ongapi.alkemy.org/api/categories?'+search);
+  } else {
+    return Get(categoriesRoute);
+  }
 };
 
 const getCategoriesById = (id) => {

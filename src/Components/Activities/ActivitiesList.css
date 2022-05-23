@@ -1,0 +1,8 @@
+.filter {
+  height: 30px;
+  border-radius: 5px;
+  border: 1.5px solid #b0b7be;
+  padding: 0 1%;
+  font-size: 1rem;
+  font-family: "Raleway";
+}

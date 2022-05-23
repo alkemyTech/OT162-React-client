@@ -20,7 +20,7 @@
     "ckeditor4-react": "^1.4.1",
     "dotenv": "^16.0.0",
     "formik": "^2.2.6",
-    "framer-motion": "^4.1.17",
+    "framer-motion": "^4.1.11",
     "gsap": "^3.6.1",
     "isarray": "^2.0.5",
     "jest": "^26.6.0",

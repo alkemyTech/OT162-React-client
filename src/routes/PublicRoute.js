@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import Loading from "../Components/Utilities/Loading";
 import PublicLayout from "./PublicLayout";
-import RegisterForm from "../Components/Auth/RegisterForm";
 
 const SchoolCampaign = lazy(() => import("../Campaigns/School/SchoolCampaign"));
 const ToysCampaign = lazy(() => import("../Campaigns/Toys/ToysCampaign"));
@@ -20,6 +19,7 @@ const MembersList = lazy(() => import("../Components/Members/MembersList"));
 const Contact = lazy(() => import("../Components/Contact/Contact"));
 const Login = lazy(() => import("../Components/Auth/Login/Login"));
 const Home = lazy(() => import("../Components/Home"));
+const RegisterForm = lazy(() => import("../Components/Auth/RegisterForm"));
 
 const PublicRoute = () => {
   return (
@@ -30,6 +30,7 @@ const PublicRoute = () => {
             <Route path="/" exact element={<Home />} />
             <Route path="registro" element={<RegisterForm />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterForm />} />
             <Route path="/actividades/:id" element={<ActivityDetail />} />
             <Route path="/donar" element={<Donation text="¡Contribuye!" />} />
             <Route path="/gracias" element={<Thanks />} />
