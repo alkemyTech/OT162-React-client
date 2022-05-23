@@ -7,8 +7,16 @@ import { errorAlert } from "../../features/alerts/alerts";
 import Loading from "../Utilities/Loading";
 import LastEvent from "./LastEvent";
 import NewsCards from "./NewsCards";
+import { Navigate } from "react-router-dom";
 
 const NewsSection = () => {
+  // Se que no esta bien esto pero es para facilitar el testing y no implementarlo por completo
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+  if (localStorage.getItem("token") === null) {
+    return <Navigate to="/login" />;
+  }
+  ///////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div>
       <div>
