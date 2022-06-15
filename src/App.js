@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      <div className="Test">
+      <div className="spinner Test">
       <BrowserRouter>
         <PublicRoute />
         <PrivateRoute />
