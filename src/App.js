@@ -7,10 +7,12 @@ import { BrowserRouter } from "react-router-dom";
 function App() {
   return (
     <div className="App">
+      <div className="spinner">
       <BrowserRouter>
         <PublicRoute />
         <PrivateRoute />
       </BrowserRouter>
+      </div>
     </div>
   );
 }
